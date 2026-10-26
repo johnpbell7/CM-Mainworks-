@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
-import Benefits from "@/components/Benefits";
 import Phases from "@/components/Phases";
 import PackageCard from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
@@ -71,10 +70,8 @@ export default function Renovations() {
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
             <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div className="prose" data-reveal="up">
-              <p>Renovating a home is exciting. It can also be the most stressful thing you ever take on, and most of that stress comes from managing it: finding trades, getting them in the right order and chasing the ones who don’t turn up.</p>
-              <p>That’s the part I take off your hands. I plan the whole job with you, run it on site with one team, and bring in trades I trust for the specialist bits like electrics and plumbing. You have one person to ring, one written quote, and one team that cares how it all turns out.</p>
-              <p>We work in clear phases, and you’re invoiced phase by phase. Before we start, we sit down and agree the process, timescales and targets, and we keep checking them together as we go. No guessing, and no surprises.</p>
-              <p>I’ll listen to what you want, be honest about what it costs, and work with you to get the home you’re picturing.</p>
+              <p>Renovating is exciting, but managing it is stressful: finding trades, getting them in the right order and chasing the ones who don’t turn up.</p>
+              <p>That’s the part I take off your hands. One team, one person to ring and one written quote. We work in clear phases, invoiced phase by phase, and sit down regularly to check we’re on track.</p>
               <p style={{ marginTop: 24 }}>
                 <Link className="link link-arrow" href="#quote">Talk to me about your renovation <Arrow /></Link>
               </p>
@@ -83,17 +80,7 @@ export default function Renovations() {
         </div>
       </section>
 
-      <section className="sec grey" aria-labelledby="why-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up"><h2 id="why-title">Why one team?</h2></div>
-            <p data-reveal="up">It’s simpler, it’s calmer and <span className="hl">it often costs less</span>.</p>
-          </div>
-          <Benefits />
-        </div>
-      </section>
-
-      <section className="sec" aria-labelledby="cmp-title">
+      <section className="sec grey" aria-labelledby="cmp-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="cmp-title">The usual way, or my way</h2></div>
@@ -112,46 +99,42 @@ export default function Renovations() {
         </div>
       </section>
 
-      <section className="sec grey" aria-labelledby="inc-title">
+      <section className="sec" aria-labelledby="inc-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="inc-title">What your renovation can include</h2></div>
             <p data-reveal="up">Pick one room or the whole house. It’s all <span className="hl">managed by me</span>.</p>
           </div>
-          <div className="items" data-reveal="stagger">
+          <ul className="incl" data-reveal="stagger">
             {[...renovationServices, ...smallerServices.filter((s) => s.slug !== "carpentry")].map((s) => (
-              <div className="item" key={s.slug} style={{ "--c": s.color } as React.CSSProperties}>
-                <h3><Link href={`/services/${s.slug}`}>{s.name}</Link></h3>
-                <p>{s.blurb}</p>
-              </div>
+              <li key={s.slug} style={{ "--c": s.color } as React.CSSProperties}>
+                <Link href={`/services/${s.slug}`}>{s.name} <Arrow /></Link>
+              </li>
             ))}
-            <div className="item">
-              <h3>Electrics, plumbing and plastering</h3>
-              <p>Organised through trades I trust, at the right point in the job, so you don’t have to find anyone.</p>
-            </div>
-          </div>
+            <li><span>Electrics, plumbing and plastering, organised for you</span></li>
+          </ul>
         </div>
       </section>
 
-      <section className="sec" aria-labelledby="how-title">
+      <section className="sec grey" aria-labelledby="how-title">
         <div className="wrap">
           <Phases titleId="how-title" />
         </div>
       </section>
 
-      <section className="sec grey" aria-labelledby="pkg-title">
+      <section className="sec" aria-labelledby="pkg-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="pkg-title">Prices from</h2></div>
             <p data-reveal="up">A guide to get you started. <Link className="link link-arrow" href="/prices">See all prices <Arrow /></Link></p>
           </div>
-          <div className="pkgs three" data-reveal="stagger">
+          <div className="pkgs three swipe" data-reveal="stagger">
             {[full, ...rest.slice(0, 2)].map((p) => <PackageCard key={p.name} p={p} compact />)}
           </div>
         </div>
       </section>
 
-      <section className="sec" aria-labelledby="faq-title">
+      <section className="sec grey" aria-labelledby="faq-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">Renovation questions</h2>
@@ -161,7 +144,7 @@ export default function Renovations() {
         </div>
       </section>
 
-      <section className="sec grey" aria-labelledby="ask-title">
+      <section className="sec" aria-labelledby="ask-title">
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Let’s talk about your home</h2>

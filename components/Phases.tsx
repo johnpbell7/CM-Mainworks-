@@ -7,9 +7,9 @@ import { Calendar, Check, Layers, QuoteDoc } from "./Icons";
 */
 
 const principles = [
-  { Icon: Layers, title: "Planned together", text: "Before anything starts, we sit down and agree the phases, the timescales and the targets for each one." },
-  { Icon: QuoteDoc, title: "Paid phase by phase", text: "You’re invoiced for each phase, so you can see exactly what you’re paying for and never pay for the whole job at once." },
-  { Icon: Calendar, title: "Regular sit-downs", text: "As each phase finishes, we sit down to check we’re on target. If anything’s slipping, you’ll hear it from me first." },
+  { Icon: Layers, title: "Planned together", text: "We agree the phases, timescales and targets before anything starts." },
+  { Icon: QuoteDoc, title: "Paid phase by phase", text: "An invoice for each phase, never the whole job at once." },
+  { Icon: Calendar, title: "Regular sit-downs", text: "We check we’re on target. If anything slips, you hear it from me first." },
 ];
 
 const phases = [
@@ -25,7 +25,7 @@ export default function Phases({ titleId }: { titleId: string }) {
     <div className="faq-wrap phases-wrap">
       <div className="faq-side" data-reveal="up">
         <h2 id={titleId}>Built in phases, always in the open</h2>
-        <p>A full renovation is a big commitment. Splitting it into phases keeps it clear, keeps it on track and keeps you in control.</p>
+        <p>Phases keep a big job clear, on track and in your control.</p>
         <ul className="principles">
           {principles.map(({ Icon, title, text }) => (
             <li key={title}>
@@ -46,7 +46,7 @@ export default function Phases({ titleId }: { titleId: string }) {
             <div>
               <p className="ph-n">Before we start</p>
               <h3>Visit, plan and sit down</h3>
-              <p>I come round, we talk through what you want, and you get a written quote split into phases. Then we sit down and agree the process, timescales and targets.</p>
+              <p>I come round, you get a written quote split into phases, and we agree the timescales and targets.</p>
             </div>
           </li>
           {phases.map((ph, i) => (
@@ -57,8 +57,8 @@ export default function Phases({ titleId }: { titleId: string }) {
                 <h3>{ph.title}</h3>
                 <p>{ph.text}</p>
                 <p className="ph-after">
-                  <span><QuoteDoc />Invoice for this phase</span>
-                  <span><Calendar />Sit-down: are we on target?</span>
+                  <span><QuoteDoc />Invoiced</span>
+                  <span><Calendar />Sit-down: on target?</span>
                 </p>
               </div>
             </li>
@@ -68,7 +68,7 @@ export default function Phases({ titleId }: { titleId: string }) {
             <div>
               <p className="ph-n">Handover</p>
               <h3>A final walk-round</h3>
-              <p>We go round together, and I put right anything you’re not happy with before I call it finished.</p>
+              <p>We go round together, and I put right anything you’re not happy with.</p>
             </div>
           </li>
         </ol>

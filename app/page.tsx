@@ -154,7 +154,7 @@ export default function Home() {
               <Link className="link link-arrow" href="/prices">All prices <Arrow /></Link>
             </p>
           </div>
-          <div className="pkgs three" data-reveal="stagger">
+          <div className="pkgs three swipe" data-reveal="stagger">
             {packages.slice(0, 3).map((p) => <PackageCard key={p.name} p={p} compact />)}
           </div>
         </div>

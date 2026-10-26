@@ -14,7 +14,7 @@ export function FromPrice({ from, unit }: { from: string | null; unit?: string }
   return (
     <p className={`from${from ? "" : " tbc"}`}>
       <span>From</span>
-      <strong>{from ?? "£ to confirm"}</strong>
+      <strong>{from ?? "£—"}</strong>
       {unit && <span>{unit}</span>}
     </p>
   );

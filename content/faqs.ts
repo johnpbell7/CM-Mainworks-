@@ -30,22 +30,16 @@ export const homeFaqs: Faq[] = [
 
 export const renovationFaqs: Faq[] = [
   oneTeam,
-  { q: "Do I have to do the whole house at once?", a: "No. Some people do everything in one go, others work through it room by room. I can plan and price the lot and we’ll go in an order that suits you and your budget.", color: "kitchens" },
-  { q: "Can we live in the house while you work?", a: "Often, yes. We’ll plan it together so you always have somewhere to cook, wash and sleep, and I’ll keep the mess under control.", color: "bathrooms" },
-  onTrack,
   pay,
-  howLong,
-  surprises,
-  budget,
+  onTrack,
+  { q: "Can we live in the house while you work?", a: "Often, yes. We’ll plan it together so you always have somewhere to cook, wash and sleep, and I’ll keep the mess under control.", color: "bathrooms" },
 ];
 
 export const priceFaqs: Faq[] = [
   pay,
   { q: "Why do you show “from” prices?", a: "So you’ve got a rough idea before you get in touch. Every home is different, so your written quote is based on your job, not a price list.", color: "renovation" },
-  freeQuote,
   budget,
-  surprises,
-  { q: "Why can one team cost less?", a: "Fewer people each adding their own margin, no days lost waiting between trades, and nobody paid twice to fix what someone else left. Good planning saves money as well as stress.", color: "extensions" },
+  { q: "Why can one team cost less?", a: "Fewer people each adding their own margin, no days lost waiting between trades, and nobody paid twice to fix what someone else left.", color: "extensions" },
 ];
 
 export const faqGroups: { title: string; faqs: Faq[] }[] = [

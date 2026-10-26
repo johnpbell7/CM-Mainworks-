@@ -158,6 +158,7 @@ ul, ol { margin: 0; padding: 0; }
 .menu-btn { display: none; }
 .menu { display: none; }
 @media (max-width: 1080px) {
+  .incl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .menu-btn {
     display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 14px; margin-left: 4px;
     border: 1.5px solid var(--line-2); border-radius: 999px; background: #fff; font-weight: 600; font-size: .95rem; cursor: pointer;
@@ -656,7 +657,7 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .from { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 14px; }
 .from span { font-size: .95rem; font-weight: 600; color: var(--ink-2); }
 .from strong { font-size: clamp(1.8rem, 2.6vw, 2.3rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
-.from.tbc strong { color: var(--ink-2); font-size: clamp(1.2rem, 1.7vw, 1.4rem); font-weight: 600; letter-spacing: -.01em; border-bottom: 2px dashed var(--line-2); }
+.from.tbc strong { color: var(--ink-2); font-weight: 600; }
 .pkg-sum { color: var(--ink-2); margin-top: 14px; }
 .pkg .ticks { margin-top: 18px; }
 .pkg .ticks li { padding: 11px 0; font-size: .98rem; }
@@ -671,9 +672,11 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .price-rows p { grid-column: 2; color: var(--ink-2); font-size: .98rem; }
 .price-rows .from { grid-column: 3; grid-row: 1 / span 2; margin: 0; justify-content: flex-end; text-align: right; }
 .price-rows .from strong { font-size: 1.35rem; }
-.price-rows .from.tbc strong { font-size: 1rem; }
 .price-rows a:hover h3 { color: var(--gold-ink); }
 .price-note { margin-top: 28px; color: var(--ink-2); max-width: 70ch; }
+.page-head .draft { margin-top: 14px; }
+.benefits.tight h3 { margin-top: 18px; font-size: 1.2rem; }
+.benefits.tight .benefit-ico { width: 52px; height: 52px; }
 
 /* ---------- renovations: the usual way vs one team ---------- */
 .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
@@ -687,6 +690,16 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .compare .usual svg { color: var(--ink-2); }
 .compare .ours { box-shadow: inset 0 0 0 2px var(--gold); }
 .compare .ours svg { color: var(--gold-ink); }
+
+/* ---------- renovations: what it can include ---------- */
+.incl { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); border-top: 1px solid var(--line); }
+.incl li { border-bottom: 1px solid var(--line); }
+.incl a, .incl span { display: flex; align-items: center; gap: 12px; padding: 18px 0; font-weight: 600; font-size: 1.1rem; letter-spacing: -.01em; text-decoration: none; }
+.incl span { color: var(--ink-2); font-weight: 500; }
+.incl a::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 2px; background: var(--c); }
+.incl a svg { width: 18px; height: 18px; margin-left: auto; transition: transform .3s var(--ease); }
+.incl a:hover { color: var(--gold-ink); }
+.incl a:hover svg { transform: translateX(4px); }
 
 /* ---------- renovations: how it runs ---------- */
 .timeline { list-style: none; counter-reset: t; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3vw, 44px) clamp(24px, 3.4vw, 52px); }
@@ -909,12 +922,31 @@ html.js.intro-on { overflow: hidden; }
   .feature .ticks { grid-template-columns: minmax(0, 1fr); }
   .services.six .service { flex: 0 0 78%; }
   .smaller, .pkgs, .compare, .timeline { grid-template-columns: minmax(0, 1fr); }
+  .pkgs.swipe {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+  }
+  .pkgs.swipe::-webkit-scrollbar { display: none; }
+  .pkgs.swipe .pkg { flex: 0 0 86%; scroll-snap-align: start; padding: 24px 22px; }
+  .benefits.tight { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 16px; }
+  .benefits.tight li { display: flex; }
+  .benefits.tight .benefit-ico { width: 46px; height: 46px; }
+  .benefits.tight h3 { margin: 12px 0 4px; font-size: 1.05rem; }
+  .benefits.tight p { font-size: .94rem; }
   .phases-wrap { grid-template-columns: minmax(0, 1fr); }
+  .incl { grid-template-columns: minmax(0, 1fr); }
+  .incl a, .incl span { padding: 15px 0; font-size: 1.02rem; }
+  .ph-after { gap: 4px 16px; font-size: .84rem; margin-top: 10px; padding-top: 10px; }
+  .phases li { padding-bottom: 24px; }
   .phases li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
   .phases .mark { width: 40px; height: 40px; font-size: 1rem; }
   .phases li:not(:last-child)::before { left: 19px; top: 44px; }
-  .price-rows a { grid-template-columns: 12px minmax(0, 1fr); }
-  .price-rows .from { grid-column: 2; grid-row: auto; justify-content: flex-start; text-align: left; margin-top: 6px; }
+  .price-rows a { grid-template-columns: 12px minmax(0, 1fr) auto; gap: 2px 12px; padding: 16px 0; }
+  .price-rows h3 { font-size: 1.08rem; }
+  .price-rows p { font-size: .92rem; }
+  .price-rows .from { gap: 2px 6px; }
+  .price-rows .from span { font-size: .8rem; }
+  .price-rows .from strong { font-size: 1.1rem; }
       .facts li { grid-template-columns: 1fr; gap: 2px; }
   .svc-row:nth-child(even) .ph { order: 0; }
   .proj-grid { grid-template-columns: minmax(0, 1fr); }
