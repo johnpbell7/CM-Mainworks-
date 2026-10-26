@@ -10,7 +10,7 @@ const links = [
   { href: "/services", label: "Services", c: "var(--oak)" },
   { href: "/projects", label: "Recent work", c: "var(--steel)" },
   { href: "/areas", label: "Areas we cover", c: "var(--sage)" },
-  { href: "/about", label: "About Connor", c: "var(--brick)" },
+  { href: "/about", label: "About me", c: "var(--brick)" },
   { href: "/faqs", label: "FAQs", c: "var(--gold)" },
   { href: "/contact", label: "Contact", c: "var(--ink-3)" },
 ];

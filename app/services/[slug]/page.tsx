@@ -86,8 +86,8 @@ export default async function Service({ params }: Props) {
       <section className="sec grey" aria-labelledby="inc-title">
         <div className="wrap">
           <div className="sec-head">
-            <div data-reveal="up"><h2 id="inc-title">{s.name} jobs Connor takes on</h2></div>
-            <p data-reveal="up">From a single job to a whole house. Something not on the list? Ask anyway.</p>
+            <div data-reveal="up"><h2 id="inc-title">{s.name} jobs I take on</h2></div>
+            <p data-reveal="up">Something not on the list? Ask anyway. If I can’t do it, I’ll say so.</p>
           </div>
           <div className="items" data-reveal="stagger">
             {c.items.map((i) => (
@@ -111,8 +111,22 @@ export default async function Service({ params }: Props) {
         </div>
       </section>
 
+      {/* what affects the price */}
+      <section className="sec grey" aria-labelledby="price-title">
+        <div className="wrap faq-wrap">
+          <div className="faq-side" data-reveal="up">
+            <h2 id="price-title">What affects the price</h2>
+            <p>{c.price.intro}</p>
+            <Link className="link link-arrow" href="#quote">Get your free quote <Arrow /></Link>
+          </div>
+          <ol className="factors" data-reveal="stagger">
+            {c.price.factors.map((f) => <li key={f}>{f}</li>)}
+          </ol>
+        </div>
+      </section>
+
       {work.length > 0 && (
-        <section className="sec grey" aria-labelledby="work-title">
+        <section className="sec" aria-labelledby="work-title">
           <div className="wrap">
             <div className="sec-head">
               <div data-reveal="up"><h2 id="work-title">Recent {name}</h2></div>
@@ -132,11 +146,11 @@ export default async function Service({ params }: Props) {
       )}
 
       {/* questions */}
-      <section className="sec" aria-labelledby="faq-title">
+      <section className={`sec${work.length ? " grey" : ""}`} aria-labelledby="faq-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">{s.name} questions</h2>
-            <p>Quick answers about {name}. More on the <Link href="/faqs">FAQs page</Link>.</p>
+            <p>The things people ask me most about {name}. There’s more on the <Link href="/faqs">FAQs page</Link>.</p>
           </div>
           <FaqList faqs={faqs} />
         </div>
@@ -147,7 +161,7 @@ export default async function Service({ params }: Props) {
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Ask about {name}</h2>
-            <p className="big-p">Send a few photos and a line about the job. Connor will look, visit if he needs to, and send a written quote.</p>
+            <p className="big-p">Send me a few photos and a line about the job. I’ll take a look, come round if I need to, and send you a written quote.</p>
             <h3 className="sub-h" style={{ marginTop: 44 }}>Other services</h3>
             <ul className="ticks">
               {others.map((o) => (

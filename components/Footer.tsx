@@ -4,7 +4,7 @@ import { areas } from "@/content/areas";
 
 const company = [
   { href: "/projects", label: "Recent work" },
-  { href: "/about", label: "About Connor" },
+  { href: "/about", label: "About me" },
   { href: "/faqs", label: "FAQs" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },
@@ -18,10 +18,10 @@ export default function Footer() {
           <Link href="/" aria-label="CM MainWorks home">
             <img className="logo" src="/brand/logo/main/cm-mainworks-horizontal-on-light.svg" alt="CM MainWorks, carpentry and construction" width={207} height={40} loading="lazy" />
           </Link>
-          <p>Carpentry, building, joinery and decorating across Lichfield and the villages around it.</p>
+          <p>I’m Connor. Carpentry, building, joinery and decorating across Lichfield and the villages around it.</p>
           <p className="foot-contact">
             <a href={business.phoneHref}>{business.phoneDisplay}</a>
-            <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp Connor</a>
+            <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a>
           </p>
         </div>
         <nav aria-label="Services">

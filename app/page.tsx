@@ -19,7 +19,7 @@ const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
 
 export const metadata: Metadata = pageMeta({
   title: "Carpenter and builder in Lichfield | CM MainWorks",
-  description: "Carpentry, building, joinery and decorating in Lichfield, Burntwood, Tamworth and nearby. Send Connor a few photos for a free, written quote.",
+  description: "I’m Connor, a carpenter and builder in Lichfield. Doors, stairs, kitchens, fitted furniture, extensions and decorating. Send me a few photos for a free quote.",
   path: "/",
   absolute: true,
 });
@@ -49,7 +49,7 @@ export default function Home() {
           </div>
           <QuoteForm collapsible />
         </div>
-        <p className="hero-credit">Pictured: an oak-framed garden canopy by CM MainWorks</p>
+        <p className="hero-credit">Pictured: an oak-framed garden canopy I built</p>
       </section>
 
       {/* ---------------- Services ---------------- */}
@@ -60,7 +60,7 @@ export default function Home() {
               <h2 id="svc-title">Services</h2>
             </div>
             <p data-reveal="up">
-              From a single door to a full extension, with <span className="hl">one person looking after the job</span> from start to finish.
+              One door or a full extension, <span className="hl">I look after every job myself</span>, start to finish.
             </p>
           </div>
           <div className="services">
@@ -89,7 +89,7 @@ export default function Home() {
               <h2 id="work-title">Recent work</h2>
             </div>
             <p data-reveal="up">
-              A few of Connor’s recent jobs, before and after.{" "}
+              A few of my recent jobs.{" "}
               <Link className="link link-arrow" href="/projects">See all projects <Arrow /></Link>
             </p>
           </div>
@@ -143,7 +143,7 @@ export default function Home() {
               I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>, and I don’t leave until it’s right.
             </p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
-            <Link className="link link-arrow" href="/about" style={{ display: "inline-flex", marginTop: 28 }}>More about Connor <Arrow /></Link>
+            <Link className="link link-arrow" href="/about" style={{ display: "inline-flex", marginTop: 28 }}>More about me <Arrow /></Link>
           </div>
         </div>
       </section>
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">FAQs</h2>
-            <p>Quick answers to what people usually ask. Anything else, just call or WhatsApp.</p>
+            <p>What people usually ask me first. Anything else, just ring or WhatsApp.</p>
             <Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link>
           </div>
           <FaqList faqs={homeFaqs} />

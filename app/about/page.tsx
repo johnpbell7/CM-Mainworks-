@@ -10,16 +10,16 @@ import { areas } from "@/content/areas";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "About Connor",
-  description: `Connor runs CM MainWorks, a carpentry and construction business based in Lichfield, with ${business.experience} in the trade. One person from first visit to final clean-up.`,
+  title: "About me",
+  description: `I’m Connor. I run CM MainWorks, a carpentry and construction business in Lichfield, with ${business.experience} in the trade. You deal with me from start to finish.`,
   path: "/about",
 });
 
 const promises = [
-  { h: "You know the price first", p: "A clear, written quote before any work starts.", c: "var(--oak)" },
-  { h: "One person, start to finish", p: "You deal with Connor from the first visit to the final clean-up.", c: "var(--steel)" },
-  { h: "Turns up when he says", p: "Work starts on the date you agree.", c: "var(--sage)" },
-  { h: "Left tidy", p: "The place is cleaned up when the job’s finished.", c: "var(--brick)" },
+  { h: "You’ll know the price first", p: "A clear, written quote before I start anything.", c: "var(--oak)" },
+  { h: "You deal with me", p: "From the first visit to the final clean-up. No passing you between people.", c: "var(--steel)" },
+  { h: "I turn up when I say", p: "We agree a start date and I stick to it.", c: "var(--sage)" },
+  { h: "I leave it tidy", p: "Dust sheets down while I work, and swept up before I go.", c: "var(--brick)" },
 ];
 
 export default function About() {
@@ -36,10 +36,10 @@ export default function About() {
           <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />
           <div data-reveal="up">
             {/* DRAFT copy for Connor to approve. Do not add insurance, qualifications or reviews until he confirms them. */}
-            <h2 id="story-title" className="mid-h">Built on doing the job properly</h2>
-            <p>I’ve spent {business.experience} in the trade, doing everything from hanging a single door to building extensions. Whether it’s a small repair or a full transformation, every job gets the same attention to detail and the same pride in the finish.</p>
-            <p>I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>, and I don’t leave until it’s right.</p>
-            <p>Because I cover carpentry, joinery, building and decorating, one job doesn’t need four different people. You deal with me from the first visit to the final clean-up.</p>
+            <h2 id="story-title" className="mid-h">How I work</h2>
+            <p>I’ve been in the trade {business.experience}. In that time I’ve hung more doors than I could count, fitted kitchens, built extensions and painted an awful lot of skirting board.</p>
+            <p>With CM MainWorks you deal with me from start to finish. I do the carpentry, the joinery, the building and the decorating, so a job doesn’t get passed between four different people, and there’s no one else to chase.</p>
+            <p>I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>. If something’s not right, I’ll put it right before I go.</p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="CM MainWorks badge" width={96} height={42} loading="lazy" />
             <p className="draft">Draft copy, waiting on Connor’s approval.</p>
           </div>
@@ -86,7 +86,7 @@ export default function About() {
               </div>
             ))}
           </div>
-          <p style={{ marginTop: 36 }}><Link className="link link-arrow" href="/areas">Areas I cover <Arrow /></Link></p>
+          <p style={{ marginTop: 36 }}><Link className="link link-arrow" href="/areas">Where I work <Arrow /></Link></p>
         </div>
       </section>
       <Closing />

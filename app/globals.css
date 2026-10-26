@@ -605,6 +605,14 @@ figcaption.cap span { font-weight: 500; }
 .more-note { margin-top: 40px; color: var(--ink-2); }
 .more-note a { color: var(--ink); font-weight: 600; text-decoration-color: var(--gold); text-underline-offset: 3px; }
 
+.factors { list-style: none; counter-reset: f; display: grid; gap: 10px; }
+.factors li {
+  counter-increment: f; display: grid; grid-template-columns: 44px 1fr; align-items: baseline; gap: 6px;
+  padding: 18px 22px; border-radius: 16px; background: #fff; font-weight: 500; line-height: 1.45;
+}
+.sec:not(.grey) .factors li { background: var(--grey); }
+.factors li::before { content: counter(f, decimal-leading-zero); font-weight: 700; color: var(--c, var(--gold-ink)); font-variant-numeric: tabular-nums; }
+
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--line); padding: clamp(56px, 7vw, 88px) 0 calc(28px + env(safe-area-inset-bottom, 0px)); font-size: .95rem; }
 .foot-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)); gap: 40px clamp(24px, 4vw, 56px); }

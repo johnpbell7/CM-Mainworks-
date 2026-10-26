@@ -11,7 +11,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Carpentry, building, joinery and decorating",
-  description: "Carpentry, building, joinery and decorating in Lichfield and nearby, with one person looking after the job from start to finish. Free, written quotes.",
+  description: "I’m Connor. I do carpentry, building, joinery and decorating around Lichfield, and I look after every job myself, start to finish. Free written quotes.",
   path: "/services",
 });
 
@@ -21,7 +21,7 @@ export default function Services() {
       <PageHead
         crumbs={[{ href: "/services", label: "Services" }]}
         title={<>Four trades, <span className="hl">one person</span> looking after the job.</>}
-        lede="From a single door to a full extension. Whatever you need doing, you deal with Connor from the first visit to the final clean-up."
+        lede="One door or a full extension, you deal with me from the first visit to the final clean-up."
       />
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap svc-rows">

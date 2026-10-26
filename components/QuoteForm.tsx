@@ -110,11 +110,11 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
       const { code, message } = err as { code?: string; message?: string };
       setStatus("idle");
       const fallback = (
-        <>Please try again, or call Connor on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</>
+        <>Please try again, or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</>
       );
-      if (code === "rate_limited") setFormError(<>You’ve sent a few requests in a short time. Please wait a few minutes, or call Connor on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</>);
+      if (code === "rate_limited") setFormError(<>You’ve sent a few requests in a short time. Please wait a few minutes, or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</>);
       else if (code === "too_large") setFormError(<>Those photos are too big to send together. Remove one or two and try again.</>);
-      else if (code === "not_configured") setFormError(<>The form isn’t switched on yet, so your request hasn’t been sent. Please call or <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp Connor</a> on {business.phoneDisplay}.</>);
+      else if (code === "not_configured") setFormError(<>The form isn’t switched on yet, so your request hasn’t been sent. Please ring or <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a> on {business.phoneDisplay}.</>);
       else if (code === "invalid" && message) setFormError(<>{message}</>);
       else if (!navigator.onLine) setFormError(<>You seem to be offline, so the request wasn’t sent. Check your connection and try again.</>);
       else setFormError(<>Your request didn’t send. {fallback}</>);
@@ -147,7 +147,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
               style={{ strokeDasharray: 40, strokeDashoffset: 40, animation: "draw .6s .15s var(--ease) forwards" }} />
           </svg>
           <H>Thanks, {thanks.first}.</H>
-          <p>Your request is with Connor. He’ll call you on {thanks.phone}.</p>
+          <p>I’ve got your request and I’ll ring you on {thanks.phone}.</p>
           <button type="button" ref={againRef} onClick={reset}>Send another request</button>
           <style>{`@keyframes draw{to{stroke-dashoffset:0}}`}</style>
         </div>
@@ -169,7 +169,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
     <div className="quote">
       <div className="quote-head">
         <H>Get a free quote</H>
-        <p>A few details and Connor will come back with a price.</p>
+        <p>A few details and I’ll come back to you with a price.</p>
       </div>
 
       <form ref={formRef} noValidate onSubmit={onSubmit} aria-describedby="q-note">
@@ -318,7 +318,7 @@ export default function QuoteForm({ headingLevel = 2, collapsible = false, defau
         <button type="button" className="quote-cta" aria-expanded={open} aria-controls="quote-panel" onClick={openForm}>
           Get a free quote <ChevronDown />
         </button>
-        <a className="quote-call" href={business.phoneHref}>Or call Connor on {business.phoneDisplay}</a>
+        <a className="quote-call" href={business.phoneHref}>Or ring me on {business.phoneDisplay}</a>
       </div>
       <div className="quote-panel" id="quote-panel" ref={panel} inert={mobile && !open}>
         <div><QuoteCard headingLevel={headingLevel} /></div>

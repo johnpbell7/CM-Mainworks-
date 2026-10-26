@@ -8,7 +8,8 @@ import Steps from "@/components/Steps";
 import { areas, getArea } from "@/content/areas";
 import { business, getSection } from "@/content/site";
 import { media } from "@/content/media";
-import { abs, businessId, JsonLd, pageMeta } from "@/lib/seo";
+import FaqList from "@/components/FaqList";
+import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -29,6 +30,7 @@ export default async function AreaPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={faqLd(a.faqs)} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -57,7 +59,7 @@ export default async function AreaPage({ params }: Props) {
               <ul className="facts">
                 <li><span>Where</span>{a.where[0].toUpperCase() + a.where.slice(1)}</li>
                 <li><span>Quotes</span>Free and written, with no obligation</li>
-                <li><span>Who you deal with</span>{business.owner}, from first visit to final clean-up</li>
+                <li><span>Who you deal with</span>Me, from the first visit to the final clean-up</li>
               </ul>
             </div>
           </div>
@@ -67,8 +69,8 @@ export default async function AreaPage({ params }: Props) {
       <section className="sec grey" aria-labelledby="work-title">
         <div className="wrap">
           <div className="sec-head">
-            <div data-reveal="up"><h2 id="work-title">Work Connor does in {a.name}</h2></div>
-            <p data-reveal="up">Carpentry, building, joinery and decorating, so one person can see the whole job through.</p>
+            <div data-reveal="up"><h2 id="work-title">The work I do in {a.name}</h2></div>
+            <p data-reveal="up">I do carpentry, building, joinery and decorating, so one person sees the whole job through.</p>
           </div>
           <div className="items" data-reveal="stagger">
             {a.focus.map((f) => {
@@ -94,12 +96,22 @@ export default async function AreaPage({ params }: Props) {
         </div>
       </section>
 
+      <section className="sec grey" aria-labelledby="faq-title">
+        <div className="wrap faq-wrap">
+          <div className="faq-side" data-reveal="up">
+            <h2 id="faq-title">Questions from {a.name}</h2>
+            <p>More answers on the <Link href="/faqs">FAQs page</Link>.</p>
+          </div>
+          <FaqList faqs={a.faqs.map((f, i) => ({ ...f, color: a.focus[i % a.focus.length].service }))} />
+        </div>
+      </section>
+
       <section className="sec" aria-labelledby="ask-title">
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Get a free quote in {a.name}</h2>
-            <p className="big-p">Send a few photos and a line about the job. Connor will look, visit if he needs to, and send a written quote.</p>
-            <p className="big-p">Or call <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
+            <p className="big-p">Send me a few photos and a line about the job. I’ll take a look, come round if I need to, and send you a written quote.</p>
+            <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
           <QuoteForm />
         </div>

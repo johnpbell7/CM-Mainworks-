@@ -19,7 +19,7 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: "Carpenter and builder in Lichfield | CM MainWorks", template: "%s | CM MainWorks" },
-  description: "Carpentry, building, joinery and decorating in Lichfield and nearby. Send Connor a few photos of the job and get a clear, free quote.",
+  description: "I’m Connor, a carpenter and builder in Lichfield. Send me a few photos of the job and I’ll come back with a clear, free quote.",
   applicationName: "CM MainWorks",
   openGraph: {
     type: "website",

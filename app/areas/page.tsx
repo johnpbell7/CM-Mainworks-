@@ -9,7 +9,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Areas covered around Lichfield",
   description:
-    "CM MainWorks covers Lichfield, Burntwood, Tamworth, Sutton Coldfield, Shenstone, Whittington and Fradley for carpentry, building, joinery and decorating.",
+    "I cover Lichfield, Burntwood, Tamworth, Sutton Coldfield, Shenstone, Whittington and Fradley for carpentry, building, joinery and decorating.",
   path: "/areas",
 });
 
@@ -19,7 +19,7 @@ export default function Areas() {
       <PageHead
         crumbs={[{ href: "/areas", label: "Areas" }]}
         title={<>Areas <span className="hl">we cover</span></>}
-        lede="CM MainWorks is based in Lichfield and works across the towns and villages around it. If you’re nearby but not listed, ask anyway."
+        lede="I’m based in Lichfield and work across the towns and villages around it. Nearby but not listed? Ask anyway."
       />
       <section className="sec" style={{ paddingTop: 0 }} aria-label="Towns and villages">
         <div className="wrap">

@@ -24,6 +24,10 @@ No database is used.
 
 Every photo slot lives in `content/media.ts` and `content/projects.ts`. Drop the file in `public/images/`, set `src` and write the `alt`. While `src` is `null`, a labelled “Photo to come” placeholder shows instead.
 
+## Voice
+
+The whole site is written in Connor’s own voice (I, me, my), in plain British English. Keep new copy the same: short sentences, real situations, no prices, insurance or claims he hasn’t confirmed.
+
 ## SEO
 
 - Every page sets a unique title, description, canonical URL and social card through `pageMeta()` in `lib/seo.tsx`, and has exactly one H1.

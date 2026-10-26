@@ -49,7 +49,7 @@ export const sections: Section[] = [
     color: "var(--oak)",
     tint: "var(--t-oak)",
     blurb: "Internal doors, skirting, staircases, kitchens and fitted wardrobes.",
-    intro: "The woodwork that makes a house feel finished, hung, fitted and trimmed so it sits right and stays right.",
+    intro: "Doors, skirting, stairs and kitchens, fitted so they sit right and stay right. The woodwork you only notice when it’s wrong.",
     examples: ["Internal doors hung and adjusted", "Skirting, architrave and trims", "Staircases and spindles", "Kitchen fitting", "Fitted wardrobes", "Oak-framed garden canopies and outdoor structures"],
   },
   {
@@ -59,7 +59,7 @@ export const sections: Section[] = [
     color: "var(--steel)",
     tint: "var(--t-steel)",
     blurb: "Extensions, structural alterations and renovations.",
-    intro: "Bigger changes to the shape of your home, planned clearly and run by one person from start to finish.",
+    intro: "Extensions, knock-throughs and renovations. I plan them with you and run them myself, start to finish.",
     examples: ["Extensions", "Knocking through and structural alterations", "Full renovations", "Bathroom refits", "Landscaping and outdoor projects"],
   },
   {
@@ -69,7 +69,7 @@ export const sections: Section[] = [
     color: "var(--sage)",
     tint: "var(--t-sage)",
     blurb: "Made-to-fit media walls, alcove units, shelving and storage.",
-    intro: "Built-in pieces made to fit your rooms exactly, rather than flat-pack that nearly fits.",
+    intro: "Media walls, alcove units and storage, built for your room rather than flat-pack that nearly fits.",
     examples: ["Media walls", "Alcove units", "Shelving", "Under-stairs storage"],
   },
   {
@@ -79,7 +79,7 @@ export const sections: Section[] = [
     color: "var(--brick)",
     tint: "var(--t-brick)",
     blurb: "Painting and finishing, right through to the last coat.",
-    intro: "The finish that people actually see, with the prep done properly underneath it.",
+    intro: "The bit everyone sees, with the prep done properly underneath so it lasts.",
     examples: ["Painting walls, ceilings and woodwork", "Filling and preparation", "Flooring and finishing after building work"],
   },
 ];

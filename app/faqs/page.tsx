@@ -7,7 +7,7 @@ import { faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "FAQs: quotes, materials, small jobs and areas",
-  description: "Answers to common questions about free quotes, materials, small jobs, how the work is run and the areas CM MainWorks covers around Lichfield.",
+  description: "Straight answers about free quotes, materials, small jobs, how I run a job and the areas I cover around Lichfield.",
   path: "/faqs",
 });
 
@@ -18,7 +18,7 @@ export default function Faqs() {
       <PageHead
         crumbs={[{ href: "/faqs", label: "FAQs" }]}
         title={<>Questions, <span className="hl">answered.</span></>}
-        lede="Can’t see yours here? Call or WhatsApp Connor and ask."
+        lede="The things people ask me most. Can’t see yours? Ring or WhatsApp me."
       />
       {faqGroups.map((g, i) => (
         <section className={`sec${i % 2 ? " grey" : ""}`} key={g.title} style={i === 0 ? { paddingTop: 0 } : undefined} aria-labelledby={`faq-${i}`}>
