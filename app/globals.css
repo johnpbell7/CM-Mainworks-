@@ -596,18 +596,6 @@ figcaption.cap span { font-weight: 500; }
 .item h3 a { text-decoration: none; }
 .item h3 a:hover { color: var(--gold-ink); }
 .item p { color: var(--ink-2); }
-.area-cards { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.area-cards a { display: flex; flex-direction: column; height: 100%; padding: 26px 24px; border-radius: 16px; background: var(--grey); text-decoration: none; transition: background .25s var(--ease); }
-.area-cards a:hover { background: var(--soft); }
-.area-cards h3 { font-size: 1.7rem; letter-spacing: -.035em; }
-.grey .area-cards a { background: #fff; }
-.grey .area-cards a:hover { background: var(--soft); }
-.area-cards + .mid-h, .wrap > .mid-h { margin-bottom: 28px; }
-.area-cards .where { margin-top: 4px; font-size: .9rem; font-weight: 600; color: var(--gold-ink); }
-.area-cards p { margin: 14px 0 18px; color: var(--ink-2); font-size: .98rem; }
-.area-cards .go { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: .95rem; }
-.area-cards .go svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
-.area-cards a:hover .go svg { transform: translateX(4px); }
 .facts { list-style: none; margin-top: 22px; padding: 0 !important; }
 .facts li { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); color: var(--ink); margin: 0 !important; }
 .facts li span { color: var(--ink-3); font-weight: 600; font-size: .9rem; }
@@ -715,8 +703,7 @@ html.js.intro-on { overflow: hidden; }
   .sec-head > p { justify-self: start; }
   .contact-grid { grid-template-columns: minmax(0, 1fr); }
   .items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .area-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .closing .big-badge { display: none; }
+      .closing .big-badge { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -775,8 +762,7 @@ html.js.intro-on { overflow: hidden; }
   .page-head h1 { font-size: clamp(2.5rem, 11vw, 3.1rem); }
   .svc-row h2 { font-size: 1.75rem; }
   .mid-h { font-size: 1.55rem; }
-  .area-cards h3 { font-size: 1.45rem; }
-  .sec-head > p { font-size: 1.04rem; }
+    .sec-head > p { font-size: 1.04rem; }
 
   .services, .work .side {
     display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
@@ -813,8 +799,7 @@ html.js.intro-on { overflow: hidden; }
 
   .svc-row { grid-template-columns: minmax(0, 1fr); }
   .items { grid-template-columns: minmax(0, 1fr); }
-    .area-cards { grid-template-columns: minmax(0, 1fr); }
-  .facts li { grid-template-columns: 1fr; gap: 2px; }
+      .facts li { grid-template-columns: 1fr; gap: 2px; }
   .svc-row:nth-child(even) .ph { order: 0; }
   .proj-grid { grid-template-columns: minmax(0, 1fr); }
   .page-head { padding-top: 48px; }

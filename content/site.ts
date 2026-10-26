@@ -96,7 +96,6 @@ export function getSection(slug: string) {
 export const nav = [
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Recent work" },
-  { href: "/areas", label: "Areas" },
   { href: "/about", label: "About" },
   { href: "/faqs", label: "FAQs" },
 ] as const;

@@ -3,7 +3,6 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Closing from "@/components/Closing";
-import { Arrow } from "@/components/Icons";
 import { business, sections } from "@/content/site";
 import { media } from "@/content/media";
 import { areas } from "@/content/areas";
@@ -88,7 +87,6 @@ export default function About() {
               </div>
             ))}
           </div>
-          <p style={{ marginTop: 36 }}><Link className="link link-arrow" href="/areas">Where I work <Arrow /></Link></p>
         </div>
       </section>
       <Closing />

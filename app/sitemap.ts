@@ -15,7 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("", 1),
     entry("/services", 0.9),
     ...sections.map((s) => entry(`/services/${s.slug}`, 0.9)),
-    entry("/areas", 0.8),
     ...areas.map((a) => entry(`/areas/${a.slug}`, 0.8)),
     entry("/projects", 0.7),
     ...publishedProjects.map((p) => entry(`/projects/${p.slug}`, 0.6)),

@@ -44,7 +44,7 @@ export default async function AreaPage({ params }: Props) {
         }}
       />
       <PageHead
-        crumbs={[{ href: "/areas", label: "Areas" }, { href: `/areas/${a.slug}`, label: a.name }]}
+        crumbs={[{ href: `/areas/${a.slug}`, label: a.name }]}
         title={<>Carpenter and builder in <span className="hl">{a.name}</span></>}
         lede={a.intro}
       />
