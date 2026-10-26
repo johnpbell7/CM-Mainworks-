@@ -24,7 +24,7 @@ export default function Services() {
         <div className="wrap svc-rows">
           {sections.map((s) => (
             <article className="svc-row" key={s.slug} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
-              <Photo media={media[s.slug]} sizes="(max-width: 720px) 100vw, 50vw" />
+              <Photo media={media[s.slug]} illo={s.slug} sizes="(max-width: 720px) 100vw, 50vw" />
               <div data-reveal="up">
                 <h2><span className="hl" data-pen={s.pen}>{s.name}</span></h2>
                 <p>{s.intro}</p>

@@ -42,7 +42,7 @@ export default async function Service({ params }: Props) {
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
-            <Photo media={media[s.slug]} sizes="(max-width: 720px) 100vw, 50vw" />
+            <Photo media={media[s.slug]} illo={s.slug} sizes="(max-width: 720px) 100vw, 50vw" />
             <div data-reveal="up">
               <h2 className="sub-h">What’s included</h2>
               <ul className="ticks">

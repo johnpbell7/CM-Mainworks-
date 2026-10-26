@@ -6,10 +6,12 @@ import BeforeAfter from "@/components/BeforeAfter";
 import AskButton from "@/components/AskButton";
 import { Arrow, Swipe } from "@/components/Icons";
 import Closing from "@/components/Closing";
+import Illustration from "@/components/Illustration";
 import { business, sections, type JobType } from "@/content/site";
 import { media } from "@/content/media";
 import { projects } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
+import FaqList from "@/components/FaqList";
 
 const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
 const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
@@ -56,7 +58,7 @@ export default function Home() {
           <div className="services">
             {sections.map((s, i) => (
               <article className="service" key={s.slug} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
-                <Photo media={media[s.slug]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 24vw" />
+                <Photo media={media[s.slug]} illo={s.slug} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 24vw" />
                 <p className="num">0{i + 1}</p>
                 <h3>
                   <Link href={`/services/${s.slug}`}><span className="hl" data-pen={s.pen}>{s.name}</span></Link>
@@ -110,22 +112,21 @@ export default function Home() {
             </div>
             <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
           </div>
-          <ol className="steps" data-reveal="stagger">
-            <li style={{ "--c": "var(--oak)" } as React.CSSProperties}>
-              <span className="rule" aria-hidden="true" />
-              <h3>Send a few photos</h3>
-              <p>Use the form or WhatsApp. A couple of pictures and a line about the job is plenty.</p>
-            </li>
-            <li style={{ "--c": "var(--steel)" } as React.CSSProperties}>
-              <span className="rule" aria-hidden="true" />
-              <h3>Get a clear price</h3>
-              <p>Connor looks at the photos, visits if he needs to, and gives you a written quote.</p>
-            </li>
-            <li style={{ "--c": "var(--sage)" } as React.CSSProperties}>
-              <span className="rule" aria-hidden="true" />
-              <h3>The job, done properly</h3>
-              <p>Work starts on the date you agree, and the place is left tidy when it’s finished.</p>
-            </li>
+          <ol className="steps">
+            {[
+              { k: "photos", c: "var(--oak)", t: "var(--t-oak)", h: "Send a few photos", p: "Use the form or WhatsApp. A couple of pictures and a line about the job is plenty." },
+              { k: "quote", c: "var(--steel)", t: "var(--t-steel)", h: "Get a clear price", p: "Connor looks at the photos, visits if he needs to, and gives you a written quote." },
+              { k: "done", c: "var(--sage)", t: "var(--t-sage)", h: "The job, done properly", p: "Work starts on the date you agree, and the place is left tidy when it’s finished." },
+            ].map((st, i) => (
+              <li key={st.k} style={{ "--c": st.c, "--pen": st.t } as React.CSSProperties} data-reveal="up">
+                <div className="step-mark"><Illustration kind={st.k as "photos" | "quote" | "done"} /></div>
+                <div className="step-body">
+                  <p className="step-n">Step {i + 1}</p>
+                  <h3>{st.h}</h3>
+                  <p>{st.p}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </section>
@@ -176,21 +177,13 @@ export default function Home() {
 
       {/* ---------------- FAQs ---------------- */}
       <section className="sec" id="faq" aria-labelledby="faq-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up">
-              <h2 id="faq-title">FAQs</h2>
-            </div>
-            <p data-reveal="up"><Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link></p>
+        <div className="wrap faq-wrap">
+          <div className="faq-side" data-reveal="up">
+            <h2 id="faq-title">FAQs</h2>
+            <p>Quick answers to what people usually ask. Anything else, just call or WhatsApp.</p>
+            <Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link>
           </div>
-          <div className="faq">
-            {homeFaqs.map((f) => (
-              <div key={f.q} style={{ "--c": colorOf(f.color) } as React.CSSProperties}>
-                <h3>{f.q}</h3>
-                <p>{f.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqList faqs={homeFaqs} />
         </div>
       </section>
 

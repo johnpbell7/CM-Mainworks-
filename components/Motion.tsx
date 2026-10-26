@@ -3,18 +3,18 @@
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin);
 
 /*
   Site-wide motion, driven by data attributes so pages stay server components.
-    data-hero            hero items, played once the intro has opened
     data-reveal="up"     fade up when scrolled into view
     data-reveal="stagger" children fade up one after another
     data-reveal="img"    photo wipes up from the bottom, image settles from a slight zoom
     .hl                  marker highlight draws across the words
-    .steps .rule         step rules draw left to right
+    [data-illustration]  ink lines draw in, colour blocks slide into their offset
   Everything is skipped under prefers-reduced-motion.
 */
 export default function Motion() {
@@ -27,35 +27,15 @@ export default function Motion() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const once = (trigger: Element, start = "top 86%") => ({ trigger, start, once: true });
 
-        // ---- hero ----
+        // ---- hero: text is static; only the photo settles and drifts ----
         const hero = document.querySelector(".hero");
-        if (hero) {
-          const items = hero.querySelectorAll("[data-hero]");
-          const heroHl = hero.querySelectorAll(".hl");
-          const bgImg = hero.querySelector(".hero-bg img");
-          gsap.set(heroHl, { backgroundSize: "0% 74%" });
-
-          const play = () => {
-            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-            if (bgImg) tl.fromTo(bgImg, { scale: 1.14 }, { scale: 1.04, duration: 2.6, ease: "power2.out" }, 0);
-            tl.fromTo(items, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 1.05, stagger: 0.09 }, 0.1)
-              .to(heroHl, { backgroundSize: "100% 74%", duration: 0.75, ease: "power2.inOut" }, 0.65);
-          };
-
-          const w = window as unknown as { __cmIntroOpen?: boolean };
-          if (document.documentElement.classList.contains("intro-on") && !w.__cmIntroOpen) {
-            window.addEventListener("cm:intro-open", play, { once: true });
-          } else {
-            play();
-          }
-
-          // gentle parallax on the photo
-          if (bgImg) {
-            gsap.to(bgImg, {
-              yPercent: 10, ease: "none",
-              scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
-            });
-          }
+        const bgImg = hero?.querySelector(".hero-bg img");
+        if (hero && bgImg) {
+          gsap.fromTo(bgImg, { scale: 1.1 }, { scale: 1.03, duration: 2.4, ease: "power2.out" });
+          gsap.to(bgImg, {
+            yPercent: 8, ease: "none",
+            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
+          });
         }
 
         // ---- reviews photo drifts behind the quote ----
@@ -70,7 +50,7 @@ export default function Motion() {
 
         // ---- generic reveals ----
         gsap.utils.toArray<HTMLElement>('[data-reveal="up"]').forEach((el) => {
-          gsap.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: once(el) });
+          gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", scrollTrigger: once(el, "top 92%") });
         });
 
         gsap.utils.toArray<HTMLElement>('[data-reveal="stagger"]').forEach((el) => {
@@ -100,14 +80,15 @@ export default function Motion() {
           });
         });
 
-        // ---- step rules draw across ----
-        gsap.utils.toArray<HTMLElement>(".steps .rule").forEach((el, i) => {
-          gsap.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: "power3.inOut", delay: (i % 3) * 0.12, scrollTrigger: once(el) });
-        });
-
-        // ---- FAQ rules ----
-        gsap.utils.toArray<HTMLElement>(".faq > div").forEach((el, i) => {
-          gsap.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", delay: (i % 2) * 0.1, scrollTrigger: once(el) });
+        // ---- illustrations draw themselves ----
+        gsap.utils.toArray<SVGSVGElement>("[data-illustration]").forEach((svg) => {
+          const q = gsap.utils.selector(svg);
+          const tl = gsap.timeline({ scrollTrigger: once(svg, "top 88%"), delay: 0.2 });
+          tl.fromTo(q(".l, .p"), { drawSVG: "0%" }, { drawSVG: "100%", duration: 1.1, ease: "power2.inOut", stagger: 0.035 }, 0)
+            .fromTo(q(".p"), { fillOpacity: 0 }, { fillOpacity: 1, duration: 0.5, stagger: 0.03 }, 0.45)
+            .fromTo(q(".d"), { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.04 }, 0.8)
+            .from(q(".f:not(.roll)"), { x: 0, y: 0, opacity: 0, duration: 0.7, ease: "back.out(2)", stagger: 0.08 }, 0.75)
+            .fromTo(q(".f.roll"), { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 1, ease: "power2.inOut" }, 0.6);
         });
 
         // ---- closing badge drifts in ----

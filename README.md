@@ -26,10 +26,21 @@ Every photo slot lives in `content/media.ts` and `content/projects.ts`. Drop the
 
 ## Where things live
 
+- `components/Illustration.tsx` holds the section illustrations: ink line drawings over an offset block of the section colour. They stand in for photos until real ones arrive.
 - `components/Intro.tsx` is the page-load animation: the CM badge halves snap together on navy, then the page splits open along a box-joint seam. It plays once per browser session and is skipped for reduced motion.
 - `components/Motion.tsx` holds the GSAP scroll reveals, driven by `data-reveal` / `data-hero` attributes and `.hl` highlights.
 - `components/QuoteForm.tsx` and `app/api/quote/route.ts` are the quote form and its email handler (honeypot and rate limit included).
 - `content/` holds the copy, services, FAQs, projects and media.
+
+## Logo video
+
+`brand/animation/cm-logo-animation-square.mp4` is a 1080×1080, 5-second clip of the badge snapping together, for Connor to post. To re-render it after changing the animation, start the site and run:
+
+```bash
+node scripts/render-logo-video.mjs http://localhost:3000
+```
+
+The source page is `/logo-animation`. It isn’t linked from the site and isn’t indexed.
 
 ## Still to confirm with Connor
 

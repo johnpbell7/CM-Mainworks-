@@ -35,6 +35,7 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
   const [pics, setPics] = useState<Pic[]>([]);
   const [picNote, setPicNote] = useState("");
   const [over, setOver] = useState(false);
+  const [more, setMore] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [formError, setFormError] = useState<React.ReactNode>(null);
   const [thanks, setThanks] = useState({ first: "", phone: "" });
@@ -129,6 +130,7 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
     setPics([]);
     setJob("");
     setErrors({});
+    setMore(false);
     setStatus("idle");
     setTimeout(() => (formRef.current?.elements.namedItem("name") as HTMLInputElement)?.focus(), 0);
   };
@@ -167,7 +169,7 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
     <div className="quote" id="quote" data-hero>
       <div className="quote-head">
         <H>Get a free quote</H>
-        <p>Send a few details and photos, and Connor will come back with a price.</p>
+        <p>A few details and Connor will come back with a price.</p>
       </div>
 
       <form ref={formRef} noValidate onSubmit={onSubmit} aria-describedby="q-note">
@@ -193,52 +195,63 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
           </div>
         </div>
 
-        <fieldset className="jobs">
-          <legend>Type of work</legend>
-          {jobTypes.map((j) => (
-            <label className="job" key={j} style={{ "--c": jobColor(j) } as React.CSSProperties}>
-              <input type="radio" name="job" value={j} checked={job === j} onChange={() => setJob(j)} />
-              <span>{j}</span>
-            </label>
-          ))}
-        </fieldset>
-
         <div className="field">
-          <label htmlFor="q-msg">About the job <span className="opt">Optional</span></label>
-          <textarea className="input" id="q-msg" name="message" rows={2} maxLength={2000}
-            placeholder="A line or two is plenty, e.g. hang three internal doors" />
+          <label htmlFor="q-job">Type of work</label>
+          <div className={`select${job ? " chosen" : ""}`} style={{ "--c": job ? jobColor(job) : "var(--line-2)" } as React.CSSProperties}>
+            <select className="input" id="q-job" name="job" value={job} onChange={(e) => setJob(e.target.value as JobType | "")}>
+              <option value="">Choose one</option>
+              {jobTypes.map((j) => <option key={j} value={j}>{j}</option>)}
+            </select>
+          </div>
           <span className="bar" />
         </div>
 
-        <div className="field">
-          <span className="label" id="q-photos-label">Photos <span className="opt">Optional, up to {MAX_PHOTOS}</span></span>
-          {pics.length < MAX_PHOTOS && (
-            <label
-              className={`drop${over ? " over" : ""}`}
-              onDragOver={(e) => { e.preventDefault(); setOver(true); }}
-              onDragLeave={() => setOver(false)}
-              onDrop={(e) => { e.preventDefault(); setOver(false); addFiles(e.dataTransfer.files); }}
-            >
-              <input type="file" name="photos" accept="image/*" multiple aria-labelledby="q-photos-label"
-                onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }} />
-              <span className="drop-ico"><Camera /></span>
-              <span>
-                <strong>{pics.length ? "Add more photos" : "Add photos of the job"}</strong>
-                <small>Tap to choose, or drag them here</small>
-              </span>
-            </label>
-          )}
-          {pics.length > 0 && (
-            <ul className="thumbs" aria-label={`${pics.length} ${pics.length === 1 ? "photo" : "photos"} added`}>
-              {pics.map((p, i) => (
-                <li key={p.url}>
-                  <img src={p.url} alt="" />
-                  <button type="button" onClick={() => removePic(i)} aria-label={`Remove photo ${i + 1}`}><Cross /></button>
-                </li>
-              ))}
-            </ul>
-          )}
-          {picNote && <span className="err" role="status"><Alert />{picNote}</span>}
+        <button type="button" className={`more${more ? " open" : ""}`} aria-expanded={more} aria-controls="q-more" onClick={() => setMore((m) => !m)}>
+          <span className="more-ico" aria-hidden="true" />
+          {more ? "Hide details and photos" : "Add details or photos"}
+          <span className="opt">{pics.length ? `${pics.length} ${pics.length === 1 ? "photo" : "photos"} added` : "Optional"}</span>
+        </button>
+
+        <div className="more-panel" id="q-more" data-open={more} inert={!more}>
+          <div>
+            <div className="field">
+              <label htmlFor="q-msg">About the job</label>
+              <textarea className="input" id="q-msg" name="message" rows={2} maxLength={2000}
+                placeholder="A line or two is plenty, e.g. hang three internal doors" />
+              <span className="bar" />
+            </div>
+
+            <div className="field" style={{ marginBottom: 4 }}>
+              <span className="label" id="q-photos-label">Photos <span className="opt">Up to {MAX_PHOTOS}</span></span>
+              {pics.length < MAX_PHOTOS && (
+                <label
+                  className={`drop${over ? " over" : ""}`}
+                  onDragOver={(e) => { e.preventDefault(); setOver(true); }}
+                  onDragLeave={() => setOver(false)}
+                  onDrop={(e) => { e.preventDefault(); setOver(false); addFiles(e.dataTransfer.files); }}
+                >
+                  <input type="file" name="photos" accept="image/*" multiple aria-labelledby="q-photos-label"
+                    onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }} />
+                  <span className="drop-ico"><Camera /></span>
+                  <span>
+                    <strong>{pics.length ? "Add more photos" : "Add photos of the job"}</strong>
+                    <small>Tap to choose, or drag them here</small>
+                  </span>
+                </label>
+              )}
+              {pics.length > 0 && (
+                <ul className="thumbs" aria-label={`${pics.length} ${pics.length === 1 ? "photo" : "photos"} added`}>
+                  {pics.map((p, i) => (
+                    <li key={p.url}>
+                      <img src={p.url} alt="" />
+                      <button type="button" onClick={() => removePic(i)} aria-label={`Remove photo ${i + 1}`}><Cross /></button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {picNote && <span className="err" role="status"><Alert />{picNote}</span>}
+            </div>
+          </div>
         </div>
 
         {/* Honeypot for bots. People never see or fill this. */}
