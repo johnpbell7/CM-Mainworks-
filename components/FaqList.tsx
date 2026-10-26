@@ -8,8 +8,8 @@ export default function FaqList({ faqs, headingLevel = 3 }: { faqs: Faq[]; headi
   const H = headingLevel === 2 ? "h2" : "h3";
   return (
     <div className="faq-list">
-      {faqs.map((f, i) => (
-        <details key={f.q} className="faq-item" style={{ "--c": colorOf(f.color) } as React.CSSProperties} open={i === 0}>
+      {faqs.map((f) => (
+        <details key={f.q} className="faq-item" style={{ "--c": colorOf(f.color) } as React.CSSProperties}>
           <summary>
             <span className="dot" aria-hidden="true" />
             <H>{f.q}</H>
