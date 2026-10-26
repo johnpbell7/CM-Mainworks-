@@ -4,7 +4,7 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import QuoteForm from "@/components/QuoteForm";
 import BeforeAfter from "@/components/BeforeAfter";
-import { Arrow } from "@/components/Icons";
+import { Arrow, Award, Pin, QuoteDoc, Shield } from "@/components/Icons";
 import Closing from "@/components/Closing";
 import Steps from "@/components/Steps";
 import { business, sections } from "@/content/site";
@@ -42,10 +42,10 @@ export default function Home() {
               Doors, staircases, kitchens, fitted furniture and building work across Lichfield and the Midlands.
             </p>
             <ul className="hero-meta" data-hero aria-label="At a glance">
-              <li>Free, written quotes</li>
-              <li>Insured</li>
-              <li>{business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade</li>
-              <li>Lichfield and {business.region}</li>
+              <li><QuoteDoc />Free written quotes</li>
+              <li><Shield />Insured</li>
+              <li><Award />{business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade</li>
+              <li><Pin />Lichfield and {business.region}</li>
             </ul>
           </div>
           <QuoteForm collapsible />

@@ -28,3 +28,15 @@ export const WhatsApp = (p: P) => (
 export const ChevronDown = (p: P) => (
   <svg viewBox="0 0 24 24" {...base} strokeWidth={2.2} {...p}><path d="M6 9l6 6 6-6" /></svg>
 );
+export const QuoteDoc = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5" /><path d="M9 14.5l2 2 4-4.5" /></svg>
+);
+export const Shield = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><path d="M12 3l7 3v5.5c0 4.4-3 7.9-7 9.5-4-1.6-7-5.1-7-9.5V6z" /><path d="M9 12l2 2 4-4.5" /></svg>
+);
+export const Award = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><circle cx="12" cy="9" r="5.5" /><path d="M8.5 13.3L7 21l5-2.6 5 2.6-1.5-7.7" /><path d="M10 9l1.4 1.4L14 7.8" /></svg>
+);
+export const Pin = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><path d="M12 21s-6.5-6.2-6.5-11.3a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21z" /><circle cx="12" cy="9.7" r="2.4" /></svg>
+);
