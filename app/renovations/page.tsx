@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Benefits from "@/components/Benefits";
+import Phases from "@/components/Phases";
 import PackageCard from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
@@ -26,24 +27,18 @@ const usual = [
   "Working out who goes first, and waiting when someone doesn’t turn up",
   "Each firm adding its own margin to the bill",
   "Nobody responsible when one trade’s work affects another’s",
+  "No real idea whether it’s on time or on budget",
   "You, managing it all around work and family",
 ];
 const ours = [
   "One person to deal with, from the first visit to the final clean",
-  "The order of work planned properly, so the job keeps moving",
-  "One clear, written quote for the whole job",
+  "The work planned in clear phases, so the job keeps moving",
+  "One clear, written quote, invoiced phase by phase",
+  "Regular sit-downs to check timescales and targets",
   "One team responsible for the finished result",
   "You get on with your life, and I keep you updated",
 ];
 
-const process = [
-  { title: "A chat about your home", text: "Ring, WhatsApp or fill in the form. Tell me what you’re hoping for, even if it’s only a rough idea." },
-  { title: "I come round", text: "We walk through the house together. I listen to how you live, what’s not working and what you’d love it to be." },
-  { title: "A plan and a written quote", text: "What’s included, what isn’t, the order of work and the price. All in writing before anything starts." },
-  { title: "Dates agreed", text: "We agree a start date and plan around you, so you always know what’s happening when." },
-  { title: "One team does the work", text: "I run the job on site with my team and the trades I trust, and keep you updated as we go." },
-  { title: "A final walk-round", text: "We go round together and I put right anything you’re not happy with before I call it finished." },
-];
 
 export default function Renovations() {
   const [full, ...rest] = packages;
@@ -68,7 +63,7 @@ export default function Renovations() {
       <PageHead
         crumbs={[{ href: "/renovations", label: "Renovations" }]}
         title={<>Your whole renovation, <span className="hl">one team.</span></>}
-        lede="Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me from start to finish. Less stress, a fair price, and a home you’ll love."
+        lede="Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me in clear phases from start to finish. Less stress, a fair price, and a home you’ll love."
       />
 
       <section className="sec" style={{ paddingTop: 0 }} aria-label="How I work">
@@ -78,6 +73,7 @@ export default function Renovations() {
             <div className="prose" data-reveal="up">
               <p>Renovating a home is exciting. It can also be the most stressful thing you ever take on, and most of that stress comes from managing it: finding trades, getting them in the right order and chasing the ones who don’t turn up.</p>
               <p>That’s the part I take off your hands. I plan the whole job with you, run it on site with one team, and bring in trades I trust for the specialist bits like electrics and plumbing. You have one person to ring, one written quote, and one team that cares how it all turns out.</p>
+              <p>We work in clear phases, and you’re invoiced phase by phase. Before we start, we sit down and agree the process, timescales and targets, and we keep checking them together as we go. No guessing, and no surprises.</p>
               <p>I’ll listen to what you want, be honest about what it costs, and work with you to get the home you’re picturing.</p>
               <p style={{ marginTop: 24 }}>
                 <Link className="link link-arrow" href="#quote">Talk to me about your renovation <Arrow /></Link>
@@ -139,18 +135,7 @@ export default function Renovations() {
 
       <section className="sec" aria-labelledby="how-title">
         <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up"><h2 id="how-title">How your renovation runs</h2></div>
-            <p data-reveal="up">You’ll know <span className="hl" data-pen="steel">the price before any work starts</span>, and what’s happening every step of the way.</p>
-          </div>
-          <ol className="timeline" data-reveal="stagger">
-            {process.map((p) => (
-              <li key={p.title}>
-                <h3>{p.title}</h3>
-                <p>{p.text}</p>
-              </li>
-            ))}
-          </ol>
+          <Phases titleId="how-title" />
         </div>
       </section>
 

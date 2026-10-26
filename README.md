@@ -61,6 +61,7 @@ The source page is `/logo-animation`. It isn’t linked from the site and isn’
 - He brings in labourers he trusts on bigger jobs, and runs the job himself.
 - He covers the wider Midlands, including Birmingham, Solihull, Leicester and Redditch.
 - Main focus is full renovations, managed by him with one team: kitchens, bathrooms, roofs, floors, stairs, skirting, architrave, tiling and extensions (via John, Oct 2026).
+- Full renovations run in phases and are invoiced phase by phase. Connor sits down with clients to agree the process, timescales and targets, checks with them whether they’re being met, and is always open about progress (via John, Oct 2026). The phase names on `/renovations` (`components/Phases.tsx`) are an example.
 
 ## Still to confirm with Connor
 

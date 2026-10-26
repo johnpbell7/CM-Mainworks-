@@ -17,10 +17,10 @@ export const metadata: Metadata = pageMeta({
 });
 
 const how = [
-  { title: "Free visit and quote", text: "I come round, look at the job and listen to what you want. It costs nothing and there’s no obligation." },
-  { title: "Everything in writing", text: "Your quote sets out what’s included and what isn’t, so you can compare it properly." },
+  { title: "Free visit and written quote", text: "I come round, listen to what you want and put it all in writing, with what’s included and what isn’t. No cost, no obligation." },
+  { title: "Pay in phases", text: "Renovations are split into clear phases and invoiced phase by phase, so you can see exactly what each payment covers." },
+  { title: "Regular sit-downs", text: "We agree timescales and targets up front, then sit down as we go to check they’re being met." },
   { title: "No surprises", text: "If something unexpected turns up, I’ll show you and we’ll agree what to do before I carry on." },
-  { title: "Honest about budget", text: "Tell me what you’ve got to spend. I’ll tell you what it can do, and where to save or spend a bit more." },
 ];
 
 export default function Prices() {
@@ -40,7 +40,7 @@ export default function Prices() {
             {packages.map((p) => <PackageCard key={p.name} p={p} />)}
           </div>
           <p className="price-note">
-            “From” prices are for a typical job and are a starting point, not a quote. Your price depends on your home, the size of the job and the finish you choose.
+            “From” prices are for a typical job and are a starting point, not a quote. Your price depends on your home, the size of the job and the finish you choose. Renovations are invoiced phase by phase, not all at once.
           </p>
         </div>
       </section>

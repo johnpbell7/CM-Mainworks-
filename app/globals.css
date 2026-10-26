@@ -695,6 +695,30 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .timeline h3 { font-size: 1.3rem; letter-spacing: -.02em; margin-bottom: 8px; }
 .timeline p { color: var(--ink-2); }
 
+/* ---------- renovations: built in phases ---------- */
+.phases-wrap { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+.principles { list-style: none; display: grid; gap: 22px; margin-top: 8px; }
+.principles li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; align-items: start; }
+.principles .benefit-ico { width: 52px; height: 52px; }
+.principles .benefit-ico svg { width: 26px; height: 26px; }
+.principles h3 { font-size: 1.15rem; letter-spacing: -.02em; }
+.faq-side .principles p { margin: 4px 0 0; max-width: 38ch; }
+.phases { list-style: none; position: relative; display: grid; }
+.phases li { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 20px; padding-bottom: 30px; }
+.phases li:not(:last-child)::before { content: ""; position: absolute; left: 23px; top: 52px; bottom: 4px; width: 2px; background: var(--line-2); }
+.phases .mark {
+  position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--t-gold); color: var(--gold-ink); font-weight: 700; font-size: 1.1rem; font-variant-numeric: tabular-nums;
+}
+.phases .ends .mark { background: var(--gold); color: var(--ink); }
+.phases .mark svg { width: 22px; height: 22px; }
+.ph-n { font-size: .85rem; font-weight: 700; color: var(--gold-ink); margin-top: 2px; }
+.phases h3 { font-size: 1.3rem; letter-spacing: -.02em; margin: 2px 0 6px; }
+.phases li > div > p:not(.ph-n):not(.ph-after) { color: var(--ink-2); max-width: 52ch; }
+.ph-after { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-2); font-size: .9rem; font-weight: 600; color: var(--ink-2); }
+.ph-after span { display: inline-flex; align-items: center; gap: 7px; }
+.ph-after svg { width: 18px; height: 18px; color: var(--gold-ink); }
+
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--line); padding: clamp(56px, 7vw, 88px) 0 calc(28px + env(safe-area-inset-bottom, 0px)); font-size: .95rem; }
 .foot-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr) minmax(0, 1.5fr) minmax(0, .9fr); gap: 40px clamp(24px, 4vw, 56px); }
@@ -885,6 +909,10 @@ html.js.intro-on { overflow: hidden; }
   .feature .ticks { grid-template-columns: minmax(0, 1fr); }
   .services.six .service { flex: 0 0 78%; }
   .smaller, .pkgs, .compare, .timeline { grid-template-columns: minmax(0, 1fr); }
+  .phases-wrap { grid-template-columns: minmax(0, 1fr); }
+  .phases li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
+  .phases .mark { width: 40px; height: 40px; font-size: 1rem; }
+  .phases li:not(:last-child)::before { left: 19px; top: 44px; }
   .price-rows a { grid-template-columns: 12px minmax(0, 1fr); }
   .price-rows .from { grid-column: 2; grid-row: auto; justify-content: flex-start; text-align: left; margin-top: 6px; }
       .facts li { grid-template-columns: 1fr; gap: 2px; }

@@ -35,7 +35,7 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     body: [
       "Most people who ask about an extension have the same worry: who’s going to pull it all together? Builders, roofers, electricians, plasterers, a kitchen fitter, a decorator. Normally that’s you, juggling phone calls. With me, it’s my job.",
       "I run the whole extension with one team, from the groundwork to the last coat of paint. Where it needs specialist trades, I bring in people I trust and organise them, so the work keeps moving and you’ve still only got one number to ring.",
-      "It starts with a visit. We’ll talk about how you live, what’s not working now and what you’d love the space to be. Then you get a written quote that sets out what’s included, so there are no surprises later.",
+      "It starts with a visit. We’ll talk about how you live, what’s not working now and what you’d love the space to be. Then you get a written quote split into clear phases, and we sit down to agree the timescales and targets before any work starts.",
     ],
     items: [
       { title: "Single-storey rear extensions", text: "The most popular way to add a proper kitchen-diner or family room at the back of the house." },
@@ -58,7 +58,7 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     steps: [
       { title: "Tell me what you’re hoping for", text: "Photos and a rough idea are plenty to start. Then I’ll come round and we’ll talk it through." },
       { title: "A plan and a written quote", text: "What’s included, what isn’t, and the price, before any work starts." },
-      { title: "One team builds it", text: "Groundwork to decorating, managed by me, with regular updates so you always know where things are." },
+      { title: "One team builds it, in phases", text: "Groundwork to decorating, invoiced phase by phase, with sit-downs to check timescales and targets." },
     ],
     faqs: [
       { q: "Do you handle the whole extension?", a: "Yes. I manage it from start to finish, so you’ve got one person to deal with. Where it needs specialist trades, I bring in people I trust and organise them for you." },

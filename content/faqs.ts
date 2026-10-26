@@ -15,12 +15,16 @@ const insured: Faq = { q: "Are you insured?", a: "Yes, I’m insured. If you’d
 const budget: Faq = { q: "Can you work to a budget?", a: "Yes. Tell me what you’ve got to spend and I’ll be honest about what it can do, and where it’s worth spending a bit more or saving.", color: "bathrooms" };
 const surprises: Faq = { q: "What if something unexpected turns up?", a: "In older houses it sometimes does. If I find something, I’ll show you, explain your options and agree the cost with you before I carry on. No surprises on the bill.", color: "renovation" };
 
+const pay: Faq = { q: "How do I pay for a renovation?", a: "In phases. Before we start, the job is split into clear phases and you’re invoiced phase by phase, so you never pay for the whole job at once and you can see exactly what each invoice covers.", color: "renovation" };
+const onTrack: Faq = { q: "How will I know it’s on track?", a: "Before we start, we sit down and agree the process, timescales and targets for each phase. Then we sit down again as the job goes on to check they’re being met. If anything’s slipping, you’ll hear it from me first, with a plan to put it right.", color: "staircases" };
+const howLong: Faq = { q: "How long will it take?", a: "It depends on the job. You’ll have timescales for each phase before we start, and we’ll check progress against them together as we go.", color: "extensions" };
+
 export const homeFaqs: Faq[] = [
   oneTeam,
   { q: "Can you manage a whole renovation?", a: "Yes, that’s my main work. Kitchens, bathrooms, extensions, floors, stairs and decorating, planned and managed by me from start to finish.", color: "extensions" },
+  pay,
   budget,
   smallJobs,
-  freeQuote,
   { q: "Which areas do you cover?", a: areasAnswer, color: "staircases" },
 ];
 
@@ -28,12 +32,15 @@ export const renovationFaqs: Faq[] = [
   oneTeam,
   { q: "Do I have to do the whole house at once?", a: "No. Some people do everything in one go, others work through it room by room. I can plan and price the lot and we’ll go in an order that suits you and your budget.", color: "kitchens" },
   { q: "Can we live in the house while you work?", a: "Often, yes. We’ll plan it together so you always have somewhere to cook, wash and sleep, and I’ll keep the mess under control.", color: "bathrooms" },
-  { q: "How will I know what’s happening?", a: "I’ll keep you updated as we go, and you can always ring or message me. You’ll know what’s happening this week and what’s coming next.", color: "staircases" },
+  onTrack,
+  pay,
+  howLong,
   surprises,
   budget,
 ];
 
 export const priceFaqs: Faq[] = [
+  pay,
   { q: "Why do you show “from” prices?", a: "So you’ve got a rough idea before you get in touch. Every home is different, so your written quote is based on your job, not a price list.", color: "renovation" },
   freeQuote,
   budget,
@@ -49,6 +56,8 @@ export const faqGroups: { title: string; faqs: Faq[] }[] = [
       { q: "What can you take on?", a: "Full renovations, extensions, kitchens, bathrooms, floors and tiling, stairs, doors and skirting, roofing and decorating. Plus smaller carpentry and joinery jobs.", color: "extensions" },
       { q: "Do I have to do the whole house at once?", a: "No. I can plan and price the lot and we’ll go in an order that suits you and your budget.", color: "kitchens" },
       { q: "Can we live in the house while you work?", a: "Often, yes. We’ll plan it together so you always have somewhere to cook, wash and sleep.", color: "bathrooms" },
+      onTrack,
+      howLong,
       { q: "Do you work on your own?", a: "No. On a renovation I run a team: labourers I trust, and trusted trades for things like electrics and plumbing. I’m on site, I run it, and I’m the one you deal with.", color: "staircases" },
       { q: "Do you tidy up afterwards?", a: "Yes. I keep the site tidy as we go and leave the place clean when we’re done.", color: "decorating" },
     ],
@@ -59,6 +68,7 @@ export const faqGroups: { title: string; faqs: Faq[] }[] = [
       freeQuote,
       { q: "How do I get a price?", a: "Send me a few photos and a line about the job, through the form or on WhatsApp. For bigger jobs I’ll come round, then send you a written quote.", color: "kitchens" },
       { q: "Will I know the full price before you start?", a: "Yes. You’ll have a written quote that says what’s included before any work starts.", color: "bathrooms" },
+      pay,
       budget,
       surprises,
       { q: "Do you supply materials?", a: "I can supply everything, or work with things you’ve chosen. Either way, it’s set out in the quote.", color: "joinery" },

@@ -55,3 +55,9 @@ export const Eye = (p: P) => (
 export const Check = (p: P) => (
   <svg viewBox="0 0 24 24" {...base} strokeWidth={2.2} {...p}><path d="M5 12.5l4.2 4.2L19 7" /></svg>
 );
+export const Calendar = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><rect x="3.5" y="5" width="17" height="15.5" rx="2" /><path d="M3.5 10h17M8 3v4M16 3v4M8.5 14.5l2.2 2.2 4.8-4.8" /></svg>
+);
+export const Layers = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><path d="M12 3.5l8.5 4.5-8.5 4.5L3.5 8z" /><path d="M3.5 12.2L12 16.7l8.5-4.5M3.5 16.2L12 20.7l8.5-4.5" /></svg>
+);
