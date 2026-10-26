@@ -31,6 +31,8 @@ export default function Intro() {
         return;
       }
       try { sessionStorage.setItem(SESSION_KEY, "1"); } catch {}
+      // tells the head script's failsafe that the intro is under way
+      (window as unknown as { __cmIntroStarted?: boolean }).__cmIntroStarted = true;
 
       const el = root.current!;
       const q = gsap.utils.selector(el);
@@ -52,7 +54,7 @@ export default function Intro() {
       const { L, R, word, desc } = addSnap(tl, el);
 
       // Split open along the joint, each half riding out on its panel
-      tl.addLabel("open", "snap+=1.75")
+      tl.addLabel("open", "snap+=1.2")
         .to([word, desc], { opacity: 0, y: -12, duration: 0.3, ease: "power2.in" }, "open")
         .call(open, [], "open+=0.55")
         .to(q(".intro-panel.l"), { xPercent: -100, duration: 1.05, ease: "power4.inOut" }, "open+=0.25")

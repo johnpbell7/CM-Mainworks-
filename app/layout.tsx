@@ -42,7 +42,9 @@ export const viewport: Viewport = {
 };
 
 // Runs before first paint: marks JS as available and decides whether the intro plays.
-const boot = `(function(){var d=document.documentElement;d.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('cm-intro-seen'))d.classList.add('intro-on')}catch(e){}})();`;
+// Two failsafes so a slow phone never sits on the navy screen: if the intro hasn't
+// started within 1.8s it's skipped, and after 7s the page always opens.
+const boot = `(function(){var d=document.documentElement;d.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('cm-intro-seen')){d.classList.add('intro-on');var off=function(){d.classList.remove('intro-on');try{sessionStorage.setItem('cm-intro-seen','1')}catch(e){}};setTimeout(function(){if(!window.__cmIntroStarted)off()},1800);setTimeout(off,7000)}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
