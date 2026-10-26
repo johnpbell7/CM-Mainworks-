@@ -19,7 +19,7 @@ const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
 
 export const metadata: Metadata = pageMeta({
   title: "Carpenter and builder in Lichfield | CM MainWorks",
-  description: "I’m Connor, a carpenter and builder in Lichfield. Doors, stairs, kitchens, fitted furniture, extensions and decorating. Send me a few photos for a free quote.",
+  description: "I’m Connor, an insured carpenter and builder in Lichfield covering the Midlands. Doors, stairs, kitchens, extensions and decorating. Free written quotes.",
   path: "/",
   absolute: true,
 });
@@ -39,10 +39,11 @@ export default function Home() {
               Carpentry and construction, <span className="hl">done properly.</span>
             </h1>
             <p className="lede" data-hero>
-              Doors, staircases, kitchens, fitted furniture and building work across Lichfield and the villages around it.
+              Doors, staircases, kitchens, fitted furniture and building work across Lichfield and the Midlands.
             </p>
             <ul className="hero-meta" data-hero aria-label="At a glance">
               <li>Free, written quotes</li>
+              <li>Insured</li>
               <li>{business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade</li>
               <li>Lichfield and {business.region}</li>
             </ul>
@@ -137,7 +138,7 @@ export default function Home() {
             <h2 id="about-title">Hi, I’m Connor.</h2>
             <p>
               I run CM MainWorks, a carpentry and construction business based in Lichfield, with {business.experience} in the trade.
-              Whatever the size of the job, you deal with me from the first visit to the final clean-up.
+              Whatever the size of the job, I run it and you deal with me, from the first visit to the final clean-up. On bigger jobs I bring in labourers I trust.
             </p>
             <p>
               I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>, and I don’t leave until it’s right.

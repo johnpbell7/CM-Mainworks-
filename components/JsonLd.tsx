@@ -11,7 +11,7 @@ export default function BusinessJsonLd() {
         "@type": "HomeAndConstructionBusiness",
         "@id": businessId,
         name: business.name,
-        description: "Carpentry, building, joinery and decorating in Lichfield and the villages around it.",
+        description: "Insured carpentry, building, joinery and decorating, based in Lichfield and covering the Midlands.",
         url: siteUrl,
         telephone: "+447742135592",
         logo: `${siteUrl}/images/og.jpg`,

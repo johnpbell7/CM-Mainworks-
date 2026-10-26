@@ -66,13 +66,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
 
   building: {
     title: "Builder in Lichfield",
-    h1: "Building work in Lichfield, run by one person",
+    h1: "Building work in Lichfield, run by me",
     description:
-      "I’m Connor, a builder in Lichfield. Extensions, knock-throughs, renovations and bathroom refits, run by me from the first visit to the last bit of trim.",
-    lede: "Extensions, knocking through and full renovations, with one person you can actually get hold of. Me.",
+      "I’m Connor, an insured builder in Lichfield covering the Midlands. Extensions, knock-throughs and renovations, run by me with labourers I trust when needed.",
+    lede: "Extensions, knocking through and full renovations. I run every job myself, and bring in labourers I trust when it needs more hands.",
     body: [
       "The hard part of building work often isn’t the building. It’s working out who’s doing what, when they’re turning up and who to ring when something changes. When you use me, that’s me, from the first visit to the final sweep-up.",
-      "Because I do the carpentry, joinery and decorating as well, a lot of the finishing that usually gets passed between trades stays with me. Fewer handovers, fewer gaps, and one person who knows the whole job.",
+      "On bigger jobs I bring in labourers I’ve worked with and trust, so the work keeps moving. I’m still on site, I still run it, and I’m still the one you ring. Because I do the carpentry, joinery and decorating as well, a lot of the finishing that usually gets passed between trades stays with me too.",
       "Bigger jobs start with a visit. I’ll look at the space, talk through what you’re after, and put together a written quote that sets out what’s included and what isn’t.",
     ],
     items: [
@@ -96,10 +96,11 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     steps: [
       { title: "Tell me what you’re planning", text: "Photos and a rough idea are enough to start. Bigger jobs usually need a visit." },
       { title: "Get a clear, written quote", text: "What’s included, what isn’t, and the price, before any work starts." },
-      { title: "I run the job", text: "From the first day to the last bit of trim, you deal with me." },
+      { title: "I run the job", text: "With labourers I trust when it needs them, and me in charge from the first day to the last bit of trim." },
     ],
     faqs: [
-      { q: "Do you handle the whole job?", a: "I run it from start to finish, so you’ve got one person to deal with. If part of the job needs a specialist, the quote says so up front." },
+      { q: "Do you handle the whole job?", a: "Yes. I run it from start to finish, so you’ve got one person to deal with. On bigger jobs I bring in labourers I trust, and if part of it needs a specialist, the quote says so up front." },
+      { q: "Are you insured?", a: "Yes, I’m insured. If you’d like to see the details before I start, just ask." },
       { q: "Will you come out before quoting?", a: "For extensions and structural work, yes. It’s hard to price that properly from photos." },
       { q: "Can we live in the house while the work’s going on?", a: "Usually. It depends on the job, so we’ll talk it through and plan it before anything starts." },
       { q: "Can you do a renovation in stages?", a: "Yes. Plenty of people do one room at a time. I can quote for the lot and work through it in an order that suits you." },

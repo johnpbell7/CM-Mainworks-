@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { business, sections } from "@/content/site";
-import { areas } from "@/content/areas";
+import { localAreas, midlandsAreas } from "@/content/areas";
+
+const areas = [...localAreas, ...midlandsAreas];
 
 const company = [
   { href: "/projects", label: "Recent work" },
@@ -18,7 +20,7 @@ export default function Footer() {
           <Link href="/" aria-label="CM MainWorks home">
             <img className="logo" src="/brand/logo/main/cm-mainworks-horizontal-on-light.svg" alt="CM MainWorks, carpentry and construction" width={207} height={40} loading="lazy" />
           </Link>
-          <p>I’m Connor. Carpentry, building, joinery and decorating across Lichfield and the villages around it.</p>
+          <p>I’m Connor. Insured carpentry, building, joinery and decorating from Lichfield, across the Midlands.</p>
           <p className="foot-contact">
             <a href={business.phoneHref}>{business.phoneDisplay}</a>
             <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a>
@@ -30,7 +32,7 @@ export default function Footer() {
         </nav>
         <nav aria-label="Areas">
           <p className="foot-h">Areas</p>
-          <ul>{areas.map((a) => <li key={a.slug}><Link href={`/areas/${a.slug}`}>{a.name}</Link></li>)}</ul>
+          <ul className="foot-areas">{areas.map((a) => <li key={a.slug}><Link href={`/areas/${a.slug}`}>{a.name}</Link></li>)}</ul>
         </nav>
         <nav aria-label="CM MainWorks">
           <p className="foot-h">CM MainWorks</p>

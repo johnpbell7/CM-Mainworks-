@@ -54,9 +54,15 @@ node scripts/render-logo-video.mjs http://localhost:3000
 
 The source page is `/logo-animation`. It isn’t linked from the site and isn’t indexed.
 
+## Confirmed by Connor (Oct 2026)
+
+- He’s insured.
+- He brings in labourers he trusts on bigger jobs, and runs the job himself.
+- He covers the wider Midlands, including Birmingham, Solihull, Leicester and Redditch.
+
 ## Still to confirm with Connor
 
 - Over 10 years’ experience (taken from his pinned Facebook post).
-- About copy, FAQ answers, the areas list and the privacy policy wording (all drafts).
+- About copy, FAQ answers and the privacy policy wording (all drafts).
 - Photos for the services, the portrait and the projects, plus the bay window “before” photo and town.
 - Lead email address, domain and trading name.

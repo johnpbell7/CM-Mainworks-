@@ -10,7 +10,9 @@ export const business = {
   base: "Lichfield, Staffordshire",
   // From Connor's pinned Facebook post (1 Apr). Flagged for Connor to confirm on the site.
   experience: "over 10 years",
-  region: "Staffordshire",
+  region: "the Midlands",
+  // Confirmed by Connor via John, Oct 2026
+  insured: true,
   // Real review, left on Connor's Facebook post about the bay window (1 Aug).
   review: {
     quote: "My bay window has been saved, from the perils of 140 years of time, weather and neglect, by an experienced tradesman. Someone who turns up to quote and returns to actually do the job. Thanks so much Connor. Would recommend.",
@@ -19,8 +21,8 @@ export const business = {
     job: "Bay window restoration",
     source: "Facebook",
   },
-  // Draft list, waiting on Connor to confirm.
-  areas: ["Lichfield", "Burntwood", "Tamworth", "Sutton Coldfield", "Shenstone", "Whittington", "Fradley"],
+  // Headline towns for copy. Full list (with town pages) is in content/areas.ts.
+  areas: ["Lichfield", "Birmingham", "Solihull", "Sutton Coldfield", "Tamworth", "Walsall", "Cannock", "Burton upon Trent", "Redditch", "Leicester"],
 } as const;
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cm-mainworks.vercel.app";

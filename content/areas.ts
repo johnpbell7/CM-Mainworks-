@@ -1,7 +1,9 @@
 import type { SectionSlug } from "./site";
 
 /*
-  Town pages for local search, written in Connor’s voice. Each has its own copy so
+  Town pages for local search, written in Connor’s voice. Coverage confirmed by
+  Connor (Oct 2026): Lichfield and the wider Midlands, including Birmingham, Solihull,
+  Leicester and Redditch. Each has its own copy so
   they aren’t duplicates. Town descriptions are general, publicly known geography.
   Nothing here states prices, travel charges, past jobs or reviews in a town.
   DRAFT: the list of areas is waiting on Connor to confirm.
@@ -10,6 +12,8 @@ import type { SectionSlug } from "./site";
 export type Area = {
   slug: string;
   name: string;
+  /** "local" = Lichfield and the villages around it; "midlands" = the wider area */
+  group: "local" | "midlands";
   /** e.g. "about four miles west of Lichfield" */
   where: string;
   title: string;
@@ -25,6 +29,7 @@ export type Area = {
 export const areas: Area[] = [
   {
     slug: "lichfield",
+    group: "local",
     name: "Lichfield",
     where: "Home ground",
     title: "Carpenter and builder in Lichfield",
@@ -48,6 +53,7 @@ export const areas: Area[] = [
   },
   {
     slug: "burntwood",
+    group: "local",
     name: "Burntwood",
     where: "About four miles west of Lichfield",
     title: "Carpenter and builder in Burntwood",
@@ -71,6 +77,7 @@ export const areas: Area[] = [
   },
   {
     slug: "tamworth",
+    group: "midlands",
     name: "Tamworth",
     where: "About seven miles south-east of Lichfield",
     title: "Carpenter and builder in Tamworth",
@@ -94,6 +101,7 @@ export const areas: Area[] = [
   },
   {
     slug: "sutton-coldfield",
+    group: "midlands",
     name: "Sutton Coldfield",
     where: "About eight miles south of Lichfield",
     title: "Carpenter and builder in Sutton Coldfield",
@@ -117,6 +125,7 @@ export const areas: Area[] = [
   },
   {
     slug: "shenstone",
+    group: "local",
     name: "Shenstone",
     where: "About three miles south of Lichfield",
     title: "Carpenter and builder in Shenstone",
@@ -140,6 +149,7 @@ export const areas: Area[] = [
   },
   {
     slug: "whittington",
+    group: "local",
     name: "Whittington",
     where: "About three miles east of Lichfield",
     title: "Carpenter and builder in Whittington",
@@ -163,6 +173,7 @@ export const areas: Area[] = [
   },
   {
     slug: "fradley",
+    group: "local",
     name: "Fradley",
     where: "About four miles north-east of Lichfield",
     title: "Carpenter and builder in Fradley",
@@ -184,8 +195,179 @@ export const areas: Area[] = [
     ],
     nearby: ["lichfield", "whittington", "burntwood", "tamworth"],
   },
+  {
+    slug: "walsall",
+    name: "Walsall",
+    group: "midlands",
+    where: "About nine miles south-west of Lichfield",
+    title: "Carpenter and builder in Walsall",
+    description:
+      "Carpentry, building, joinery and decorating in Walsall, Aldridge, Pelsall and Bloxwich. I’m Connor, based up the road in Lichfield. Insured, free written quotes.",
+    intro:
+      "Walsall is about nine miles south-west of Lichfield, and I cover the town and the areas around it, including Aldridge, Pelsall, Bloxwich, Rushall and Walsall Wood.",
+    local:
+      "Walsall has a real mix: Victorian terraces close to the town centre, interwar semis, and big post-war estates further out. Kitchen refits, knocking through to open up the back of the house, and new doors throughout are the kind of jobs that suit a lot of homes round there.",
+    focus: [
+      { service: "building", text: "Knock-throughs, rear extensions and full renovations." },
+      { service: "carpentry", text: "Kitchen fitting, internal doors and staircases." },
+      { service: "joinery", text: "Media walls and alcove units." },
+      { service: "decorating", text: "Finishing rooms properly once the work’s done." },
+    ],
+    faqs: [
+      { q: "Do you cover Aldridge and Pelsall?", a: "Yes, along with Bloxwich, Rushall, Walsall Wood and the rest of Walsall." },
+      { q: "Can you price a Walsall job from photos?", a: "Smaller jobs, usually. For building work I’ll come and see it first." },
+    ],
+    nearby: ["burntwood", "sutton-coldfield", "cannock", "birmingham"],
+  },
+  {
+    slug: "cannock",
+    name: "Cannock",
+    group: "midlands",
+    where: "About eight miles west of Lichfield",
+    title: "Carpenter and builder in Cannock",
+    description:
+      "Carpentry, building, joinery and decorating in Cannock, Hednesford, Heath Hayes and Norton Canes. I’m Connor, based in Lichfield. Insured, free written quotes.",
+    intro:
+      "Cannock is about eight miles west of Lichfield, on the edge of Cannock Chase. I cover the town along with Hednesford, Heath Hayes, Norton Canes and Huntington.",
+    local:
+      "A lot of Cannock’s housing is post-war and newer estate homes, with plenty of houses now ready for a kitchen refit, an extension or new doors throughout. Being next to the Chase, garden canopies and outdoor timber come up a fair bit too.",
+    focus: [
+      { service: "building", text: "Extensions and renovations to get more space." },
+      { service: "carpentry", text: "Internal doors, skirting and garden canopies." },
+      { service: "joinery", text: "Fitted wardrobes and under-stairs storage." },
+      { service: "decorating", text: "Inside and outside painting." },
+    ],
+    faqs: [
+      { q: "Do you cover Hednesford and Heath Hayes?", a: "Yes, along with Norton Canes, Huntington and the rest of Cannock." },
+      { q: "Do you build garden canopies?", a: "Yes, including oak-framed canopies like the one on my homepage." },
+    ],
+    nearby: ["burntwood", "walsall", "lichfield", "shenstone"],
+  },
+  {
+    slug: "burton-upon-trent",
+    name: "Burton upon Trent",
+    group: "midlands",
+    where: "About eleven miles north-east of Lichfield",
+    title: "Carpenter and builder in Burton upon Trent",
+    description:
+      "Carpentry, building, joinery and decorating in Burton upon Trent, Stapenhill, Winshill and Branston. I’m Connor, based in Lichfield. Free written quotes.",
+    intro:
+      "Burton upon Trent is about eleven miles north-east of Lichfield, straight up the A38. I cover the town, including Stapenhill, Winshill, Horninglow and Branston.",
+    local:
+      "Burton’s older streets are full of Victorian terraces from its brewing days, where doors, stairs and alcoves are worth doing properly. Newer areas like Branston are more about making a new build your own, with fitted wardrobes, media walls and better doors.",
+    focus: [
+      { service: "carpentry", text: "Doors, skirting and staircase repairs in older terraces." },
+      { service: "joinery", text: "Alcove units, media walls and fitted wardrobes." },
+      { service: "building", text: "Knock-throughs, extensions and renovations." },
+      { service: "decorating", text: "Full redecoration, inside and out." },
+    ],
+    faqs: [
+      { q: "Do you cover Branston and Stapenhill?", a: "Yes, along with Winshill, Horninglow and the rest of Burton." },
+      { q: "Do you work on Victorian terraces?", a: "Yes. Older doors, stairs and windows are often worth repairing, and I’ll tell you honestly when they’re not." },
+    ],
+    nearby: ["fradley", "lichfield", "whittington", "tamworth"],
+  },
+  {
+    slug: "birmingham",
+    name: "Birmingham",
+    group: "midlands",
+    where: "About fifteen miles south-west of Lichfield",
+    title: "Carpenter and builder in Birmingham",
+    description:
+      "Carpentry, building, joinery and decorating across Birmingham, from Erdington and Great Barr to Moseley and Harborne. I’m Connor. Insured, free written quotes.",
+    intro:
+      "Birmingham is about fifteen miles south-west of Lichfield, down the A38. I work across the city, from Erdington, Kingstanding and Great Barr in the north to Moseley, Kings Heath and Harborne.",
+    local:
+      "Birmingham has every kind of house going. Victorian and Edwardian terraces with original doors, stairs and bay windows, 1930s semis that are ready for an extension, and newer flats and town houses that need storage built in. Bigger jobs here are where I bring in a labourer or two to keep things moving.",
+    focus: [
+      { service: "building", text: "Rear extensions, knock-throughs and full renovations." },
+      { service: "joinery", text: "Alcove units and media walls in period living rooms." },
+      { service: "carpentry", text: "Staircases, panelled doors and kitchen fitting." },
+      { service: "decorating", text: "Bay windows and woodwork repaired and repainted." },
+    ],
+    faqs: [
+      { q: "Which parts of Birmingham do you cover?", a: "All of it, including Erdington, Kingstanding, Great Barr, Moseley, Kings Heath and Harborne. If you’re not sure, send me your postcode." },
+      { q: "Do you take on big jobs in Birmingham?", a: "Yes. On extensions and renovations I bring in labourers I trust, but I run the job and I’m the one you deal with." },
+    ],
+    nearby: ["sutton-coldfield", "solihull", "walsall", "tamworth"],
+  },
+  {
+    slug: "solihull",
+    name: "Solihull",
+    group: "midlands",
+    where: "About nineteen miles south of Lichfield",
+    title: "Carpenter and builder in Solihull",
+    description:
+      "Carpentry, building, joinery and decorating in Solihull, Shirley, Knowle, Dorridge and Olton. I’m Connor. Insured, free written quotes.",
+    intro:
+      "Solihull is about nineteen miles south of Lichfield, and I cover the town and the villages around it, including Shirley, Olton, Knowle, Dorridge and Hockley Heath.",
+    local:
+      "Solihull is mostly interwar semis and bigger detached houses, with Knowle and Dorridge leaning towards the larger end. That means a lot of kitchen extensions, knock-throughs, fitted wardrobes and media walls, done to a high finish.",
+    focus: [
+      { service: "building", text: "Kitchen extensions and opening up the back of the house." },
+      { service: "joinery", text: "Media walls, fitted wardrobes and built-in storage." },
+      { service: "carpentry", text: "New internal doors, skirting and staircases." },
+      { service: "decorating", text: "A proper finish once the building work’s done." },
+    ],
+    faqs: [
+      { q: "Do you cover Knowle and Dorridge?", a: "Yes, along with Shirley, Olton, Hockley Heath and the rest of Solihull." },
+      { q: "Will you come out to quote in Solihull?", a: "For extensions and bigger jobs, yes. Smaller jobs I can often price from photos." },
+    ],
+    nearby: ["birmingham", "redditch", "sutton-coldfield", "leicester"],
+  },
+  {
+    slug: "redditch",
+    name: "Redditch",
+    group: "midlands",
+    where: "About twenty-five miles south of Lichfield",
+    title: "Carpenter and builder in Redditch",
+    description:
+      "Carpentry, building, joinery and decorating in Redditch, Headless Cross, Webheath and Matchborough. I’m Connor. Insured, free written quotes.",
+    intro:
+      "Redditch is about twenty-five miles south of Lichfield, on the Worcestershire side of Birmingham. I cover the whole town, including Headless Cross, Webheath, Matchborough, Winyates and Church Hill.",
+    local:
+      "Much of Redditch was built as a new town in the 60s, 70s and 80s, so a lot of houses share the same layouts and the same jobs: knocking through downstairs, replacing original doors and skirting, and building in storage where those designs never had any.",
+    focus: [
+      { service: "building", text: "Knock-throughs and extensions for more living space." },
+      { service: "carpentry", text: "Replacing original doors, skirting and architrave." },
+      { service: "joinery", text: "Under-stairs storage and fitted wardrobes." },
+      { service: "decorating", text: "Full redecoration after the work’s done." },
+    ],
+    faqs: [
+      { q: "Is Redditch too far for you?", a: "No. I cover Redditch and the areas around it, and bigger jobs are well worth the drive." },
+      { q: "Can you do a whole house of doors in one go?", a: "Yes. Doing every internal door and the skirting together is quicker, and neater, than doing them bit by bit." },
+    ],
+    nearby: ["solihull", "birmingham", "sutton-coldfield", "walsall"],
+  },
+  {
+    slug: "leicester",
+    name: "Leicester",
+    group: "midlands",
+    where: "About thirty miles east of Lichfield",
+    title: "Carpenter and builder in Leicester",
+    description:
+      "Carpentry, building, joinery and decorating in Leicester, Oadby, Wigston and Birstall. I’m Connor. Insured, with labourers I trust on bigger jobs. Free quotes.",
+    intro:
+      "Leicester is about thirty miles east of Lichfield, along the A5 and M69. I cover the city and the areas around it, including Oadby, Wigston, Birstall, Glenfield and Braunstone.",
+    local:
+      "Leicester has streets of Victorian terraces in places like Clarendon Park and Westcotes, and plenty of interwar and post-war semis in the suburbs. Extensions, knock-throughs, built-in storage and doing up period features properly are all on the list.",
+    focus: [
+      { service: "building", text: "Extensions and renovations, with labourers brought in when the job needs it." },
+      { service: "carpentry", text: "Staircases, doors and kitchen fitting." },
+      { service: "joinery", text: "Alcove units and bookcases in period rooms." },
+      { service: "decorating", text: "Woodwork, windows and full redecoration." },
+    ],
+    faqs: [
+      { q: "Do you really cover Leicester?", a: "Yes. I cover Leicester and the areas around it, including Oadby, Wigston and Birstall." },
+      { q: "Who will be working on my job?", a: "Me. On bigger jobs I bring in labourers I’ve worked with and trust, but I’m on site and I run it." },
+    ],
+    nearby: ["solihull", "tamworth", "birmingham", "burton-upon-trent"],
+  },
 ];
 
 export function getArea(slug: string) {
   return areas.find((a) => a.slug === slug);
 }
+
+export const localAreas = areas.filter((a) => a.group === "local");
+export const midlandsAreas = areas.filter((a) => a.group === "midlands");

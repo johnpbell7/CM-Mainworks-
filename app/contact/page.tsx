@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact and free quote",
-  description: "Get a free written quote from me, Connor at CM MainWorks. Send a few photos of the job, ring 07742 135592 or WhatsApp me. Covering Lichfield and nearby.",
+  description: "Get a free written quote from me, Connor at CM MainWorks. Send a few photos of the job, ring 07742 135592 or WhatsApp me. Covering Lichfield and the Midlands.",
   path: "/contact",
 });
 

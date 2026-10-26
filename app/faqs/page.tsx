@@ -7,7 +7,7 @@ import { faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "FAQs: quotes, materials, small jobs and areas",
-  description: "Straight answers about free quotes, materials, small jobs, how I run a job and the areas I cover around Lichfield.",
+  description: "Straight answers about free quotes, materials, small jobs, insurance, how I run a job and the areas I cover across the Midlands.",
   path: "/faqs",
 });
 

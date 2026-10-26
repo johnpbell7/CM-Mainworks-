@@ -59,6 +59,7 @@ export default async function AreaPage({ params }: Props) {
               <ul className="facts">
                 <li><span>Where</span>{a.where[0].toUpperCase() + a.where.slice(1)}</li>
                 <li><span>Quotes</span>Free and written, with no obligation</li>
+                <li><span>Insurance</span>Yes, I’m insured</li>
                 <li><span>Who you deal with</span>Me, from the first visit to the final clean-up</li>
               </ul>
             </div>
@@ -70,7 +71,7 @@ export default async function AreaPage({ params }: Props) {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="work-title">The work I do in {a.name}</h2></div>
-            <p data-reveal="up">I do carpentry, building, joinery and decorating, so one person sees the whole job through.</p>
+            <p data-reveal="up">I do carpentry, building, joinery and decorating, and run every job myself, with labourers I trust on the bigger ones.</p>
           </div>
           <div className="items" data-reveal="stagger">
             {a.focus.map((f) => {

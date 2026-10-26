@@ -6,12 +6,14 @@ import { business } from "./site";
 export type Faq = { q: string; a: string; color: SectionSlug };
 
 const areaList = `${business.areas.slice(1, -1).join(", ")} and ${business.areas[business.areas.length - 1]}`;
+const areasAnswer = `I’m based in Lichfield and work across the Midlands, including ${areaList}, plus the towns and villages in between.`;
 
 export const homeFaqs: Faq[] = [
   { q: "Do you take on small jobs?", a: "Yes. Hanging one door is as welcome as a full renovation.", color: "carpentry" },
   { q: "Is the quote free?", a: "Yes, and there’s no obligation to go ahead.", color: "building" },
   { q: "Do you supply materials?", a: "I can supply everything, or work with materials you’ve chosen. Either way, it’s set out in the quote.", color: "joinery" },
-  { q: "Which areas do you cover?", a: `Lichfield and the places around it, including ${areaList}.`, color: "decorating" },
+  { q: "Are you insured?", a: "Yes, I’m insured. If you’d like to see the details before I start, just ask.", color: "decorating" },
+  { q: "Which areas do you cover?", a: areasAnswer, color: "building" },
 ];
 
 export const faqGroups: { title: string; faqs: Faq[] }[] = [
@@ -30,6 +32,8 @@ export const faqGroups: { title: string; faqs: Faq[] }[] = [
       { q: "Do you take on small jobs?", a: "Yes. Hanging one door is as welcome as a full renovation.", color: "carpentry" },
       { q: "Do you supply materials?", a: "I can supply everything, or work with materials you’ve chosen. Either way, it’s set out in the quote.", color: "joinery" },
       { q: "Will I be dealing with you the whole way through?", a: "Yes. You deal with me from the first visit to the final clean-up.", color: "building" },
+      { q: "Do you work on your own?", a: "On smaller jobs, yes. On bigger ones I bring in labourers I’ve worked with and trust, so the job keeps moving. Either way I’m on site, I run it, and I’m the one you deal with.", color: "carpentry" },
+      { q: "Are you insured?", a: "Yes, I’m insured. If you’d like to see the details before I start, just ask.", color: "joinery" },
       { q: "Do you tidy up afterwards?", a: "Yes. I leave the place tidy when the job’s done.", color: "decorating" },
       { q: "Can you work around us living in the house?", a: "Usually, yes. Mention it when you ask for a quote and we’ll plan around it.", color: "building" },
       { q: "Can one job cover more than one trade?", a: "Yes. I do carpentry, joinery, building and decorating, so a job doesn’t need handing between different people.", color: "carpentry" },
@@ -38,7 +42,7 @@ export const faqGroups: { title: string; faqs: Faq[] }[] = [
   {
     title: "Areas and getting in touch",
     faqs: [
-      { q: "Which areas do you cover?", a: `Lichfield and the places around it, including ${areaList}.`, color: "decorating" },
+      { q: "Which areas do you cover?", a: areasAnswer, color: "decorating" },
       { q: "I’m just outside those areas. Can you still help?", a: "Possibly. Send me a few details and I’ll let you know.", color: "joinery" },
       { q: "What’s the best way to get in touch?", a: `Use the quote form, ring me on ${business.phoneDisplay}, or send a WhatsApp with a few photos of the job.`, color: "building" },
     ],
