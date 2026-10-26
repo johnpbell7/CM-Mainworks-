@@ -122,6 +122,7 @@ ul, ol { margin: 0; padding: 0; }
 
 /* ---------- logo ---------- */
 .logo { height: 46px; width: auto; }
+.logo-head { height: 44px; }
 
 /* ---------- header ---------- */
 .head {
@@ -709,6 +710,10 @@ html.js.intro-on { overflow: hidden; }
   :root { --head-h: 66px; }
   body { font-size: 1rem; padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
   .logo { height: 38px; }
+  .logo-head { height: 38px; }
+  .menu-btn { width: 44px; padding: 0; justify-content: center; margin-left: 0; }
+  .menu-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .menu-ico { width: 20px; }
   .head .tel { width: 44px; height: 44px; justify-content: center; border-radius: 50%; background: var(--t-gold); }
   .head .tel svg { width: 20px; height: 20px; }
   .head .tel-num { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

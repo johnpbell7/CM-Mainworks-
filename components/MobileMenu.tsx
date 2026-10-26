@@ -56,9 +56,9 @@ export default function MobileMenu() {
 
   return (
     <>
-      <button ref={btn} type="button" className="menu-btn" aria-expanded={open} aria-controls="site-menu" onClick={() => setOpen((o) => !o)}>
+      <button ref={btn} type="button" className="menu-btn" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="site-menu" onClick={() => setOpen((o) => !o)}>
         <span className="menu-ico" aria-hidden="true"><i /><i /></span>
-        <span>{open ? "Close" : "Menu"}</span>
+        <span className="menu-txt">{open ? "Close" : "Menu"}</span>
       </button>
 
       <div id="site-menu" ref={panel} className="menu" data-open={open} inert={!open} aria-label="Site menu" role="dialog" aria-modal="true">
