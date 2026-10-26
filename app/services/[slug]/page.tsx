@@ -136,8 +136,10 @@ export default async function Service({ params }: Props) {
               {work.map((p) => (
                 <Link className="proj" key={p.slug} href={`/projects/${p.slug}`}>
                   <Photo media={p.after} sizes="(max-width: 720px) 100vw, 50vw" />
+                  <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                   <h3>{p.name}</h3>
                   <p>{p.summary}</p>
+                  <span className="proj-more">Read about this job <Arrow /></span>
                 </Link>
               ))}
             </div>

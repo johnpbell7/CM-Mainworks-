@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Photo from "./Photo";
+import { Arrow } from "./Icons";
 import { sections, type SectionSlug } from "@/content/site";
 import type { Project } from "@/content/projects";
 
@@ -34,8 +35,10 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
           return (
             <Link className="proj" key={p.slug} href={`/projects/${p.slug}`}>
               <Photo media={p.after.src ? p.after : p.gallery[0]} sizes="(max-width: 720px) 100vw, 50vw" reveal={false} />
+              <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
               <h2>{p.name}</h2>
-              <p><span style={{ color: s.color, fontWeight: 600 }}>{s.name}</span> {p.summary}</p>
+              <p>{p.summary}</p>
+              <span className="proj-more">Read about this job <Arrow /></span>
             </Link>
           );
         })}

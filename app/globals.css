@@ -559,8 +559,13 @@ figcaption.cap span { font-weight: 500; }
 .proj .ph { aspect-ratio: 4 / 3; }
 .proj .ph > img { transition: transform 1.2s var(--ease); }
 .proj:hover .ph > img { transform: scale(1.04); }
-.proj h2, .proj h3 { font-size: 1.5rem; letter-spacing: -.03em; margin-top: 16px; }
-.proj p { display: flex; gap: 10px; color: var(--ink-3); margin-top: 4px; }
+.proj h2, .proj h3 { font-size: 1.5rem; letter-spacing: -.03em; margin-top: 6px; }
+.proj p { color: var(--ink-2); margin-top: 8px; max-width: 52ch; }
+.proj-tag { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: .88rem; font-weight: 600; color: var(--c); }
+.proj-tag::before { content: ""; width: 14px; height: 2px; background: var(--c); }
+.proj-more { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-weight: 600; padding-bottom: 3px; border-bottom: 2px solid var(--gold); }
+.proj-more svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+.proj:hover .proj-more svg { transform: translateX(4px); }
 
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 460px); gap: clamp(40px, 7vw, 120px); align-items: start; }
 .contact-list { list-style: none; display: grid; }
