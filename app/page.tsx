@@ -97,7 +97,7 @@ export default function Home() {
           <div className="work">
             <figure>
               <BeforeAfter before={lead.before} after={lead.after} />
-              <figcaption className="cap">{lead.name} <span style={{ color: colorOf(lead.section) }}>{nameOf(lead.section)}</span></figcaption>
+              <figcaption className="cap">{lead.name} <span style={{ "--c": colorOf(lead.section) } as React.CSSProperties}>{nameOf(lead.section)}</span></figcaption>
             </figure>
             <div className="side">
               {rest.slice(0, 2).map((p) => (
@@ -109,7 +109,7 @@ export default function Home() {
                       <Photo media={p.gallery[0]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 36vw" />
                     </Link>
                   )}
-                  <figcaption className="cap">{p.name} <span style={{ color: colorOf(p.section) }}>{nameOf(p.section)}</span></figcaption>
+                  <figcaption className="cap">{p.name} <span style={{ "--c": colorOf(p.section) } as React.CSSProperties}>{nameOf(p.section)}</span></figcaption>
                 </figure>
               ))}
             </div>

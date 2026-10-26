@@ -49,53 +49,73 @@ export default function Motion() {
         }
 
         // ---- generic reveals ----
-        gsap.utils.toArray<HTMLElement>('[data-reveal="up"]').forEach((el) => {
-          gsap.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", scrollTrigger: once(el, "top 92%") });
+        // Tweens are built only when an element scrolls into view, so the page
+        // doesn't pay for every animation up front on a phone.
+        ScrollTrigger.batch('[data-reveal="up"]', {
+          start: "top 92%", once: true,
+          onEnter: (els) => gsap.fromTo(els, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.08 }),
         });
 
-        gsap.utils.toArray<HTMLElement>('[data-reveal="stagger"]').forEach((el) => {
-          gsap.set(el, { opacity: 1 });
-          gsap.fromTo(el.children, { opacity: 0, y: 34 }, {
-            opacity: 1, y: 0, duration: 0.95, ease: "power3.out", stagger: 0.1, scrollTrigger: once(el),
-          });
+        ScrollTrigger.batch('[data-reveal="stagger"]', {
+          start: "top 86%", once: true,
+          onEnter: (els) => els.forEach((el) => {
+            gsap.set(el, { opacity: 1 });
+            gsap.fromTo(el.children, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.95, ease: "power3.out", stagger: 0.1 });
+          }),
         });
 
-        gsap.utils.toArray<HTMLElement>('[data-reveal="img"]').forEach((el) => {
+        // illustration tiles just fade in quickly; the drawing does the work
+        ScrollTrigger.batch('.ph-illo[data-reveal="img"]', {
+          start: "top 95%", once: true,
+          onEnter: (els) => gsap.fromTo(els, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }),
+        });
+
+        gsap.utils.toArray<HTMLElement>('[data-reveal="img"]:not(.ph-illo)').forEach((el) => {
           if (el.closest(".hero")) return;
-          // illustration tiles just fade in quickly; the drawing does the work
-          if (el.classList.contains("ph-illo")) {
-            gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out", scrollTrigger: once(el, "top 95%") });
-            return;
-          }
-          const img = el.querySelector("img");
-          const tl = gsap.timeline({ scrollTrigger: once(el, "top 90%") });
-          tl.fromTo(el, { opacity: 1, clipPath: "inset(100% 0% 0% 0% round 6px)" }, {
-            clipPath: "inset(0% 0% 0% 0% round 6px)", duration: 1.15, ease: "power4.inOut",
-            clearProps: "clipPath",
+          ScrollTrigger.create({
+            trigger: el, start: "top 90%", once: true,
+            onEnter: () => {
+              const img = el.querySelector("img");
+              const tl = gsap.timeline();
+              tl.fromTo(el, { opacity: 1, clipPath: "inset(100% 0% 0% 0% round 6px)" }, {
+                clipPath: "inset(0% 0% 0% 0% round 6px)", duration: 1.15, ease: "power4.inOut",
+                clearProps: "clipPath",
+              });
+              if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.5, ease: "power3.out", clearProps: "transform" }, 0.1);
+            },
           });
-          if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.5, ease: "power3.out", clearProps: "transform" }, 0.1);
         });
 
         // ---- marker highlights (outside the hero) ----
         gsap.utils.toArray<HTMLElement>(".hl").forEach((el) => {
           if (el.closest(".hero")) return;
-          gsap.fromTo(el, { backgroundSize: "0% 74%" }, {
-            backgroundSize: "100% 74%", duration: 0.55, ease: "power2.inOut", delay: 0.1,
-            scrollTrigger: once(el, "top 90%"),
+          gsap.set(el, { backgroundSize: "0% 74%" });
+          ScrollTrigger.create({
+            trigger: el, start: "top 90%", once: true,
+            onEnter: () => gsap.to(el, { backgroundSize: "100% 74%", duration: 0.55, ease: "power2.inOut", delay: 0.1 }),
           });
         });
 
         // ---- illustrations draw themselves ----
+        // Measuring every line for DrawSVG is the costly part, so each drawing
+        // is only set up when it reaches the screen.
         gsap.utils.toArray<SVGSVGElement>("[data-illustration]").forEach((svg) => {
-          const q = gsap.utils.selector(svg);
-          const outlined = q(".l, .lt, .lw, .lg, .lc, .p, .fs, .fds, .fls, .g, .pole-o, .pole-i");
-          const tl = gsap.timeline({ scrollTrigger: once(svg, "top 95%") });
-          tl.fromTo(q(".bg"), { scale: 0.92, opacity: 0, transformOrigin: "50% 100%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, 0)
-            .fromTo(outlined, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.5, ease: "power2.inOut", stagger: { amount: 0.45 } }, 0.05)
-            .fromTo(q(".p, .fs, .fds, .fls, .g"), { fillOpacity: 0 }, { fillOpacity: 1, duration: 0.3, stagger: { amount: 0.4 } }, 0.2)
-            .fromTo(q(".f:not(.roll), .fl, .fd, .d, .ht"), { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: { amount: 0.3 } }, 0.15)
-            .from(q(".off"), { x: 0, y: 0, duration: 0.45, ease: "back.out(2)" }, 0.55)
-            .fromTo(q(".roll"), { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          gsap.set(svg, { autoAlpha: 0 });
+          ScrollTrigger.create({
+            trigger: svg, start: "top 95%", once: true,
+            onEnter: () => {
+              const q = gsap.utils.selector(svg);
+              const outlined = q(".l, .lt, .lw, .lg, .lc, .p, .fs, .fds, .fls, .g, .pole-o, .pole-i");
+              gsap.set(svg, { autoAlpha: 1 });
+              gsap.timeline()
+                .fromTo(q(".bg"), { scale: 0.92, opacity: 0, transformOrigin: "50% 100%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out", immediateRender: true }, 0)
+                .fromTo(outlined, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.5, ease: "power2.inOut", stagger: { amount: 0.45 }, immediateRender: true }, 0.05)
+                .fromTo(q(".p, .fs, .fds, .fls, .g"), { fillOpacity: 0 }, { fillOpacity: 1, duration: 0.3, stagger: { amount: 0.4 }, immediateRender: true }, 0.2)
+                .fromTo(q(".f:not(.roll), .fl, .fd, .d, .ht"), { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: { amount: 0.3 }, immediateRender: true }, 0.15)
+                .from(q(".off"), { x: 0, y: 0, duration: 0.45, ease: "back.out(2)" }, 0.55)
+                .fromTo(q(".roll"), { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.7, ease: "power2.inOut", immediateRender: true }, 0.1);
+            },
+          });
         });
 
         // ---- closing badge drifts in ----
@@ -106,11 +126,19 @@ export default function Motion() {
           });
         }
 
-        // Images loading late can shift layout; re-measure when they arrive.
+        // Images loading late can shift layout; re-measure once they settle,
+        // not once per image.
+        let timer = 0;
+        const refresh = () => {
+          clearTimeout(timer);
+          timer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
+        };
         const imgs = Array.from(document.images).filter((i) => !i.complete);
-        const refresh = () => ScrollTrigger.refresh();
         imgs.forEach((i) => i.addEventListener("load", refresh, { once: true }));
-        return () => imgs.forEach((i) => i.removeEventListener("load", refresh));
+        return () => {
+          clearTimeout(timer);
+          imgs.forEach((i) => i.removeEventListener("load", refresh));
+        };
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
