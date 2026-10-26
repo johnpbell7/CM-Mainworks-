@@ -83,12 +83,14 @@ export default function Motion() {
         // ---- illustrations draw themselves ----
         gsap.utils.toArray<SVGSVGElement>("[data-illustration]").forEach((svg) => {
           const q = gsap.utils.selector(svg);
-          const tl = gsap.timeline({ scrollTrigger: once(svg, "top 88%"), delay: 0.2 });
-          tl.fromTo(q(".l, .p"), { drawSVG: "0%" }, { drawSVG: "100%", duration: 1.1, ease: "power2.inOut", stagger: 0.035 }, 0)
-            .fromTo(q(".p"), { fillOpacity: 0 }, { fillOpacity: 1, duration: 0.5, stagger: 0.03 }, 0.45)
-            .fromTo(q(".d"), { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.04 }, 0.8)
-            .from(q(".f:not(.roll)"), { x: 0, y: 0, opacity: 0, duration: 0.7, ease: "back.out(2)", stagger: 0.08 }, 0.75)
-            .fromTo(q(".f.roll"), { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 1, ease: "power2.inOut" }, 0.6);
+          const outlined = q(".l, .lt, .lw, .lg, .lc, .p, .fs, .fds, .fls, .g, .pole-o, .pole-i");
+          const tl = gsap.timeline({ scrollTrigger: once(svg, "top 88%"), delay: 0.15 });
+          tl.fromTo(q(".bg"), { scale: 0.9, opacity: 0, transformOrigin: "50% 100%" }, { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }, 0)
+            .fromTo(outlined, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.8, ease: "power2.inOut", stagger: { amount: 0.9 } }, 0.15)
+            .fromTo(q(".p, .fs, .fds, .fls, .g"), { fillOpacity: 0 }, { fillOpacity: 1, duration: 0.45, stagger: { amount: 0.8 } }, 0.45)
+            .fromTo(q(".f:not(.roll), .fl, .fd, .d, .ht"), { opacity: 0 }, { opacity: 1, duration: 0.5, stagger: { amount: 0.6 } }, 0.4)
+            .from(q(".off"), { x: 0, y: 0, duration: 0.7, ease: "back.out(2)" }, 1.1)
+            .fromTo(q(".roll"), { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 1.2, ease: "power2.inOut" }, 0.3);
         });
 
         // ---- closing badge drifts in ----

@@ -36,7 +36,6 @@ export default function LogoVideo() {
       <div className="intro-stage lv-stage">
         <LogoArt />
         <div className="lv-text">
-          <p className="lv-line">Carpentry and construction in Lichfield</p>
           <p className="lv-line lv-tel">{business.phoneDisplay}</p>
         </div>
       </div>
