@@ -27,11 +27,11 @@ async function shrink(file: File): Promise<Blob> {
   }
 }
 
-function QuoteCard({ headingLevel = 2 }: { headingLevel?: 2 | 1 }) {
+function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1; defaultJob?: JobType | "" }) {
   const formRef = useRef<HTMLFormElement>(null);
   const againRef = useRef<HTMLButtonElement>(null);
   const [errors, setErrors] = useState<Partial<Record<RuleKey, string>>>({});
-  const [job, setJob] = useState<JobType | "">("");
+  const [job, setJob] = useState<JobType | "">(defaultJob);
   const [pics, setPics] = useState<Pic[]>([]);
   const [picNote, setPicNote] = useState("");
   const [over, setOver] = useState(false);
@@ -128,7 +128,7 @@ function QuoteCard({ headingLevel = 2 }: { headingLevel?: 2 | 1 }) {
   const reset = () => {
     formRef.current?.reset();
     setPics([]);
-    setJob("");
+    setJob(defaultJob);
     setErrors({});
     setMore(false);
     setStatus("idle");
@@ -280,7 +280,7 @@ function QuoteCard({ headingLevel = 2 }: { headingLevel?: 2 | 1 }) {
   Tablets and desktop always show the form. "Ask about…" buttons, the mobile bar
   and links to #quote open it too.
 */
-export default function QuoteForm({ headingLevel = 2, collapsible = false }: { headingLevel?: 2 | 1; collapsible?: boolean }) {
+export default function QuoteForm({ headingLevel = 2, collapsible = false, defaultJob = "" }: { headingLevel?: 2 | 1; collapsible?: boolean; defaultJob?: JobType | "" }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
@@ -303,7 +303,7 @@ export default function QuoteForm({ headingLevel = 2, collapsible = false }: { h
   }, [collapsible]);
 
   if (!collapsible) {
-    return <div className="quote-wrap" id="quote"><QuoteCard headingLevel={headingLevel} /></div>;
+    return <div className="quote-wrap" id="quote"><QuoteCard headingLevel={headingLevel} defaultJob={defaultJob} /></div>;
   }
 
   const openForm = () => {

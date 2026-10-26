@@ -19,7 +19,7 @@ export const media = {
   // Behind the reviews section. Bay window Connor restored and repainted (Facebook post, 1 Aug).
   reviews: {
     src: "/images/bay-window-after.jpg",
-    alt: "",
+    alt: "Restored bay window, freshly painted white, by CM MainWorks",
     label: "Reviews background",
   },
   portrait: { src: null, alt: "Connor, who runs CM MainWorks", label: "Photo of Connor" },

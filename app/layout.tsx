@@ -18,15 +18,17 @@ const bricolage = Bricolage_Grotesque({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "CM MainWorks · Carpentry and construction in Lichfield", template: "%s · CM MainWorks" },
-  description: "Carpentry and construction in Lichfield and nearby. Send Connor a few photos of the job and get a clear, free quote.",
+  title: { default: "Carpenter and builder in Lichfield | CM MainWorks", template: "%s | CM MainWorks" },
+  description: "Carpentry, building, joinery and decorating in Lichfield and nearby. Send Connor a few photos of the job and get a clear, free quote.",
+  applicationName: "CM MainWorks",
   openGraph: {
     type: "website",
     locale: "en_GB",
     siteName: "CM MainWorks",
-    images: [{ url: "/images/og.jpg", width: 3000, height: 3000, alt: "CM MainWorks logo" }],
+    images: [{ url: "/images/og-cm-mainworks.jpg", width: 1200, height: 630, alt: "CM MainWorks, carpentry and construction in Lichfield" }],
   },
   twitter: { card: "summary_large_image" },
+  formatDetection: { telephone: true },
   // Staging must not be indexed. Set NEXT_PUBLIC_ALLOW_INDEXING=true on production only.
   robots: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true" ? undefined : { index: false, follow: false },
 };

@@ -2,21 +2,30 @@ import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import ProjectGrid from "@/components/ProjectGrid";
 import Closing from "@/components/Closing";
-import { projects } from "@/content/projects";
+import { publishedProjects } from "@/content/projects";
+import { business } from "@/content/site";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Recent work",
-  description: "Recent carpentry, building, joinery and decorating jobs by CM MainWorks in Lichfield and nearby.",
-  alternates: { canonical: "/projects" },
-};
+  description: "Recent carpentry, building, joinery and decorating jobs by CM MainWorks in Lichfield and nearby, including a 140-year-old bay window restoration.",
+  path: "/projects",
+});
 
 export default function Projects() {
   return (
     <>
-      <PageHead title={<>Recent <span className="hl">work</span></>} lede="A few of Connor’s recent jobs. Filter by service to see the kind of work you’re planning." />
-      <section className="sec" style={{ paddingTop: 0 }}>
+      <PageHead
+        crumbs={[{ href: "/projects", label: "Recent work" }]}
+        title={<>Recent <span className="hl">work</span></>}
+        lede="A few of Connor’s recent jobs. More are being added as they’re photographed."
+      />
+      <section className="sec" style={{ paddingTop: 0 }} aria-label="Projects">
         <div className="wrap">
-          <ProjectGrid projects={projects} />
+          <ProjectGrid projects={publishedProjects} />
+          <p className="more-note">
+            See more of Connor’s work on the <a href={business.facebook} target="_blank" rel="noopener">CM MainWorks Facebook page</a>.
+          </p>
         </div>
       </section>
       <Closing />

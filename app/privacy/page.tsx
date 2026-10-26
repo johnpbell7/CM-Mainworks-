@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/PageHead";
 import { business } from "@/content/site";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Privacy policy",
   description: "How CM MainWorks uses the details and photos you send through the quote form.",
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 export default function Privacy() {
   return (
     <>
-      <PageHead title="Privacy policy" lede="How your details and photos are used when you ask for a quote." />
+      <PageHead crumbs={[{ href: "/privacy", label: "Privacy" }]} title="Privacy policy" lede="How your details and photos are used when you ask for a quote." />
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap prose">
           {/* DRAFT: needs Connor's legal trading name and contact email before launch. */}

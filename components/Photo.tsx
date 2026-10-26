@@ -21,7 +21,7 @@ export default function Photo({ media, sizes, className = "", style, priority, r
   if (!media.src && illo) {
     return (
       <div className={`ph ph-illo ${className}`} style={style} {...r}>
-        <Illustration kind={illo} label={`Illustration: ${media.label.replace(/ photo$/i, "")}`} />
+        <Illustration kind={illo} fit="bottom" />
       </div>
     );
   }

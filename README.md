@@ -24,6 +24,14 @@ No database is used.
 
 Every photo slot lives in `content/media.ts` and `content/projects.ts`. Drop the file in `public/images/`, set `src` and write the `alt`. While `src` is `null`, a labelled “Photo to come” placeholder shows instead.
 
+## SEO
+
+- Every page sets a unique title, description, canonical URL and social card through `pageMeta()` in `lib/seo.tsx`, and has exactly one H1.
+- Structured data: `HomeAndConstructionBusiness` site-wide, plus `Service`, `FAQPage` and `BreadcrumbList` where they apply.
+- Town pages live in `content/areas.ts` (served at `/areas/[slug]`). Each has its own copy; add a town there and it appears in the footer, the sitemap and the Areas page.
+- Service page copy lives in `content/services.ts`.
+- Placeholder projects are kept out of the projects page, the sitemap and search until real photos replace them.
+
 ## Where things live
 
 - `components/Illustration.tsx` holds the section illustrations: ink line drawings over an offset block of the section colour. They stand in for photos until real ones arrive.

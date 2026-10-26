@@ -390,24 +390,28 @@ function Done() {
 }
 
 const map = {
-  carpentry: { C: Carpentry, box: "0 0 320 400" },
-  building: { C: Building, box: "0 0 320 400" },
-  joinery: { C: Joinery, box: "0 0 320 400" },
-  decorating: { C: Decorating, box: "0 0 320 400" },
-  photos: { C: Photos, box: "0 0 120 120" },
-  quote: { C: Quote, box: "0 0 120 120" },
-  done: { C: Done, box: "0 0 120 120" },
+  carpentry: { C: Carpentry, box: "0 0 320 400", label: "Illustration of a carpenter’s workbench with a hand plane, shavings, a saw, a try square and a chisel" },
+  building: { C: Building, box: "0 0 320 400", label: "Illustration of a house with a brick extension being built, with scaffolding and a ladder" },
+  joinery: { C: Joinery, box: "0 0 320 400", label: "Illustration of a fitted media wall with alcove shelves and painted cabinets" },
+  decorating: { C: Decorating, box: "0 0 320 400", label: "Illustration of a wall being painted with a roller, with a stepladder and paint tins" },
+  photos: { C: Photos, box: "0 0 120 120", label: "Phone showing a photo" },
+  quote: { C: Quote, box: "0 0 120 120", label: "Written quote" },
+  done: { C: Done, box: "0 0 120 120", label: "Spirit level with a tick" },
 } as const;
 
-export default function Illustration({ kind, className = "", label }: { kind: IllustrationKind; className?: string; label?: string }) {
+/** Inline SVG illustration. Labelled for screen readers and search unless `decorative`. */
+export default function Illustration({ kind, className = "", label, decorative = false, fit }: { kind: IllustrationKind; className?: string; label?: string; decorative?: boolean; fit?: "bottom" }) {
   const { C, box } = map[kind];
+  if (!decorative) label = label ?? map[kind].label;
   return (
     <svg
       className={`il il-${kind} ${className}`}
       viewBox={box}
+      preserveAspectRatio={fit === "bottom" ? "xMidYMax meet" : undefined}
       data-illustration
-      {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}
+      {...(label && !decorative ? { role: "img", "aria-label": label } : { "aria-hidden": true })}
     >
+      {label && !decorative && <title>{label}</title>}
       <C />
     </svg>
   );

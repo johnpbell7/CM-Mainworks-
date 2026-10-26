@@ -16,15 +16,17 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
 
   const shown = filter === "all" ? projects : projects.filter((p) => p.section === filter);
 
+  const showFilters = projects.length >= 4;
+
   return (
     <>
-      <div className="filters" role="group" aria-label="Filter projects by service">
+      {showFilters && <div className="filters" role="group" aria-label="Filter projects by service">
         <button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All</button>
         {sections.map((s) => (
           <button key={s.slug} type="button" aria-pressed={filter === s.slug} onClick={() => setFilter(s.slug)}
             style={{ "--c": s.color } as React.CSSProperties}>{s.name}</button>
         ))}
-      </div>
+      </div>}
       <p className="sr-only" aria-live="polite">{shown.length} {shown.length === 1 ? "project" : "projects"} shown</p>
       <div className="proj-grid">
         {shown.map((p) => {
@@ -33,7 +35,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
             <Link className="proj" key={p.slug} href={`/projects/${p.slug}`}>
               <Photo media={p.after.src ? p.after : p.gallery[0]} sizes="(max-width: 720px) 100vw, 50vw" reveal={false} />
               <h2>{p.name}</h2>
-              <p><span style={{ color: s.color, fontWeight: 600 }}>{s.name}</span> {p.place}</p>
+              <p><span style={{ color: s.color, fontWeight: 600 }}>{s.name}</span> {p.summary}</p>
             </Link>
           );
         })}

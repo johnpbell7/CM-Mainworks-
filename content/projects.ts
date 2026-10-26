@@ -8,6 +8,10 @@ export type Project = {
   section: SectionSlug;
   place: string;
   summary: string;
+  /** Longer write-up for the project page */
+  body?: string[];
+  done?: string[];
+  review?: { quote: string; name: string };
   before: Media;
   after: Media;
   gallery: Media[];
@@ -22,8 +26,17 @@ export const projects: Project[] = [
     slug: "bay-window-restoration",
     name: "Bay window restoration",
     section: "carpentry",
-    place: "Town to confirm",
-    summary: "A 140-year-old bay window brought back to life after years of weather and neglect. The rotten sills and frames were repaired, then everything was filled, primed and painted.",
+    place: "",
+    summary: "A 140-year-old bay window brought back to life after years of weather and neglect.",
+    body: [
+      "This bay window had been standing for around 140 years, and time, weather and neglect had caught up with it. The sills and lower frames had started to rot, the paint had failed, and water was getting in.",
+      "Rather than replace the whole thing, Connor repaired it. The damaged timber was cut out and made good, the sills were rebuilt, and everything was filled, sanded, primed and painted, so the window looks right on the house and is protected for years to come.",
+    ],
+    done: ["Rotten timber cut out and repaired", "Sills rebuilt", "Frames filled and sanded", "Primed and painted inside and out"],
+    review: {
+      quote: "My bay window has been saved, from the perils of 140 years of time, weather and neglect, by an experienced tradesman. Someone who turns up to quote and returns to actually do the job. Thanks so much Connor. Would recommend.",
+      name: "Alice Walsh",
+    },
     before: ph("Before photo"),
     after: { src: "/images/bay-window-after.jpg", alt: "Restored bay window, freshly painted white, with the sill repaired", label: "After" },
     gallery: [
@@ -67,6 +80,9 @@ export const projects: Project[] = [
   },
 ];
 
+/** Real projects only. Placeholders stay off the projects page, the sitemap and search. */
+export const publishedProjects = projects.filter((p) => !p.placeholder);
+
 export function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug);
+  return publishedProjects.find((p) => p.slug === slug);
 }

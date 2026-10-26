@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { business, nav } from "@/content/site";
 import { Phone } from "./Icons";
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,17 +25,18 @@ export default function Header() {
           {/* Supplied logo, used as-is */}
           <img className="logo" src="/brand/logo/main/cm-mainworks-horizontal-on-light.svg" alt="CM MainWorks, carpentry and construction" width={238} height={46} />
         </Link>
-        <nav aria-label="Main">
+        <nav className="main-nav" aria-label="Main">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}>
               {n.label}
             </Link>
           ))}
         </nav>
-        <a className="tel" href={business.phoneHref}>
+        <a className="tel" href={business.phoneHref} aria-label={`Call ${business.phoneDisplay}`}>
           <Phone />
-          {business.phoneDisplay}
+          <span className="tel-num">{business.phoneDisplay}</span>
         </a>
+        <MobileMenu />
       </div>
     </header>
   );
