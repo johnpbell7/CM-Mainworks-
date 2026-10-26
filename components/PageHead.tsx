@@ -8,7 +8,7 @@ export default function PageHead({ title, lede, crumbs = [], children }: { title
       <div className="wrap">
         {crumbs.length > 0 && (
           <>
-            <nav aria-label="Breadcrumb" data-reveal="up">
+            <nav aria-label="Breadcrumb">
               <ol className="crumbs">
                 <li><Link href="/">Home</Link></li>
                 {crumbs.map((c, i) => (
@@ -21,8 +21,8 @@ export default function PageHead({ title, lede, crumbs = [], children }: { title
             <JsonLd data={breadcrumbLd(crumbs)} />
           </>
         )}
-        <h1 data-reveal="up">{title}</h1>
-        {lede && <p data-reveal="up">{lede}</p>}
+        <h1>{title}</h1>
+        {lede && <p>{lede}</p>}
         {children}
       </div>
     </section>

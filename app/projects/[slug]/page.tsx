@@ -33,7 +33,7 @@ export default async function ProjectPage({ params }: Props) {
       <PageHead
         crumbs={[{ href: "/projects", label: "Recent work" }, { href: `/projects/${p.slug}`, label: p.name }]}
         title={p.name}
-        lede={<><Link href={`/services/${s.slug}`} style={{ color: s.color, fontWeight: 600, textDecoration: "none" }}>{s.name}</Link>{p.place && ` · ${p.place}`}</>}
+        lede={<><Link href={`/services/${s.slug}`} style={{ color: `color-mix(in srgb, ${s.color} 70%, var(--ink))`, fontWeight: 600, textDecoration: "none" }}>{s.name}</Link>{p.place && ` · ${p.place}`}</>}
       />
       <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="job-title">
         <div className="wrap">

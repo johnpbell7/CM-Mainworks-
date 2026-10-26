@@ -31,7 +31,7 @@ export default function Home() {
       {/* ---------------- Hero ---------------- */}
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-bg">
-          <Image src={media.hero.src!} alt={media.hero.alt} fill priority sizes="100vw" />
+          <Image src={media.hero.src!} alt={media.hero.alt} fill priority fetchPriority="high" sizes="100vw" />
         </div>
         <div className="wrap">
           <div>

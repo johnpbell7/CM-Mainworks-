@@ -38,7 +38,7 @@ export default function Photo({ media, sizes, className = "", style, priority, r
   }
   return (
     <div className={`ph ${className}`} style={style} {...r}>
-      <Image src={media.src} alt={media.alt} fill sizes={sizes} priority={priority} loading={priority ? undefined : "lazy"} />
+      <Image src={media.src} alt={media.alt} fill sizes={sizes} priority={priority} fetchPriority={priority ? "high" : undefined} loading={priority ? undefined : "lazy"} />
     </div>
   );
 }

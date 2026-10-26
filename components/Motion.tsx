@@ -24,7 +24,7 @@ export default function Motion() {
     () => {
       const mm = gsap.matchMedia();
 
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
+      mm.add("(prefers-reduced-motion: no-preference)", (_ctx, contextSafe) => {
         const once = (trigger: Element, start = "top 86%") => ({ trigger, start, once: true });
 
         // ---- hero: text is static; only the photo settles and drifts ----
@@ -38,70 +38,70 @@ export default function Motion() {
           });
         }
 
-        // ---- reviews photo drifts behind the quote ----
-        const rev = document.querySelector(".reviews");
-        const revImg = rev?.querySelector(".reviews-bg img");
-        if (rev && revImg) {
-          gsap.fromTo(revImg, { yPercent: -8, scale: 1.18 }, {
-            yPercent: 8, scale: 1.18, ease: "none",
-            scrollTrigger: { trigger: rev, start: "top bottom", end: "bottom top", scrub: true },
+        // Everything else waits until the browser is idle, so it never holds up
+        // the first paint. Content is never hidden waiting for script: anything
+        // already on screen just stays put, and only what's further down the
+        // page is tucked away to animate in when it's scrolled to.
+        let timer = 0;
+        const setup = contextSafe!(() => {
+          const vh = window.innerHeight;
+          const pick = <T extends Element>(sel: string) =>
+            gsap.utils.toArray<T>(sel).filter((el) => !el.closest(".hero") && el.getBoundingClientRect().top > vh);
+
+          // read every position first, then write, so the page is measured once
+          const ups = pick<HTMLElement>('[data-reveal="up"]');
+          const staggers = pick<HTMLElement>('[data-reveal="stagger"]');
+          const tiles = pick<HTMLElement>('.ph-illo[data-reveal="img"]');
+          const photos = pick<HTMLElement>('[data-reveal="img"]:not(.ph-illo)');
+          const marks = pick<HTMLElement>(".hl");
+          const drawings = pick<SVGSVGElement>("[data-illustration]");
+          const badge = pick<HTMLElement>(".closing .big-badge")[0];
+
+          gsap.set(ups, { opacity: 0, y: 18 });
+          ScrollTrigger.batch(ups, {
+            start: "top 92%", once: true,
+            onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.08 }),
           });
-        }
 
-        // ---- generic reveals ----
-        // Tweens are built only when an element scrolls into view, so the page
-        // doesn't pay for every animation up front on a phone.
-        ScrollTrigger.batch('[data-reveal="up"]', {
-          start: "top 92%", once: true,
-          onEnter: (els) => gsap.fromTo(els, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", stagger: 0.08 }),
-        });
-
-        ScrollTrigger.batch('[data-reveal="stagger"]', {
-          start: "top 86%", once: true,
-          onEnter: (els) => els.forEach((el) => {
-            gsap.set(el, { opacity: 1 });
-            gsap.fromTo(el.children, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.95, ease: "power3.out", stagger: 0.1 });
-          }),
-        });
-
-        // illustration tiles just fade in quickly; the drawing does the work
-        ScrollTrigger.batch('.ph-illo[data-reveal="img"]', {
-          start: "top 95%", once: true,
-          onEnter: (els) => gsap.fromTo(els, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }),
-        });
-
-        gsap.utils.toArray<HTMLElement>('[data-reveal="img"]:not(.ph-illo)').forEach((el) => {
-          if (el.closest(".hero")) return;
-          ScrollTrigger.create({
-            trigger: el, start: "top 90%", once: true,
-            onEnter: () => {
-              const img = el.querySelector("img");
-              const tl = gsap.timeline();
-              tl.fromTo(el, { opacity: 1, clipPath: "inset(100% 0% 0% 0% round 6px)" }, {
-                clipPath: "inset(0% 0% 0% 0% round 6px)", duration: 1.15, ease: "power4.inOut",
-                clearProps: "clipPath",
-              });
-              if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.5, ease: "power3.out", clearProps: "transform" }, 0.1);
-            },
+          staggers.forEach((el) => gsap.set(el.children, { opacity: 0, y: 34 }));
+          ScrollTrigger.batch(staggers, {
+            start: "top 86%", once: true,
+            onEnter: (els) => els.forEach((el) =>
+              gsap.to(el.children, { opacity: 1, y: 0, duration: 0.95, ease: "power3.out", stagger: 0.1 })),
           });
-        });
 
-        // ---- marker highlights (outside the hero) ----
-        gsap.utils.toArray<HTMLElement>(".hl").forEach((el) => {
-          if (el.closest(".hero")) return;
-          gsap.set(el, { backgroundSize: "0% 74%" });
-          ScrollTrigger.create({
+          // illustration tiles just fade in quickly; the drawing does the work
+          gsap.set(tiles, { opacity: 0 });
+          ScrollTrigger.batch(tiles, {
+            start: "top 95%", once: true,
+            onEnter: (els) => gsap.to(els, { opacity: 1, duration: 0.35, ease: "power1.out" }),
+          });
+
+          photos.forEach((el) => {
+            const img = el.querySelector("img");
+            gsap.set(el, { clipPath: "inset(100% 0% 0% 0% round 6px)" });
+            ScrollTrigger.create({
+              trigger: el, start: "top 90%", once: true,
+              onEnter: () => {
+                const tl = gsap.timeline();
+                tl.to(el, { clipPath: "inset(0% 0% 0% 0% round 6px)", duration: 1.15, ease: "power4.inOut", clearProps: "clipPath" });
+                if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 1.5, ease: "power3.out", clearProps: "transform" }, 0.1);
+              },
+            });
+          });
+
+          // ---- marker highlights ----
+          gsap.set(marks, { backgroundSize: "0% 74%" });
+          marks.forEach((el) => ScrollTrigger.create({
             trigger: el, start: "top 90%", once: true,
             onEnter: () => gsap.to(el, { backgroundSize: "100% 74%", duration: 0.55, ease: "power2.inOut", delay: 0.1 }),
-          });
-        });
+          }));
 
-        // ---- illustrations draw themselves ----
-        // Measuring every line for DrawSVG is the costly part, so each drawing
-        // is only set up when it reaches the screen.
-        gsap.utils.toArray<SVGSVGElement>("[data-illustration]").forEach((svg) => {
-          gsap.set(svg, { autoAlpha: 0 });
-          ScrollTrigger.create({
+          // ---- illustrations draw themselves ----
+          // Measuring every line for DrawSVG is the costly part, so each drawing
+          // is only set up when it reaches the screen.
+          gsap.set(drawings, { autoAlpha: 0 });
+          drawings.forEach((svg) => ScrollTrigger.create({
             trigger: svg, start: "top 95%", once: true,
             onEnter: () => {
               const q = gsap.utils.selector(svg);
@@ -115,20 +115,22 @@ export default function Motion() {
                 .from(q(".off"), { x: 0, y: 0, duration: 0.45, ease: "back.out(2)" }, 0.55)
                 .fromTo(q(".roll"), { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.7, ease: "power2.inOut", immediateRender: true }, 0.1);
             },
-          });
+          }));
+
+          // ---- closing badge drifts in ----
+          if (badge) {
+            gsap.fromTo(badge, { rotation: -14, y: 60, opacity: 0 }, {
+              rotation: 0, y: 0, opacity: 1, duration: 1.3, ease: "back.out(1.6)", scrollTrigger: once(badge, "top 92%"),
+            });
+          }
         });
 
-        // ---- closing badge drifts in ----
-        const bb = document.querySelector(".closing .big-badge");
-        if (bb) {
-          gsap.fromTo(bb, { rotation: -14, y: 60, opacity: 0 }, {
-            rotation: 0, y: 0, opacity: 1, duration: 1.3, ease: "back.out(1.6)", scrollTrigger: once(bb, "top 92%"),
-          });
-        }
+        const run = () => { setup(); };
+        const hasIdle = typeof window.requestIdleCallback === "function";
+        const idle = hasIdle ? window.requestIdleCallback(run, { timeout: 1200 }) : window.setTimeout(run, 200);
 
         // Images loading late can shift layout; re-measure once they settle,
         // not once per image.
-        let timer = 0;
         const refresh = () => {
           clearTimeout(timer);
           timer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
@@ -136,6 +138,8 @@ export default function Motion() {
         const imgs = Array.from(document.images).filter((i) => !i.complete);
         imgs.forEach((i) => i.addEventListener("load", refresh, { once: true }));
         return () => {
+          if (hasIdle) window.cancelIdleCallback(idle);
+          else clearTimeout(idle);
           clearTimeout(timer);
           imgs.forEach((i) => i.removeEventListener("load", refresh));
         };

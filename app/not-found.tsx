@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <section className="notfound">
       <div className="wrap">
-        <img className="badge" src="/brand/logo/badge/cm-badge-jaunty.svg" alt="" width={120} height={53} />
+        <img className="badge" src="/brand/logo/badge/cm-badge-jaunty.svg" alt="" width={120} height={53} loading="lazy" />
         <h1>This page has <span className="hl">gone walkabout.</span></h1>
         <p>The link may be old or mistyped. Try the homepage, or ring me on {business.phoneDisplay}.</p>
         <Link className="btn btn-gold" href="/">Back to the homepage</Link>
