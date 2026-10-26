@@ -23,7 +23,7 @@ export default function MobileBar() {
   return (
     <nav className={`mbar${away ? " away" : ""}`} aria-label="Quick contact">
       <a href={business.phoneHref}><Phone />Call</a>
-      <a className="q" href={quoteHref}>Free quote</a>
+      <a className="q" href={quoteHref} onClick={() => window.dispatchEvent(new Event("cm:open-quote"))}>Free quote</a>
     </nav>
   );
 }

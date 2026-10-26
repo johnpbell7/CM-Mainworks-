@@ -25,3 +25,6 @@ export const Chevrons = (p: P) => (
 export const WhatsApp = (p: P) => (
   <svg viewBox="0 0 24 24" {...base} {...p}><path d="M4 20l1.2-3.9A8 8 0 1 1 8 19z" /><path d="M9.2 9.3c.3 2.3 2.2 4.3 4.6 4.8l1-1.2 1.8.9c-.2 1.1-1 1.8-2.2 1.8-3.4-.2-6.3-3.1-6.4-6.5 0-1.1.7-2 1.8-2.2l.9 1.8z" /></svg>
 );
+export const ChevronDown = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} strokeWidth={2.2} {...p}><path d="M6 9l6 6 6-6" /></svg>
+);

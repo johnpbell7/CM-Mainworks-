@@ -39,7 +39,7 @@ export default function Home() {
               <li>Lichfield and {business.region}</li>
             </ul>
           </div>
-          <QuoteForm />
+          <QuoteForm collapsible />
         </div>
         <p className="hero-credit">Pictured: an oak-framed garden canopy by CM MainWorks</p>
       </section>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { business, jobTypes, sections, type JobType } from "@/content/site";
 import { MAX_PHOTOS, formatPostcode, ruleKeys, rules, type RuleKey } from "@/lib/validation";
-import { Alert, Arrow, Camera, Cross } from "./Icons";
+import { Alert, Arrow, Camera, ChevronDown, Cross } from "./Icons";
 
 type Pic = { file: File; url: string };
 type Status = "idle" | "sending" | "sent";
@@ -27,7 +27,7 @@ async function shrink(file: File): Promise<Blob> {
   }
 }
 
-export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }) {
+function QuoteCard({ headingLevel = 2 }: { headingLevel?: 2 | 1 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const againRef = useRef<HTMLButtonElement>(null);
   const [errors, setErrors] = useState<Partial<Record<RuleKey, string>>>({});
@@ -139,7 +139,7 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
 
   if (status === "sent") {
     return (
-      <div className="quote" id="quote">
+      <div className="quote">
         <div className="done" role="status" aria-live="polite">
           <svg className="tick" viewBox="0 0 64 64" aria-hidden="true">
             <circle cx="32" cy="32" r="30" fill="var(--t-gold)" />
@@ -166,7 +166,7 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
     errors[k] ? <span className="err" id={`e-${k}`}><Alert />{errors[k]}</span> : null;
 
   return (
-    <div className="quote" id="quote" data-hero>
+    <div className="quote">
       <div className="quote-head">
         <H>Get a free quote</H>
         <p>A few details and Connor will come back with a price.</p>
@@ -270,6 +270,59 @@ export default function QuoteForm({ headingLevel = 2 }: { headingLevel?: 2 | 1 }
           Your details are only used to reply about your job. <Link href="/privacy">Privacy</Link>
         </p>
       </form>
+    </div>
+  );
+}
+
+/*
+  The quote form. With `collapsible` (the homepage hero), phones see a single
+  "Get a free quote" button above the fold that slides the form open underneath.
+  Tablets and desktop always show the form. "Ask about…" buttons, the mobile bar
+  and links to #quote open it too.
+*/
+export default function QuoteForm({ headingLevel = 2, collapsible = false }: { headingLevel?: 2 | 1; collapsible?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const panel = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!collapsible) return;
+    const mq = matchMedia("(max-width: 720px)");
+    const sync = () => setMobile(mq.matches);
+    const openUp = () => setOpen(true);
+    sync();
+    if (location.hash === "#quote") setOpen(true);
+    mq.addEventListener("change", sync);
+    window.addEventListener("cm:job", openUp);
+    window.addEventListener("cm:open-quote", openUp);
+    return () => {
+      mq.removeEventListener("change", sync);
+      window.removeEventListener("cm:job", openUp);
+      window.removeEventListener("cm:open-quote", openUp);
+    };
+  }, [collapsible]);
+
+  if (!collapsible) {
+    return <div className="quote-wrap" id="quote"><QuoteCard headingLevel={headingLevel} /></div>;
+  }
+
+  const openForm = () => {
+    setOpen(true);
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(() => panel.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }), 120);
+  };
+
+  return (
+    <div className={`quote-wrap collapsible${open ? " is-open" : ""}`} id="quote">
+      <div className="quote-cta-wrap">
+        <button type="button" className="quote-cta" aria-expanded={open} aria-controls="quote-panel" onClick={openForm}>
+          Get a free quote <ChevronDown />
+        </button>
+        <a className="quote-call" href={business.phoneHref}>Or call Connor on {business.phoneDisplay}</a>
+      </div>
+      <div className="quote-panel" id="quote-panel" ref={panel} inert={mobile && !open}>
+        <div><QuoteCard headingLevel={headingLevel} /></div>
+      </div>
     </div>
   );
 }
