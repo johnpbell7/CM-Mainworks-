@@ -14,7 +14,7 @@ export function FromPrice({ from, unit }: { from: string | null; unit?: string }
   return (
     <p className={`from${from ? "" : " tbc"}`}>
       <span>From</span>
-      <strong>{from ?? "£—"}</strong>
+      <strong>{from ?? "£TBC"}</strong>
       {unit && <span>{unit}</span>}
     </p>
   );
@@ -26,19 +26,23 @@ export default function PackageCard({ p, compact = false, headingLevel = 3 }: { 
   const H = headingLevel === 2 ? "h2" : "h3";
   return (
     <article className="pkg" style={{ "--c": color, "--pen": tint } as React.CSSProperties}>
-      <H>{p.name}</H>
-      <FromPrice from={p.from} />
-      <p className="pkg-sum">{p.summary}</p>
-      {!compact && (
-        <ul className="ticks">
-          {p.includes.map((i) => <li key={i}>{i}</li>)}
-        </ul>
-      )}
-      <div className="pkg-links">
-        <Link className="link link-arrow" style={{ "--u": color } as React.CSSProperties} href={`/contact?job=${encodeURIComponent(p.job)}#quote`}>
-          Get a quote <Arrow />
-        </Link>
-        <Link className="pkg-more" href={p.href}>Find out more</Link>
+      <div className="pkg-head">
+        <H>{p.name}</H>
+        <FromPrice from={p.from} />
+      </div>
+      <div className="pkg-body">
+        <p className="pkg-sum">{p.summary}</p>
+        {!compact && (
+          <ul className="ticks">
+            {p.includes.map((i) => <li key={i}>{i}</li>)}
+          </ul>
+        )}
+        <div className="pkg-links">
+          <Link className="btn btn-line btn-sm" href={`/contact?job=${encodeURIComponent(p.job)}#quote`}>
+            Get a quote <Arrow />
+          </Link>
+          <Link className="pkg-more" href={p.href} aria-label={`More about ${p.name.toLowerCase()}`}>Details</Link>
+        </div>
       </div>
     </article>
   );

@@ -11,7 +11,9 @@ import { siteUrl } from "@/content/site";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  // Variable font with the optical-size axis, so small text gets the wider,
+  // easier-to-read letterforms and big headlines keep the display cut.
+  axes: ["opsz"],
   display: "swap",
   variable: "--font-bricolage",
 });
