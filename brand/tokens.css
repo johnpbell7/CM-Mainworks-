@@ -1,0 +1,40 @@
+/* CM MainWorks design tokens. Website palette is light-only (client decision). */
+:root {
+  /* text */
+  --ink: #1A2238;        /* body + headings (warm deep navy) */
+  --ink-2: #5F6575;      /* secondary text */
+  --ink-3: #9A9EA8;      /* captions, hints */
+  --line: #E8E4DC;       /* hairline dividers */
+
+  /* surfaces */
+  --bg: #FFFFFF;
+  --grey: #F5F5F4;       /* very light grey sections */
+  --soft: #F7F4EE;       /* photo placeholders */
+
+  /* brand core (logo artwork) */
+  --navy: #16264A;
+  --gold: #D9A441;       /* primary button, highlights */
+  --gold-hover: #E4B357;
+  --gold-ink: #8F6418;   /* gold used as text/icons on white */
+  --chalk: #F5EFE4;      /* logo backgrounds in brand assets */
+
+  /* section colours (website text/rules use these) */
+  --oak: #B07D45;        /* Carpentry  (brand swatch #C79A64, darkened for text) */
+  --steel: #3D78B5;      /* Building */
+  --sage: #3F7D5C;       /* Joinery */
+  --brick: #B5473A;      /* Decorating */
+
+  /* highlighter tints (marker-pen behind key words) */
+  --t-gold: #F7E3B5;
+  --t-oak: #F1DEC6;
+  --t-steel: #D7E6F5;
+  --t-sage: #D3E8DB;
+  --t-brick: #F5D7D1;
+
+  /* type + layout */
+  --font: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --max: 1240px;
+  --gutter: clamp(20px, 5vw, 72px);
+  --radius: 6px;          /* photos */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}

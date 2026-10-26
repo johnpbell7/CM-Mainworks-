@@ -1,0 +1,39 @@
+# CM MainWorks website
+
+Next.js (App Router) + TypeScript, deployed on Vercel. Read `CLAUDE.md` and `HANDOFF.md` first.
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+npm run build
+```
+
+## Environment variables (Vercel)
+
+| Name | What it does |
+|---|---|
+| `RESEND_API_KEY` | Sends quote requests by email. Without it the form says it isn’t switched on yet and points people to phone and WhatsApp. |
+| `QUOTE_TO_EMAIL` | Where leads go (waiting on Connor). |
+| `QUOTE_FROM_EMAIL` | Verified sender, e.g. `CM MainWorks website <quotes@domain>`. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL for the sitemap, Open Graph and JSON-LD. |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | Set to `true` on production only. Staging stays `noindex`. |
+
+No database is used.
+
+## Photos
+
+Every photo slot lives in `content/media.ts` and `content/projects.ts`. Drop the file in `public/images/`, set `src` and write the `alt`. While `src` is `null`, a labelled “Photo to come” placeholder shows instead.
+
+## Where things live
+
+- `components/Intro.tsx` is the page-load animation: the CM badge halves snap together on navy, then the page splits open along a box-joint seam. It plays once per browser session and is skipped for reduced motion.
+- `components/Motion.tsx` holds the GSAP scroll reveals, driven by `data-reveal` / `data-hero` attributes and `.hl` highlights.
+- `components/QuoteForm.tsx` and `app/api/quote/route.ts` are the quote form and its email handler (honeypot and rate limit included).
+- `content/` holds the copy, services, FAQs, projects and media.
+
+## Still to confirm with Connor
+
+- Over 10 years’ experience (taken from his pinned Facebook post).
+- About copy, FAQ answers, the areas list and the privacy policy wording (all drafts).
+- Photos for the services, the portrait and the projects, plus the bay window “before” photo and town.
+- Lead email address, domain and trading name.

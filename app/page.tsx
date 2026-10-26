@@ -1,0 +1,200 @@
+import Image from "next/image";
+import Link from "next/link";
+import Photo from "@/components/Photo";
+import QuoteForm from "@/components/QuoteForm";
+import BeforeAfter from "@/components/BeforeAfter";
+import AskButton from "@/components/AskButton";
+import { Arrow, Swipe } from "@/components/Icons";
+import Closing from "@/components/Closing";
+import { business, sections, type JobType } from "@/content/site";
+import { media } from "@/content/media";
+import { projects } from "@/content/projects";
+import { homeFaqs } from "@/content/faqs";
+
+const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
+const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
+
+export default function Home() {
+  const [lead, ...rest] = projects;
+  return (
+    <>
+      {/* ---------------- Hero ---------------- */}
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-bg">
+          <Image src={media.hero.src!} alt="" fill priority sizes="100vw" />
+        </div>
+        <div className="wrap">
+          <div>
+            <h1 id="hero-title" data-hero>
+              Carpentry and construction, <span className="hl">done properly.</span>
+            </h1>
+            <p className="lede" data-hero>
+              Doors, staircases, kitchens, fitted furniture and building work across Lichfield and the villages around it.
+            </p>
+            <ul className="hero-meta" data-hero aria-label="At a glance">
+              <li>Free, written quotes</li>
+              <li>{business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade</li>
+              <li>Lichfield and {business.region}</li>
+            </ul>
+          </div>
+          <QuoteForm />
+        </div>
+        <p className="hero-credit">Pictured: an oak-framed garden canopy by CM MainWorks</p>
+      </section>
+
+      {/* ---------------- Services ---------------- */}
+      <section className="sec" id="services" aria-labelledby="svc-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="svc-title">Services</h2>
+            </div>
+            <p data-reveal="up">
+              From a single door to a full extension, with <span className="hl">one person looking after the job</span> from start to finish.
+            </p>
+          </div>
+          <div className="services">
+            {sections.map((s, i) => (
+              <article className="service" key={s.slug} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
+                <Photo media={media[s.slug]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 24vw" />
+                <p className="num">0{i + 1}</p>
+                <h3>
+                  <Link href={`/services/${s.slug}`}><span className="hl" data-pen={s.pen}>{s.name}</span></Link>
+                </h3>
+                <p>{s.blurb}</p>
+                <AskButton job={s.name as JobType}>Ask about {s.name.toLowerCase()}</AskButton>
+              </article>
+            ))}
+          </div>
+          <p className="scroll-hint" aria-hidden="true"><Swipe />Swipe for more</p>
+        </div>
+      </section>
+
+      {/* ---------------- Recent work ---------------- */}
+      <section className="sec grey" id="work" aria-labelledby="work-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="work-title">Recent work</h2>
+            </div>
+            <p data-reveal="up">
+              Drag across the first photo to compare before and after.{" "}
+              <Link className="link link-arrow" href="/projects">See all projects <Arrow /></Link>
+            </p>
+          </div>
+          <div className="work">
+            <figure>
+              <BeforeAfter before={lead.before} after={lead.after} />
+              <figcaption className="cap">{lead.name} <span style={{ color: colorOf(lead.section) }}>{nameOf(lead.section)}</span></figcaption>
+            </figure>
+            <div className="side">
+              {rest.slice(0, 2).map((p) => (
+                <figure key={p.slug}>
+                  <Link href={`/projects/${p.slug}`} aria-label={`${p.name}, ${nameOf(p.section)}`}>
+                    <Photo media={p.gallery[0]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 36vw" />
+                  </Link>
+                  <figcaption className="cap">{p.name} <span style={{ color: colorOf(p.section) }}>{nameOf(p.section)}</span></figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- How it works ---------------- */}
+      <section className="sec" aria-labelledby="how-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="how-title">How it works</h2>
+            </div>
+            <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
+          </div>
+          <ol className="steps" data-reveal="stagger">
+            <li style={{ "--c": "var(--oak)" } as React.CSSProperties}>
+              <span className="rule" aria-hidden="true" />
+              <h3>Send a few photos</h3>
+              <p>Use the form or WhatsApp. A couple of pictures and a line about the job is plenty.</p>
+            </li>
+            <li style={{ "--c": "var(--steel)" } as React.CSSProperties}>
+              <span className="rule" aria-hidden="true" />
+              <h3>Get a clear price</h3>
+              <p>Connor looks at the photos, visits if he needs to, and gives you a written quote.</p>
+            </li>
+            <li style={{ "--c": "var(--sage)" } as React.CSSProperties}>
+              <span className="rule" aria-hidden="true" />
+              <h3>The job, done properly</h3>
+              <p>Work starts on the date you agree, and the place is left tidy when it’s finished.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      {/* ---------------- About ---------------- */}
+      <section className="sec about" id="about" aria-labelledby="about-title">
+        <div className="wrap">
+          <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />
+          <div data-reveal="up">
+            <h2 id="about-title">Hi, I’m Connor.</h2>
+            <p>
+              I run CM MainWorks, a carpentry and construction business based in Lichfield, with {business.experience} in the trade.
+              Whatever the size of the job, you deal with me from the first visit to the final clean-up.
+            </p>
+            <p>
+              I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>, and I don’t leave until it’s right.
+            </p>
+            <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
+            <Link className="link link-arrow" href="/about" style={{ display: "inline-flex", marginTop: 28 }}>More about Connor <Arrow /></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Review ---------------- */}
+      <section className="sec reviews" aria-labelledby="rev-title">
+        <div className="reviews-bg" aria-hidden="true">
+          <Image src={media.reviews.src!} alt="" fill sizes="100vw" loading="lazy" />
+        </div>
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up"><h2 id="rev-title">What customers say</h2></div>
+          </div>
+          <figure data-reveal="up">
+            <blockquote className="quote-big">
+              {(() => {
+                const { quote, highlight } = business.review;
+                const [a, b] = quote.split(highlight);
+                return <>{a}<span className="hl">{highlight}</span>{b}</>;
+              })()}
+            </blockquote>
+            <figcaption className="quote-by">
+              <strong>{business.review.name}</strong>
+              <span>{business.review.job}, via {business.review.source}</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* ---------------- FAQs ---------------- */}
+      <section className="sec" id="faq" aria-labelledby="faq-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="faq-title">FAQs</h2>
+            </div>
+            <p data-reveal="up"><Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link></p>
+          </div>
+          <div className="faq">
+            {homeFaqs.map((f) => (
+              <div key={f.q} style={{ "--c": colorOf(f.color) } as React.CSSProperties}>
+                <h3>{f.q}</h3>
+                <p>{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Closing />
+    </>
+  );
+}
