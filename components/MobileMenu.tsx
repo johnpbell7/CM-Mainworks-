@@ -7,10 +7,12 @@ import { business } from "@/content/site";
 import { Phone, WhatsApp } from "./Icons";
 
 const links = [
+  { href: "/renovations", label: "Renovations", c: "var(--gold)" },
   { href: "/services", label: "Services", c: "var(--oak)" },
-  { href: "/projects", label: "Recent work", c: "var(--steel)" },
-  { href: "/about", label: "About me", c: "var(--sage)" },
-  { href: "/faqs", label: "FAQs", c: "var(--brick)" },
+  { href: "/prices", label: "Prices", c: "var(--steel)" },
+  { href: "/projects", label: "Recent work", c: "var(--sage)" },
+  { href: "/about", label: "About me", c: "var(--brick)" },
+  { href: "/faqs", label: "FAQs", c: "var(--ink-3)" },
   { href: "/contact", label: "Contact", c: "var(--ink-3)" },
 ];
 

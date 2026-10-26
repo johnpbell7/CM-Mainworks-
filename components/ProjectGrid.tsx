@@ -23,7 +23,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
     <>
       {showFilters && <div className="filters" role="group" aria-label="Filter projects by service">
         <button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All</button>
-        {sections.map((s) => (
+        {sections.filter((s) => projects.some((p) => p.section === s.slug)).map((s) => (
           <button key={s.slug} type="button" aria-pressed={filter === s.slug} onClick={() => setFilter(s.slug)}
             style={{ "--c": s.color } as React.CSSProperties}>{s.name}</button>
         ))}

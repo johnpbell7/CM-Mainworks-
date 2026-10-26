@@ -13,7 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
   return [
     entry("", 1),
+    entry("/renovations", 1),
     entry("/services", 0.9),
+    entry("/prices", 0.9),
     ...sections.map((s) => entry(`/services/${s.slug}`, 0.9)),
     ...areas.map((a) => entry(`/areas/${a.slug}`, 0.8)),
     entry("/projects", 0.7),

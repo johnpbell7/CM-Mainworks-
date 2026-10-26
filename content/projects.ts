@@ -59,7 +59,7 @@ export const projects: Project[] = [
   {
     slug: "project-three",
     name: "Project name",
-    section: "building",
+    section: "extensions",
     place: "Town",
     summary: "A short write-up of the job goes here: what the customer wanted, what I did and how it turned out.",
     before: ph("Before"),

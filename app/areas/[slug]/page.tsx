@@ -6,7 +6,7 @@ import Photo from "@/components/Photo";
 import QuoteForm from "@/components/QuoteForm";
 import Steps from "@/components/Steps";
 import { areas, getArea } from "@/content/areas";
-import { business, getSection } from "@/content/site";
+import { business, getSection, renovation } from "@/content/site";
 import { media } from "@/content/media";
 import FaqList from "@/components/FaqList";
 import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
@@ -35,8 +35,8 @@ export default async function AreaPage({ params }: Props) {
         data={{
           "@context": "https://schema.org",
           "@type": "Service",
-          name: `Carpentry and building in ${a.name}`,
-          serviceType: ["Carpentry", "Building", "Joinery", "Decorating"],
+          name: `Home renovations in ${a.name}`,
+          serviceType: ["Home renovation", "Extensions", "Kitchens", "Bathrooms", "Carpentry", "Decorating"],
           description: a.description,
           url: abs(`/areas/${a.slug}`),
           provider: { "@id": businessId },
@@ -45,14 +45,14 @@ export default async function AreaPage({ params }: Props) {
       />
       <PageHead
         crumbs={[{ href: `/areas/${a.slug}`, label: a.name }]}
-        title={<>Carpenter and builder in <span className="hl">{a.name}</span></>}
+        title={<>Home renovations in <span className="hl">{a.name}</span></>}
         lede={a.intro}
       />
 
       <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="local-title">
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0, "--c": lead.color, "--pen": lead.tint } as React.CSSProperties}>
-            <Photo media={media[lead.slug]} illo={lead.slug} sizes="(max-width: 720px) 100vw, 50vw" />
+            <Photo media={media[lead.slug]} illo={lead.illo} sizes="(max-width: 720px) 100vw, 50vw" />
             <div className="prose" data-reveal="up">
               <h2 id="local-title" className="mid-h">Homes in {a.name}</h2>
               <p>{a.local}</p>
@@ -61,6 +61,7 @@ export default async function AreaPage({ params }: Props) {
                 <li><span>Quotes</span>Free and written, with no obligation</li>
                 <li><span>Insurance</span>Yes, I’m insured</li>
                 <li><span>Who you deal with</span>Me, from the first visit to the final clean-up</li>
+                <li><span>The team</span>One team for the whole job, with trusted trades organised for you</li>
               </ul>
             </div>
           </div>
@@ -71,9 +72,13 @@ export default async function AreaPage({ params }: Props) {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="work-title">The work I do in {a.name}</h2></div>
-            <p data-reveal="up">I do carpentry, building, joinery and decorating, and run every job myself, with labourers I trust on the bigger ones.</p>
+            <p data-reveal="up">Full renovations are my main work, managed by one team. Smaller jobs are just as welcome.</p>
           </div>
           <div className="items" data-reveal="stagger">
+            <div className="item" style={{ "--c": renovation.color } as React.CSSProperties}>
+              <h3><Link href={renovation.href}>Full renovations in {a.name}</Link></h3>
+              <p>Kitchens, bathrooms, floors, stairs and decorating, planned with you and managed by me from start to finish.</p>
+            </div>
             {a.focus.map((f) => {
               const s = getSection(f.service)!;
               return (
@@ -114,7 +119,7 @@ export default async function AreaPage({ params }: Props) {
             <p className="big-p">Send me a few photos and a line about the job. I’ll take a look, come round if I need to, and send you a written quote.</p>
             <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
-          <QuoteForm />
+          <QuoteForm defaultJob={renovation.job} />
         </div>
       </section>
     </>

@@ -11,7 +11,7 @@ export default function BusinessJsonLd() {
         "@type": "HomeAndConstructionBusiness",
         "@id": businessId,
         name: business.name,
-        description: "Insured carpentry, building, joinery and decorating, based in Lichfield and covering the Midlands.",
+        description: `${business.pitch}. Kitchens, bathrooms, extensions, stairs, floors, roofing and decorating. Insured, based in Lichfield and covering the Midlands.`,
         url: siteUrl,
         telephone: "+447742135592",
         logo: `${siteUrl}/images/og.jpg`,
@@ -23,10 +23,13 @@ export default function BusinessJsonLd() {
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Services",
-          itemListElement: sections.map((s) => ({
+          itemListElement: [
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Full home renovations", description: business.pitch, url: `${siteUrl}/renovations` } },
+            ...sections.map((s) => ({
             "@type": "Offer",
             itemOffered: { "@type": "Service", name: s.name, description: s.blurb, url: `${siteUrl}/services/${s.slug}` },
-          })),
+            })),
+          ],
         },
       }}
     />

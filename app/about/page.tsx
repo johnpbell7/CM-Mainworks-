@@ -3,21 +3,21 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Closing from "@/components/Closing";
-import { business, sections } from "@/content/site";
+import { business, renovation, sections } from "@/content/site";
 import { media } from "@/content/media";
 import { areas } from "@/content/areas";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "About me",
-  description: `I’m Connor. I run CM MainWorks, an insured carpentry and construction business in Lichfield covering the Midlands, with ${business.experience} in the trade.`,
+  description: `I’m Connor. I run CM MainWorks, managing full home renovations with one team across Lichfield and the Midlands, with ${business.experience} in the trade.`,
   path: "/about",
 });
 
 const promises = [
-  { h: "You’ll know the price first", p: "A clear, written quote before I start anything.", c: "var(--oak)" },
-  { h: "You deal with me", p: "From the first visit to the final clean-up. No passing you between people.", c: "var(--steel)" },
-  { h: "Extra hands when it needs them", p: "On bigger jobs I bring in labourers I trust, and I’m on site running it.", c: "var(--gold)" },
+  { h: "I’ll listen first", p: "Your home, your budget, your plans. I’ll help you get there, not push my ideas on you.", c: "var(--gold)" },
+  { h: "You’ll know the price first", p: "A clear, written quote before I start anything, and no surprises on the bill.", c: "var(--oak)" },
+  { h: "You deal with me", p: "One team, and one person to ring from the first visit to the final clean-up.", c: "var(--steel)" },
   { h: "I’m insured", p: "Happy to show you the details before I start.", c: "var(--ink-3)" },
   { h: "I turn up when I say", p: "We agree a start date and I stick to it.", c: "var(--sage)" },
   { h: "I leave it tidy", p: "Dust sheets down while I work, and swept up before I go.", c: "var(--brick)" },
@@ -29,7 +29,7 @@ export default function About() {
       <PageHead
         crumbs={[{ href: "/about", label: "About" }]}
         title={<>Hi, I’m <span className="hl">Connor.</span></>}
-        lede="I run CM MainWorks, a carpentry and construction business based in Lichfield."
+        lede="I run CM MainWorks from Lichfield. I manage home renovations from start to finish, so you get the home you want without the stress of running it yourself."
       />
 
       <section className="sec about" style={{ paddingTop: 0, borderTop: 0 }} aria-labelledby="story-title">
@@ -38,9 +38,10 @@ export default function About() {
           <div data-reveal="up">
             {/* DRAFT copy for Connor to approve. Do not add insurance, qualifications or reviews until he confirms them. */}
             <h2 id="story-title" className="mid-h">How I work</h2>
-            <p>I’ve been in the trade {business.experience}. In that time I’ve hung more doors than I could count, fitted kitchens, built extensions and painted an awful lot of skirting board.</p>
-            <p>With CM MainWorks you deal with me from start to finish. I do the carpentry, the joinery, the building and the decorating, so a job doesn’t get passed between four different people. When a job needs more hands, I bring in labourers I’ve worked with and trust. I’m still on site, and I’m still the one you ring.</p>
-            <p>I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>. If something’s not right, I’ll put it right before I go.</p>
+            <p>I’ve been in the trade {business.experience}. I started as a carpenter, hanging doors and fitting kitchens, and along the way I saw how stressful renovations can be for the people living through them. Too many trades, nobody in charge, and the homeowner stuck in the middle.</p>
+            <p>So that’s what I do differently. I manage the whole job with one team: my labourers, the trades I trust for things like electrics and plumbing, and me on site running it. You’ve got one person to ring and one written quote, and I keep you updated as we go.</p>
+            <p>I’m friendly, I’m straight with people about cost, and I’ll <span className="hl" data-pen="sage">work with you to get the home you want</span>. If something’s not right, I’ll put it right before I go.</p>
+            <p><Link className="link link-arrow" href={renovation.href}>How a renovation works with me</Link></p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="CM MainWorks badge" width={96} height={42} loading="lazy" />
             <p className="draft">Draft copy, waiting on Connor’s approval.</p>
           </div>
@@ -80,6 +81,10 @@ export default function About() {
             <p data-reveal="up">Across {areas.slice(0, -1).map((a) => a.name).join(", ")} and {areas[areas.length - 1].name}.</p>
           </div>
           <div className="items" data-reveal="stagger">
+            <div className="item" style={{ "--c": renovation.color } as React.CSSProperties}>
+              <h3><Link href={renovation.href}>{renovation.name}</Link></h3>
+              <p>The whole job, managed by one team from start to finish.</p>
+            </div>
             {sections.map((s) => (
               <div className="item" key={s.slug} style={{ "--c": s.color } as React.CSSProperties}>
                 <h3><Link href={`/services/${s.slug}`}>{s.name}</Link></h3>

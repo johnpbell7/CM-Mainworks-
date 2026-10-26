@@ -1,7 +1,11 @@
+import type { IllustrationKind } from "@/components/Illustration";
+
 // Business details and sections. Mirrors brand/tokens.ts; keep the two in step.
 export const business = {
   name: "CM MainWorks",
   descriptor: "Carpentry & Construction",
+  /** The main offer, used in titles and schema */
+  pitch: "Full home renovations, managed by one team from start to finish",
   owner: "Connor",
   phoneDisplay: "07742 135592",
   phoneHref: "tel:+447742135592",
@@ -27,75 +31,123 @@ export const business = {
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cm-mainworks.vercel.app";
 
-export type SectionSlug = "carpentry" | "building" | "joinery" | "decorating";
+export type SectionSlug =
+  | "extensions" | "kitchens" | "bathrooms" | "staircases" | "roofing" | "flooring-and-tiling"
+  | "carpentry" | "joinery" | "decorating";
+
+/** What people pick in the quote form. Each service maps to one. */
+export const jobTypes = [
+  "Full renovation", "Extension", "Kitchen", "Bathroom", "Stairs", "Floors and tiling", "Roofing",
+  "Doors, skirting and carpentry", "Joinery", "Decorating", "Something else",
+] as const;
+export type JobType = (typeof jobTypes)[number];
 
 export type Section = {
   slug: SectionSlug;
   name: string;
+  /** "renovation" = the main work; "smaller" = trades Connor also takes on as single jobs */
+  group: "renovation" | "smaller";
   /** CSS variable for the section colour, e.g. var(--oak) */
   color: string;
   /** CSS variable for the highlighter tint */
   tint: string;
   /** Highlighter name used by .hl[data-pen] */
   pen: "oak" | "steel" | "sage" | "brick";
+  illo: IllustrationKind;
+  job: JobType;
   blurb: string;
   intro: string;
-  examples: string[];
 };
+
+const oak = { color: "var(--oak)", tint: "var(--t-oak)", pen: "oak" } as const;
+const steel = { color: "var(--steel)", tint: "var(--t-steel)", pen: "steel" } as const;
+const sage = { color: "var(--sage)", tint: "var(--t-sage)", pen: "sage" } as const;
+const brick = { color: "var(--brick)", tint: "var(--t-brick)", pen: "brick" } as const;
 
 export const sections: Section[] = [
   {
-    slug: "carpentry",
-    pen: "oak",
+    slug: "extensions", ...brick, group: "renovation", illo: "building", job: "Extension",
+    name: "Extensions",
+    blurb: "Single-storey and kitchen extensions, knock-throughs and more room to live in.",
+    intro: "More space without moving house. I plan it with you, build it and finish it inside, so you’re handed a room, not a shell.",
+  },
+  {
+    slug: "kitchens", ...sage, group: "renovation", illo: "kitchen", job: "Kitchen",
+    name: "Kitchens",
+    blurb: "Old kitchen out, new one in, and the room finished properly around it.",
+    intro: "From stripping the old one out to the last bit of tiling, your kitchen is handled by one team, so it comes together without the usual chasing.",
+  },
+  {
+    slug: "bathrooms", ...steel, group: "renovation", illo: "bathroom", job: "Bathroom",
+    name: "Bathrooms",
+    blurb: "Full bathroom renovations, from strip-out to tiling and the final seal.",
+    intro: "A bathroom has a lot of trades squeezed into a small room. I organise all of them, so you get a finished bathroom, not five separate appointments.",
+  },
+  {
+    slug: "staircases", ...oak, group: "renovation", illo: "stairs", job: "Stairs",
+    name: "Stairs, doors and skirting",
+    blurb: "Staircases, internal doors, skirting and architrave, fitted to last.",
+    intro: "The joinery that makes a house feel finished: a solid staircase, doors that close properly and skirting and architrave that sit tight.",
+  },
+  {
+    slug: "roofing", ...steel, group: "renovation", illo: "roof", job: "Roofing",
+    name: "Roofing",
+    blurb: "Roof repairs, new roofs on extensions, and the fascias and guttering around them.",
+    intro: "A sound roof over the work, whether that’s a repair after a storm or a new roof as part of an extension.",
+  },
+  {
+    slug: "flooring-and-tiling", ...brick, group: "renovation", illo: "flooring", job: "Floors and tiling",
+    name: "Floors and tiling",
+    blurb: "Wood, laminate and tiled floors, and wall tiling for kitchens and bathrooms.",
+    intro: "Floors laid flat and tiles set straight, with the preparation underneath done properly so they stay that way.",
+  },
+  {
+    slug: "carpentry", ...oak, group: "smaller", illo: "carpentry", job: "Doors, skirting and carpentry",
     name: "Carpentry",
-    color: "var(--oak)",
-    tint: "var(--t-oak)",
-    blurb: "Internal doors, skirting, staircases, kitchens and fitted wardrobes.",
-    intro: "Doors, skirting, stairs and kitchens, fitted so they sit right and stay right. The woodwork you only notice when it’s wrong.",
-    examples: ["Internal doors hung and adjusted", "Skirting, architrave and trims", "Staircases and spindles", "Kitchen fitting", "Fitted wardrobes", "Oak-framed garden canopies and outdoor structures"],
+    blurb: "Doors hung, skirting fixed, the odd job that’s been bugging you for months.",
+    intro: "One door that sticks is as welcome as a whole house of new ones. Small carpentry jobs, done the same way as the big ones.",
   },
   {
-    slug: "building",
-    pen: "steel",
-    name: "Building",
-    color: "var(--steel)",
-    tint: "var(--t-steel)",
-    blurb: "Extensions, structural alterations and renovations.",
-    intro: "Extensions, knock-throughs and renovations. I plan them with you and run them myself, start to finish.",
-    examples: ["Extensions", "Knocking through and structural alterations", "Full renovations", "Bathroom refits", "Landscaping and outdoor projects"],
-  },
-  {
-    slug: "joinery",
-    pen: "sage",
+    slug: "joinery", ...sage, group: "smaller", illo: "joinery", job: "Joinery",
     name: "Joinery",
-    color: "var(--sage)",
-    tint: "var(--t-sage)",
     blurb: "Made-to-fit media walls, alcove units, shelving and storage.",
     intro: "Media walls, alcove units and storage, built for your room rather than flat-pack that nearly fits.",
-    examples: ["Media walls", "Alcove units", "Shelving", "Under-stairs storage"],
   },
   {
-    slug: "decorating",
-    pen: "brick",
+    slug: "decorating", ...brick, group: "smaller", illo: "decorating", job: "Decorating",
     name: "Decorating",
-    color: "var(--brick)",
-    tint: "var(--t-brick)",
-    blurb: "Painting and finishing, right through to the last coat.",
+    blurb: "Painting and finishing, a single room or the whole house.",
     intro: "The bit everyone sees, with the prep done properly underneath so it lasts.",
-    examples: ["Painting walls, ceilings and woodwork", "Filling and preparation", "Flooring and finishing after building work"],
   },
 ];
 
-export const jobTypes = ["Carpentry", "Building", "Joinery", "Decorating", "Something else"] as const;
-export type JobType = (typeof jobTypes)[number];
+export const renovationServices = sections.filter((s) => s.group === "renovation");
+export const smallerServices = sections.filter((s) => s.group === "smaller");
+
+/** The full-renovation offer has its own page and uses brand gold. */
+export const renovation = {
+  name: "Full renovations",
+  href: "/renovations",
+  color: "var(--gold)",
+  tint: "var(--t-gold)",
+  illo: "renovation" as IllustrationKind,
+  job: "Full renovation" as JobType,
+};
 
 export function getSection(slug: string) {
   return sections.find((s) => s.slug === slug);
 }
 
+/** Colour for a job type (used by the quote form). */
+export function jobColor(j: JobType | "") {
+  if (j === renovation.job) return renovation.color;
+  return sections.find((s) => s.job === j)?.color ?? "var(--gold)";
+}
+
 export const nav = [
+  { href: "/renovations", label: "Renovations" },
   { href: "/services", label: "Services" },
+  { href: "/prices", label: "Prices" },
   { href: "/projects", label: "Recent work" },
   { href: "/about", label: "About" },
-  { href: "/faqs", label: "FAQs" },
 ] as const;

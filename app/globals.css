@@ -115,6 +115,9 @@ ul, ol { margin: 0; padding: 0; }
   transition: background .2s var(--ease), border-color .2s var(--ease), transform .15s var(--ease);
 }
 .btn:active { transform: scale(.985); }
+.btn svg { flex: none; width: 1.1em; height: 1.1em; transition: transform .3s var(--ease); }
+.btn:hover svg { transform: translateX(3px); }
+.row-links .btn { white-space: nowrap; }
 .btn-gold { background: var(--gold); color: var(--ink); }
 .btn-gold:hover { background: var(--gold-hover); }
 .btn-line { background: transparent; border-color: var(--line-2); color: var(--ink); }
@@ -618,6 +621,80 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .sec:not(.grey) .factors li { background: var(--grey); }
 .factors li::before { content: counter(f, decimal-leading-zero); font-weight: 700; color: var(--c, var(--gold-ink)); font-variant-numeric: tabular-nums; }
 
+/* ---------- one team: the four benefits ---------- */
+.benefits { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(28px, 3.2vw, 48px); }
+.benefits li { display: flex; flex-direction: column; }
+.benefit-ico { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: var(--pen); color: color-mix(in srgb, var(--c) 72%, var(--ink)); }
+.benefit-ico svg { width: 28px; height: 28px; }
+.benefits h3 { font-size: 1.35rem; letter-spacing: -.025em; line-height: 1.2; margin: 22px 0 10px; }
+.benefits p { color: var(--ink-2); }
+
+/* ---------- full renovation feature (home and services) ---------- */
+.feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 80px); align-items: center; margin-bottom: clamp(48px, 6vw, 88px); }
+.feature .ph { aspect-ratio: 5 / 4; background: var(--pen); }
+.feature h3 { font-size: clamp(2rem, 3.4vw, 3rem); letter-spacing: -.04em; line-height: 1.05; margin-bottom: 18px; }
+.feature > div > p { color: var(--ink-2); font-size: 1.12rem; max-width: 46ch; }
+.feature .ticks { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; margin-top: 22px; }
+.feature .row-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 30px; }
+.services.six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: clamp(40px, 4.5vw, 64px); }
+.services.six .service .ph { aspect-ratio: 4 / 3; }
+
+/* smaller jobs: three plain rows */
+.smaller { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); }
+.smaller a { display: block; padding: 24px 0 28px; border-top: 2px solid var(--c); text-decoration: none; }
+.smaller h3 { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 1.35rem; letter-spacing: -.02em; }
+.smaller h3 svg { width: 20px; height: 20px; flex: none; transition: transform .3s var(--ease); }
+.smaller a:hover h3 svg { transform: translateX(4px); }
+.smaller p { color: var(--ink-2); margin-top: 8px; }
+
+/* ---------- prices ---------- */
+.pkgs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+.pkgs.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pkg { display: flex; flex-direction: column; padding: clamp(24px, 2.8vw, 40px); border-radius: 20px; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--c); }
+.sec:not(.grey) .pkg { background: var(--grey); border-color: transparent; border-top-color: var(--c); }
+.pkg h2, .pkg h3 { font-size: clamp(1.5rem, 2.2vw, 1.9rem); letter-spacing: -.03em; line-height: 1.15; }
+.from { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 14px; }
+.from span { font-size: .95rem; font-weight: 600; color: var(--ink-2); }
+.from strong { font-size: clamp(1.8rem, 2.6vw, 2.3rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
+.from.tbc strong { color: var(--ink-2); font-size: clamp(1.2rem, 1.7vw, 1.4rem); font-weight: 600; letter-spacing: -.01em; border-bottom: 2px dashed var(--line-2); }
+.pkg-sum { color: var(--ink-2); margin-top: 14px; }
+.pkg .ticks { margin-top: 18px; }
+.pkg .ticks li { padding: 11px 0; font-size: .98rem; }
+.pkg-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; margin-top: auto; padding-top: 26px; }
+.pkg-more { color: var(--ink-2); font-weight: 600; text-underline-offset: 4px; }
+.pkg-more:hover { color: var(--ink); }
+.price-rows { list-style: none; border-top: 1px solid var(--line); }
+.price-rows li { border-bottom: 1px solid var(--line); }
+.price-rows a { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 6px 18px; align-items: center; padding: 20px 0; text-decoration: none; }
+.price-rows a::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
+.price-rows h3 { font-size: 1.2rem; letter-spacing: -.02em; }
+.price-rows p { grid-column: 2; color: var(--ink-2); font-size: .98rem; }
+.price-rows .from { grid-column: 3; grid-row: 1 / span 2; margin: 0; justify-content: flex-end; text-align: right; }
+.price-rows .from strong { font-size: 1.35rem; }
+.price-rows .from.tbc strong { font-size: 1rem; }
+.price-rows a:hover h3 { color: var(--gold-ink); }
+.price-note { margin-top: 28px; color: var(--ink-2); max-width: 70ch; }
+
+/* ---------- renovations: the usual way vs one team ---------- */
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+.compare > div { padding: clamp(24px, 3vw, 44px); border-radius: 20px; background: #fff; }
+.sec:not(.grey) .compare > div { background: var(--grey); }
+.compare h3 { font-size: 1.45rem; letter-spacing: -.03em; margin-bottom: 14px; }
+.compare ul { list-style: none; display: grid; }
+.compare li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); }
+.compare li svg { width: 22px; height: 22px; margin-top: 1px; }
+.compare .usual li { color: var(--ink-2); }
+.compare .usual svg { color: var(--ink-2); }
+.compare .ours { box-shadow: inset 0 0 0 2px var(--gold); }
+.compare .ours svg { color: var(--gold-ink); }
+
+/* ---------- renovations: how it runs ---------- */
+.timeline { list-style: none; counter-reset: t; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3vw, 44px) clamp(24px, 3.4vw, 52px); }
+.timeline li { counter-increment: t; padding-top: 22px; border-top: 2px solid var(--line-2); }
+.timeline li::before { content: counter(t, decimal-leading-zero); display: block; font-weight: 700; color: var(--gold-ink); font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+.timeline h3 { font-size: 1.3rem; letter-spacing: -.02em; margin-bottom: 8px; }
+.timeline p { color: var(--ink-2); }
+
 /* ---------- footer ---------- */
 .foot { border-top: 1px solid var(--line); padding: clamp(56px, 7vw, 88px) 0 calc(28px + env(safe-area-inset-bottom, 0px)); font-size: .95rem; }
 .foot-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr) minmax(0, 1.5fr) minmax(0, .9fr); gap: 40px clamp(24px, 4vw, 56px); }
@@ -701,6 +778,11 @@ html.js.intro-on { overflow: hidden; }
   .contact-grid { grid-template-columns: minmax(0, 1fr); }
   .items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .closing .big-badge { display: none; }
+  .benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feature { grid-template-columns: minmax(0, 1fr); }
+  .services.six { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pkgs.three { grid-template-columns: minmax(0, 1fr); }
+  .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 720px) {
@@ -796,6 +878,15 @@ html.js.intro-on { overflow: hidden; }
 
   .svc-row { grid-template-columns: minmax(0, 1fr); }
   .items { grid-template-columns: minmax(0, 1fr); }
+  .benefits { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .benefits li { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: 18px; }
+  .benefit-ico { width: 52px; height: 52px; grid-row: 1 / span 2; }
+  .benefits h3 { margin: 4px 0 6px; font-size: 1.2rem; }
+  .feature .ticks { grid-template-columns: minmax(0, 1fr); }
+  .services.six .service { flex: 0 0 78%; }
+  .smaller, .pkgs, .compare, .timeline { grid-template-columns: minmax(0, 1fr); }
+  .price-rows a { grid-template-columns: 12px minmax(0, 1fr); }
+  .price-rows .from { grid-column: 2; grid-row: auto; justify-content: flex-start; text-align: left; margin-top: 6px; }
       .facts li { grid-template-columns: 1fr; gap: 2px; }
   .svc-row:nth-child(even) .ph { order: 0; }
   .proj-grid { grid-template-columns: minmax(0, 1fr); }

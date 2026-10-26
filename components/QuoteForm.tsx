@@ -2,14 +2,13 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { business, jobTypes, sections, type JobType } from "@/content/site";
+import { business, jobColor, jobTypes, type JobType } from "@/content/site";
 import { MAX_PHOTOS, formatPostcode, ruleKeys, rules, type RuleKey } from "@/lib/validation";
 import { Alert, Arrow, Camera, ChevronDown, Cross } from "./Icons";
 
 type Pic = { file: File; url: string };
 type Status = "idle" | "sending" | "sent";
 
-const jobColor = (j: JobType) => sections.find((s) => s.name === j)?.color ?? "var(--gold)";
 
 /** Resize a photo in the browser so uploads stay small (long edge 1600px, JPEG). */
 async function shrink(file: File): Promise<Blob> {

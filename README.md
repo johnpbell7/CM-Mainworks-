@@ -26,14 +26,15 @@ Every photo slot lives in `content/media.ts` and `content/projects.ts`. Drop the
 
 ## Voice
 
-The whole site is written in Connor’s own voice (I, me, my), in plain British English. Keep new copy the same: short sentences, real situations, no prices, insurance or claims he hasn’t confirmed.
+The whole site is written in Connor’s own voice (I, me, my), in plain British English. Keep new copy the same: friendly, open and plain, with short sentences and real situations. The main pitch is full renovations run by one team (less stress, competitive prices, one point of contact); smaller jobs are still welcome. No prices or claims he hasn’t confirmed.
 
 ## SEO
 
 - Every page sets a unique title, description, canonical URL and social card through `pageMeta()` in `lib/seo.tsx`, and has exactly one H1.
 - Structured data: `HomeAndConstructionBusiness` site-wide, plus `Service`, `FAQPage` and `BreadcrumbList` where they apply.
 - Town pages live in `content/areas.ts` (served at `/areas/[slug]`). Each has its own copy; add a town there and it appears in the footer, the sitemap and the Areas page.
-- Service page copy lives in `content/services.ts`.
+- Service page copy lives in `content/services.ts`; the list of services (renovation and smaller jobs) is in `content/site.ts`.
+- `/renovations` is the main pitch page. `/prices` reads `content/prices.ts`, where every `from` is `null` (shown as “£ to confirm”) until Connor gives real figures.
 - Placeholder projects are kept out of the projects page, the sitemap and search until real photos replace them.
 
 ## Where things live
@@ -59,8 +60,13 @@ The source page is `/logo-animation`. It isn’t linked from the site and isn’
 - He’s insured.
 - He brings in labourers he trusts on bigger jobs, and runs the job himself.
 - He covers the wider Midlands, including Birmingham, Solihull, Leicester and Redditch.
+- Main focus is full renovations, managed by him with one team: kitchens, bathrooms, roofs, floors, stairs, skirting, architrave, tiling and extensions (via John, Oct 2026).
 
 ## Still to confirm with Connor
+
+- “From” prices for every package and room-by-room job in `content/prices.ts`.
+- Which specialist trades he organises (electrics, plumbing, plastering, gas) and exactly what roofing work he takes on.
+- Package contents on `/prices`, including help with plans and approvals for extensions.
 
 - Over 10 years’ experience (taken from his pinned Facebook post).
 - About copy, FAQ answers and the privacy policy wording (all drafts).

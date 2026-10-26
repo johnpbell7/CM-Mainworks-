@@ -3,7 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // The areas overview page was removed; the town pages are linked from the footer.
   async redirects() {
-    return [{ source: "/areas", destination: "/", permanent: true }];
+    return [
+      { source: "/areas", destination: "/", permanent: true },
+      // Building work became its own Extensions page in the renovation rework
+      { source: "/services/building", destination: "/services/extensions", permanent: true },
+    ];
   },
   images: {
     formats: ["image/avif", "image/webp"],

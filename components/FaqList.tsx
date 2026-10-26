@@ -1,7 +1,7 @@
 import type { Faq } from "@/content/faqs";
-import { sections } from "@/content/site";
+import { renovation, sections } from "@/content/site";
 
-const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
+const colorOf = (slug: string) => sections.find((s) => s.slug === slug)?.color ?? renovation.color;
 
 /** Tap-to-open questions. Native <details>, so it works without JavaScript. */
 export default function FaqList({ faqs, headingLevel = 3 }: { faqs: Faq[]; headingLevel?: 2 | 3 }) {

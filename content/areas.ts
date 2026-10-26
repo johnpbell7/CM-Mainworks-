@@ -32,9 +32,9 @@ export const areas: Area[] = [
     group: "local",
     name: "Lichfield",
     where: "Home ground",
-    title: "Carpenter and builder in Lichfield",
+    title: "Builder and home renovations in Lichfield",
     description:
-      "I’m Connor, a Lichfield carpenter, joiner, builder and decorator. Based in the city, working right across it. Send me a few photos for a free written quote.",
+      "I’m Connor. Full home renovations, extensions, kitchens and bathrooms in Lichfield, managed by one team from start to finish. Free written quotes.",
     intro:
       "CM MainWorks is based in Lichfield, so this is home ground. I work right across the city, from the older streets around the cathedral and Beacon Park to Boley Park, Darwin Park, Netherstowe and everywhere in between.",
     local:
@@ -43,7 +43,7 @@ export const areas: Area[] = [
       { service: "carpentry", text: "Doors, skirting and staircases, including in older houses where nothing is quite square." },
       { service: "joinery", text: "Alcove units and media walls built around chimney breasts and awkward corners." },
       { service: "decorating", text: "Timber and bay windows repaired and repainted, inside and out." },
-      { service: "building", text: "Extensions, knock-throughs and renovations, run by me from start to finish." },
+      { service: "extensions", text: "Extensions, knock-throughs and renovations, run by me from start to finish." },
     ],
     faqs: [
       { q: "Are you actually based in Lichfield?", a: "Yes. CM MainWorks is a Lichfield business, so most jobs in the city are a short drive away." },
@@ -56,16 +56,16 @@ export const areas: Area[] = [
     group: "local",
     name: "Burntwood",
     where: "About four miles west of Lichfield",
-    title: "Carpenter and builder in Burntwood",
+    title: "Builder and home renovations in Burntwood",
     description:
-      "Carpentry, building, joinery and decorating in Burntwood, Chase Terrace and Chasetown. I’m Connor, based just down the road in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Burntwood, Chase Terrace and Chasetown. I’m Connor, based just down the road in Lichfield. Free written quotes.",
     intro:
       "Burntwood is about four miles west of Lichfield, a straight run along the A5190, so it’s well within my patch. I cover the whole town, including Chase Terrace, Chasetown, Boney Hay and the roads out towards Chasewater.",
     local:
       "A lot of Burntwood went up between the 1960s and the 80s. Those houses are solid but often tired inside, so the jobs tend to be similar: swapping dated doors and skirting all the way through, refitting a kitchen, or adding a single-storey extension at the back for a proper kitchen-diner.",
     focus: [
       { service: "carpentry", text: "New internal doors, skirting and architrave right through the house." },
-      { service: "building", text: "Rear and kitchen extensions, and opening up the downstairs." },
+      { service: "extensions", text: "Rear and kitchen extensions, and opening up the downstairs." },
       { service: "joinery", text: "Media walls and alcove units for the living room." },
       { service: "decorating", text: "Finishing rooms after the building work, so the whole job’s done." },
     ],
@@ -80,15 +80,15 @@ export const areas: Area[] = [
     group: "midlands",
     name: "Tamworth",
     where: "About seven miles south-east of Lichfield",
-    title: "Carpenter and builder in Tamworth",
+    title: "Builder and home renovations in Tamworth",
     description:
-      "Carpentry, building, joinery and decorating in Tamworth, Wilnecote, Amington and Fazeley. I’m Connor, based in nearby Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Tamworth, Wilnecote, Amington and Fazeley. I’m Connor, based in nearby Lichfield. Free written quotes.",
     intro:
       "Tamworth is about seven miles south-east of Lichfield along the A51, and I cover the whole town. That takes in Wilnecote, Amington, Glascote, Belgrave, Fazeley and the estates in between.",
     local:
       "There’s a bit of everything in Tamworth. Older terraces near the castle and town centre, and big estates built from the 60s onwards as the town grew. Extensions, kitchen refits and storage that makes better use of smaller rooms come up a lot.",
     focus: [
-      { service: "building", text: "Extensions and renovations for families who’ve run out of room." },
+      { service: "extensions", text: "Extensions and renovations for families who’ve run out of room." },
       { service: "carpentry", text: "Kitchen fitting, new doors and staircase updates." },
       { service: "joinery", text: "Under-stairs storage and fitted wardrobes that use every bit of space." },
       { service: "decorating", text: "Painting and finishing, inside and out." },
@@ -104,9 +104,9 @@ export const areas: Area[] = [
     group: "midlands",
     name: "Sutton Coldfield",
     where: "About eight miles south of Lichfield",
-    title: "Carpenter and builder in Sutton Coldfield",
+    title: "Builder and home renovations in Sutton Coldfield",
     description:
-      "Carpentry, building, joinery and decorating in Sutton Coldfield, Four Oaks, Mere Green and Little Aston. I’m Connor, based in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Sutton Coldfield, Four Oaks, Mere Green and Little Aston. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Sutton Coldfield is about eight miles south of Lichfield, straight down the A5127. I cover the town, including Four Oaks, Mere Green and Little Aston.",
     local:
@@ -115,7 +115,7 @@ export const areas: Area[] = [
       { service: "joinery", text: "Alcove units and bookcases that suit a period room." },
       { service: "carpentry", text: "Staircase repairs, spindles and handrails, and panelled doors." },
       { service: "decorating", text: "Bay and sash windows repaired, filled and repainted." },
-      { service: "building", text: "Kitchen extensions and knock-throughs." },
+      { service: "extensions", text: "Kitchen extensions and knock-throughs." },
     ],
     faqs: [
       { q: "Do you cover Four Oaks and Mere Green?", a: "Yes, along with Little Aston and the rest of Sutton Coldfield." },
@@ -128,9 +128,9 @@ export const areas: Area[] = [
     group: "local",
     name: "Shenstone",
     where: "About three miles south of Lichfield",
-    title: "Carpenter and builder in Shenstone",
+    title: "Builder and home renovations in Shenstone",
     description:
-      "Carpentry, building, joinery and decorating in Shenstone, Stonnall and Little Hay. I’m Connor, just up the road in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Shenstone, Stonnall and Little Hay. I’m Connor, just up the road in Lichfield. Free written quotes.",
     intro:
       "Shenstone is about three miles south of Lichfield, so it’s practically on my doorstep. I also cover the villages around it, including Stonnall, Lower Stonnall and Little Hay.",
     local:
@@ -139,7 +139,7 @@ export const areas: Area[] = [
       { service: "carpentry", text: "Oak-framed garden canopies, doors and staircases." },
       { service: "decorating", text: "Timber windows and woodwork repaired and repainted." },
       { service: "joinery", text: "Fitted wardrobes and alcove units." },
-      { service: "building", text: "Extensions and renovations." },
+      { service: "extensions", text: "Extensions and renovations." },
     ],
     faqs: [
       { q: "Do you cover Stonnall and Little Hay?", a: "Yes. They’re all within a few miles of Lichfield." },
@@ -152,9 +152,9 @@ export const areas: Area[] = [
     group: "local",
     name: "Whittington",
     where: "About three miles east of Lichfield",
-    title: "Carpenter and builder in Whittington",
+    title: "Builder and home renovations in Whittington",
     description:
-      "Carpentry, building, joinery and decorating in Whittington, Hopwas, Huddlesford and Fisherwick. I’m Connor, based in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Whittington, Hopwas, Huddlesford and Fisherwick. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Whittington is about three miles east of Lichfield, on the way to Tamworth. I cover the village along with Hopwas, Huddlesford and Fisherwick.",
     local:
@@ -162,12 +162,12 @@ export const areas: Area[] = [
     focus: [
       { service: "carpentry", text: "Doors, staircases, and outdoor timber like canopies and pergolas." },
       { service: "joinery", text: "Built-in storage and media walls." },
-      { service: "building", text: "Extensions and alterations." },
+      { service: "extensions", text: "Extensions and alterations." },
       { service: "decorating", text: "Inside and outside painting." },
     ],
     faqs: [
       { q: "Do you cover Hopwas and Huddlesford?", a: "Yes, and Fisherwick too. They’re all a short drive from Lichfield." },
-      { q: "Can you do the inside and outside on the same job?", a: "Yes. I cover carpentry, building, joinery and decorating, so one person can do both." },
+      { q: "Can you do the inside and outside on the same job?", a: "Yes. I manage the whole job with one team, so it’s all handled together." },
     ],
     nearby: ["lichfield", "fradley", "tamworth", "shenstone"],
   },
@@ -176,9 +176,9 @@ export const areas: Area[] = [
     group: "local",
     name: "Fradley",
     where: "About four miles north-east of Lichfield",
-    title: "Carpenter and builder in Fradley",
+    title: "Builder and home renovations in Fradley",
     description:
-      "Carpentry, building, joinery and decorating in Fradley, Alrewas and Streethay. Fitted wardrobes, media walls and door upgrades. I’m Connor, based in Lichfield.",
+      "Full renovations, extensions, kitchens and bathrooms in Fradley, Alrewas and Streethay. Fitted wardrobes, media walls and door upgrades. I’m Connor, based in Lichfield.",
     intro:
       "Fradley is about four miles north-east of Lichfield, near the canal junction. I cover the village, the newer estates around it, and nearby Alrewas and Streethay.",
     local:
@@ -186,7 +186,7 @@ export const areas: Area[] = [
     focus: [
       { service: "joinery", text: "Media walls, fitted wardrobes and under-stairs storage." },
       { service: "carpentry", text: "Upgraded internal doors and garden canopies." },
-      { service: "building", text: "Extensions and renovations to add more space." },
+      { service: "extensions", text: "Extensions and renovations to add more space." },
       { service: "decorating", text: "Feature walls and full redecoration." },
     ],
     faqs: [
@@ -200,15 +200,15 @@ export const areas: Area[] = [
     name: "Walsall",
     group: "midlands",
     where: "About nine miles south-west of Lichfield",
-    title: "Carpenter and builder in Walsall",
+    title: "Builder and home renovations in Walsall",
     description:
-      "Carpentry, building, joinery and decorating in Walsall, Aldridge, Pelsall and Bloxwich. I’m Connor, based up the road in Lichfield. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Walsall, Aldridge, Pelsall and Bloxwich. I’m Connor, based up the road in Lichfield. Insured, free written quotes.",
     intro:
       "Walsall is about nine miles south-west of Lichfield, and I cover the town and the areas around it, including Aldridge, Pelsall, Bloxwich, Rushall and Walsall Wood.",
     local:
       "Walsall has a real mix: Victorian terraces close to the town centre, interwar semis, and big post-war estates further out. Kitchen refits, knocking through to open up the back of the house, and new doors throughout are the kind of jobs that suit a lot of homes round there.",
     focus: [
-      { service: "building", text: "Knock-throughs, rear extensions and full renovations." },
+      { service: "extensions", text: "Knock-throughs, rear extensions and full renovations." },
       { service: "carpentry", text: "Kitchen fitting, internal doors and staircases." },
       { service: "joinery", text: "Media walls and alcove units." },
       { service: "decorating", text: "Finishing rooms properly once the work’s done." },
@@ -224,15 +224,15 @@ export const areas: Area[] = [
     name: "Cannock",
     group: "midlands",
     where: "About eight miles west of Lichfield",
-    title: "Carpenter and builder in Cannock",
+    title: "Builder and home renovations in Cannock",
     description:
-      "Carpentry, building, joinery and decorating in Cannock, Hednesford, Heath Hayes and Norton Canes. I’m Connor, based in Lichfield. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Cannock, Hednesford, Heath Hayes and Norton Canes. I’m Connor, based in Lichfield. Insured, free written quotes.",
     intro:
       "Cannock is about eight miles west of Lichfield, on the edge of Cannock Chase. I cover the town along with Hednesford, Heath Hayes, Norton Canes and Huntington.",
     local:
       "A lot of Cannock’s housing is post-war and newer estate homes, with plenty of houses now ready for a kitchen refit, an extension or new doors throughout. Being next to the Chase, garden canopies and outdoor timber come up a fair bit too.",
     focus: [
-      { service: "building", text: "Extensions and renovations to get more space." },
+      { service: "extensions", text: "Extensions and renovations to get more space." },
       { service: "carpentry", text: "Internal doors, skirting and garden canopies." },
       { service: "joinery", text: "Fitted wardrobes and under-stairs storage." },
       { service: "decorating", text: "Inside and outside painting." },
@@ -248,9 +248,9 @@ export const areas: Area[] = [
     name: "Burton upon Trent",
     group: "midlands",
     where: "About eleven miles north-east of Lichfield",
-    title: "Carpenter and builder in Burton upon Trent",
+    title: "Builder and home renovations in Burton upon Trent",
     description:
-      "Carpentry, building, joinery and decorating in Burton upon Trent, Stapenhill, Winshill and Branston. I’m Connor, based in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Burton upon Trent, Stapenhill, Winshill and Branston. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Burton upon Trent is about eleven miles north-east of Lichfield, straight up the A38. I cover the town, including Stapenhill, Winshill, Horninglow and Branston.",
     local:
@@ -258,7 +258,7 @@ export const areas: Area[] = [
     focus: [
       { service: "carpentry", text: "Doors, skirting and staircase repairs in older terraces." },
       { service: "joinery", text: "Alcove units, media walls and fitted wardrobes." },
-      { service: "building", text: "Knock-throughs, extensions and renovations." },
+      { service: "extensions", text: "Knock-throughs, extensions and renovations." },
       { service: "decorating", text: "Full redecoration, inside and out." },
     ],
     faqs: [
@@ -272,15 +272,15 @@ export const areas: Area[] = [
     name: "Birmingham",
     group: "midlands",
     where: "About fifteen miles south-west of Lichfield",
-    title: "Carpenter and builder in Birmingham",
+    title: "Builder and home renovations in Birmingham",
     description:
-      "Carpentry, building, joinery and decorating across Birmingham, from Erdington and Great Barr to Moseley and Harborne. I’m Connor. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms across Birmingham, from Erdington and Great Barr to Moseley and Harborne. I’m Connor. Insured, free written quotes.",
     intro:
       "Birmingham is about fifteen miles south-west of Lichfield, down the A38. I work across the city, from Erdington, Kingstanding and Great Barr in the north to Moseley, Kings Heath and Harborne.",
     local:
       "Birmingham has every kind of house going. Victorian and Edwardian terraces with original doors, stairs and bay windows, 1930s semis that are ready for an extension, and newer flats and town houses that need storage built in. Bigger jobs here are where I bring in a labourer or two to keep things moving.",
     focus: [
-      { service: "building", text: "Rear extensions, knock-throughs and full renovations." },
+      { service: "extensions", text: "Rear extensions, knock-throughs and full renovations." },
       { service: "joinery", text: "Alcove units and media walls in period living rooms." },
       { service: "carpentry", text: "Staircases, panelled doors and kitchen fitting." },
       { service: "decorating", text: "Bay windows and woodwork repaired and repainted." },
@@ -296,15 +296,15 @@ export const areas: Area[] = [
     name: "Solihull",
     group: "midlands",
     where: "About nineteen miles south of Lichfield",
-    title: "Carpenter and builder in Solihull",
+    title: "Builder and home renovations in Solihull",
     description:
-      "Carpentry, building, joinery and decorating in Solihull, Shirley, Knowle, Dorridge and Olton. I’m Connor. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Solihull, Shirley, Knowle, Dorridge and Olton. I’m Connor. Insured, free written quotes.",
     intro:
       "Solihull is about nineteen miles south of Lichfield, and I cover the town and the villages around it, including Shirley, Olton, Knowle, Dorridge and Hockley Heath.",
     local:
       "Solihull is mostly interwar semis and bigger detached houses, with Knowle and Dorridge leaning towards the larger end. That means a lot of kitchen extensions, knock-throughs, fitted wardrobes and media walls, done to a high finish.",
     focus: [
-      { service: "building", text: "Kitchen extensions and opening up the back of the house." },
+      { service: "extensions", text: "Kitchen extensions and opening up the back of the house." },
       { service: "joinery", text: "Media walls, fitted wardrobes and built-in storage." },
       { service: "carpentry", text: "New internal doors, skirting and staircases." },
       { service: "decorating", text: "A proper finish once the building work’s done." },
@@ -320,15 +320,15 @@ export const areas: Area[] = [
     name: "Redditch",
     group: "midlands",
     where: "About twenty-five miles south of Lichfield",
-    title: "Carpenter and builder in Redditch",
+    title: "Builder and home renovations in Redditch",
     description:
-      "Carpentry, building, joinery and decorating in Redditch, Headless Cross, Webheath and Matchborough. I’m Connor. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Redditch, Headless Cross, Webheath and Matchborough. I’m Connor. Insured, free written quotes.",
     intro:
       "Redditch is about twenty-five miles south of Lichfield, on the Worcestershire side of Birmingham. I cover the whole town, including Headless Cross, Webheath, Matchborough, Winyates and Church Hill.",
     local:
       "Much of Redditch was built as a new town in the 60s, 70s and 80s, so a lot of houses share the same layouts and the same jobs: knocking through downstairs, replacing original doors and skirting, and building in storage where those designs never had any.",
     focus: [
-      { service: "building", text: "Knock-throughs and extensions for more living space." },
+      { service: "extensions", text: "Knock-throughs and extensions for more living space." },
       { service: "carpentry", text: "Replacing original doors, skirting and architrave." },
       { service: "joinery", text: "Under-stairs storage and fitted wardrobes." },
       { service: "decorating", text: "Full redecoration after the work’s done." },
@@ -344,15 +344,15 @@ export const areas: Area[] = [
     name: "Leicester",
     group: "midlands",
     where: "About thirty miles east of Lichfield",
-    title: "Carpenter and builder in Leicester",
+    title: "Builder and home renovations in Leicester",
     description:
-      "Carpentry, building, joinery and decorating in Leicester, Oadby, Wigston and Birstall. I’m Connor. Insured, with labourers I trust on bigger jobs. Free quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Leicester, Oadby, Wigston and Birstall. I’m Connor. Insured, with labourers I trust on bigger jobs. Free quotes.",
     intro:
       "Leicester is about thirty miles east of Lichfield, along the A5 and M69. I cover the city and the areas around it, including Oadby, Wigston, Birstall, Glenfield and Braunstone.",
     local:
       "Leicester has streets of Victorian terraces in places like Clarendon Park and Westcotes, and plenty of interwar and post-war semis in the suburbs. Extensions, knock-throughs, built-in storage and doing up period features properly are all on the list.",
     focus: [
-      { service: "building", text: "Extensions and renovations, with labourers brought in when the job needs it." },
+      { service: "extensions", text: "Extensions and renovations, with labourers brought in when the job needs it." },
       { service: "carpentry", text: "Staircases, doors and kitchen fitting." },
       { service: "joinery", text: "Alcove units and bookcases in period rooms." },
       { service: "decorating", text: "Woodwork, windows and full redecoration." },

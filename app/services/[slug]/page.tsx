@@ -8,7 +8,7 @@ import Steps from "@/components/Steps";
 import FaqList from "@/components/FaqList";
 import Closing from "@/components/Closing";
 import { Arrow } from "@/components/Icons";
-import { getSection, sections, type JobType } from "@/content/site";
+import { getSection, renovation, sections } from "@/content/site";
 import { serviceContent } from "@/content/services";
 import { media } from "@/content/media";
 import { publishedProjects } from "@/content/projects";
@@ -37,6 +37,10 @@ export default async function Service({ params }: Props) {
   const name = s.name.toLowerCase();
   const [first, ...rest] = c.h1.split(" ");
   const faqs = c.faqs.map((f) => ({ ...f, color: s.slug }));
+  // keep white and grey sections alternating whichever optional blocks show
+  const showReno = s.slug !== "carpentry";
+  const renoGrey = work.length > 0;
+  const faqGrey = showReno ? !renoGrey : work.length > 0;
 
   return (
     <div style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
@@ -71,7 +75,7 @@ export default async function Service({ params }: Props) {
       <section className="sec" style={{ paddingTop: 0 }} aria-label={`About ${name}`}>
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
-            <Photo media={media[s.slug]} illo={s.slug} sizes="(max-width: 720px) 100vw, 50vw" priority />
+            <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div className="prose" data-reveal="up">
               {c.body.map((p) => <p key={p}>{p}</p>)}
               <p style={{ marginTop: 24 }}>
@@ -117,7 +121,10 @@ export default async function Service({ params }: Props) {
           <div className="faq-side" data-reveal="up">
             <h2 id="price-title">What affects the price</h2>
             <p>{c.price.intro}</p>
-            <Link className="link link-arrow" href="#quote">Get your free quote <Arrow /></Link>
+            <p style={{ display: "flex", flexWrap: "wrap", gap: "12px 26px" }}>
+              <Link className="link link-arrow" href="#quote">Get your free quote <Arrow /></Link>
+              <Link className="link" href="/prices">See my prices</Link>
+            </p>
           </div>
           <ol className="factors" data-reveal="stagger">
             {c.price.factors.map((f) => <li key={f}>{f}</li>)}
@@ -147,8 +154,27 @@ export default async function Service({ params }: Props) {
         </section>
       )}
 
+      {/* part of a bigger job? */}
+      {showReno && (
+        <section className={`sec${renoGrey ? " grey" : ""}`} aria-labelledby="reno-title" style={{ "--c": renovation.color, "--pen": renovation.tint } as React.CSSProperties}>
+          <div className="wrap">
+            <div className="feature" style={{ marginBottom: 0 }}>
+              <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 1080px) 100vw, 48vw" />
+              <div data-reveal="up">
+                <h2 id="reno-title" className="big-h">Part of a bigger project?</h2>
+                <p>{s.group === "renovation" ? `${s.name} are` : `${s.name} is`} often one piece of a wider renovation. I can manage the whole job with one team, so everything is planned together and you’ve only got one person to deal with.</p>
+                <div className="row-links">
+                  <Link className="btn btn-gold" href={renovation.href}>Full renovations <Arrow /></Link>
+                  <Link className="link" href="/prices">See prices</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* questions */}
-      <section className={`sec${work.length ? " grey" : ""}`} aria-labelledby="faq-title">
+      <section className={`sec${faqGrey ? " grey" : ""}`} aria-labelledby="faq-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">{s.name} questions</h2>
@@ -166,6 +192,7 @@ export default async function Service({ params }: Props) {
             <p className="big-p">Send me a few photos and a line about the job. I’ll take a look, come round if I need to, and send you a written quote.</p>
             <h3 className="sub-h" style={{ marginTop: 44 }}>Other services</h3>
             <ul className="ticks">
+              <li><Link href={renovation.href} style={{ textDecoration: "none", fontWeight: 600 }}>Full renovations</Link></li>
               {others.map((o) => (
                 <li key={o.slug} style={{ "--c": o.color } as React.CSSProperties}>
                   <Link href={`/services/${o.slug}`} style={{ textDecoration: "none", fontWeight: 600 }}>{o.name}</Link>
@@ -173,7 +200,7 @@ export default async function Service({ params }: Props) {
               ))}
             </ul>
           </div>
-          <QuoteForm defaultJob={s.name as JobType} />
+          <QuoteForm defaultJob={s.job} />
         </div>
       </section>
 

@@ -4,10 +4,13 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import QuoteForm from "@/components/QuoteForm";
 import BeforeAfter from "@/components/BeforeAfter";
-import { Arrow, Award, Pin, QuoteDoc, Shield } from "@/components/Icons";
+import { Arrow, Award, QuoteDoc, Shield, Team } from "@/components/Icons";
 import Closing from "@/components/Closing";
 import Steps from "@/components/Steps";
-import { business, sections } from "@/content/site";
+import Benefits from "@/components/Benefits";
+import PackageCard from "@/components/PackageCard";
+import { business, renovation, renovationServices, sections, smallerServices } from "@/content/site";
+import { packages } from "@/content/prices";
 import { media } from "@/content/media";
 import { projects } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
@@ -18,8 +21,8 @@ const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
 const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
 
 export const metadata: Metadata = pageMeta({
-  title: "Carpenter and builder in Lichfield | CM MainWorks",
-  description: "I’m Connor, an insured carpenter and builder in Lichfield covering the Midlands. Doors, stairs, kitchens, extensions and decorating. Free written quotes.",
+  title: "Home renovations in Lichfield and the Midlands | CM MainWorks",
+  description: "I’m Connor. Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and roofs. Insured, with free written quotes.",
   path: "/",
   absolute: true,
 });
@@ -36,41 +39,78 @@ export default function Home() {
         <div className="wrap">
           <div>
             <h1 id="hero-title" data-hero>
-              Carpentry and construction, <span className="hl">done properly.</span>
+              Your whole renovation, <span className="hl">one team.</span>
             </h1>
             <p className="lede" data-hero>
-              Doors, staircases, kitchens, fitted furniture and building work across Lichfield and the Midlands.
+              Kitchens, bathrooms, extensions and full home renovations across Lichfield and the Midlands, managed by me from start to finish.
             </p>
             <ul className="hero-meta" data-hero aria-label="At a glance">
+              <li><Team />One team, start to finish</li>
               <li><QuoteDoc />Free written quotes</li>
               <li><Shield />Insured</li>
               <li><Award />{business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade</li>
-              <li><Pin />Lichfield and {business.region}</li>
             </ul>
           </div>
-          <QuoteForm collapsible />
+          <QuoteForm collapsible defaultJob={renovation.job} />
         </div>
         <p className="hero-credit">Pictured: an oak-framed garden canopy I built</p>
       </section>
 
-      {/* ---------------- Services ---------------- */}
-      <section className="sec" id="services" aria-labelledby="svc-title">
+      {/* ---------------- Why one team ---------------- */}
+      <section className="sec" id="why" aria-labelledby="why-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up">
-              <h2 id="svc-title">Services</h2>
+              <h2 id="why-title">One team. Less stress.</h2>
             </div>
             <p data-reveal="up">
-              One door or a full extension, <span className="hl">I look after every job myself</span>, start to finish.
+              Renovating should be exciting, not a second job. <span className="hl">I manage the whole thing</span>, so you don’t have to.
             </p>
           </div>
-          <div className="services">
-            {sections.map((s, i) => (
+          <Benefits />
+        </div>
+      </section>
+
+      {/* ---------------- Renovations ---------------- */}
+      <section className="sec grey" id="services" aria-labelledby="svc-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="svc-title">What I can do for your home</h2>
+            </div>
+            <p data-reveal="up">
+              One room or the whole house, <span className="hl" data-pen="steel">planned with you</span> and finished properly.
+            </p>
+          </div>
+
+          <article className="feature" style={{ "--c": renovation.color, "--pen": renovation.tint } as React.CSSProperties}>
+            <Link href={renovation.href} tabIndex={-1} aria-hidden="true" className="card-img">
+              <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 1080px) 100vw, 48vw" />
+            </Link>
+            <div data-reveal="up">
+              <h3><Link href={renovation.href} style={{ textDecoration: "none" }}>Full home renovations</Link></h3>
+              <p>Everything you want doing, from the first plan to the final coat of paint. I run the job with one team and organise the specialist trades, so you have one person to talk to and one price to agree.</p>
+              <ul className="ticks">
+                <li>Kitchens and bathrooms</li>
+                <li>Extensions and knock-throughs</li>
+                <li>Floors, tiling and stairs</li>
+                <li>Doors, skirting and architrave</li>
+                <li>Roofing</li>
+                <li>Decorating, to the last coat</li>
+              </ul>
+              <div className="row-links">
+                <Link className="btn btn-gold" href={renovation.href}>How a renovation works <Arrow /></Link>
+                <Link className="link" href="/prices">See prices</Link>
+              </div>
+            </div>
+          </article>
+
+          <div className="services six">
+            {renovationServices.map((s) => (
               <article className="service" key={s.slug} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
                 <Link href={`/services/${s.slug}`} tabIndex={-1} aria-hidden="true" className="card-img">
-                  <Photo media={media[s.slug]} illo={s.slug} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 24vw" />
+                  <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
                 </Link>
-                <p className="num">0{i + 1}</p>
                 <h3>
                   <Link href={`/services/${s.slug}`}><span className="hl" data-pen={s.pen}>{s.name}</span></Link>
                 </h3>
@@ -82,8 +122,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------------- Smaller jobs ---------------- */}
+      <section className="sec" aria-labelledby="small-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="small-title">Smaller jobs, just as welcome</h2>
+            </div>
+            <p data-reveal="up">Renovations are my main work, but <span className="hl" data-pen="oak">one sticking door</span> still gets the same care.</p>
+          </div>
+          <div className="smaller" data-reveal="stagger">
+            {smallerServices.map((s) => (
+              <Link key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color } as React.CSSProperties}>
+                <h3>{s.name} <Arrow /></h3>
+                <p>{s.blurb}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- Prices ---------------- */}
+      <section className="sec grey" id="prices" aria-labelledby="price-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up">
+              <h2 id="price-title">Prices from</h2>
+            </div>
+            <p data-reveal="up">
+              A guide to get you started, then <span className="hl">a written quote for your home</span>.{" "}
+              <Link className="link link-arrow" href="/prices">All prices <Arrow /></Link>
+            </p>
+          </div>
+          <div className="pkgs three" data-reveal="stagger">
+            {packages.slice(0, 3).map((p) => <PackageCard key={p.name} p={p} compact />)}
+          </div>
+        </div>
+      </section>
+
       {/* ---------------- Recent work ---------------- */}
-      <section className="sec grey" id="work" aria-labelledby="work-title">
+      <section className="sec" id="work" aria-labelledby="work-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up">
@@ -118,7 +196,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- How it works ---------------- */}
-      <section className="sec" aria-labelledby="how-title">
+      <section className="sec grey" aria-labelledby="how-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up">
@@ -126,7 +204,11 @@ export default function Home() {
             </div>
             <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
           </div>
-          <Steps />
+          <Steps steps={[
+            { title: "Tell me what you’re planning", text: "Use the form, ring or WhatsApp. A few photos and a rough idea are plenty to start." },
+            { title: "A visit and a written quote", text: "I come round, listen to what you want, and send you a clear plan and price." },
+            { title: "One team does the lot", text: "I manage the whole job, keep you updated, and leave your home finished and tidy." },
+          ]} />
         </div>
       </section>
 
@@ -137,11 +219,11 @@ export default function Home() {
           <div data-reveal="up">
             <h2 id="about-title">Hi, I’m Connor.</h2>
             <p>
-              I run CM MainWorks, a carpentry and construction business based in Lichfield, with {business.experience} in the trade.
-              Whatever the size of the job, I run it and you deal with me, from the first visit to the final clean-up. On bigger jobs I bring in labourers I trust.
+              I run CM MainWorks from Lichfield, with {business.experience} in the trade. I started as a carpenter, and now I manage whole renovations:
+              one team, with the trades I trust, and me as the one person you deal with from the first visit to the final clean-up.
             </p>
             <p>
-              I’d rather <span className="hl" data-pen="sage">do one job properly than rush three</span>, and I don’t leave until it’s right.
+              I’ll listen, be straight with you about cost, and <span className="hl" data-pen="sage">work with you to get the home you want</span>. I don’t leave until it’s right.
             </p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
             <Link className="link link-arrow" href="/about" style={{ display: "inline-flex", marginTop: 28 }}>More about me <Arrow /></Link>
@@ -179,7 +261,7 @@ export default function Home() {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">FAQs</h2>
-            <p>What people usually ask me first. Anything else, just ring or WhatsApp.</p>
+            <p>What people usually ask me first. Anything else, just ring or WhatsApp. I’m always happy to talk.</p>
             <Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link>
           </div>
           <FaqList faqs={homeFaqs} />

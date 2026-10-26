@@ -40,3 +40,18 @@ export const Award = (p: P) => (
 export const Pin = (p: P) => (
   <svg viewBox="0 0 24 24" {...base} {...p}><path d="M12 21s-6.5-6.2-6.5-11.3a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21z" /><circle cx="12" cy="9.7" r="2.4" /></svg>
 );
+export const Team = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><circle cx="9" cy="8" r="3" /><path d="M3.5 19a5.5 5.5 0 0 1 11 0" /><circle cx="17" cy="9.5" r="2.4" /><path d="M15.5 14.4A4.5 4.5 0 0 1 21 18.8" /></svg>
+);
+export const Pound = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><circle cx="12" cy="12" r="9" /><path d="M14.6 8.6a2.6 2.6 0 0 0-4.6 1.7V16M8.6 12.8h4.6M8.4 16h7" /></svg>
+);
+export const Calm = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
+);
+export const Eye = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" /><circle cx="12" cy="12" r="2.8" /></svg>
+);
+export const Check = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} strokeWidth={2.2} {...p}><path d="M5 12.5l4.2 4.2L19 7" /></svg>
+);

@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMeta({
 export default function Contact() {
   return (
     <>
-      <PageHead crumbs={[{ href: "/contact", label: "Contact" }]} title={<>Get a <span className="hl">free quote.</span></>} lede="Send me a few details and photos and I’ll come back to you with a clear, written price." />
+      <PageHead crumbs={[{ href: "/contact", label: "Contact" }]} title={<>Get a <span className="hl">free quote.</span></>} lede="Planning a renovation or just one job? Send me a few details and photos and I’ll come back to you with a clear, written price." />
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap contact-grid">
           <div data-reveal="up">

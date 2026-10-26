@@ -1,0 +1,193 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import PageHead from "@/components/PageHead";
+import Photo from "@/components/Photo";
+import Benefits from "@/components/Benefits";
+import PackageCard from "@/components/PackageCard";
+import QuoteForm from "@/components/QuoteForm";
+import FaqList from "@/components/FaqList";
+import Closing from "@/components/Closing";
+import { Arrow, Check, Cross } from "@/components/Icons";
+import { business, renovation, renovationServices, smallerServices } from "@/content/site";
+import { media } from "@/content/media";
+import { packages } from "@/content/prices";
+import { renovationFaqs } from "@/content/faqs";
+import { areas } from "@/content/areas";
+import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta({
+  title: "Full home renovations in Lichfield and the Midlands",
+  description: "I’m Connor. Full home renovations managed by one team from start to finish: kitchens, bathrooms, extensions, floors, stairs and decorating. Free written quotes.",
+  path: "/renovations",
+});
+
+const usual = [
+  "Finding, vetting and booking five or six different trades",
+  "Working out who goes first, and waiting when someone doesn’t turn up",
+  "Each firm adding its own margin to the bill",
+  "Nobody responsible when one trade’s work affects another’s",
+  "You, managing it all around work and family",
+];
+const ours = [
+  "One person to deal with, from the first visit to the final clean",
+  "The order of work planned properly, so the job keeps moving",
+  "One clear, written quote for the whole job",
+  "One team responsible for the finished result",
+  "You get on with your life, and I keep you updated",
+];
+
+const process = [
+  { title: "A chat about your home", text: "Ring, WhatsApp or fill in the form. Tell me what you’re hoping for, even if it’s only a rough idea." },
+  { title: "I come round", text: "We walk through the house together. I listen to how you live, what’s not working and what you’d love it to be." },
+  { title: "A plan and a written quote", text: "What’s included, what isn’t, the order of work and the price. All in writing before anything starts." },
+  { title: "Dates agreed", text: "We agree a start date and plan around you, so you always know what’s happening when." },
+  { title: "One team does the work", text: "I run the job on site with my team and the trades I trust, and keep you updated as we go." },
+  { title: "A final walk-round", text: "We go round together and I put right anything you’re not happy with before I call it finished." },
+];
+
+export default function Renovations() {
+  const [full, ...rest] = packages;
+  return (
+    <div style={{ "--c": renovation.color, "--pen": renovation.tint } as React.CSSProperties}>
+      <JsonLd
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Full home renovations",
+            serviceType: "Home renovation",
+            description: business.pitch,
+            url: abs("/renovations"),
+            provider: { "@id": businessId },
+            areaServed: areas.map((a) => ({ "@type": "City", name: a.name })),
+          },
+          faqLd(renovationFaqs),
+        ]}
+      />
+
+      <PageHead
+        crumbs={[{ href: "/renovations", label: "Renovations" }]}
+        title={<>Your whole renovation, <span className="hl">one team.</span></>}
+        lede="Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me from start to finish. Less stress, a fair price, and a home you’ll love."
+      />
+
+      <section className="sec" style={{ paddingTop: 0 }} aria-label="How I work">
+        <div className="wrap">
+          <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
+            <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
+            <div className="prose" data-reveal="up">
+              <p>Renovating a home is exciting. It can also be the most stressful thing you ever take on, and most of that stress comes from managing it: finding trades, getting them in the right order and chasing the ones who don’t turn up.</p>
+              <p>That’s the part I take off your hands. I plan the whole job with you, run it on site with one team, and bring in trades I trust for the specialist bits like electrics and plumbing. You have one person to ring, one written quote, and one team that cares how it all turns out.</p>
+              <p>I’ll listen to what you want, be honest about what it costs, and work with you to get the home you’re picturing.</p>
+              <p style={{ marginTop: 24 }}>
+                <Link className="link link-arrow" href="#quote">Talk to me about your renovation <Arrow /></Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec grey" aria-labelledby="why-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up"><h2 id="why-title">Why one team?</h2></div>
+            <p data-reveal="up">It’s simpler, it’s calmer and <span className="hl">it often costs less</span>.</p>
+          </div>
+          <Benefits />
+        </div>
+      </section>
+
+      <section className="sec" aria-labelledby="cmp-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up"><h2 id="cmp-title">The usual way, or my way</h2></div>
+            <p data-reveal="up">Same renovation. Very different few months.</p>
+          </div>
+          <div className="compare" data-reveal="stagger">
+            <div className="usual">
+              <h3>Managing it yourself</h3>
+              <ul>{usual.map((u) => <li key={u}><Cross />{u}</li>)}</ul>
+            </div>
+            <div className="ours">
+              <h3>With CM MainWorks</h3>
+              <ul>{ours.map((u) => <li key={u}><Check />{u}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec grey" aria-labelledby="inc-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up"><h2 id="inc-title">What your renovation can include</h2></div>
+            <p data-reveal="up">Pick one room or the whole house. It’s all <span className="hl">managed by me</span>.</p>
+          </div>
+          <div className="items" data-reveal="stagger">
+            {[...renovationServices, ...smallerServices.filter((s) => s.slug !== "carpentry")].map((s) => (
+              <div className="item" key={s.slug} style={{ "--c": s.color } as React.CSSProperties}>
+                <h3><Link href={`/services/${s.slug}`}>{s.name}</Link></h3>
+                <p>{s.blurb}</p>
+              </div>
+            ))}
+            <div className="item">
+              <h3>Electrics, plumbing and plastering</h3>
+              <p>Organised through trades I trust, at the right point in the job, so you don’t have to find anyone.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" aria-labelledby="how-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up"><h2 id="how-title">How your renovation runs</h2></div>
+            <p data-reveal="up">You’ll know <span className="hl" data-pen="steel">the price before any work starts</span>, and what’s happening every step of the way.</p>
+          </div>
+          <ol className="timeline" data-reveal="stagger">
+            {process.map((p) => (
+              <li key={p.title}>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="sec grey" aria-labelledby="pkg-title">
+        <div className="wrap">
+          <div className="sec-head">
+            <div data-reveal="up"><h2 id="pkg-title">Prices from</h2></div>
+            <p data-reveal="up">A guide to get you started. <Link className="link link-arrow" href="/prices">See all prices <Arrow /></Link></p>
+          </div>
+          <div className="pkgs three" data-reveal="stagger">
+            {[full, ...rest.slice(0, 2)].map((p) => <PackageCard key={p.name} p={p} compact />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" aria-labelledby="faq-title">
+        <div className="wrap faq-wrap">
+          <div className="faq-side" data-reveal="up">
+            <h2 id="faq-title">Renovation questions</h2>
+            <p>The things people ask me before they start. More on the <Link href="/faqs">FAQs page</Link>.</p>
+          </div>
+          <FaqList faqs={renovationFaqs} />
+        </div>
+      </section>
+
+      <section className="sec grey" aria-labelledby="ask-title">
+        <div className="wrap contact-grid">
+          <div data-reveal="up">
+            <h2 id="ask-title" className="big-h">Let’s talk about your home</h2>
+            <p className="big-p">Tell me what you’re thinking, even if it’s only a rough idea. I’ll come round, listen, and put together a plan and a written quote.</p>
+            <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
+          </div>
+          <QuoteForm defaultJob={renovation.job} />
+        </div>
+      </section>
+
+      <Closing />
+    </div>
+  );
+}
