@@ -16,7 +16,7 @@ export default function Privacy() {
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap prose">
           {/* DRAFT: needs Connor's legal trading name and contact email before launch. */}
-          <p>This website is run by me, Connor, trading as {business.name}, a carpentry and construction business based in {business.base}. If you’ve got any questions about this policy, ring me on {business.phoneDisplay}.</p>
+          <p>This website is run by me, Connor, trading as {business.name}, a home renovation, carpentry and construction business based in {business.base}. If you’ve got any questions about this policy, ring me on {business.phoneDisplay}.</p>
 
           <h2>What I collect</h2>
           <p>When you use the quote form, I collect:</p>

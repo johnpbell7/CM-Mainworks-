@@ -36,7 +36,7 @@ const ours = [
   "One clear, written quote, invoiced phase by phase",
   "Regular sit-downs to check timescales and targets",
   "One team responsible for the finished result",
-  "You get on with your life, and I keep you updated",
+  "You get on with your life, and we sit down regularly to check progress",
 ];
 
 

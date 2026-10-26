@@ -43,7 +43,7 @@ export const areas: Area[] = [
       { service: "carpentry", text: "Doors, skirting and staircases, including in older houses where nothing is quite square." },
       { service: "joinery", text: "Alcove units and media walls built around chimney breasts and awkward corners." },
       { service: "decorating", text: "Timber and bay windows repaired and repainted, inside and out." },
-      { service: "extensions", text: "Extensions, knock-throughs and renovations, run by me from start to finish." },
+      { service: "extensions", text: "Extensions, knock-throughs and full renovations, managed by me with one team, start to finish." },
     ],
     faqs: [
       { q: "Are you actually based in Lichfield?", a: "Yes. CM MainWorks is a Lichfield business, so most jobs in the city are a short drive away." },
@@ -287,7 +287,7 @@ export const areas: Area[] = [
     ],
     faqs: [
       { q: "Which parts of Birmingham do you cover?", a: "All of it, including Erdington, Kingstanding, Great Barr, Moseley, Kings Heath and Harborne. If you’re not sure, send me your postcode." },
-      { q: "Do you take on big jobs in Birmingham?", a: "Yes. On extensions and renovations I bring in labourers I trust, but I run the job and I’m the one you deal with." },
+      { q: "Do you take on big jobs in Birmingham?", a: "Yes, that’s my main work. I manage extensions and full renovations with one team, in clear phases, and I’m the one you deal with throughout." },
     ],
     nearby: ["sutton-coldfield", "solihull", "walsall", "tamworth"],
   },
@@ -346,20 +346,20 @@ export const areas: Area[] = [
     where: "About thirty miles east of Lichfield",
     title: "Builder and home renovations in Leicester",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Leicester, Oadby, Wigston and Birstall. I’m Connor. Insured, with labourers I trust on bigger jobs. Free quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Leicester, Oadby, Wigston and Birstall. I’m Connor. Insured, managed by one team. Free quotes.",
     intro:
       "Leicester is about thirty miles east of Lichfield, along the A5 and M69. I cover the city and the areas around it, including Oadby, Wigston, Birstall, Glenfield and Braunstone.",
     local:
       "Leicester has streets of Victorian terraces in places like Clarendon Park and Westcotes, and plenty of interwar and post-war semis in the suburbs. Extensions, knock-throughs, built-in storage and doing up period features properly are all on the list.",
     focus: [
-      { service: "extensions", text: "Extensions and renovations, with labourers brought in when the job needs it." },
+      { service: "extensions", text: "Extensions and full renovations, managed by one team in clear phases." },
       { service: "carpentry", text: "Staircases, doors and kitchen fitting." },
       { service: "joinery", text: "Alcove units and bookcases in period rooms." },
       { service: "decorating", text: "Woodwork, windows and full redecoration." },
     ],
     faqs: [
       { q: "Do you really cover Leicester?", a: "Yes. I cover Leicester and the areas around it, including Oadby, Wigston and Birstall." },
-      { q: "Who will be working on my job?", a: "Me. On bigger jobs I bring in labourers I’ve worked with and trust, but I’m on site and I run it." },
+      { q: "Who will be working on my job?", a: "My team: labourers I trust, plus the trades I organise for things like electrics and plumbing. I’m on site, I run it, and I’m the one you deal with." },
     ],
     nearby: ["solihull", "tamworth", "birmingham", "burton-upon-trent"],
   },

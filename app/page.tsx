@@ -204,11 +204,7 @@ export default function Home() {
             </div>
             <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
           </div>
-          <Steps steps={[
-            { title: "Tell me what you’re planning", text: "Use the form, ring or WhatsApp. A few photos and a rough idea are plenty to start." },
-            { title: "A visit and a written quote", text: "I come round, listen to what you want, and send you a clear plan and price." },
-            { title: "One team does the lot", text: "Bigger jobs run in clear phases, invoiced as we go, with sit-downs to check we’re on target." },
-          ]} />
+          <Steps />
         </div>
       </section>
 

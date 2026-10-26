@@ -9,9 +9,9 @@ const looks = [
 ] as const;
 
 export const defaultSteps: Step[] = [
-  { title: "Send me a few photos", text: "Use the form or WhatsApp. A couple of pictures and a line about the job is plenty." },
-  { title: "Get a clear price", text: "I look at the photos, come round if I need to, and give you a written quote." },
-  { title: "The job, done properly", text: "I start on the day we agree, and leave the place tidy when I’m finished." },
+  { title: "Tell me what you’re planning", text: "Use the form, ring or WhatsApp. A few photos and a rough idea are plenty to start." },
+  { title: "A visit and a written quote", text: "I come round, listen to what you want, and send you a clear plan and price." },
+  { title: "One team does the lot", text: "Bigger jobs run in clear phases, invoiced as we go, with sit-downs to check we’re on target." },
 ];
 
 /** Three illustrated steps joined by a dashed line. Headings are H3 under the section’s H2. */

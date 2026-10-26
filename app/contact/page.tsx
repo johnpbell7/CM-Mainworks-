@@ -45,10 +45,11 @@ export default function Contact() {
             <p>You don’t need all of this, but the more I can see, the quicker and more accurate the price.</p>
           </div>
           <ol className="factors" data-reveal="stagger">
-            <li>A photo of the whole area, plus a couple of close-ups of anything that’s damaged or awkward</li>
+            <li>A photo of each room or area, plus a couple of close-ups of anything that’s damaged or awkward</li>
             <li>Rough measurements, if you’ve got them. Not essential</li>
             <li>Any pictures you’ve saved of the look you’re after</li>
             <li>Your postcode, and roughly when you’d like the work done</li>
+            <li>For a renovation, a rough budget if you have one. I’ll be honest about what it can do</li>
             <li>Whether you’re supplying anything yourself, like doors, paint or tiles</li>
           </ol>
         </div>

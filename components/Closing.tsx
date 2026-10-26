@@ -5,7 +5,7 @@ export default function Closing() {
   return (
     <section className="sec closing" aria-labelledby="close-title">
       <div className="wrap">
-        <h2 id="close-title" data-reveal="up">Got a <span className="hl">job in mind?</span></h2>
+        <h2 id="close-title" data-reveal="up">Got a <span className="hl">project in mind?</span></h2>
         <div className="contact" data-reveal="stagger">
           <a className="link" href={business.phoneHref}>Ring me on {business.phoneDisplay}</a>
           <a className="link" href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a>

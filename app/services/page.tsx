@@ -53,7 +53,7 @@ export default function Services() {
                 <li>One person to deal with throughout</li>
                 <li>Specialist trades organised for you</li>
                 <li>A clear, written quote before work starts</li>
-                <li>Room by room or the whole house</li>
+                <li>Clear phases, invoiced phase by phase</li>
               </ul>
               <div className="row-links">
                 <Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link>

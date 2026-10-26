@@ -16,10 +16,10 @@ export const metadata: Metadata = pageMeta({
 
 const promises = [
   { h: "I’ll listen first", p: "Your home, your budget, your plans. I’ll help you get there, not push my ideas on you.", c: "var(--gold)" },
-  { h: "You’ll know the price first", p: "A clear, written quote before I start anything, and no surprises on the bill.", c: "var(--oak)" },
+  { h: "You’ll know the price first", p: "A clear, written quote before I start, and on bigger jobs, invoices phase by phase.", c: "var(--oak)" },
   { h: "You deal with me", p: "One team, and one person to ring from the first visit to the final clean-up.", c: "var(--steel)" },
   { h: "I’m insured", p: "Happy to show you the details before I start.", c: "var(--ink-3)" },
-  { h: "I turn up when I say", p: "We agree a start date and I stick to it.", c: "var(--sage)" },
+  { h: "We check we’re on target", p: "Timescales and targets agreed up front, and regular sit-downs to check them. Always out in the open.", c: "var(--sage)" },
   { h: "I leave it tidy", p: "Dust sheets down while I work, and swept up before I go.", c: "var(--brick)" },
 ];
 
@@ -39,7 +39,7 @@ export default function About() {
             {/* DRAFT copy for Connor to approve. Do not add insurance, qualifications or reviews until he confirms them. */}
             <h2 id="story-title" className="mid-h">How I work</h2>
             <p>I’ve been in the trade {business.experience}. I started as a carpenter, hanging doors and fitting kitchens, and along the way I saw how stressful renovations can be for the people living through them. Too many trades, nobody in charge, and the homeowner stuck in the middle.</p>
-            <p>So that’s what I do differently. I manage the whole job with one team: my labourers, the trades I trust for things like electrics and plumbing, and me on site running it. You’ve got one person to ring and one written quote, and I keep you updated as we go.</p>
+            <p>So that’s what I do differently. I manage the whole job with one team: my labourers, the trades I trust for things like electrics and plumbing, and me on site running it. You’ve got one person to ring and one written quote. Bigger jobs run in clear phases, invoiced phase by phase, and we sit down regularly to check the timescales and targets we agreed.</p>
             <p>I’m friendly, I’m straight with people about cost, and I’ll <span className="hl" data-pen="sage">work with you to get the home you want</span>. If something’s not right, I’ll put it right before I go.</p>
             <p><Link className="link link-arrow" href={renovation.href}>How a renovation works with me</Link></p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="CM MainWorks badge" width={96} height={42} loading="lazy" />
