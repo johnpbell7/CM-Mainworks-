@@ -1,10 +1,10 @@
 import { Calm, Eye, Pound, Team } from "./Icons";
 
 const items = [
-  { Icon: Team, c: "var(--gold)", t: "var(--t-gold)", title: "One team, one number to ring", text: "I manage the whole job, from the first plan to the final coat of paint. No chasing five different trades." },
-  { Icon: Calm, c: "var(--sage)", t: "var(--t-sage)", title: "Less stress", text: "I plan the order of work so trades aren’t tripping over each other, and you’re never left with a half-finished room." },
-  { Icon: Pound, c: "var(--steel)", t: "var(--t-steel)", title: "Competitive prices", text: "One team means fewer overheads, no days lost between trades and nobody paid twice to put things right." },
-  { Icon: Eye, c: "var(--brick)", t: "var(--t-brick)", title: "Clear and honest", text: "A written quote before anything starts, invoices phase by phase, and regular sit-downs to check we’re on target." },
+  { Icon: Team, c: "var(--gold)", t: "var(--t-gold)", title: "One team, one number to ring", text: "I manage the whole job, start to finish. No chasing five different trades." },
+  { Icon: Calm, c: "var(--sage)", t: "var(--t-sage)", title: "Less stress", text: "The work is planned properly, so you’re never left with a half-finished room." },
+  { Icon: Pound, c: "var(--steel)", t: "var(--t-steel)", title: "Competitive prices", text: "Fewer overheads, no days lost between trades, nobody paid twice." },
+  { Icon: Eye, c: "var(--brick)", t: "var(--t-brick)", title: "Clear and honest", text: "Written quotes, invoices phase by phase and regular sit-downs." },
 ];
 
 /** The four reasons to use one team. Headings are H3 under the section’s H2. */

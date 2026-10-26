@@ -428,6 +428,11 @@ textarea.input { resize: vertical; min-height: 76px; line-height: 1.5; }
 .work { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(20px, 2.4vw, 36px); }
 .work figure { margin: 0; }
 .work .side { display: grid; gap: clamp(20px, 2.4vw, 36px); }
+.work.solo { grid-template-columns: minmax(0, 1fr); }
+.work.solo .ph { aspect-ratio: 2.2 / 1; }
+.work.solo .ba { min-height: clamp(320px, 42vw, 560px); }
+.about.no-photo .wrap { grid-template-columns: minmax(0, 1fr); }
+.about.no-photo p { max-width: 58ch; }
 .work .side .ph { aspect-ratio: 4 / 3; }
 .work > figure { display: flex; flex-direction: column; }
 figcaption.cap { margin-top: 14px; display: flex; justify-content: space-between; gap: 16px; font-weight: 600; }
@@ -934,6 +939,13 @@ html.js.intro-on { overflow: hidden; }
   .benefits.tight h3 { margin: 12px 0 4px; font-size: 1.05rem; }
   .benefits.tight p { font-size: .94rem; }
   .phases-wrap { grid-template-columns: minmax(0, 1fr); }
+  .hide-m { display: none !important; }
+  .feature { gap: 24px; margin-bottom: 40px; }
+  .feature .ph { aspect-ratio: 16 / 10; }
+  .feature h3 { font-size: 1.9rem; margin-bottom: 12px; }
+  .feature > div > p { font-size: 1.02rem; }
+  .feature .row-links { margin-top: 22px; }
+  .work.solo .ph { aspect-ratio: 4 / 3; }
   .incl { grid-template-columns: minmax(0, 1fr); }
   .incl a, .incl span { padding: 15px 0; font-size: 1.02rem; }
   .ph-after { gap: 4px 16px; font-size: .84rem; margin-top: 10px; padding-top: 10px; }

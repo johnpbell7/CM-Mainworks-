@@ -32,9 +32,9 @@ export default function About() {
         lede="I run CM MainWorks from Lichfield. I manage home renovations from start to finish, so you get the home you want without the stress of running it yourself."
       />
 
-      <section className="sec about" style={{ paddingTop: 0, borderTop: 0 }} aria-labelledby="story-title">
+      <section className={`sec about${media.portrait.src ? "" : " no-photo"}`} style={{ paddingTop: 0, borderTop: 0 }} aria-labelledby="story-title">
         <div className="wrap">
-          <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />
+          {media.portrait.src && <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />}
           <div data-reveal="up">
             {/* DRAFT copy for Connor to approve. Do not add insurance, qualifications or reviews until he confirms them. */}
             <h2 id="story-title" className="mid-h">How I work</h2>

@@ -12,7 +12,7 @@ import PackageCard from "@/components/PackageCard";
 import { business, renovation, renovationServices, sections, smallerServices } from "@/content/site";
 import { packages } from "@/content/prices";
 import { media } from "@/content/media";
-import { projects } from "@/content/projects";
+import { publishedProjects } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
 import { pageMeta } from "@/lib/seo";
 import FaqList from "@/components/FaqList";
@@ -28,7 +28,9 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default function Home() {
-  const [lead, ...rest] = projects;
+  // Only real jobs on the homepage; placeholders stay off until photos arrive.
+  const [lead, ...rest] = publishedProjects;
+  const side = rest.slice(0, 2);
   return (
     <>
       {/* ---------------- Hero ---------------- */}
@@ -89,8 +91,8 @@ export default function Home() {
             </Link>
             <div data-reveal="up">
               <h3><Link href={renovation.href} style={{ textDecoration: "none" }}>Full home renovations</Link></h3>
-              <p>Everything you want doing, from the first plan to the final coat of paint. I run the job with one team, in clear phases that are invoiced as we go, with regular sit-downs so you always know where things stand.</p>
-              <ul className="ticks">
+              <p>Everything you want doing, from the first plan to the final coat of paint. One team, clear phases, and regular sit-downs so you always know where things stand.</p>
+              <ul className="ticks hide-m">
                 <li>Kitchens and bathrooms</li>
                 <li>Extensions and knock-throughs</li>
                 <li>Floors, tiling and stairs</li>
@@ -168,29 +170,33 @@ export default function Home() {
               <h2 id="work-title">Recent work</h2>
             </div>
             <p data-reveal="up">
-              A few of my recent jobs.{" "}
+              {side.length ? "A few of my recent jobs." : "One of my recent jobs."}{" "}
               <Link className="link link-arrow" href="/projects">See all projects <Arrow /></Link>
             </p>
           </div>
-          <div className="work">
+          <div className={`work${side.length ? "" : " solo"}`}>
             <figure>
-              <BeforeAfter before={lead.before} after={lead.after} />
+              {lead.before.src && lead.after.src ? (
+                <BeforeAfter before={lead.before} after={lead.after} />
+              ) : (
+                <Link href={`/projects/${lead.slug}`} aria-label={`${lead.name}, ${nameOf(lead.section)}`}>
+                  <Photo media={lead.after} sizes="(max-width: 1080px) 100vw, 60vw" />
+                </Link>
+              )}
               <figcaption className="cap">{lead.name} <span style={{ "--c": colorOf(lead.section) } as React.CSSProperties}>{nameOf(lead.section)}</span></figcaption>
             </figure>
-            <div className="side">
-              {rest.slice(0, 2).map((p) => (
-                <figure key={p.slug}>
-                  {p.placeholder ? (
-                    <Photo media={p.gallery[0]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 36vw" />
-                  ) : (
+            {side.length > 0 && (
+              <div className="side">
+                {side.map((p) => (
+                  <figure key={p.slug}>
                     <Link href={`/projects/${p.slug}`} aria-label={`${p.name}, ${nameOf(p.section)}`}>
                       <Photo media={p.gallery[0]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 36vw" />
                     </Link>
-                  )}
-                  <figcaption className="cap">{p.name} <span style={{ "--c": colorOf(p.section) } as React.CSSProperties}>{nameOf(p.section)}</span></figcaption>
-                </figure>
-              ))}
-            </div>
+                    <figcaption className="cap">{p.name} <span style={{ "--c": colorOf(p.section) } as React.CSSProperties}>{nameOf(p.section)}</span></figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -209,9 +215,9 @@ export default function Home() {
       </section>
 
       {/* ---------------- About ---------------- */}
-      <section className="sec about" id="about" aria-labelledby="about-title">
+      <section className={`sec about${media.portrait.src ? "" : " no-photo"}`} id="about" aria-labelledby="about-title">
         <div className="wrap">
-          <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />
+          {media.portrait.src && <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />}
           <div data-reveal="up">
             <h2 id="about-title">Hi, I’m Connor.</h2>
             <p>
@@ -260,7 +266,7 @@ export default function Home() {
             <p>What people usually ask me first. Anything else, just ring or WhatsApp. I’m always happy to talk.</p>
             <Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link>
           </div>
-          <FaqList faqs={homeFaqs} />
+          <FaqList faqs={homeFaqs.slice(0, 4)} />
         </div>
       </section>
 
