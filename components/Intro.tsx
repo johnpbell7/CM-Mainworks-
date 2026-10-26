@@ -34,7 +34,6 @@ export default function Intro() {
 
       const el = root.current!;
       const q = gsap.utils.selector(el);
-      const hello = q(".intro-hello")[0];
 
       let opened = false;
       const open = () => {
@@ -50,11 +49,11 @@ export default function Intro() {
       };
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" }, onComplete: finish });
-      const { L, R, word, desc } = addSnap(tl, el, [hello]);
+      const { L, R, word, desc } = addSnap(tl, el);
 
       // Split open along the joint, each half riding out on its panel
       tl.addLabel("open", "snap+=1.75")
-        .to([word, desc, hello], { opacity: 0, y: -12, duration: 0.3, ease: "power2.in" }, "open")
+        .to([word, desc], { opacity: 0, y: -12, duration: 0.3, ease: "power2.in" }, "open")
         .call(open, [], "open+=0.55")
         .to(q(".intro-panel.l"), { xPercent: -100, duration: 1.05, ease: "power4.inOut" }, "open+=0.25")
         .to(q(".intro-panel.r"), { xPercent: 100, duration: 1.05, ease: "power4.inOut" }, "open+=0.25")
@@ -89,7 +88,6 @@ export default function Intro() {
       <div className="intro-panel r" />
       <div className="intro-stage">
         <LogoArt />
-        <p className="intro-hello">Hello, come on in.</p>
       </div>
       <button type="button" className="intro-skip" tabIndex={-1}>Skip</button>
     </div>
