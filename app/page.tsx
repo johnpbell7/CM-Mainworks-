@@ -89,7 +89,7 @@ export default function Home() {
               <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 1080px) 100vw, 48vw" />
             </Link>
             <div data-reveal="up">
-              <h3><Link href={renovation.href} style={{ textDecoration: "none" }}>Full home renovations</Link></h3>
+              <h3><Link className="head-link" href={renovation.href}>Full home renovations <Arrow /></Link></h3>
               <p>Everything you want doing, from the first plan to the last coat of paint. One team, in clear phases.</p>
               <ul className="ticks hide-m">
                 <li>Kitchens and bathrooms</li>
@@ -99,9 +99,6 @@ export default function Home() {
                 <li>Roofing</li>
                 <li>Decorating, to the last coat</li>
               </ul>
-              <div className="row-links">
-                <Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link>
-              </div>
             </div>
           </article>
 
@@ -156,8 +153,7 @@ export default function Home() {
               <h2 id="work-title">Before and after</h2>
             </div>
             <p data-reveal="up">
-              A few of my recent jobs.{" "}
-              <Link className="link link-arrow" href="/projects">All recent work <Arrow /></Link>
+              A few of my recent jobs.
             </p>
           </div>
           <div className="ba-grid">
@@ -200,7 +196,6 @@ export default function Home() {
               I’ll be straight with you about cost and <span className="hl" data-pen="sage">work with you to get the home you want</span>.
             </p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
-            <Link className="link link-arrow" href="/about" style={{ display: "inline-flex", marginTop: 28 }}>More about me <Arrow /></Link>
           </div>
         </div>
       </section>
@@ -236,7 +231,6 @@ export default function Home() {
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">FAQs</h2>
             <p>Anything else, just ring or WhatsApp.</p>
-            <Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link>
           </div>
           <FaqList faqs={homeFaqs.slice(0, 4)} />
         </div>

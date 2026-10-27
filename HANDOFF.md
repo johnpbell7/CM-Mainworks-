@@ -1,5 +1,7 @@
 # CM MainWorks: website handoff
 
+> **Historical brief, written before the build.** For the current state, decisions and next steps, read `PROJECT-STATUS.md`.
+
 **Client:** Connor, CM MainWorks (carpentry and construction, Lichfield)
 **Designer / developer:** John, JB Design Agency
 **Status:** brand approved, homepage design approved as a prototype, build not started

@@ -23,7 +23,7 @@ export default function Header() {
       <div className="wrap">
         <Link href="/" aria-label="CM MainWorks home">
           {/* Supplied logo, used as-is */}
-          <img className="logo logo-head" src="/brand/logo/main/cm-mainworks-horizontal-on-light.svg" alt="CM MainWorks, carpentry and construction" width={259} height={50} />
+          <img className="logo logo-head" src="/brand/logo/main/cm-mainworks-header-lockup.svg" alt="CM MainWorks, carpentry and construction" width={328} height={56} />
         </Link>
         <nav className="main-nav" aria-label="Main">
           {nav.map((n) => (

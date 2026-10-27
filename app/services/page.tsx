@@ -21,14 +21,11 @@ function Row({ s }: { s: Section }) {
     <article className="svc-row" style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
       <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 100vw, 50vw" />
       <div data-reveal="up">
-        <h2><span className="hl" data-pen={s.pen}>{s.name}</span></h2>
+        <h2><Link className="head-link" href={`/services/${s.slug}`}><span className="hl" data-pen={s.pen}>{s.name}</span> <Arrow /></Link></h2>
         <p>{s.intro}</p>
         <ul className="ticks">
           {serviceContent[s.slug].items.slice(0, 4).map((e) => <li key={e.title}>{e.title}</li>)}
         </ul>
-        <div className="row-links">
-          <Link className="link link-arrow" style={{ "--u": s.color } as React.CSSProperties} href={`/services/${s.slug}`}>More on {s.name.toLowerCase()} <Arrow /></Link>
-        </div>
       </div>
     </article>
   );
@@ -47,7 +44,7 @@ export default function Services() {
           <article className="svc-row" style={{ "--c": renovation.color, "--pen": renovation.tint, borderTop: 0 } as React.CSSProperties}>
             <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div data-reveal="up">
-              <h2><span className="hl">Full home renovations</span></h2>
+              <h2><Link className="head-link" href={renovation.href}><span className="hl">Full home renovations</span> <Arrow /></Link></h2>
               <p>The whole job, planned with you and managed by me. One team, one written quote.</p>
               <ul className="ticks">
                 <li>One person to deal with throughout</li>
@@ -55,9 +52,6 @@ export default function Services() {
                 <li>A clear, written quote before work starts</li>
                 <li>Clear phases, invoiced phase by phase</li>
               </ul>
-              <div className="row-links">
-                <Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link>
-              </div>
             </div>
           </article>
           {renovationServices.map((s) => <Row key={s.slug} s={s} />)}

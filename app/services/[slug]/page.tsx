@@ -116,9 +116,6 @@ export default async function Service({ params }: Props) {
           <div className="faq-side" data-reveal="up">
             <h2 id="price-title">What affects the price</h2>
             <p>{c.price.intro}</p>
-            <p style={{ display: "flex", flexWrap: "wrap", gap: "12px 26px" }}>
-              <Link className="link link-arrow" href="/prices">See my prices <Arrow /></Link>
-            </p>
           </div>
           <ol className="factors" data-reveal="stagger">
             {c.price.factors.map((f) => <li key={f}>{f}</li>)}
@@ -169,7 +166,6 @@ export default async function Service({ params }: Props) {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">{s.name} questions</h2>
-            <p>More on the <Link href="/faqs">FAQs page</Link>.</p>
           </div>
           <FaqList faqs={faqs} />
         </div>

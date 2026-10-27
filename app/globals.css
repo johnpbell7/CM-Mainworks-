@@ -128,7 +128,7 @@ ul, ol { margin: 0; padding: 0; }
 
 /* ---------- logo ---------- */
 .logo { height: 46px; width: auto; }
-.logo-head { height: 50px; }
+.logo-head { height: 56px; }
 
 /* ---------- header ---------- */
 .head {
@@ -431,6 +431,10 @@ textarea.input { resize: vertical; min-height: 76px; line-height: 1.5; }
 .service .ask:hover { color: var(--c); }
 .service .ask svg { width: 1em; height: 1em; }
 .card-img { display: block; }
+/* a heading that is itself the link: no underline, arrow nudges on hover */
+.head-link { text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: .3em; }
+.head-link svg { width: .7em; height: .7em; flex: none; transition: transform .3s var(--ease); }
+.head-link:hover svg { transform: translateX(4px); }
 
 /* ---------- recent work ---------- */
 .work { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(20px, 2.4vw, 36px); }
@@ -819,6 +823,11 @@ html.js.intro-on { overflow: hidden; }
 }
 .intro-skip:hover { color: var(--chalk); }
 
+/* ---------- page change: the new page slides up into place ---------- */
+@keyframes page-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.page-in { animation: page-in .38s var(--ease) both; }
+@media (prefers-reduced-motion: reduce) { .page-in { animation: none; } }
+
 /* ---------- motion defaults ---------- */
 /* Nothing is hidden by CSS: Motion only tucks away what's below the fold once the page has loaded. */
 @media (prefers-reduced-motion: reduce) {
@@ -861,8 +870,10 @@ html.js.intro-on { overflow: hidden; }
   /* room for the sticky call / quote bar, inside the navy footer so no white strip shows */
   .foot { padding-bottom: calc(28px + 76px + env(safe-area-inset-bottom, 0px)); }
   .logo { height: 38px; }
-  .logo-head { height: 40px; }
-  .menu-btn { width: 42px; height: 42px; padding: 0; justify-content: center; margin-left: 0; }
+  .logo-head { height: 48px; }
+  /* the bottom bar already has Call, so the header keeps just the logo and menu */
+  .head .tel { display: none; }
+  .menu-btn { width: 42px; height: 42px; padding: 0; justify-content: center; margin-left: auto; }
   .menu-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .menu-ico { width: 18px; }
   .head .tel { width: 42px; height: 42px; justify-content: center; border-radius: 50%; background: var(--t-gold); }

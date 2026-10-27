@@ -3,7 +3,6 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Closing from "@/components/Closing";
-import { Arrow } from "@/components/Icons";
 import { business, renovation, sections } from "@/content/site";
 import { media } from "@/content/media";
 import { areas } from "@/content/areas";
@@ -42,7 +41,6 @@ export default function About() {
             <p>I’ve been in the trade {business.experience}. I started as a carpenter, and saw how stressful renovations are for the people living through them: too many trades and nobody in charge.</p>
             <p>So I run the whole job with one team: my labourers, trusted trades for electrics and plumbing, and me on site. One person to ring, one written quote, paid phase by phase.</p>
             <p>I’m straight about cost, and I’ll <span className="hl" data-pen="sage">work with you to get the home you want</span>.</p>
-            <p><Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link></p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="CM MainWorks badge" width={96} height={42} loading="lazy" />
             <p className="draft">Draft copy, waiting on Connor’s approval.</p>
           </div>

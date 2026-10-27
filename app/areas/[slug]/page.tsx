@@ -106,7 +106,6 @@ export default async function AreaPage({ params }: Props) {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">Questions from {a.name}</h2>
-            <p>More answers on the <Link href="/faqs">FAQs page</Link>.</p>
           </div>
           <FaqList faqs={a.faqs.map((f, i) => ({ ...f, color: a.focus[i % a.focus.length].service }))} />
         </div>

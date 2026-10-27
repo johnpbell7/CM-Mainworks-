@@ -1,24 +1,25 @@
 # CM MainWorks website: rules for Claude Code
 
-Read `HANDOFF.md` before starting. It has the full brief, site map, page spec and open questions.
+**Read `PROJECT-STATUS.md` before starting.** It covers what has been built, the aims, every decision made so far, what's still waiting on Connor, and how to launch. `HANDOFF.md` is the original pre-build brief; where they disagree, `PROJECT-STATUS.md` wins.
 
 ## Always
-- **Stack:** Next.js (App Router) + TypeScript, deployed on Vercel.
-- **Staging first.** Work on the staging branch and push to the staging site. Never merge to `main` until John explicitly says **"launch"**.
-- **Prototype:** `prototype/index.html` is the approved homepage design. Match its layout, spacing, type and colours.
-- **Tokens:** use the values in `brand/tokens.css` / `brand/tokens.ts`. Don't invent new colours.
-- **Logos:** use the SVG files in `brand/logo/` exactly as supplied. Never redraw, recolour, stretch or retype them.
-- **Light only.** No dark mode. This was the client's decision.
-- **Font:** one family throughout, Bricolage Grotesque, loaded via `next/font/google`.
-- **Writing style:** British English, sentence case, plain words, curly apostrophes.
+- **Stack:** Next.js (App Router) and TypeScript, deployed on Vercel. Read `AGENTS.md`: this Next.js version differs from older docs.
+- **Branch:** work on `ccr-6ec0a5e9-9pzhmk`, which the preview at cm-mainworks.vercel.app deploys from. Never go live until John explicitly says **"launch"**.
+- **Pitch:** full home renovations, managed by one team, in clear phases, invoiced phase by phase, with regular sit-downs. Smaller jobs are welcome but secondary.
+- **Voice:** Connor's own (I, me, my). Friendly, open, short. British English, sentence case, curly apostrophes.
+- **Calls to action:** one main action, getting a quote. At most one link per section; cards are tapped as a whole.
+- **Copy:** trim it, but keep the long-form service, town and FAQ text that search relies on.
+- **Lichfield:** only on town pages, town lists and the footer. Generic pages say "the Midlands".
+- **Tokens:** use the values in `brand/tokens.css` and `brand/tokens.ts`. Don't invent new colours.
+- **Logos:** use the SVGs in `brand/logo/` as supplied, or rescale the supplied shapes with a script. Never redraw, recolour or retype them.
+- **Light only, one font:** no dark mode. Bricolage Grotesque, loaded via `next/font/google`.
+- **Checks before every push:** `npx tsc --noEmit` and `npm run build`, then look at the page on a phone width.
 
 ## Never
-- Navy-heavy blocks or navy buttons. Navy is for text and the logo only.
-- Orange, a slanted or italic name, or a rule beside the badge. All were rejected in design rounds.
-- Decorative clutter: marquees, chips, badges on cards, gradients, drop-shadow cards or emoji.
-- Calls to action in the hero. The hero is headline, one line, a photo, and the quote form.
-- Merging to `main` without "launch".
-- Invented facts about Connor: insurance, years in the trade, reviews or prices. Placeholders stay clearly marked.
+- Invent facts about Connor: prices, qualifications, guarantees, reviews or years in the trade. Placeholders stay clearly marked; prices stay `£TBC` until he gives figures.
+- Get round Facebook's login to take photos.
+- Use navy buttons, gradients, drop-shadow cards, marquees, chips or emoji.
+- Go live, or point a production domain, without "launch".
 
 ## Heads-up rule
 If any change needs a database or Supabase schema change, say so explicitly before doing it.

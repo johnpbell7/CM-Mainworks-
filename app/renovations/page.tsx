@@ -133,7 +133,6 @@ export default function Renovations() {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">Renovation questions</h2>
-            <p>More on the <Link href="/faqs">FAQs page</Link>.</p>
           </div>
           <FaqList faqs={renovationFaqs} />
         </div>

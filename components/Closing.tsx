@@ -8,7 +8,6 @@ export default function Closing() {
         <h2 id="close-title" data-reveal="up">Got a <span className="hl">project in mind?</span></h2>
         <div className="contact" data-reveal="stagger">
           <a className="link" href={business.phoneHref}>Ring me on {business.phoneDisplay}</a>
-          <a className="link" href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a>
           <Link className="link" href="/contact#quote">Get a free quote</Link>
         </div>
       </div>
