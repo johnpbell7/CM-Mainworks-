@@ -1,7 +1,11 @@
 import type { Media } from "./media";
 import type { SectionSlug } from "./site";
 
-// PLACEHOLDER projects. Replace names, write-ups and photos with Connor's real jobs.
+// Connor's jobs. One entry per job feeds its own page (/projects/<slug>), the projects
+// page, its service page ("Recent … work"), its town page ("Recent work in …", matched
+// by `place`), the sitemap (with its photos) and, with `homepage: true`, the homepage
+// before and afters. Photos go in public/images/projects/<slug>/.
+// Entries with `placeholder: true` stay hidden everywhere until replaced.
 export type Project = {
   slug: string;
   name: string;
@@ -16,6 +20,8 @@ export type Project = {
   after: Media;
   gallery: Media[];
   placeholder: boolean;
+  /** Put this job's before and after on the homepage (up to three jobs; both photos needed) */
+  homepage?: boolean;
 };
 
 const ph = (label: string): Media => ({ src: null, alt: label, label });
@@ -83,6 +89,22 @@ export const projects: Project[] = [
 /** Real projects only. Placeholders stay off the projects page, the sitemap and search. */
 export const publishedProjects = projects.filter((p) => !p.placeholder);
 
+/** Every real photo of a job, after first, without repeats. */
+export function projectPhotos(p: Project): (Media & { src: string })[] {
+  const seen = new Set<string>();
+  return [p.after, p.before, ...p.gallery].filter((m): m is Media & { src: string } => {
+    if (!m.src || seen.has(m.src)) return false;
+    seen.add(m.src);
+    return true;
+  });
+}
+
+/** Real jobs in a town, or in one of the villages its page covers. Matches `place` by name. */
+export function projectsIn(town: string, alsoCovers: string[] = []) {
+  const names = [town, ...alsoCovers].map((n) => n.toLowerCase());
+  return publishedProjects.filter((p) => p.place && names.includes(p.place.toLowerCase()));
+}
+
 export function getProject(slug: string) {
   return publishedProjects.find((p) => p.slug === slug);
 }
@@ -95,10 +117,17 @@ export function getProject(slug: string) {
 */
 export type BeforeAfterPair = { name: string; section: SectionSlug; before: Media; after: Media; href?: string };
 
-const pairs: BeforeAfterPair[] = [
+// Real pairs come from jobs marked `homepage: true` with both photos. Until there are
+// three, the slots below fill the gaps (the bay window is waiting on its before photo).
+const realPairs: BeforeAfterPair[] = publishedProjects
+  .filter((p) => p.homepage && p.before.src && p.after.src)
+  .map((p) => ({ name: p.name, section: p.section, before: p.before, after: p.after, href: `/projects/${p.slug}` }));
+
+const stopgaps: BeforeAfterPair[] = ([
   { name: "Bay window restoration", section: "carpentry", before: projects[0].before, after: projects[0].after, href: "/projects/bay-window-restoration" },
   { name: "Kitchen renovation", section: "kitchens", before: ph("Before photo"), after: ph("After photo") },
   { name: "Bathroom renovation", section: "bathrooms", before: ph("Before photo"), after: ph("After photo") },
-];
-export const beforeAfters = pairs.slice(0, 3);
+] satisfies BeforeAfterPair[]).filter((g) => !realPairs.some((r) => r.name === g.name || r.section === g.section));
+
+export const beforeAfters = [...realPairs, ...stopgaps].slice(0, 3);
 

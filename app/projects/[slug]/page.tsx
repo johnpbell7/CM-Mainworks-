@@ -5,7 +5,7 @@ import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import BeforeAfter from "@/components/BeforeAfter";
 import Closing from "@/components/Closing";
-import { getProject, publishedProjects } from "@/content/projects";
+import { getProject, projectPhotos, publishedProjects } from "@/content/projects";
 import { getSection } from "@/content/site";
 import { pageMeta } from "@/lib/seo";
 
@@ -19,14 +19,17 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = getProject((await params).slug);
   if (!p) return {};
-  return pageMeta({ title: p.name, description: p.summary, path: `/projects/${p.slug}` });
+  const title = p.place ? `${p.name} in ${p.place}` : p.name;
+  const image = p.after.src ? { src: p.after.src, alt: p.after.alt } : undefined;
+  return pageMeta({ title, description: p.summary, path: `/projects/${p.slug}`, image });
 }
 
 export default async function ProjectPage({ params }: Props) {
   const p = getProject((await params).slug);
   if (!p) notFound();
   const s = getSection(p.section)!;
-  const photos = p.gallery.filter((m) => m.src);
+  // the first photo sits beside the write-up; the rest follow underneath
+  const photos = projectPhotos(p).filter((m) => !(p.before.src && p.after.src && (m.src === p.before.src || m.src === p.after.src)));
   return (
     <div style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
       <PageHead
@@ -54,6 +57,11 @@ export default async function ProjectPage({ params }: Props) {
             </div>
             {photos[0] && <Photo media={photos[0]} sizes="(max-width: 1080px) 100vw, 40vw" style={{ aspectRatio: "3 / 4" }} priority />}
           </div>
+          {photos.length > 1 && (
+            <div className="proj-photos">
+              {photos.slice(1).map((m) => <Photo key={m.src} media={m} sizes="(max-width: 720px) 100vw, 33vw" />)}
+            </div>
+          )}
         </div>
       </section>
       {p.review && (

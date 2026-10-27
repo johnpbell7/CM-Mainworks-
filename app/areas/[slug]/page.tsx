@@ -8,6 +8,7 @@ import Steps from "@/components/Steps";
 import { areas, getArea } from "@/content/areas";
 import { business, getSection, renovation } from "@/content/site";
 import { media } from "@/content/media";
+import { projectsIn } from "@/content/projects";
 import FaqList from "@/components/FaqList";
 import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
@@ -27,6 +28,7 @@ export default async function AreaPage({ params }: Props) {
   const a = getArea((await params).slug);
   if (!a) notFound();
   const lead = getSection(a.focus[0].service)!;
+  const work = projectsIn(a.name, a.alsoCovers);
 
   return (
     <>
@@ -65,6 +67,24 @@ export default async function AreaPage({ params }: Props) {
               </ul>
             </div>
           </div>
+          {work.length > 0 && (
+            <div className="area-work">
+              <h2 className="mid-h" data-reveal="up">Recent work in {a.name}</h2>
+              <div className="proj-grid">
+                {work.map((p) => {
+                  const s = getSection(p.section)!;
+                  return (
+                    <Link className="proj" key={p.slug} href={`/projects/${p.slug}`}>
+                      <Photo media={p.after} sizes="(max-width: 720px) 100vw, 50vw" />
+                      <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
+                      <h3>{p.name}</h3>
+                      <p>{p.summary}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

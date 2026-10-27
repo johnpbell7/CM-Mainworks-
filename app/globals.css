@@ -128,7 +128,7 @@ ul, ol { margin: 0; padding: 0; }
 
 /* ---------- logo ---------- */
 .logo { height: 46px; width: auto; }
-.logo-head { height: 56px; }
+.logo-head { height: 50px; }
 
 /* ---------- header ---------- */
 .head {
@@ -631,6 +631,11 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .time-wrap { margin-top: clamp(56px, 7vw, 104px); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
 .time-wrap .faq-side { position: static; }
 .time-wrap .facts { margin-top: 0; }
+/* real jobs: the extra photos on a project page, and "Recent work in …" on a town page */
+.proj-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); margin-top: clamp(40px, 5vw, 72px); }
+.proj-photos .ph { aspect-ratio: 4 / 3; }
+.area-work { margin-top: clamp(56px, 7vw, 104px); }
+@media (max-width: 720px) { .proj-photos { grid-template-columns: minmax(0, 1fr); } }
 .mid-h { font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.035em; margin-bottom: 16px; }
 .big-h { font-size: var(--h2); }
 .big-p { margin-top: 20px; color: var(--ink-2); max-width: 40ch; font-size: 1.1rem; }
