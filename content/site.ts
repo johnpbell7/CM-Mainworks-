@@ -57,6 +57,9 @@ export type Section = {
   job: JobType;
   blurb: string;
   intro: string;
+  /** Headings that read right for this service: "How an extension works", "Extension work I take on" */
+  how: string;
+  work: string;
 };
 
 const oak = { color: "var(--oak)", tint: "var(--t-oak)", pen: "oak" } as const;
@@ -70,54 +73,72 @@ export const sections: Section[] = [
     name: "Extensions",
     blurb: "More room, built and finished inside.",
     intro: "More space without moving house. I plan it with you, build it and finish it inside, so you’re handed a room, not a shell.",
+    how: "How an extension works",
+    work: "Extension work",
   },
   {
     slug: "kitchens", ...sage, group: "renovation", illo: "kitchen", job: "Kitchen",
     name: "Kitchens",
     blurb: "Old one out, new one in, room finished.",
     intro: "From stripping the old one out to the last bit of tiling, your kitchen is handled by one team, so it comes together without the usual chasing.",
+    how: "How a kitchen renovation works",
+    work: "Kitchen work",
   },
   {
     slug: "bathrooms", ...steel, group: "renovation", illo: "bathroom", job: "Bathroom",
     name: "Bathrooms",
     blurb: "Strip-out to tiling and the final seal.",
     intro: "A bathroom has a lot of trades squeezed into a small room. I organise all of them, so you get a finished bathroom, not five separate appointments.",
+    how: "How a bathroom renovation works",
+    work: "Bathroom work",
   },
   {
     slug: "staircases", ...oak, group: "renovation", illo: "stairs", job: "Stairs",
     name: "Stairs, doors and skirting",
     blurb: "The joinery that finishes a home.",
     intro: "The joinery that makes a house feel finished: a solid staircase, doors that close properly and skirting and architrave that sit tight.",
+    how: "How a stairs, doors or skirting job works",
+    work: "Stairs, doors and skirting work",
   },
   {
     slug: "roofing", ...steel, group: "renovation", illo: "roof", job: "Roofing",
     name: "Roofing",
     blurb: "Repairs, new roofs, fascias and guttering.",
     intro: "A sound roof over the work, whether that’s a repair after a storm or a new roof as part of an extension.",
+    how: "How a roofing job works",
+    work: "Roofing work",
   },
   {
     slug: "flooring-and-tiling", ...brick, group: "renovation", illo: "flooring", job: "Floors and tiling",
     name: "Floors and tiling",
     blurb: "Laid flat, tiled straight.",
     intro: "Floors laid flat and tiles set straight, with the preparation underneath done properly so they stay that way.",
+    how: "How a floor or tiling job works",
+    work: "Floor and tiling work",
   },
   {
     slug: "carpentry", ...oak, group: "smaller", illo: "carpentry", job: "Doors, skirting and carpentry",
     name: "Carpentry",
     blurb: "Doors, trims and the odd jobs.",
     intro: "One door that sticks is as welcome as a whole house of new ones. Small carpentry jobs, done the same way as the big ones.",
+    how: "How a carpentry job works",
+    work: "Carpentry work",
   },
   {
     slug: "joinery", ...sage, group: "smaller", illo: "joinery", job: "Joinery",
     name: "Joinery",
     blurb: "Media walls, alcoves and storage.",
     intro: "Media walls, alcove units and storage, built for your room rather than flat-pack that nearly fits.",
+    how: "How a joinery job works",
+    work: "Joinery work",
   },
   {
     slug: "decorating", ...brick, group: "smaller", illo: "decorating", job: "Decorating",
     name: "Decorating",
     blurb: "One room or the whole house.",
     intro: "The bit everyone sees, with the prep done properly underneath so it lasts.",
+    how: "How a decorating job works",
+    work: "Decorating work",
   },
 ];
 

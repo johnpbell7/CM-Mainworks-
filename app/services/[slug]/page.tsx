@@ -90,7 +90,7 @@ export default async function Service({ params }: Props) {
       <section className="sec grey" aria-labelledby="inc-title">
         <div className="wrap">
           <div className="sec-head">
-            <div data-reveal="up"><h2 id="inc-title">{s.name} jobs I take on</h2></div>
+            <div data-reveal="up"><h2 id="inc-title">{s.work} I take on</h2></div>
             <p data-reveal="up">Not on the list? Ask anyway.</p>
           </div>
           <div className="items" data-reveal="stagger">
@@ -108,7 +108,7 @@ export default async function Service({ params }: Props) {
       <section className="sec" aria-labelledby="how-title">
         <div className="wrap">
           <div className="sec-head">
-            <div data-reveal="up"><h2 id="how-title">How a {name} job works</h2></div>
+            <div data-reveal="up"><h2 id="how-title">{s.how}</h2></div>
             <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
           </div>
           <Steps steps={c.steps} />
@@ -132,7 +132,7 @@ export default async function Service({ params }: Props) {
         <section className="sec" aria-labelledby="work-title">
           <div className="wrap">
             <div className="sec-head">
-              <div data-reveal="up"><h2 id="work-title">Recent {name}</h2></div>
+              <div data-reveal="up"><h2 id="work-title">Recent {s.work.toLowerCase()}</h2></div>
             </div>
             <div className="proj-grid">
               {work.map((p) => (
@@ -156,7 +156,7 @@ export default async function Service({ params }: Props) {
               <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 1080px) 100vw, 48vw" />
               <div data-reveal="up">
                 <h2 id="reno-title" className="big-h">Part of a bigger project?</h2>
-                <p>{s.group === "renovation" ? `${s.name} are` : `${s.name} is`} often one piece of a wider renovation. I can manage the whole job with one team, so everything is planned together and you’ve only got one person to deal with.</p>
+                <p>{s.work} is often one piece of a wider renovation. I can manage the whole job with one team, so everything is planned together and you’ve only got one person to deal with.</p>
                 <div className="row-links">
                   <Link className="link link-arrow" href={renovation.href}>How a full renovation works <Arrow /></Link>
                 </div>
@@ -170,7 +170,7 @@ export default async function Service({ params }: Props) {
       <section className={`sec${faqGrey ? " grey" : ""}`} aria-labelledby="faq-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
-            <h2 id="faq-title">{s.name} questions</h2>
+            <h2 id="faq-title">Questions about {name}</h2>
           </div>
           <FaqList faqs={faqs} />
         </div>
