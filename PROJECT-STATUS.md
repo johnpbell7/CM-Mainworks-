@@ -62,13 +62,19 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
   - Four renovation packages, plus four broad smaller-job rows. No per-door or per-room rates.
   - Every "from" price has an asterisk, explained by: "Prices are a guide and subject to seeing the job…".
   - **All figures are placeholders (`£TBC`) until Connor supplies them.** Never invent prices.
-- **Homepage before and afters:** at most three sliders (`beforeAfters` in `content/projects.ts`). Jobs with only one photo go on the projects page as single-photo posts.
+- **Homepage before and afters:** at most three sliders, taken from jobs marked `homepage: true` in `content/projects.ts` (both photos needed); placeholder slots fill the gaps until there are three. Jobs with only one photo go on the projects page as single-photo posts.
+- **Photos and icons (John, 27 Oct):** keep the icons, but get far more photos on the homepage. Photo spots that fill in as soon as `src` is set: hero, renovation feature, the six service cards, the three smaller-job cards, a wide team photo under the benefits (`media.team`), the before and afters, up to six photos from real jobs under them, and Connor's portrait.
 - **FAQs:** every FAQ starts closed.
 - **Header:**
   - The logo lockup has "Carpentry & Construction" made legible: `scripts/make-header-logo.mjs` rescales the supplied shapes, nothing is retyped.
   - On phones the header shows just the logo and the menu, because the bottom bar has Call.
+  - The logo is 50px tall on desktop (John, 27 Oct: a little smaller) and 48px on phones.
 - **Footer:** navy, with the on-navy logo, light text and gold headings.
-- **Town pages** (`/areas/[slug]`, 14 towns) are in scope. They are linked from the footer only, and there is no areas hub page (`/areas` redirects to `/`).
+- **Town pages** (`/areas/[slug]`, 11 towns) are in scope. They are linked from the footer only, and there is no areas hub page (`/areas` redirects to `/`).
+  - Each leads with renovation work (kitchens, bathrooms, extensions), has its own write-up of the local houses and three or four questions of its own.
+  - Fradley, Shenstone and Whittington (and the other villages round Lichfield) are covered on the Lichfield page; their old addresses redirect there (27 Oct).
+- **Renovations page:** a full renovation is shown as every trade Connor also does on its own, joined up: nine cards in job order, each with its photo spot (John, 27 Oct).
+- **Service pages:** each has "How long, and how much disruption" (`time` in `content/services.ts`). Connor's typical time on site stays `null`, and hidden, until he gives it.
 - **Page changes:** a quick slide-up transition (`app/template.tsx`). The logo link always lands at the very top.
 - **Intro animation:** the CM halves snap together on navy, then the page splits open. It plays once per browser session and has failsafes, so a slow phone is never left on the navy screen.
 
@@ -90,7 +96,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 | `/renovations` | **The main pitch page.** It covers the usual way versus one team, what a renovation includes, built in phases (with the timeline), prices, FAQs and the quote form |
 | `/prices` | Packages, how pricing works, smaller jobs, price FAQs and the quote form |
 | `/services` and `/services/[slug]` | Nine services. Six are renovation services: extensions, kitchens, bathrooms, staircases, roofing, and flooring-and-tiling. Three are smaller jobs: carpentry, joinery and decorating. (`/services/building` redirects to extensions) |
-| `/areas/[slug]` | 14 town pages for local SEO |
+| `/areas/[slug]` | 11 town pages for local SEO (the villages round Lichfield are on its page) |
 | `/projects` and `/projects/[slug]` | Recent work. Only real jobs are published; placeholders stay hidden |
 | `/about`, `/faqs`, `/contact`, `/privacy` | As named |
 | `/logo-animation` | Unlinked page used to render the square logo video |
@@ -106,7 +112,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 | `content/prices.ts` | Packages, smaller-job rows and the price note. Prices are `null` until Connor confirms them |
 | `content/faqs.ts` | All FAQs (home, renovations, prices, the full list) |
 | `content/areas.ts` | Town page copy |
-| `content/projects.ts` | Projects plus the homepage `beforeAfters` |
+| `content/projects.ts` | Connor's jobs. One entry per job feeds its own page, the projects page, its service and town pages (matched by `place`), the sitemap with its photos, and the homepage (`homepage: true`) |
 | `content/media.ts` | Every photo slot. Set `src` when a real photo arrives; until then a drawing or a labelled placeholder shows |
 | `components/` | Header, Footer, MobileMenu, MobileBar, QuoteForm, Intro, Motion (GSAP scroll reveals, set up lazily for speed), Illustration (all drawings), Phases, Benefits, PackageCard, SmallerJobs, BeforeAfter, FaqList and others |
 | `lib/seo.tsx` | `pageMeta()`, breadcrumb and FAQ schema |
