@@ -86,7 +86,7 @@ export default async function Service({ params }: Props) {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="inc-title">{s.name} jobs I take on</h2></div>
-            <p data-reveal="up">Something not on the list? Ask anyway. If I can’t do it, I’ll say so.</p>
+            <p data-reveal="up">Not on the list? Ask anyway.</p>
           </div>
           <div className="items" data-reveal="stagger">
             {c.items.map((i) => (
@@ -169,7 +169,7 @@ export default async function Service({ params }: Props) {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">{s.name} questions</h2>
-            <p>The things people ask me most about {name}. There’s more on the <Link href="/faqs">FAQs page</Link>.</p>
+            <p>More on the <Link href="/faqs">FAQs page</Link>.</p>
           </div>
           <FaqList faqs={faqs} />
         </div>
@@ -180,7 +180,7 @@ export default async function Service({ params }: Props) {
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Ask about {name}</h2>
-            <p className="big-p">Send me a few photos and a line about the job. I’ll take a look, come round if I need to, and send you a written quote.</p>
+            <p className="big-p">Send a few photos and a line about the job, and I’ll send a written quote.</p>
             <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
           <QuoteForm defaultJob={s.job} />

@@ -5,8 +5,8 @@ import { business } from "./site";
 // No prices (those live on /prices as placeholders), qualifications or guarantees.
 export type Faq = { q: string; a: string; color: SectionSlug | "renovation" };
 
-const areaList = `${business.areas.slice(1, -1).join(", ")} and ${business.areas[business.areas.length - 1]}`;
-const areasAnswer = `I’m based in Lichfield and work across the Midlands, including ${areaList}, plus the towns and villages in between.`;
+const areaList = `${business.areas.slice(0, -1).join(", ")} and ${business.areas[business.areas.length - 1]}`;
+const areasAnswer = `I work across the Midlands, including ${areaList}, plus the towns and villages in between.`;
 
 const oneTeam: Faq = { q: "What does “one team” actually mean?", a: "It means you deal with me, and I take care of everything else. I plan the job, run it on site, and bring in the trades I trust for things like electrics and plumbing. You’re not chasing five different firms or wondering who turns up next.", color: "renovation" };
 const smallJobs: Faq = { q: "Do you still take on small jobs?", a: "Yes. Renovations are my main work, but one sticking door is still welcome. Send me a photo and I’ll let you know.", color: "carpentry" };

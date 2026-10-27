@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Arrow } from "./Icons";
 import { renovation, getSection } from "@/content/site";
-import type { Package } from "@/content/prices";
+import { priceNote, type Package } from "@/content/prices";
 
 export function lookOf(look: Package["look"]) {
   if (look === "renovation") return { color: renovation.color, tint: renovation.tint };
@@ -9,15 +9,19 @@ export function lookOf(look: Package["look"]) {
   return { color: s.color, tint: s.tint };
 }
 
-/** A "from" price. Shows a clearly marked placeholder until Connor supplies the figure. */
-export function FromPrice({ from, unit }: { from: string | null; unit?: string }) {
+/** A "from" price, with the asterisk that ties it to PriceNote. Shows a placeholder until Connor supplies the figure. */
+export function FromPrice({ from }: { from: string | null }) {
   return (
     <p className={`from${from ? "" : " tbc"}`}>
       <span>From</span>
-      <strong>{from ?? "£TBC"}</strong>
-      {unit && <span>{unit}</span>}
+      <strong>{from ?? "£TBC"}<sup aria-hidden="true">*</sup></strong>
     </p>
   );
+}
+
+/** The footnote for the asterisk. Use under every group of prices. */
+export function PriceNote() {
+  return <p className="price-note"><span aria-hidden="true">* </span>{priceNote}</p>;
 }
 
 /**

@@ -79,14 +79,13 @@ export const packages: Package[] = [
   },
 ];
 
-/** Room-by-room and smaller jobs. */
-export const roomPrices: { name: string; note: string; from: string | null; unit?: string; look: SectionSlug; href: string }[] = [
-  { name: "Staircase makeover", note: "New spindles, handrail and newels", from: null, look: "staircases", href: "/services/staircases" },
-  { name: "Internal doors", note: "Hung, with handles and latches", from: null, unit: "per door", look: "staircases", href: "/services/staircases" },
-  { name: "Skirting and architrave", note: "Ready for paint", from: null, unit: "per room", look: "staircases", href: "/services/staircases" },
-  { name: "Flooring", note: "Wood, laminate or LVT", from: null, unit: "per room", look: "flooring-and-tiling", href: "/services/flooring-and-tiling" },
-  { name: "Floor and wall tiling", note: "Kitchens, bathrooms and hallways", from: null, unit: "per room", look: "flooring-and-tiling", href: "/services/flooring-and-tiling" },
-  { name: "Roof repairs", note: "Slipped tiles, leaks and flashings", from: null, look: "roofing", href: "/services/roofing" },
-  { name: "Media wall or alcove units", note: "Made to fit, painted on site", from: null, look: "joinery", href: "/services/joinery" },
-  { name: "Decorating", note: "Walls, ceilings and woodwork", from: null, unit: "per room", look: "decorating", href: "/services/decorating" },
+/** Smaller jobs, kept broad: one "from" price per kind of work, no per-door or per-room rates. */
+export const roomPrices: { name: string; note: string; from: string | null; look: SectionSlug; href: string }[] = [
+  { name: "Stairs, doors and skirting", note: "Staircase makeovers, internal doors, trims", from: null, look: "staircases", href: "/services/staircases" },
+  { name: "Floors and tiling", note: "Wood, laminate, LVT and tiles", from: null, look: "flooring-and-tiling", href: "/services/flooring-and-tiling" },
+  { name: "Roof repairs", note: "Tiles, leaks, fascias and guttering", from: null, look: "roofing", href: "/services/roofing" },
+  { name: "Joinery and decorating", note: "Media walls, alcoves and painting", from: null, look: "joinery", href: "/services/joinery" },
 ];
+
+/** Shown wherever a price appears, tied to the asterisk on every "from" figure. */
+export const priceNote = "Prices are a guide and subject to seeing the job. You’ll always get a written quote before any work starts.";

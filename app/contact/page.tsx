@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact and free quote",
-  description: "Get a free written quote from me, Connor at CM MainWorks. Send a few photos of the job, ring 07742 135592 or WhatsApp me. Covering Lichfield and the Midlands.",
+  description: "Get a free written quote from me, Connor at CM MainWorks. Send a few photos of the job, ring 07742 135592 or WhatsApp me. Covering the Midlands.",
   path: "/contact",
 });
 
@@ -42,7 +42,7 @@ export default function Contact() {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="send-title">What to send for a quick quote</h2>
-            <p>You don’t need all of this, but the more I can see, the quicker and more accurate the price.</p>
+            <p>Not all of it. The more I see, the quicker the price.</p>
           </div>
           <ol className="factors" data-reveal="stagger">
             <li>A photo of each room or area, plus a couple of close-ups of anything that’s damaged or awkward</li>

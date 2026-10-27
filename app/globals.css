@@ -703,7 +703,8 @@ a.pkg:hover h3 svg { transform: translateX(4px); }
 .price-rows .from { grid-column: 3; grid-row: 1 / span 2; margin: 0; justify-content: flex-end; text-align: right; }
 .price-rows .from strong { font-size: 1.35rem; }
 .price-rows a:hover h3 { color: var(--gold-ink); }
-.price-note { margin-top: 28px; color: var(--ink-2); max-width: 70ch; }
+.price-note { margin-top: 24px; color: var(--ink-2); font-size: .9rem; max-width: 70ch; }
+.from sup { font-size: .5em; vertical-align: super; margin-left: 1px; }
 .page-head .draft { margin-top: 14px; }
 .benefits.tight h3 { margin-top: 18px; font-size: 1.2rem; }
 .benefits.tight .benefit-ico { width: 52px; height: 52px; }

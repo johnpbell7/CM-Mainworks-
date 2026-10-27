@@ -72,7 +72,7 @@ export default function Phases({ titleId }: { titleId: string }) {
             </div>
           </li>
         </ol>
-        <p className="price-note">An example. Every job is different, so your phases are planned around your home and agreed with you before we start.</p>
+        <p className="price-note">An example. Your phases are planned around your home.</p>
       </div>
     </div>
   );

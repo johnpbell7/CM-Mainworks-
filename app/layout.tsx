@@ -20,14 +20,14 @@ const bricolage = Bricolage_Grotesque({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "Home renovations in Lichfield and the Midlands | CM MainWorks", template: "%s | CM MainWorks" },
-  description: "I’m Connor. Full home renovations across Lichfield and the Midlands, managed by one team from start to finish. Free written quotes.",
+  title: { default: "Home renovations across the Midlands | CM MainWorks", template: "%s | CM MainWorks" },
+  description: "I’m Connor. Full home renovations across the Midlands, managed by one team from start to finish. Free written quotes.",
   applicationName: "CM MainWorks",
   openGraph: {
     type: "website",
     locale: "en_GB",
     siteName: "CM MainWorks",
-    images: [{ url: "/images/og-cm-mainworks.jpg", width: 1200, height: 630, alt: "CM MainWorks, carpentry and construction in Lichfield" }],
+    images: [{ url: "/images/og-cm-mainworks.jpg", width: 1200, height: 630, alt: "CM MainWorks, carpentry and construction" }],
   },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: true },

@@ -21,7 +21,7 @@ export default function Footer() {
           <Link href="/" aria-label="CM MainWorks home">
             <img className="logo" src="/brand/logo/main/cm-mainworks-horizontal-on-navy.svg" alt="CM MainWorks, carpentry and construction" width={207} height={40} loading="lazy" />
           </Link>
-          <p>I’m Connor. Full home renovations, managed by one team from start to finish. Based in Lichfield, working across the Midlands.</p>
+          <p>I’m Connor. Full home renovations, managed by one team from start to finish, across the Midlands.</p>
           <p className="foot-contact">
             <a href={business.phoneHref}>{business.phoneDisplay}</a>
             <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a>

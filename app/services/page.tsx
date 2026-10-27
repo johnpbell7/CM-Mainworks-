@@ -12,7 +12,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Renovation services: kitchens, bathrooms, extensions and more",
-  description: "I’m Connor. Full renovations, extensions, kitchens, bathrooms, stairs, floors, roofing and decorating across Lichfield and the Midlands, managed by one team.",
+  description: "I’m Connor. Full renovations, extensions, kitchens, bathrooms, stairs, floors, roofing and decorating across the Midlands, managed by one team.",
   path: "/services",
 });
 
@@ -40,7 +40,7 @@ export default function Services() {
       <PageHead
         crumbs={[{ href: "/services", label: "Services" }]}
         title={<>Everything your home needs, <span className="hl">one team.</span></>}
-        lede="Whole renovations are my main work: kitchens, bathrooms, extensions, stairs, floors and roofs, all managed by me. Smaller jobs are welcome too."
+        lede="Whole renovations are my main work, all managed by me. Smaller jobs are welcome too."
       />
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap svc-rows">
@@ -48,7 +48,7 @@ export default function Services() {
             <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div data-reveal="up">
               <h2><span className="hl">Full home renovations</span></h2>
-              <p>The whole job, planned with you and managed by me from start to finish. One team, one point of contact and one written quote.</p>
+              <p>The whole job, planned with you and managed by me. One team, one written quote.</p>
               <ul className="ticks">
                 <li>One person to deal with throughout</li>
                 <li>Specialist trades organised for you</li>
@@ -67,7 +67,7 @@ export default function Services() {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="small-title">Smaller jobs</h2></div>
-            <p data-reveal="up">One door, one media wall or one room to paint. <span className="hl" data-pen="oak">Just as welcome.</span></p>
+            <p data-reveal="up"><span className="hl" data-pen="oak">Just as welcome.</span></p>
           </div>
           <SmallerJobs />
         </div>

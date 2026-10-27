@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/PageHead";
-import PackageCard, { FromPrice } from "@/components/PackageCard";
+import PackageCard, { FromPrice, PriceNote } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
 import { business, getSection, renovation } from "@/content/site";
@@ -12,7 +12,7 @@ import { faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Renovation prices and packages",
-  description: "A guide to my prices for full renovations, kitchens, bathrooms, extensions and smaller jobs across Lichfield and the Midlands. Free written quotes, no surprises.",
+  description: "A guide to my prices for full renovations, kitchens, bathrooms, extensions and smaller jobs across the Midlands. Free written quotes, no surprises.",
   path: "/prices",
 });
 
@@ -41,6 +41,7 @@ export default function Prices() {
           <div className="pkgs swipe" data-reveal="stagger">
             {packages.map((p) => <PackageCard key={p.name} p={p} />)}
           </div>
+          <PriceNote />
         </div>
       </section>
 
@@ -65,9 +66,10 @@ export default function Prices() {
       <section className="sec" aria-labelledby="room-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
-            <h2 id="room-title">Room by room</h2>
-            <p>Not doing the whole house? These can be done on their own or added to a bigger job.</p>
+            <h2 id="room-title">Smaller jobs</h2>
+            <p>On their own or as part of a bigger job.</p>
           </div>
+          <div>
           <ul className="price-rows" data-reveal="stagger">
             {roomPrices.map((r) => {
               const s = getSection(r.look)!;
@@ -75,13 +77,15 @@ export default function Prices() {
                 <li key={r.name} style={{ "--c": s.color } as React.CSSProperties}>
                   <Link href={r.href}>
                     <h3>{r.name}</h3>
-                    <FromPrice from={r.from} unit={r.unit} />
+                    <FromPrice from={r.from} />
                     <p>{r.note}</p>
                   </Link>
                 </li>
               );
             })}
           </ul>
+            <PriceNote />
+          </div>
         </div>
       </section>
 
@@ -99,7 +103,7 @@ export default function Prices() {
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Get your price</h2>
-            <p className="big-p">Send me a few photos and a line about the job, and I’ll send you a written quote.</p>
+            <p className="big-p">Send a few photos and a line about the job, and I’ll send a written quote.</p>
             <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
           <QuoteForm />

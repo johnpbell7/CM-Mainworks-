@@ -27,10 +27,10 @@ export type ServiceContent = {
 
 export const serviceContent: Record<SectionSlug, ServiceContent> = {
   extensions: {
-    title: "House extensions in Lichfield and the Midlands",
+    title: "House extensions across the Midlands",
     h1: "Extensions, built and finished by one team",
     description:
-      "I’m Connor. Single-storey, kitchen and rear extensions across Lichfield and the Midlands, planned with you and finished inside by one team. Free written quotes.",
+      "I’m Connor. Single-storey, kitchen and rear extensions across the Midlands, planned with you and finished inside by one team. Free written quotes.",
     lede: "More room without moving house. I plan it with you, build it, and finish it inside, so you’re handed a room you can use, not a shell.",
     body: [
       "Most people who ask about an extension have the same worry: who’s going to pull it all together? Builders, roofers, electricians, plasterers, a kitchen fitter, a decorator. Normally that’s you, juggling phone calls. With me, it’s my job.",
@@ -70,10 +70,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   kitchens: {
-    title: "Kitchen renovations in Lichfield and the Midlands",
+    title: "Kitchen renovations across the Midlands",
     h1: "Kitchen renovations, start to finish",
     description:
-      "I’m Connor. Complete kitchen renovations across Lichfield and the Midlands: strip-out, layout changes, fitting, tiling, flooring and decorating, run by one team.",
+      "I’m Connor. Complete kitchen renovations across the Midlands: strip-out, layout changes, fitting, tiling, flooring and decorating, run by one team.",
     lede: "Old kitchen out, new one in, and the room finished properly around it. One team, one point of contact, and a kitchen you’ll love cooking in.",
     body: [
       "A new kitchen usually means a lot of different people: someone to rip the old one out, a fitter, a plumber, an electrician, a tiler, a plasterer and a decorator. Get the order wrong and you’re without a kitchen for weeks longer than you need to be.",
@@ -112,10 +112,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   bathrooms: {
-    title: "Bathroom renovations in Lichfield and the Midlands",
+    title: "Bathroom renovations across the Midlands",
     h1: "Bathroom renovations, done properly",
     description:
-      "I’m Connor. Full bathroom renovations across Lichfield and the Midlands: strip-out, new suite, tiling, flooring and decorating, organised by one team.",
+      "I’m Connor. Full bathroom renovations across the Midlands: strip-out, new suite, tiling, flooring and decorating, organised by one team.",
     lede: "A bathroom packs a lot of trades into one small room. I organise every one of them, so you get a finished bathroom, not five separate appointments.",
     body: [
       "A tired bathroom is one of those jobs people put off, mostly because of the hassle. Who strips it out? Who does the plumbing? When does the tiler come? What if they all turn up on the same day?",
@@ -154,10 +154,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   staircases: {
-    title: "Staircases, doors and skirting in Lichfield",
+    title: "Staircases, doors and skirting across the Midlands",
     h1: "Stairs, doors and skirting that finish a home",
     description:
-      "I’m Connor. Staircase renovations, internal doors, skirting and architrave across Lichfield and the Midlands, room by room or right through the house.",
+      "I’m Connor. Staircase renovations, internal doors, skirting and architrave across the Midlands, room by room or right through the house.",
     lede: "The woodwork you only notice when it’s wrong. A solid staircase, doors that close with a click and skirting and architrave that sit tight to the wall.",
     body: [
       "Stairs, doors, skirting and architrave are what make a renovated house feel finished. They’re also the first things you notice in a house that isn’t: a door that catches, a gap under the skirting, a wobbly newel post everyone has learned not to lean on.",
@@ -196,10 +196,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   roofing: {
-    title: "Roofing in Lichfield and the Midlands",
+    title: "Roofing across the Midlands",
     h1: "Roofing, as part of the job or on its own",
     description:
-      "I’m Connor. Roof repairs, new roofs on extensions, flat roofs, fascias, soffits and guttering across Lichfield and the Midlands. Free written quotes.",
+      "I’m Connor. Roof repairs, new roofs on extensions, flat roofs, fascias, soffits and guttering across the Midlands. Free written quotes.",
     lede: "A sound roof over everything else. Repairs after a storm, a new roof on an extension, and the fascias and guttering that keep the weather out.",
     body: [
       "Roof work often comes up in the middle of something else. You’re planning an extension and it needs a roof. You’re renovating and spot a leak. Having it handled by the same team means it’s done at the right time, and done properly.",
@@ -236,10 +236,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   "flooring-and-tiling": {
-    title: "Flooring and tiling in Lichfield and the Midlands",
+    title: "Flooring and tiling across the Midlands",
     h1: "Floors and tiling, laid flat and straight",
     description:
-      "I’m Connor. Wood, laminate and tiled floors, and wall tiling for kitchens and bathrooms, across Lichfield and the Midlands. Proper preparation underneath.",
+      "I’m Connor. Wood, laminate and tiled floors, and wall tiling for kitchens and bathrooms, across the Midlands. Proper preparation underneath.",
     lede: "Floors laid flat and tiles set straight, with the preparation underneath done properly so they stay that way.",
     body: [
       "A good floor is mostly about what you can’t see. A level base, the right underlay, room for expansion and doors trimmed to clear. Skip any of it and you get gaps, bounce and tiles that crack.",
@@ -276,10 +276,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   carpentry: {
-    title: "Carpenter in Lichfield",
+    title: "Carpenter across the Midlands",
     h1: "Carpentry jobs, big or small",
     description:
-      "I’m Connor, a carpenter in Lichfield. Doors eased and hung, fitted wardrobes, kitchen fitting and garden canopies. No job too small. Free written quotes.",
+      "I’m Connor, a carpenter working across the Midlands. Doors eased and hung, fitted wardrobes, kitchen fitting and garden canopies. No job too small. Free written quotes.",
     lede: "Renovations are what I do most, but I started as a carpenter and I still love the smaller jobs. One sticking door is as welcome as a whole house.",
     body: [
       "Most small carpentry jobs are in lived-in homes. A door that’s started catching since the new flooring went down. A cupboard door that’s never shut properly. A gap that’s been bugging you for months. Small things, but they’re what make a place feel unfinished.",
@@ -315,10 +315,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   joinery: {
-    title: "Joiner in Lichfield",
-    h1: "Joinery in Lichfield, made to fit",
+    title: "Joiner across the Midlands",
+    h1: "Joinery, made to fit",
     description:
-      "I’m Connor, a joiner in Lichfield. Made-to-measure media walls, alcove units, shelving and under-stairs storage, built for your room, not adapted from flat-pack.",
+      "I’m Connor, a joiner working across the Midlands. Made-to-measure media walls, alcove units, shelving and under-stairs storage, built for your room, not adapted from flat-pack.",
     lede: "Media walls, alcove units and storage, made for the room they’re going in.",
     body: [
       "Shop-bought furniture never quite fits an alcove. There’s a gap down one side, a skirting board in the way, or a wall that leans. What I build is made for the actual space, so it runs right up to the walls and ceiling and looks like it’s always been there.",
@@ -356,10 +356,10 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
   },
 
   decorating: {
-    title: "Painter and decorator in Lichfield",
-    h1: "Decorating in Lichfield, right to the last coat",
+    title: "Painter and decorator across the Midlands",
+    h1: "Decorating, right to the last coat",
     description:
-      "I’m Connor, a painter and decorator in Lichfield. Walls, ceilings, woodwork, timber windows and outside paintwork, with proper prep under every coat.",
+      "I’m Connor, a painter and decorator working across the Midlands. Walls, ceilings, woodwork, timber windows and outside paintwork, with proper prep under every coat.",
     lede: "Clean lines, proper prep and paint that lasts, inside and out.",
     body: [
       "A paint job lives or dies on the preparation. Filling, sanding, sealing new plaster and masking off take longer than the painting, and they’re the reason a finish still looks sharp a year later, not just on the day.",

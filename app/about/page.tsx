@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Closing from "@/components/Closing";
+import { Arrow } from "@/components/Icons";
 import { business, renovation, sections } from "@/content/site";
 import { media } from "@/content/media";
 import { areas } from "@/content/areas";
@@ -10,7 +11,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "About me",
-  description: `I’m Connor. I run CM MainWorks, managing full home renovations with one team across Lichfield and the Midlands, with ${business.experience} in the trade.`,
+  description: `I’m Connor. I run CM MainWorks, managing full home renovations with one team across the Midlands, with ${business.experience} in the trade.`,
   path: "/about",
 });
 
@@ -29,7 +30,7 @@ export default function About() {
       <PageHead
         crumbs={[{ href: "/about", label: "About" }]}
         title={<>Hi, I’m <span className="hl">Connor.</span></>}
-        lede="I run CM MainWorks from Lichfield. I manage home renovations from start to finish, so you get the home you want without the stress of running it yourself."
+        lede="I run CM MainWorks, managing home renovations from start to finish."
       />
 
       <section className={`sec about${media.portrait.src ? "" : " no-photo"}`} style={{ paddingTop: 0, borderTop: 0 }} aria-labelledby="story-title">
@@ -38,10 +39,10 @@ export default function About() {
           <div data-reveal="up">
             {/* DRAFT copy for Connor to approve. Do not add insurance, qualifications or reviews until he confirms them. */}
             <h2 id="story-title" className="mid-h">How I work</h2>
-            <p>I’ve been in the trade {business.experience}. I started as a carpenter, hanging doors and fitting kitchens, and along the way I saw how stressful renovations can be for the people living through them. Too many trades, nobody in charge, and the homeowner stuck in the middle.</p>
-            <p>So that’s what I do differently. I manage the whole job with one team: my labourers, the trades I trust for things like electrics and plumbing, and me on site running it. You’ve got one person to ring and one written quote. Bigger jobs run in clear phases, invoiced phase by phase, and we sit down regularly to check the timescales and targets we agreed.</p>
-            <p>I’m friendly, I’m straight with people about cost, and I’ll <span className="hl" data-pen="sage">work with you to get the home you want</span>. If something’s not right, I’ll put it right before I go.</p>
-            <p><Link className="link link-arrow" href={renovation.href}>How a renovation works with me</Link></p>
+            <p>I’ve been in the trade {business.experience}. I started as a carpenter, and saw how stressful renovations are for the people living through them: too many trades and nobody in charge.</p>
+            <p>So I run the whole job with one team: my labourers, trusted trades for electrics and plumbing, and me on site. One person to ring, one written quote, paid phase by phase.</p>
+            <p>I’m straight about cost, and I’ll <span className="hl" data-pen="sage">work with you to get the home you want</span>.</p>
+            <p><Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link></p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="CM MainWorks badge" width={96} height={42} loading="lazy" />
             <p className="draft">Draft copy, waiting on Connor’s approval.</p>
           </div>

@@ -9,7 +9,7 @@ import Closing from "@/components/Closing";
 import SmallerJobs from "@/components/SmallerJobs";
 import Steps from "@/components/Steps";
 import Benefits from "@/components/Benefits";
-import PackageCard from "@/components/PackageCard";
+import PackageCard, { PriceNote } from "@/components/PackageCard";
 import { business, renovation, renovationServices, sections } from "@/content/site";
 import { packages } from "@/content/prices";
 import { media } from "@/content/media";
@@ -23,7 +23,7 @@ const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
 const tintOf = (slug: string) => sections.find((s) => s.slug === slug)!.tint;
 
 export const metadata: Metadata = pageMeta({
-  title: "Home renovations in Lichfield and the Midlands | CM MainWorks",
+  title: "Home renovations across the Midlands | CM MainWorks",
   description: "I’m Connor. Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and roofs. Insured, with free written quotes.",
   path: "/",
   absolute: true,
@@ -43,7 +43,7 @@ export default function Home() {
               Your whole renovation, <span className="hl">one team.</span>
             </h1>
             <p className="lede" data-hero>
-              Kitchens, bathrooms, extensions and full home renovations across Lichfield and the Midlands, managed by me from start to finish.
+              Kitchens, bathrooms, extensions and whole homes across the Midlands, managed start to finish.
             </p>
             <ul className="hero-meta" data-hero aria-label="At a glance">
               <li><Team />One team, start to finish</li>
@@ -65,7 +65,7 @@ export default function Home() {
               <h2 id="why-title">One team. Less stress.</h2>
             </div>
             <p data-reveal="up">
-              Renovating should be exciting, not a second job. <span className="hl">I manage the whole thing</span>, so you don’t have to.
+              <span className="hl">I manage the whole thing</span>, so you don’t have to.
             </p>
           </div>
           <Benefits />
@@ -80,7 +80,7 @@ export default function Home() {
               <h2 id="svc-title">What I can do for your home</h2>
             </div>
             <p data-reveal="up">
-              One room or the whole house, <span className="hl" data-pen="steel">planned with you</span> and finished properly.
+              One room or the whole house, <span className="hl" data-pen="steel">planned with you</span>.
             </p>
           </div>
 
@@ -90,7 +90,7 @@ export default function Home() {
             </Link>
             <div data-reveal="up">
               <h3><Link href={renovation.href} style={{ textDecoration: "none" }}>Full home renovations</Link></h3>
-              <p>Everything you want doing, from the first plan to the final coat of paint. One team, clear phases, and regular sit-downs so you always know where things stand.</p>
+              <p>Everything you want doing, from the first plan to the last coat of paint. One team, in clear phases.</p>
               <ul className="ticks hide-m">
                 <li>Kitchens and bathrooms</li>
                 <li>Extensions and knock-throughs</li>
@@ -124,7 +124,7 @@ export default function Home() {
             <div data-reveal="up">
               <h2 id="small-title">Smaller jobs, just as welcome</h2>
             </div>
-            <p data-reveal="up">Renovations are my main work, but <span className="hl" data-pen="oak">one sticking door</span> still gets the same care.</p>
+            <p data-reveal="up"><span className="hl" data-pen="oak">One sticking door</span> gets the same care.</p>
           </div>
           <SmallerJobs />
         </div>
@@ -138,12 +138,13 @@ export default function Home() {
               <h2 id="price-title">Prices from</h2>
             </div>
             <p data-reveal="up">
-              A guide to get you started, then <span className="hl">a written quote for your home</span>.
+              A guide first, then <span className="hl">a written quote</span>.
             </p>
           </div>
           <div className="pkgs three swipe" data-reveal="stagger">
             {packages.slice(0, 3).map((p) => <PackageCard key={p.name} p={p} compact />)}
           </div>
+          <PriceNote />
         </div>
       </section>
 
@@ -193,11 +194,10 @@ export default function Home() {
           <div data-reveal="up">
             <h2 id="about-title">Hi, I’m Connor.</h2>
             <p>
-              I run CM MainWorks from Lichfield, with {business.experience} in the trade. I started as a carpenter, and now I manage whole renovations:
-              one team, with the trades I trust, and me as the one person you deal with from the first visit to the final clean-up.
+              {business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade, from carpenter to running whole renovations. One team, and me as the person you deal with throughout.
             </p>
             <p>
-              I’ll listen, be straight with you about cost, and <span className="hl" data-pen="sage">work with you to get the home you want</span>. I don’t leave until it’s right.
+              I’ll be straight with you about cost and <span className="hl" data-pen="sage">work with you to get the home you want</span>.
             </p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
             <Link className="link link-arrow" href="/about" style={{ display: "inline-flex", marginTop: 28 }}>More about me <Arrow /></Link>
@@ -235,7 +235,7 @@ export default function Home() {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">FAQs</h2>
-            <p>What people usually ask me first. Anything else, just ring or WhatsApp. I’m always happy to talk.</p>
+            <p>Anything else, just ring or WhatsApp.</p>
             <Link className="link link-arrow" href="/faqs">All questions <Arrow /></Link>
           </div>
           <FaqList faqs={homeFaqs.slice(0, 4)} />

@@ -3,7 +3,7 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Phases from "@/components/Phases";
-import PackageCard from "@/components/PackageCard";
+import PackageCard, { PriceNote } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
 import { Arrow, Check, Cross } from "@/components/Icons";
@@ -15,26 +15,24 @@ import { areas } from "@/content/areas";
 import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Full home renovations in Lichfield and the Midlands",
+  title: "Full home renovations across the Midlands",
   description: "I’m Connor. Full home renovations managed by one team from start to finish: kitchens, bathrooms, extensions, floors, stairs and decorating. Free written quotes.",
   path: "/renovations",
 });
 
 const usual = [
-  "Finding, vetting and booking five or six different trades",
-  "Working out who goes first, and waiting when someone doesn’t turn up",
-  "Each firm adding its own margin to the bill",
-  "Nobody responsible when one trade’s work affects another’s",
-  "No real idea whether it’s on time or on budget",
-  "You, managing it all around work and family",
+  "Finding and booking five or six trades",
+  "Waiting when someone doesn’t turn up",
+  "Every firm adding its own margin",
+  "Nobody responsible for the whole job",
+  "No idea if it’s on time or budget",
 ];
 const ours = [
-  "One person to deal with, from the first visit to the final clean",
-  "The work planned in clear phases, so the job keeps moving",
-  "One clear, written quote, invoiced phase by phase",
-  "Regular sit-downs to check timescales and targets",
-  "One team responsible for the finished result",
-  "You get on with your life, and we sit down regularly to check progress",
+  "One person to deal with throughout",
+  "Clear phases that keep the job moving",
+  "One written quote, paid phase by phase",
+  "One team responsible for the result",
+  "Regular sit-downs to check progress",
 ];
 
 
@@ -61,7 +59,7 @@ export default function Renovations() {
       <PageHead
         crumbs={[{ href: "/renovations", label: "Renovations" }]}
         title={<>Your whole renovation, <span className="hl">one team.</span></>}
-        lede="Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me in clear phases from start to finish. Less stress, a fair price, and a home you’ll love."
+        lede="Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me in clear phases."
       />
 
       <section className="sec" style={{ paddingTop: 0 }} aria-label="How I work">
@@ -69,8 +67,8 @@ export default function Renovations() {
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
             <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div className="prose" data-reveal="up">
-              <p>Renovating is exciting, but managing it is stressful: finding trades, getting them in the right order and chasing the ones who don’t turn up.</p>
-              <p>That’s the part I take off your hands. One team, one person to ring and one written quote. We work in clear phases, invoiced phase by phase, and sit down regularly to check we’re on track.</p>
+              <p>Renovating is exciting. Managing it is stressful: finding trades, getting the order right, chasing no-shows.</p>
+              <p>That’s the part I take off your hands. One team, one person to ring and one written quote, paid phase by phase.</p>
             </div>
           </div>
         </div>
@@ -80,7 +78,7 @@ export default function Renovations() {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="cmp-title">The usual way, or my way</h2></div>
-            <p data-reveal="up">Same renovation. Very different few months.</p>
+            <p data-reveal="up">Same job, very different few months.</p>
           </div>
           <div className="compare" data-reveal="stagger">
             <div className="usual">
@@ -99,7 +97,7 @@ export default function Renovations() {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="inc-title">What your renovation can include</h2></div>
-            <p data-reveal="up">Pick one room or the whole house. It’s all <span className="hl">managed by me</span>.</p>
+            <p data-reveal="up">One room or the whole house, <span className="hl">all managed by me</span>.</p>
           </div>
           <ul className="incl" data-reveal="stagger">
             {[...renovationServices, ...smallerServices.filter((s) => s.slug !== "carpentry")].map((s) => (
@@ -122,11 +120,12 @@ export default function Renovations() {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="pkg-title">Prices from</h2></div>
-            <p data-reveal="up">A guide to get you started, then a written quote for your home.</p>
+            <p data-reveal="up">A guide first, then a written quote.</p>
           </div>
           <div className="pkgs three swipe" data-reveal="stagger">
             {[full, ...rest.slice(0, 2)].map((p) => <PackageCard key={p.name} p={p} compact />)}
           </div>
+          <PriceNote />
         </div>
       </section>
 
@@ -134,7 +133,7 @@ export default function Renovations() {
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">Renovation questions</h2>
-            <p>The things people ask me before they start. More on the <Link href="/faqs">FAQs page</Link>.</p>
+            <p>More on the <Link href="/faqs">FAQs page</Link>.</p>
           </div>
           <FaqList faqs={renovationFaqs} />
         </div>
@@ -144,7 +143,7 @@ export default function Renovations() {
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Let’s talk about your home</h2>
-            <p className="big-p">Tell me what you’re thinking, even if it’s only a rough idea. I’ll come round, listen, and put together a plan and a written quote.</p>
+            <p className="big-p">A rough idea is plenty. I’ll come round and put together a plan and a written quote.</p>
             <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
           <QuoteForm defaultJob={renovation.job} />

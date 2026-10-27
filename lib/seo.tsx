@@ -6,7 +6,7 @@ import { business, siteUrl } from "@/content/site";
   and Open Graph/Twitter card. Titles use the root template "%s | CM MainWorks".
 */
 
-const ogImage = { url: "/images/og-cm-mainworks.jpg", width: 1200, height: 630, alt: "CM MainWorks, carpentry and construction in Lichfield" };
+const ogImage = { url: "/images/og-cm-mainworks.jpg", width: 1200, height: 630, alt: "CM MainWorks, carpentry and construction" };
 
 export function pageMeta({ title, description, path, absolute = false, noindex = false }: {
   title: string;
