@@ -6,7 +6,6 @@ import Phases from "@/components/Phases";
 import PackageCard from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
-import Closing from "@/components/Closing";
 import { Arrow, Check, Cross } from "@/components/Icons";
 import { business, renovation, renovationServices, smallerServices } from "@/content/site";
 import { media } from "@/content/media";
@@ -72,9 +71,6 @@ export default function Renovations() {
             <div className="prose" data-reveal="up">
               <p>Renovating is exciting, but managing it is stressful: finding trades, getting them in the right order and chasing the ones who don’t turn up.</p>
               <p>That’s the part I take off your hands. One team, one person to ring and one written quote. We work in clear phases, invoiced phase by phase, and sit down regularly to check we’re on track.</p>
-              <p style={{ marginTop: 24 }}>
-                <Link className="link link-arrow" href="#quote">Talk to me about your renovation <Arrow /></Link>
-              </p>
             </div>
           </div>
         </div>
@@ -126,7 +122,7 @@ export default function Renovations() {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="pkg-title">Prices from</h2></div>
-            <p data-reveal="up">A guide to get you started. <Link className="link link-arrow" href="/prices">See all prices <Arrow /></Link></p>
+            <p data-reveal="up">A guide to get you started, then a written quote for your home.</p>
           </div>
           <div className="pkgs three swipe" data-reveal="stagger">
             {[full, ...rest.slice(0, 2)].map((p) => <PackageCard key={p.name} p={p} compact />)}
@@ -155,7 +151,6 @@ export default function Renovations() {
         </div>
       </section>
 
-      <Closing />
     </div>
   );
 }

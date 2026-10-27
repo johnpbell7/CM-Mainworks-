@@ -5,7 +5,6 @@ import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import BeforeAfter from "@/components/BeforeAfter";
 import Closing from "@/components/Closing";
-import { Arrow } from "@/components/Icons";
 import { getProject, publishedProjects } from "@/content/projects";
 import { getSection } from "@/content/site";
 import { pageMeta } from "@/lib/seo";
@@ -52,7 +51,6 @@ export default async function ProjectPage({ params }: Props) {
                   <ul className="ticks">{p.done.map((d) => <li key={d}>{d}</li>)}</ul>
                 </>
               )}
-              <p style={{ marginTop: 32 }}><Link className="link link-arrow" href={`/contact?job=${s.name}#quote`}>Ask about a job like this <Arrow /></Link></p>
             </div>
             {photos[0] && <Photo media={photos[0]} sizes="(max-width: 1080px) 100vw, 40vw" style={{ aspectRatio: "3 / 4" }} priority />}
           </div>

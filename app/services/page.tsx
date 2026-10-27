@@ -3,8 +3,9 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Closing from "@/components/Closing";
+import SmallerJobs from "@/components/SmallerJobs";
 import { Arrow } from "@/components/Icons";
-import { renovation, renovationServices, smallerServices, type Section } from "@/content/site";
+import { renovation, renovationServices, type Section } from "@/content/site";
 import { media } from "@/content/media";
 import { serviceContent } from "@/content/services";
 import { pageMeta } from "@/lib/seo";
@@ -27,7 +28,6 @@ function Row({ s }: { s: Section }) {
         </ul>
         <div className="row-links">
           <Link className="link link-arrow" style={{ "--u": s.color } as React.CSSProperties} href={`/services/${s.slug}`}>More on {s.name.toLowerCase()} <Arrow /></Link>
-          <Link className="link" style={{ "--u": s.color } as React.CSSProperties} href={`/contact?job=${encodeURIComponent(s.job)}#quote`}>Get a quote</Link>
         </div>
       </div>
     </article>
@@ -57,7 +57,6 @@ export default function Services() {
               </ul>
               <div className="row-links">
                 <Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link>
-                <Link className="link" href="/prices">See prices</Link>
               </div>
             </div>
           </article>
@@ -70,14 +69,7 @@ export default function Services() {
             <div data-reveal="up"><h2 id="small-title">Smaller jobs</h2></div>
             <p data-reveal="up">One door, one media wall or one room to paint. <span className="hl" data-pen="oak">Just as welcome.</span></p>
           </div>
-          <div className="smaller" data-reveal="stagger">
-            {smallerServices.map((s) => (
-              <Link key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color } as React.CSSProperties}>
-                <h3>{s.name} <Arrow /></h3>
-                <p>{s.blurb}</p>
-              </Link>
-            ))}
-          </div>
+          <SmallerJobs />
         </div>
       </section>
       <Closing />

@@ -20,14 +20,19 @@ export function FromPrice({ from, unit }: { from: string | null; unit?: string }
   );
 }
 
-/** A renovation package: name, from price, what’s included and two links. */
+/**
+  A renovation package: name, from price and a short line. Compact cards (homepage,
+  renovations page) are one tappable link to the prices page; the full cards on the
+  prices page add what's included and carry no links, since the page ends in the quote form.
+*/
 export default function PackageCard({ p, compact = false, headingLevel = 3 }: { p: Package; compact?: boolean; headingLevel?: 2 | 3 }) {
   const { color, tint } = lookOf(p.look);
   const H = headingLevel === 2 ? "h2" : "h3";
-  return (
-    <article className="pkg" style={{ "--c": color, "--pen": tint } as React.CSSProperties}>
+  const style = { "--c": color, "--pen": tint } as React.CSSProperties;
+  const inner = (
+    <>
       <div className="pkg-head">
-        <H>{p.name}</H>
+        <H>{p.name}{compact && <Arrow />}</H>
         <FromPrice from={p.from} />
       </div>
       <div className="pkg-body">
@@ -37,13 +42,10 @@ export default function PackageCard({ p, compact = false, headingLevel = 3 }: { 
             {p.includes.map((i) => <li key={i}>{i}</li>)}
           </ul>
         )}
-        <div className="pkg-links">
-          <Link className="btn btn-line btn-sm" href={`/contact?job=${encodeURIComponent(p.job)}#quote`}>
-            Get a quote <Arrow />
-          </Link>
-          <Link className="pkg-more" href={p.href} aria-label={`More about ${p.name.toLowerCase()}`}>Details</Link>
-        </div>
       </div>
-    </article>
+    </>
   );
+  return compact
+    ? <Link className="pkg" href="/prices" style={style}>{inner}</Link>
+    : <article className="pkg" style={style}>{inner}</article>;
 }

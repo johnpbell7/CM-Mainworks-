@@ -4,7 +4,6 @@ import PageHead from "@/components/PageHead";
 import PackageCard, { FromPrice } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
-import Closing from "@/components/Closing";
 import { business, getSection, renovation } from "@/content/site";
 import { Calendar, Eye, Layers, QuoteDoc } from "@/components/Icons";
 import { packages, roomPrices } from "@/content/prices";
@@ -107,7 +106,6 @@ export default function Prices() {
         </div>
       </section>
 
-      <Closing />
     </div>
   );
 }

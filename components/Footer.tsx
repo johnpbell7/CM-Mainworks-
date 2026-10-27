@@ -19,7 +19,7 @@ export default function Footer() {
       <div className="wrap foot-grid">
         <div className="foot-brand">
           <Link href="/" aria-label="CM MainWorks home">
-            <img className="logo" src="/brand/logo/main/cm-mainworks-horizontal-on-light.svg" alt="CM MainWorks, carpentry and construction" width={207} height={40} loading="lazy" />
+            <img className="logo" src="/brand/logo/main/cm-mainworks-horizontal-on-navy.svg" alt="CM MainWorks, carpentry and construction" width={207} height={40} loading="lazy" />
           </Link>
           <p>I’m Connor. Full home renovations, managed by one team from start to finish. Based in Lichfield, working across the Midlands.</p>
           <p className="foot-contact">

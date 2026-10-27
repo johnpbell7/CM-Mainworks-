@@ -6,10 +6,11 @@ import QuoteForm from "@/components/QuoteForm";
 import BeforeAfter from "@/components/BeforeAfter";
 import { Arrow, Award, QuoteDoc, Shield, Team } from "@/components/Icons";
 import Closing from "@/components/Closing";
+import SmallerJobs from "@/components/SmallerJobs";
 import Steps from "@/components/Steps";
 import Benefits from "@/components/Benefits";
 import PackageCard from "@/components/PackageCard";
-import { business, renovation, renovationServices, sections, smallerServices } from "@/content/site";
+import { business, renovation, renovationServices, sections } from "@/content/site";
 import { packages } from "@/content/prices";
 import { media } from "@/content/media";
 import { publishedProjects } from "@/content/projects";
@@ -101,24 +102,18 @@ export default function Home() {
                 <li>Decorating, to the last coat</li>
               </ul>
               <div className="row-links">
-                <Link className="btn btn-gold" href={renovation.href}>How a renovation works <Arrow /></Link>
-                <Link className="link" href="/prices">See prices</Link>
+                <Link className="link link-arrow" href={renovation.href}>How a renovation works <Arrow /></Link>
               </div>
             </div>
           </article>
 
           <div className="services six">
             {renovationServices.map((s) => (
-              <article className="service" key={s.slug} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
-                <Link href={`/services/${s.slug}`} tabIndex={-1} aria-hidden="true" className="card-img">
-                  <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
-                </Link>
-                <h3>
-                  <Link href={`/services/${s.slug}`}><span className="hl" data-pen={s.pen}>{s.name}</span></Link>
-                </h3>
+              <Link className="service" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
+                <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
+                <h3><span className="hl" data-pen={s.pen}>{s.name}</span> <Arrow /></h3>
                 <p>{s.blurb}</p>
-                <Link className="ask link-arrow" href={`/services/${s.slug}`}>More about {s.name.toLowerCase()} <Arrow /></Link>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -133,14 +128,7 @@ export default function Home() {
             </div>
             <p data-reveal="up">Renovations are my main work, but <span className="hl" data-pen="oak">one sticking door</span> still gets the same care.</p>
           </div>
-          <div className="smaller" data-reveal="stagger">
-            {smallerServices.map((s) => (
-              <Link key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color } as React.CSSProperties}>
-                <h3>{s.name} <Arrow /></h3>
-                <p>{s.blurb}</p>
-              </Link>
-            ))}
-          </div>
+          <SmallerJobs />
         </div>
       </section>
 
@@ -152,8 +140,7 @@ export default function Home() {
               <h2 id="price-title">Prices from</h2>
             </div>
             <p data-reveal="up">
-              A guide to get you started, then <span className="hl">a written quote for your home</span>.{" "}
-              <Link className="link link-arrow" href="/prices">All prices <Arrow /></Link>
+              A guide to get you started, then <span className="hl">a written quote for your home</span>.
             </p>
           </div>
           <div className="pkgs three swipe" data-reveal="stagger">
@@ -170,8 +157,7 @@ export default function Home() {
               <h2 id="work-title">Recent work</h2>
             </div>
             <p data-reveal="up">
-              {side.length ? "A few of my recent jobs." : "One of my recent jobs."}{" "}
-              <Link className="link link-arrow" href="/projects">See all projects <Arrow /></Link>
+              {side.length ? "A few of my recent jobs." : "One of my recent jobs."}
             </p>
           </div>
           <div className={`work${side.length ? "" : " solo"}`}>

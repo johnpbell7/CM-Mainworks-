@@ -6,9 +6,8 @@ import Photo from "@/components/Photo";
 import QuoteForm from "@/components/QuoteForm";
 import Steps from "@/components/Steps";
 import FaqList from "@/components/FaqList";
-import Closing from "@/components/Closing";
 import { Arrow } from "@/components/Icons";
-import { getSection, renovation, sections } from "@/content/site";
+import { business, getSection, renovation, sections } from "@/content/site";
 import { serviceContent } from "@/content/services";
 import { media } from "@/content/media";
 import { publishedProjects } from "@/content/projects";
@@ -33,7 +32,6 @@ export default async function Service({ params }: Props) {
   if (!s) notFound();
   const c = serviceContent[s.slug];
   const work = publishedProjects.filter((p) => p.section === s.slug);
-  const others = sections.filter((o) => o.slug !== s.slug);
   const name = s.name.toLowerCase();
   const [first, ...rest] = c.h1.split(" ");
   const faqs = c.faqs.map((f) => ({ ...f, color: s.slug }));
@@ -78,9 +76,6 @@ export default async function Service({ params }: Props) {
             <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div className="prose" data-reveal="up">
               {c.body.map((p) => <p key={p}>{p}</p>)}
-              <p style={{ marginTop: 24 }}>
-                <Link className="link link-arrow" style={{ "--u": s.color } as React.CSSProperties} href="#quote">Get a free {name} quote <Arrow /></Link>
-              </p>
             </div>
           </div>
         </div>
@@ -122,8 +117,7 @@ export default async function Service({ params }: Props) {
             <h2 id="price-title">What affects the price</h2>
             <p>{c.price.intro}</p>
             <p style={{ display: "flex", flexWrap: "wrap", gap: "12px 26px" }}>
-              <Link className="link link-arrow" href="#quote">Get your free quote <Arrow /></Link>
-              <Link className="link" href="/prices">See my prices</Link>
+              <Link className="link link-arrow" href="/prices">See my prices <Arrow /></Link>
             </p>
           </div>
           <ol className="factors" data-reveal="stagger">
@@ -137,7 +131,6 @@ export default async function Service({ params }: Props) {
           <div className="wrap">
             <div className="sec-head">
               <div data-reveal="up"><h2 id="work-title">Recent {name}</h2></div>
-              <p data-reveal="up"><Link className="link link-arrow" href="/projects">See all recent work <Arrow /></Link></p>
             </div>
             <div className="proj-grid">
               {work.map((p) => (
@@ -146,7 +139,6 @@ export default async function Service({ params }: Props) {
                   <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                   <h3>{p.name}</h3>
                   <p>{p.summary}</p>
-                  <span className="proj-more">Read about this job <Arrow /></span>
                 </Link>
               ))}
             </div>
@@ -164,8 +156,7 @@ export default async function Service({ params }: Props) {
                 <h2 id="reno-title" className="big-h">Part of a bigger project?</h2>
                 <p>{s.group === "renovation" ? `${s.name} are` : `${s.name} is`} often one piece of a wider renovation. I can manage the whole job with one team, so everything is planned together and you’ve only got one person to deal with.</p>
                 <div className="row-links">
-                  <Link className="btn btn-gold" href={renovation.href}>Full renovations <Arrow /></Link>
-                  <Link className="link" href="/prices">See prices</Link>
+                  <Link className="link link-arrow" href={renovation.href}>How a full renovation works <Arrow /></Link>
                 </div>
               </div>
             </div>
@@ -190,21 +181,12 @@ export default async function Service({ params }: Props) {
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Ask about {name}</h2>
             <p className="big-p">Send me a few photos and a line about the job. I’ll take a look, come round if I need to, and send you a written quote.</p>
-            <h3 className="sub-h" style={{ marginTop: 44 }}>Other services</h3>
-            <ul className="ticks">
-              <li><Link href={renovation.href} style={{ textDecoration: "none", fontWeight: 600 }}>Full renovations</Link></li>
-              {others.map((o) => (
-                <li key={o.slug} style={{ "--c": o.color } as React.CSSProperties}>
-                  <Link href={`/services/${o.slug}`} style={{ textDecoration: "none", fontWeight: 600 }}>{o.name}</Link>
-                </li>
-              ))}
-            </ul>
+            <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
           <QuoteForm defaultJob={s.job} />
         </div>
       </section>
 
-      <Closing />
     </div>
   );
 }
