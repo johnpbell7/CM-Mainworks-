@@ -16,7 +16,7 @@ import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo"
 
 export const metadata: Metadata = pageMeta({
   title: "Full home renovations across the Midlands",
-  description: "I’m Connor. Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and decorating. Free written quotes.",
+  description: "I’m Connor. Full renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and decorating. Free written quotes.",
   path: "/renovations",
   image: shareImage("renovations", "CM MainWorks: Full home renovations, one team"),
 });
