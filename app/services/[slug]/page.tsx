@@ -112,6 +112,18 @@ export default async function Service({ params }: Props) {
             <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
           </div>
           <Steps steps={c.steps} />
+          <div className="faq-wrap time-wrap">
+            <div className="faq-side" data-reveal="up">
+              <h2 id="time-title">How long, and how much disruption</h2>
+              <p>{c.time.intro}</p>
+            </div>
+            <ul className="facts" data-reveal="up">
+              {c.time.typical && <li><span>Typical time</span>{c.time.typical}</li>}
+              <li><span>How long</span>{c.time.long}</li>
+              <li><span>Living there</span>{c.time.living}</li>
+              <li><span>Mess</span>{c.time.mess}</li>
+            </ul>
+          </div>
         </div>
       </section>
 

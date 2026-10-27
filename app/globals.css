@@ -627,6 +627,10 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .facts { list-style: none; margin-top: 22px; padding: 0 !important; }
 .facts li { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); color: var(--ink); margin: 0 !important; }
 .facts li span { color: var(--ink-2); font-weight: 600; font-size: .9rem; }
+/* "How long, and how much disruption" under the steps on service pages */
+.time-wrap { margin-top: clamp(56px, 7vw, 104px); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+.time-wrap .faq-side { position: static; }
+.time-wrap .facts { margin-top: 0; }
 .mid-h { font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.035em; margin-bottom: 16px; }
 .big-h { font-size: var(--h2); }
 .big-p { margin-top: 20px; color: var(--ink-2); max-width: 40ch; font-size: 1.1rem; }

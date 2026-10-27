@@ -22,6 +22,12 @@ export type ServiceContent = {
   items: { title: string; text: string }[];
   price: { intro: string; factors: string[] };
   steps: { title: string; text: string }[];
+  /**
+   * "How long, and how much disruption". typical is Connor's usual time on site
+   * (e.g. "Around four to six weeks"); it stays null until he gives it, and shows
+   * as "Typical time" once set. Never guess it.
+   */
+  time: { intro: string; typical: string | null; long: string; living: string; mess: string };
   faqs: Omit<Faq, "color">[];
 };
 
@@ -60,10 +66,16 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "A plan and a written quote", text: "What’s included, what isn’t, and the price, before any work starts." },
       { title: "One team builds it, in phases", text: "Groundwork to decorating, invoiced phase by phase, with sit-downs to check timescales and targets." },
     ],
+    time: {
+      intro: "Every extension is different, so you get the timescale in writing before any work starts.",
+      typical: null,
+      long: "It depends on the size, the roof and the finish inside. We agree the timescale and targets for each phase at the start, then check them together at regular sit-downs.",
+      living: "Usually, yes. Most of the work happens outside until we knock through, and we’ll plan that part around you.",
+      mess: "Outside work stays outside. When we open up, I’ll talk you through what to expect first, and the mess is cleared as we go.",
+    },
     faqs: [
       { q: "Do you handle the whole extension?", a: "Yes. I manage it from start to finish, so you’ve got one person to deal with. Where it needs specialist trades, I bring in people I trust and organise them for you." },
       { q: "Can you help with plans and approvals?", a: "Yes. I’ll talk you through what your extension is likely to need and help you get it in place before any work starts." },
-      { q: "Can we live in the house while it’s built?", a: "Usually, yes. Most of the work happens outside until we knock through. We’ll plan that part around you." },
       { q: "Are you insured?", a: "Yes, I’m insured. If you’d like to see the details before I start, just ask." },
       { q: "Can you fit the kitchen in the extension too?", a: "Yes. That’s one of the best reasons to use one team: the extension and the kitchen are planned together." },
     ],
@@ -103,9 +115,15 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "A plan and a written quote", text: "The order of work, what’s included and the price, before anything starts." },
       { title: "Fitted and finished", text: "One team from strip-out to the final coat, with the mess cleared as we go." },
     ],
+    time: {
+      intro: "The question everyone asks is how long they’ll be without a kitchen.",
+      typical: null,
+      long: "It depends on the job. A refit in the same layout is quicker than moving walls, sinks or cookers. You’ll get the timescale with your quote, before anything starts.",
+      living: "You’ll be without a working kitchen for part of the job. Planning the order of work properly keeps that part as short as it can be, and you’ll know when it starts and ends before we begin.",
+      mess: "Dust sheets down and the mess cleared as we go.",
+    },
     faqs: [
       { q: "Can you fit a kitchen I’ve already bought?", a: "Yes. Plenty of people buy their own. I’ll fit it and finish the room around it." },
-      { q: "How long will we be without a kitchen?", a: "It depends on the job, and I’ll give you a clear idea before we start. Planning the order of work properly is the best way to keep it short." },
       { q: "Do you do the electrics and plumbing?", a: "I organise them through trades I trust, so you don’t have to find anyone else." },
       { q: "Can you move walls to make the kitchen bigger?", a: "Yes. Knock-throughs are a big part of what I do, with the structural side sorted first." },
     ],
@@ -145,10 +163,16 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "A plan and a written quote", text: "What’s included and the price, before any work starts." },
       { title: "One team finishes it", text: "Stripped out, fitted, tiled and decorated, with the trades organised for you." },
     ],
+    time: {
+      intro: "A bathroom is a small room with a lot going on, so the order of work matters.",
+      typical: null,
+      long: "It depends on the size, how much tiling there is and whether anything moves. You’ll get the timescale with your quote, and we agree it before any work starts.",
+      living: "If it’s your only bathroom, we’ll talk it through first and plan the job to keep the time without one as short as possible.",
+      mess: "Dust sheets down, the old bathroom taken away, and the mess cleared as we go.",
+    },
     faqs: [
       { q: "Do you do the plumbing?", a: "I organise it through plumbers I trust, so you don’t have to find anyone else." },
       { q: "Can I choose my own suite and tiles?", a: "Of course. I can work with what you’ve picked, or help you choose." },
-      { q: "We only have one bathroom. How do we manage?", a: "We’ll talk it through before we start and plan the job to keep the time without one as short as possible." },
       { q: "Can you turn a bathroom into a shower room?", a: "Yes. Walk-in showers are one of the most popular changes I’m asked about." },
     ],
   },
@@ -187,6 +211,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "A clear, written quote", text: "I can price a lot of this from photos. If it needs measuring, I’ll come round." },
       { title: "Fitted and finished", text: "Done on the day we agree, with the sawdust gone before I leave." },
     ],
+    time: {
+      intro: "Most of this work goes on around you while you get on with your day.",
+      typical: null,
+      long: "It depends on how much there is. One door is a short visit; a staircase, or a whole house of doors and skirting, takes longer. You’ll know how long before I start.",
+      living: "Yes, you can stay in the house. If the stairs themselves are being replaced, we’ll talk through how that part works first.",
+      mess: "Dust sheets down, and the sawdust gone before I leave.",
+    },
     faqs: [
       { q: "Can you change the spindles without replacing the whole staircase?", a: "Usually, yes. Swapping spindles, newels and the handrail is often all a staircase needs." },
       { q: "Can you hang doors I’ve already bought?", a: "Yes. I’ll hang and fit them, or supply them if you’d rather." },
@@ -228,6 +259,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "A look and a written quote", text: "I’ll come out, check it over and show you what I find." },
       { title: "Fixed properly", text: "The work done safely and the area left tidy." },
     ],
+    time: {
+      intro: "Roof work depends on the weather, so I’ll keep you up to date as it goes.",
+      typical: null,
+      long: "A repair can be quick. A new roof on an extension is planned in with the rest of the build. Either way, you’ll get the timescale with your quote.",
+      living: "Yes. Roof work happens outside, so you can carry on as normal inside.",
+      mess: "Old materials taken away and the area left tidy.",
+    },
     faqs: [
       { q: "Can you fix a leak?", a: "Yes. I’ll find where it’s coming in and fix it, and tell you if anything else needs attention." },
       { q: "Do you need scaffolding?", a: "Sometimes. It depends on the job and how high it is. If it’s needed, I’ll arrange it and it’ll be in the quote." },
@@ -268,6 +306,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "A clear, written quote", text: "Including any preparation the base needs, so there are no surprises." },
       { title: "Laid and finished", text: "Floors down, trims fitted and the room put back." },
     ],
+    time: {
+      intro: "New floors mean moving furniture, so it’s worth planning which rooms go first.",
+      typical: null,
+      long: "It depends on the rooms and how much preparation the base needs. You’ll get the timescale with your quote, and we’ll plan the order of rooms together.",
+      living: "Yes. We’ll work room by room where we can, so you can keep using the rest of the house.",
+      mess: "The old floor lifted and taken away, and the room put back when it’s done.",
+    },
     faqs: [
       { q: "Can you lay flooring I’ve already bought?", a: "Yes. Just let me know what it is so I can check the base suits it." },
       { q: "Do you lift the old floor?", a: "Yes, and take it away." },
@@ -307,6 +352,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "Get a written quote", text: "I can price most small jobs from photos." },
       { title: "Fixed and tidied", text: "Done on the day we agree, with the sawdust gone before I leave." },
     ],
+    time: {
+      intro: "Small jobs fit in around you.",
+      typical: null,
+      long: "Most small jobs are quick. You’ll know how long it’ll take when you get the quote.",
+      living: "Yes. Carpentry goes on around you, so you can get on with your day.",
+      mess: "Dust sheets down, and the sawdust gone before I leave.",
+    },
     faqs: [
       { q: "Is one small job worth getting you out for?", a: "Yes. Small jobs are a normal part of my week, and I can usually price them from a photo." },
       { q: "Can you fit a kitchen I’ve bought?", a: "Yes. Or I can take care of the whole kitchen renovation if you’d rather." },
@@ -347,6 +399,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "Agree the design and price", text: "I measure up and set out exactly what I’ll build." },
       { title: "Built in, made to fit", text: "Fitted on the day we agree and finished so it’s ready to fill." },
     ],
+    time: {
+      intro: "Joinery is measured and planned first, so you know exactly what’s happening and when.",
+      typical: null,
+      long: "It depends on the size and the finish. A media wall or a pair of alcove units takes longer than a few shelves. You’ll know how long before I start.",
+      living: "Yes. Only the room I’m working in is affected.",
+      mess: "Dust sheets down and the room left tidy.",
+    },
     faqs: [
       { q: "Can you build something I’ve seen on Instagram or Pinterest?", a: "Send it over with photos of your room. I’ll tell you what will work in your space and what I’d change." },
       { q: "Do you paint it as well?", a: "Yes. I can fill, sand and paint it on site in your colour." },
@@ -389,6 +448,13 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
       { title: "Get a clear price", text: "A written quote that sets out the prep and the number of coats." },
       { title: "Prepared and painted", text: "Furniture and floors covered, the work done, and the room put back." },
     ],
+    time: {
+      intro: "Decorating is mostly preparation, and that’s the part that makes it last.",
+      typical: null,
+      long: "It depends on the rooms and how much prep the walls and woodwork need. You’ll know how long when you get the quote.",
+      living: "Yes. I’ll work room by room where I can, so you can use the rest of the house.",
+      mess: "Furniture covered and floors protected, and the room left tidy.",
+    },
     faqs: [
       { q: "Do you do outside painting?", a: "Yes. Windows, sills, doors and fascias, including repairing rotten timber before it’s painted." },
       { q: "Who buys the paint?", a: "Either. I can supply it, or use paint you’ve already picked. The quote spells out which." },
