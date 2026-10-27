@@ -86,3 +86,19 @@ export const publishedProjects = projects.filter((p) => !p.placeholder);
 export function getProject(slug: string) {
   return publishedProjects.find((p) => p.slug === slug);
 }
+
+/*
+  Homepage before-and-after sliders. Keep it to three. Jobs without a before photo
+  belong on the projects page as single photos instead. Until Connor's photos come in,
+  empty slots show as clearly labelled "Photo to come" tiles.
+  TODO: swap in real pairs from Connor's Facebook.
+*/
+export type BeforeAfterPair = { name: string; section: SectionSlug; before: Media; after: Media; href?: string };
+
+const pairs: BeforeAfterPair[] = [
+  { name: "Bay window restoration", section: "carpentry", before: projects[0].before, after: projects[0].after, href: "/projects/bay-window-restoration" },
+  { name: "Kitchen renovation", section: "kitchens", before: ph("Before photo"), after: ph("After photo") },
+  { name: "Bathroom renovation", section: "bathrooms", before: ph("Before photo"), after: ph("After photo") },
+];
+export const beforeAfters = pairs.slice(0, 3);
+

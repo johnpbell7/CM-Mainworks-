@@ -13,13 +13,14 @@ import PackageCard from "@/components/PackageCard";
 import { business, renovation, renovationServices, sections } from "@/content/site";
 import { packages } from "@/content/prices";
 import { media } from "@/content/media";
-import { publishedProjects } from "@/content/projects";
+import { beforeAfters } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
 import { pageMeta } from "@/lib/seo";
 import FaqList from "@/components/FaqList";
 
 const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
 const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
+const tintOf = (slug: string) => sections.find((s) => s.slug === slug)!.tint;
 
 export const metadata: Metadata = pageMeta({
   title: "Home renovations in Lichfield and the Midlands | CM MainWorks",
@@ -29,9 +30,6 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default function Home() {
-  // Only real jobs on the homepage; placeholders stay off until photos arrive.
-  const [lead, ...rest] = publishedProjects;
-  const side = rest.slice(0, 2);
   return (
     <>
       {/* ---------------- Hero ---------------- */}
@@ -149,40 +147,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- Recent work ---------------- */}
+      {/* ---------------- Before and after ---------------- */}
       <section className="sec" id="work" aria-labelledby="work-title">
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up">
-              <h2 id="work-title">Recent work</h2>
+              <h2 id="work-title">Before and after</h2>
             </div>
             <p data-reveal="up">
-              {side.length ? "A few of my recent jobs." : "One of my recent jobs."}
+              A few of my recent jobs.{" "}
+              <Link className="link link-arrow" href="/projects">All recent work <Arrow /></Link>
             </p>
           </div>
-          <div className={`work${side.length ? "" : " solo"}`}>
-            <figure>
-              {lead.before.src && lead.after.src ? (
-                <BeforeAfter before={lead.before} after={lead.after} />
-              ) : (
-                <Link href={`/projects/${lead.slug}`} aria-label={`${lead.name}, ${nameOf(lead.section)}`}>
-                  <Photo media={lead.after} sizes="(max-width: 1080px) 100vw, 60vw" />
-                </Link>
-              )}
-              <figcaption className="cap">{lead.name} <span style={{ "--c": colorOf(lead.section) } as React.CSSProperties}>{nameOf(lead.section)}</span></figcaption>
-            </figure>
-            {side.length > 0 && (
-              <div className="side">
-                {side.map((p) => (
-                  <figure key={p.slug}>
-                    <Link href={`/projects/${p.slug}`} aria-label={`${p.name}, ${nameOf(p.section)}`}>
-                      <Photo media={p.gallery[0]} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 36vw" />
-                    </Link>
-                    <figcaption className="cap">{p.name} <span style={{ "--c": colorOf(p.section) } as React.CSSProperties}>{nameOf(p.section)}</span></figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
+          <div className="ba-grid">
+            {beforeAfters.map((w) => (
+              <figure key={w.name} style={{ "--c": colorOf(w.section), "--pen": tintOf(w.section) } as React.CSSProperties}>
+                <BeforeAfter before={w.before} after={w.after} label={`Compare ${w.name.toLowerCase()} before and after`} />
+                <figcaption className="cap">
+                  {w.href ? <Link href={w.href} style={{ textDecoration: "none" }}>{w.name}</Link> : w.name}
+                  <span>{nameOf(w.section)}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>

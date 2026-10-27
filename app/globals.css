@@ -162,6 +162,7 @@ ul, ol { margin: 0; padding: 0; }
 .menu { display: none; }
 @media (max-width: 1080px) {
   .incl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ba-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .smaller { grid-template-columns: minmax(0, 1fr); }
   .menu-btn {
     display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 14px; margin-left: 4px;
@@ -435,6 +436,13 @@ textarea.input { resize: vertical; min-height: 76px; line-height: 1.5; }
 .work { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(20px, 2.4vw, 36px); }
 .work figure { margin: 0; }
 .work .side { display: grid; gap: clamp(20px, 2.4vw, 36px); }
+.ba-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); }
+.ba-grid figure { margin: 0; }
+.ba-grid .ba { min-height: 0; aspect-ratio: 4 / 5; flex: none; }
+/* empty slots: the job's own colour, so they read as "photo to come", not broken */
+.ba .before.ph-empty { background: color-mix(in srgb, var(--pen, var(--soft)) 100%, #fff 0%); }
+.ba .after.ph-empty { background: color-mix(in srgb, var(--pen, var(--soft)) 55%, #fff); }
+.ba .ph-empty .ph-label { color: color-mix(in srgb, var(--c, var(--ink-2)) 62%, var(--ink)); }
 .work.solo { grid-template-columns: minmax(0, 1fr); }
 .work.solo .ph { aspect-ratio: 2.2 / 1; }
 .work.solo .ba { min-height: clamp(320px, 42vw, 560px); }
@@ -961,6 +969,8 @@ html.js.intro-on { overflow: hidden; }
   .benefits.tight p { font-size: .94rem; }
   .phases-wrap { grid-template-columns: minmax(0, 1fr); }
   .hide-m { display: none !important; }
+  .ba-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .ba-grid .ba { aspect-ratio: 4 / 3.4; }
   .sj { grid-template-columns: 84px minmax(0, 1fr) 18px; gap: 16px; padding: 10px 16px 10px 10px; border-radius: 18px; }
   .sj h3 { font-size: 1.12rem; }
   .sj p { font-size: .9rem; }
