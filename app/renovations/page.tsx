@@ -120,7 +120,7 @@ export default function Renovations() {
               const s = getSection(t.slug)!;
               return (
                 <Link className="trade" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
-                  <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 1080px) 50vw, 33vw" />
+                  <Photo media={media[s.slug]} illo={s.illo} drawingOnly sizes="(max-width: 1080px) 50vw, 33vw" />
                   <span className="proj-tag">{t.stage}</span>
                   <h3>{s.name}</h3>
                   <p>{t.text}</p>

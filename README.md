@@ -22,7 +22,7 @@ No database is used.
 
 ## Photos
 
-Every photo slot lives in `content/media.ts` and `content/projects.ts`. Drop the file in `public/images/`, set `src` and write the `alt`. While `src` is `null`, a labelled “Photo to come” placeholder shows instead.
+Connor’s job photos are listed in `scripts/photos.json` (job, name, any crop) and made into web copies with `python3 scripts/make-photos.py`, which writes `public/images/projects/<job>/` and `content/photos.ts`. The originals stay outside this repo. In `content/projects.ts` and `content/media.ts`, `photo("<job>/<name>", alt)` uses one. Check every photo for faces, names, house numbers and number plates before adding it. Cards keep their drawings; feature rows lead with a photo and keep the drawing in the corner; while a slot’s `src` is `null`, the drawing shows on its own.
 
 ## Voice
 

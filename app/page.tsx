@@ -4,6 +4,7 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import QuoteForm from "@/components/QuoteForm";
 import BeforeAfter from "@/components/BeforeAfter";
+import BeforeAfterSplit from "@/components/BeforeAfterSplit";
 import { Arrow, Award, QuoteDoc, Shield, Team } from "@/components/Icons";
 import Closing from "@/components/Closing";
 import SmallerJobs from "@/components/SmallerJobs";
@@ -13,7 +14,7 @@ import PackageCard, { PriceNote } from "@/components/PackageCard";
 import { business, renovation, renovationServices, sections } from "@/content/site";
 import { packages } from "@/content/prices";
 import { media } from "@/content/media";
-import { beforeAfters, projectPhotos, publishedProjects } from "@/content/projects";
+import { beforeAfters, publishedProjects } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
 import { JsonLd, pageMeta, shareImage, websiteLd } from "@/lib/seo";
 import FaqList from "@/components/FaqList";
@@ -22,11 +23,12 @@ const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
 const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
 const tintOf = (slug: string) => sections.find((s) => s.slug === slug)!.tint;
 
-// Up to six more photos from real jobs, under the before and afters (not repeating
-// the photos in the sliders). Shows once there are at least three.
-const inSliders = new Set(beforeAfters.flatMap((w) => [w.before.src, w.after.src]));
+// One finished photo from each of up to six more jobs, under the before and afters
+// (not the jobs already shown there). Shows once there are at least three.
+const onHome = new Set(beforeAfters.map((w) => w.href));
 const recentPhotos = publishedProjects
-  .flatMap((p) => projectPhotos(p).filter((m) => !inSliders.has(m.src)).map((m) => ({ m, p })))
+  .filter((p) => p.after.src && !onHome.has(`/projects/${p.slug}`))
+  .map((p) => ({ m: p.after, p }))
   .slice(0, 6);
 
 export const metadata: Metadata = pageMeta({
@@ -115,7 +117,7 @@ export default function Home() {
           <div className="services six">
             {renovationServices.map((s) => (
               <Link className="service" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
-                <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
+                <Photo media={media[s.slug]} illo={s.illo} drawingOnly sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
                 <h3><span className="hl" data-pen={s.pen}>{s.name}</span> <Arrow /></h3>
                 <p>{s.blurb}</p>
               </Link>
@@ -169,9 +171,11 @@ export default function Home() {
           <div className="ba-grid">
             {beforeAfters.map((w) => (
               <figure key={w.name} style={{ "--c": colorOf(w.section), "--pen": tintOf(w.section) } as React.CSSProperties}>
-                <BeforeAfter before={w.before} after={w.after} label={`Compare ${w.name.toLowerCase()} before and after`} />
+                {w.aligned
+                  ? <BeforeAfter before={w.before} after={w.after} label={`Compare ${w.name.toLowerCase()} before and after`} />
+                  : <BeforeAfterSplit before={w.before} after={w.after} sizes="(max-width: 720px) 50vw, (max-width: 1080px) 25vw, 17vw" />}
                 <figcaption className="cap">
-                  {w.href ? <Link href={w.href} style={{ textDecoration: "none" }}>{w.name}</Link> : w.name}
+                  <Link href={w.href} style={{ textDecoration: "none" }}>{w.name}</Link>
                   <span>{nameOf(w.section)}</span>
                 </figcaption>
               </figure>

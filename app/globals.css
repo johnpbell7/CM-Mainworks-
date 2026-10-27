@@ -441,7 +441,8 @@ textarea.input { resize: vertical; min-height: 76px; line-height: 1.5; }
 .work .side { display: grid; gap: clamp(20px, 2.4vw, 36px); }
 .ba-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); }
 .ba-grid figure { margin: 0; }
-.ba-grid .ba { min-height: 0; aspect-ratio: 4 / 5; flex: none; }
+/* one shape for every homepage pair, slider or side by side */
+.ba-grid .ba, .ba-grid .ba-split { min-height: 0; aspect-ratio: 4 / 3; flex: none; }
 /* empty slots: the job's own colour, so they read as "photo to come", not broken */
 .ba .before.ph-empty { background: color-mix(in srgb, var(--pen, var(--soft)) 100%, #fff 0%); }
 .ba .after.ph-empty { background: color-mix(in srgb, var(--pen, var(--soft)) 55%, #fff); }
@@ -631,8 +632,30 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .time-wrap .faq-side { position: static; }
 .time-wrap .facts { margin-top: 0; }
 /* real jobs: the extra photos on a project page, and "Recent work in …" on a town page */
-.proj-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); margin-top: clamp(40px, 5vw, 72px); }
-.proj-photos .ph { aspect-ratio: 4 / 3; }
+/* project page gallery: upright photos take one column, wide ones two, so every row lines up */
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: dense; gap: clamp(10px, 1.6vw, 20px); margin-top: clamp(40px, 5vw, 72px); }
+.gallery .ph { aspect-ratio: 3 / 4; }
+.gallery .ph.wide { grid-column: span 2; aspect-ratio: 3 / 2; }
+.proj-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.proj-grid.three h3 { font-size: 1.2rem; }
+
+/* Connor's photo leading a feature row, the service's drawing tucked into its corner */
+.ph-pair > img { object-fit: cover; }
+.pair-ill {
+  position: absolute; left: clamp(10px, 1.6vw, 18px); bottom: clamp(10px, 1.6vw, 18px); z-index: 1;
+  width: 30%; aspect-ratio: 1; border-radius: 14px; background: var(--pen, var(--soft));
+  border: 4px solid #fff; overflow: hidden;
+}
+.pair-ill .il { position: absolute; left: 6%; top: 8%; width: 88%; height: 92%; }
+
+/* before and after side by side, for pairs not taken from the same spot */
+.ba-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; border-radius: var(--radius); overflow: hidden; background: #fff; }
+.ba-split .half { position: relative; overflow: hidden; }
+.ba-split .ph { position: absolute; inset: 0; border-radius: 0; }
+.ba-split .tag {
+  position: absolute; top: 12px; left: 12px; z-index: 2; font-size: .78rem; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px; background: rgb(255 255 255 / .9); color: var(--ink-2); pointer-events: none;
+}
 .area-work { margin-top: clamp(56px, 7vw, 104px); }
 /* homepage photos that appear once Connor's are in: the team under the benefits, and recent jobs under the before and afters */
 .why-photo { aspect-ratio: 21 / 9; margin-top: clamp(40px, 5vw, 72px); }
@@ -659,7 +682,12 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
   .trade p { font-size: .9rem; }
   .trade .proj-tag { font-size: .78rem; margin-top: 12px; }
 }
-@media (max-width: 720px) { .proj-photos { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1080px) { .proj-grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .proj-grid.three { grid-template-columns: minmax(0, 1fr); }
+  .pair-ill { width: 32%; border-width: 3px; border-radius: 12px; }
+}
 .mid-h { font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.035em; margin-bottom: 16px; }
 .big-h { font-size: var(--h2); }
 .big-p { margin-top: 20px; color: var(--ink-2); max-width: 40ch; font-size: 1.1rem; }

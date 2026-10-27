@@ -63,7 +63,15 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
   - Every "from" price has an asterisk, explained by: "Prices are a guide and subject to seeing the job…".
   - **All figures are placeholders (`£TBC`) until Connor supplies them.** Never invent prices.
 - **Homepage before and afters:** at most three sliders, taken from jobs marked `homepage: true` in `content/projects.ts` (both photos needed); placeholder slots fill the gaps until there are three. Jobs with only one photo go on the projects page as single-photo posts.
-- **Photos and icons (John, 27 Oct):** keep the icons, but get far more photos on the homepage. Photo spots that fill in as soon as `src` is set: hero, renovation feature, the six service cards, the three smaller-job cards, a wide team photo under the benefits (`media.team`), the before and afters, up to six photos from real jobs under them, and Connor's portrait.
+- **Photos alongside the drawings (John, 27 Oct: keep every icon and drawing, work photography in):**
+  - Cards (service cards, the renovation trades, smaller jobs, steps) always keep the drawing (`drawingOnly`).
+  - Feature rows (a service's intro, the renovations intro, a town's "Homes in …", the homepage renovation feature) lead with Connor's photo, the drawing tucked into the corner on its section colour (`components/Photo.tsx`).
+  - Proof is photos only: project pages and cards, before and afters, the six job photos under them on the homepage.
+  - Photos are calm: same rounded corners as the tiles, no shadows or frames, the section colour only as the accent.
+- **Projects (27 Oct):** 14 real jobs from Connor's Facebook posts (1 Apr to 1 Oct 2026), written from his own captions, nothing added. The town appears only where he named it (Cannock, Lichfield).
+- **Before and afters:** a slider only where both photos were taken from the same spot (`aligned: true`, just the panelled wall so far); otherwise the two sit side by side (`BeforeAfterSplit`). Homepage order is set by `homepage: 1–3` in `content/projects.ts`.
+- **Photo files:** `scripts/photos.json` lists every published photo (job, name, crop); `python3 scripts/make-photos.py` makes the 1400px JPEGs in `public/images/projects/` (no camera or location data) and `content/photos.ts`. The originals stay in the studio (`Clients/CM MainWorks/Documents/Facebook/photos/`), not in this public repo. Every photo is checked for faces, names, house numbers and number plates first; Connor's own face is left out until he says.
+- **Reviews:** no customer comment goes on the site until Connor OKs it. The bay window review (homepage and bay window page) went in before that rule and is waiting on John.
 - **FAQs:** every FAQ starts closed.
 - **Header:**
   - The logo lockup has "Carpentry & Construction" made legible: `scripts/make-header-logo.mjs` rescales the supplied shapes, nothing is retyped.
@@ -113,7 +121,8 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 | `content/faqs.ts` | All FAQs (home, renovations, prices, the full list) |
 | `content/areas.ts` | Town page copy |
 | `content/projects.ts` | Connor's jobs. One entry per job feeds its own page, the projects page, its service and town pages (matched by `place`), the sitemap with its photos, and the homepage (`homepage: true`) |
-| `content/media.ts` | Every photo slot. Set `src` when a real photo arrives; until then a drawing or a labelled placeholder shows |
+| `content/media.ts` | Every photo slot and `photo()`, which looks up one of Connor's photos by job and name. Where photos and drawings go is written at the top |
+| `scripts/photos.json`, `scripts/make-photos.py` | The published photos and the script that makes their web copies |
 | `components/` | Header, Footer, MobileMenu, MobileBar, QuoteForm, Intro, Motion (GSAP scroll reveals, set up lazily for speed), Illustration (all drawings), Phases, Benefits, PackageCard, SmallerJobs, BeforeAfter, FaqList and others |
 | `lib/seo.tsx` | `pageMeta()`, breadcrumb and FAQ schema |
 | `app/api/quote/route.ts` | The quote form handler (Resend email, honeypot, rate limit) |
@@ -123,10 +132,11 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 ## 6. Waiting on Connor
 
 1. **"From" prices** for every package and smaller-job row (`content/prices.ts`).
-2. **Photos.** These come from his Facebook, which needs his login or an export. Do not get round the login. The site needs:
-   - job photos, with before and afters for up to three homepage sliders,
-   - a portrait of Connor,
-   - one photo per service.
+2. **Photos.** 14 jobs are in from his Facebook (27 Oct). Still wanted:
+   - a portrait of Connor (none of the Facebook photos show him clearly, and his face stays off until he says),
+   - before and after pairs taken from the same spot, so more of them can be sliders,
+   - finished photos of the garage and porch, a floors or tiling job, and a bathroom,
+   - a line or two from him per job (they're short at about 200 words each).
 3. **A read-through of the wording**, including:
    - which trades he organises (electrics, plumbing, plastering, gas),
    - exactly what roofing he takes on,

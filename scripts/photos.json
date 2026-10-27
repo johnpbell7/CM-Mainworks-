@@ -1,0 +1,345 @@
+{
+ "source": "../Documents/Facebook/photos",
+ "maxEdge": 1400,
+ "quality": 78,
+ "projects": {
+  "garage-conversion-cannock": [
+   {
+    "name": "after-loft-room",
+    "fbid": "122131187426810054"
+   },
+   {
+    "name": "after-room",
+    "fbid": "122131187624810054"
+   },
+   {
+    "name": "after-skylight",
+    "fbid": "122131187558810054"
+   },
+   {
+    "name": "after-hatch",
+    "fbid": "122131187690810054"
+   },
+   {
+    "name": "after-corridor",
+    "fbid": "122131042010810054"
+   },
+   {
+    "name": "before-room",
+    "fbid": "122131041878810054"
+   },
+   {
+    "name": "before-skylight",
+    "fbid": "122131041746810054"
+   },
+   {
+    "name": "before-corridor",
+    "fbid": "122131041674810054"
+   }
+  ],
+  "conservatory": [
+   {
+    "name": "after-wide",
+    "fbid": "122129649752810054"
+   },
+   {
+    "name": "after-carpet",
+    "fbid": "122129649818810054"
+   },
+   {
+    "name": "after-windows",
+    "fbid": "122129649686810054"
+   },
+   {
+    "name": "after-corner",
+    "fbid": "122129649548810054"
+   },
+   {
+    "name": "before-floor",
+    "fbid": "122129649332810054"
+   },
+   {
+    "name": "before-ledge",
+    "fbid": "122129649266810054"
+   }
+  ],
+  "three-bed-house-repaint": [
+   {
+    "name": "after-living-room",
+    "fbid": "122127216320810054"
+   },
+   {
+    "name": "after-bedroom",
+    "fbid": "122127216608810054"
+   },
+   {
+    "name": "after-fireplace",
+    "fbid": "122127215942810054"
+   },
+   {
+    "name": "after-room",
+    "fbid": "122127216404810054"
+   },
+   {
+    "name": "after-stairs",
+    "fbid": "122127216446810054"
+   },
+   {
+    "name": "after-front-room",
+    "fbid": "122127216860810054"
+   },
+   {
+    "name": "before-room",
+    "fbid": "122127216152810054"
+   },
+   {
+    "name": "during-room",
+    "fbid": "122127216194810054"
+   }
+  ],
+  "kitchen-drop-ceiling": [
+   {
+    "name": "after-ceiling",
+    "fbid": "122127213266810054"
+   },
+   {
+    "name": "after-ceiling-2",
+    "fbid": "122127213182810054"
+   },
+   {
+    "name": "during-boards",
+    "fbid": "122127213092810054",
+    "crop": [
+     0,
+     0,
+     0.84,
+     1
+    ]
+   },
+   {
+    "name": "before-ceiling",
+    "fbid": "122127212960810054"
+   }
+  ],
+  "hall-stairs-landing": [
+   {
+    "name": "after-stairs",
+    "fbid": "122122384508810054"
+   },
+   {
+    "name": "after-landing",
+    "fbid": "122122385228810054"
+   },
+   {
+    "name": "after-stairs-2",
+    "fbid": "122122384466810054"
+   },
+   {
+    "name": "after-landing-2",
+    "fbid": "122122384322810054"
+   },
+   {
+    "name": "after-landing-3",
+    "fbid": "122122385402810054"
+   },
+   {
+    "name": "during-stairs",
+    "fbid": "122122384118810054"
+   }
+  ],
+  "bay-window-restoration": [
+   {
+    "name": "after-bay",
+    "fbid": "122122010762810054"
+   },
+   {
+    "name": "after-full-bay",
+    "fbid": "122122010708810054"
+   },
+   {
+    "name": "after-side",
+    "fbid": "122122010660810054"
+   },
+   {
+    "name": "after-cill",
+    "fbid": "122122010606810054"
+   },
+   {
+    "name": "before-cill",
+    "fbid": "122122010468810054"
+   },
+   {
+    "name": "before-cill-2",
+    "fbid": "122122010204810054"
+   },
+   {
+    "name": "during-new-cill",
+    "fbid": "122122010378810054"
+   },
+   {
+    "name": "during-taped",
+    "fbid": "122122010420810054"
+   }
+  ],
+  "garage-and-porch": [
+   {
+    "name": "porch-door",
+    "fbid": "122121442964810054"
+   },
+   {
+    "name": "porch-ceiling",
+    "fbid": "122121442910810054"
+   },
+   {
+    "name": "porch",
+    "fbid": "122121443012810054"
+   },
+   {
+    "name": "garage-boarded",
+    "fbid": "122121442508810054"
+   },
+   {
+    "name": "garage-skimmed",
+    "fbid": "122121442466810054"
+   },
+   {
+    "name": "garage-studs",
+    "fbid": "122121442406810054"
+   }
+  ],
+  "hmo-renovation": [
+   {
+    "name": "after-kitchen",
+    "fbid": "122117886212810054"
+   },
+   {
+    "name": "after-kitchen-2",
+    "fbid": "122117886260810054"
+   },
+   {
+    "name": "during-worktop",
+    "fbid": "122117886122810054"
+   },
+   {
+    "name": "during-units",
+    "fbid": "122117886038810054"
+   },
+   {
+    "name": "bathroom-tiled",
+    "fbid": "122117886380810054"
+   },
+   {
+    "name": "bathroom-tiling",
+    "fbid": "122117886344810054"
+   }
+  ],
+  "full-house-repaint-lichfield": [
+   {
+    "name": "after-bedroom",
+    "fbid": "122104754738810054"
+   },
+   {
+    "name": "after-hall",
+    "fbid": "122104754894810054"
+   },
+   {
+    "name": "after-living-room",
+    "fbid": "122104754612810054"
+   },
+   {
+    "name": "after-bedroom-2",
+    "fbid": "122104753814810054"
+   },
+   {
+    "name": "before-bedroom",
+    "fbid": "122104754384810054"
+   },
+   {
+    "name": "before-dining",
+    "fbid": "122104754474810054"
+   }
+  ],
+  "panelled-feature-wall": [
+   {
+    "name": "after",
+    "fbid": "122094649970810054",
+    "crop": [
+     0.0,
+     0.1167,
+     0.748,
+     1.0
+    ]
+   },
+   {
+    "name": "before",
+    "fbid": "122094650012810054",
+    "crop": [
+     0.0924,
+     0.0,
+     0.8548,
+     0.8983
+    ]
+   }
+  ],
+  "under-stairs-cupboard-door": [
+   {
+    "name": "after",
+    "fbid": "122094650894810054"
+   },
+   {
+    "name": "before",
+    "fbid": "122094651056810054"
+   }
+  ],
+  "oak-internal-doors": [
+   {
+    "name": "double-doors",
+    "fbid": "122094649928810054"
+   },
+   {
+    "name": "door",
+    "fbid": "122094649868810054"
+   },
+   {
+    "name": "glazed-door",
+    "fbid": "122094649760810054"
+   }
+  ],
+  "extension-build": [
+   {
+    "name": "roof-timbers",
+    "fbid": "122094650330810054"
+   },
+   {
+    "name": "rear",
+    "fbid": "122094650438810054"
+   },
+   {
+    "name": "walls",
+    "fbid": "122094650486810054"
+   },
+   {
+    "name": "roof-light",
+    "fbid": "122094650264810054"
+   },
+   {
+    "name": "roof-frame",
+    "fbid": "122094650102810054"
+   }
+  ],
+  "outdoor-timber": [
+   {
+    "name": "fence-screen",
+    "fbid": "122094634652810054"
+   },
+   {
+    "name": "gates",
+    "fbid": "122094650624810054"
+   },
+   {
+    "name": "gazebo",
+    "fbid": "122094650144810054"
+   }
+  ]
+ }
+}

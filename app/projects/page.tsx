@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Recent work",
-  description: "Recent renovation, carpentry and decorating jobs from CM MainWorks, including a 140-year-old bay window I repaired and repainted.",
+  description: "Recent jobs with before and after photos: a garage conversion in Cannock, a 140-year-old bay window brought back to life, a kitchen fit and more.",
   path: "/projects",
 });
 
