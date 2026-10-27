@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Photo from "./Photo";
+import Photo from "./PhotoBasic";
 import { sections, type SectionSlug } from "@/content/site";
 import type { Project } from "@/content/projects";
 

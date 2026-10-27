@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Media } from "@/content/media";
-import Photo from "./Photo";
+import Photo from "./PhotoBasic";
 import { Chevrons } from "./Icons";
 
 /** Before/after comparison. Keyboard accessible through a native range input. */
