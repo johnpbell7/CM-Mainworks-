@@ -13,7 +13,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
     data-reveal="stagger" children fade up one after another
     data-reveal="img"    photo fades in, image settles from a slight zoom
     .hl                  marker highlight draws across the words
-    [data-illustration]  drawing fades up, colour blocks slide into their offset
+    [data-illustration]  drawing fades up as one piece
   Everything is skipped under prefers-reduced-motion.
   Kept light so scrolling stays smooth on phones: only opacity and transform are
   animated (no clip-path wipes, no line-by-line drawing, which repaint every frame),
@@ -48,7 +48,6 @@ export default function Motion() {
         // the first paint. Content is never hidden waiting for script: anything
         // already on screen just stays put, and only what's further down the
         // page is tucked away to animate in when it's scrolled to.
-        let timer = 0;
         const setup = contextSafe!(() => {
           const vh = window.innerHeight;
           const pick = <T extends Element>(sel: string) =>
@@ -100,16 +99,14 @@ export default function Motion() {
             onEnter: (els) => gsap.to(els, { backgroundSize: "100% 74%", duration: 0.45, ease: "power2.inOut", delay: 0.05 }),
           });
 
-          // ---- illustrations fade up, then their colour block settles into its offset ----
-          // (Drawing each line in was the slowest thing on the site: every line had to
-          // be measured, and the drawing repainted on every frame.)
+          // ---- illustrations fade up as a whole ----
+          // Moving anything inside a drawing (drawing each line in, sliding its colour
+          // block) repaints the whole drawing on every frame, which was the slowest thing
+          // on the site. Fading the drawing as one piece is handled by the graphics chip.
           gsap.set(drawings, { autoAlpha: 0, y: 14 });
           ScrollTrigger.batch(drawings, {
             start: "top 98%", once: true,
-            onEnter: (els) => els.forEach((svg, i) => {
-              gsap.to(svg, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out", delay: i * 0.05 });
-              gsap.from(gsap.utils.selector(svg)(".off"), { x: 0, y: 0, duration: 0.4, ease: "back.out(2)", delay: 0.2 + i * 0.05 });
-            }),
+            onEnter: (els) => gsap.to(els, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.05, force3D: true, clearProps: "transform" }),
           });
 
           // ---- closing badge drifts in ----
@@ -124,19 +121,13 @@ export default function Motion() {
         const hasIdle = typeof window.requestIdleCallback === "function";
         const idle = hasIdle ? window.requestIdleCallback(run, { timeout: 1200 }) : window.setTimeout(run, 200);
 
-        // Images loading late can shift layout; re-measure once they settle,
-        // not once per image.
-        const refresh = () => {
-          clearTimeout(timer);
-          timer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
-        };
-        const imgs = Array.from(document.images).filter((i) => !i.complete);
-        imgs.forEach((i) => i.addEventListener("load", refresh, { once: true }));
+        // No re-measuring when photos finish loading: every photo sits in a frame with
+        // a fixed shape, so a late photo never moves anything. Re-measuring every trigger
+        // mid-scroll was the biggest single freeze on a phone with a slow connection.
+        // (ScrollTrigger still re-measures by itself on page load and resize.)
         return () => {
           if (hasIdle) window.cancelIdleCallback(idle);
           else clearTimeout(idle);
-          clearTimeout(timer);
-          imgs.forEach((i) => i.removeEventListener("load", refresh));
         };
       });
 
