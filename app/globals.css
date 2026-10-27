@@ -128,7 +128,7 @@ ul, ol { margin: 0; padding: 0; }
 
 /* ---------- logo ---------- */
 .logo { height: 46px; width: auto; }
-.logo-head { height: 44px; }
+.logo-head { height: 50px; }
 
 /* ---------- header ---------- */
 .head {
@@ -860,7 +860,7 @@ html.js.intro-on { overflow: hidden; }
   /* room for the sticky call / quote bar, inside the navy footer so no white strip shows */
   .foot { padding-bottom: calc(28px + 76px + env(safe-area-inset-bottom, 0px)); }
   .logo { height: 38px; }
-  .logo-head { height: 31px; }
+  .logo-head { height: 40px; }
   .menu-btn { width: 42px; height: 42px; padding: 0; justify-content: center; margin-left: 0; }
   .menu-txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .menu-ico { width: 18px; }
@@ -954,7 +954,8 @@ html.js.intro-on { overflow: hidden; }
   .benefit-ico { width: 52px; height: 52px; grid-row: 1 / span 2; }
   .benefits h3 { margin: 4px 0 6px; font-size: 1.2rem; }
   .feature .ticks { grid-template-columns: minmax(0, 1fr); }
-  .services.six .service { flex: 0 0 78%; }
+  .services.six .service { flex: 0 0 64%; }
+  .services.six .service .ph { aspect-ratio: 1 / 1.02; }
   .smaller, .pkgs, .compare, .timeline { grid-template-columns: minmax(0, 1fr); }
   .pkgs.swipe {
     display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
@@ -975,7 +976,8 @@ html.js.intro-on { overflow: hidden; }
   .sj h3 { font-size: 1.12rem; }
   .sj p { font-size: .9rem; }
   .feature { gap: 24px; margin-bottom: 40px; }
-  .feature .ph { aspect-ratio: 16 / 10; }
+  .feature .ph { aspect-ratio: 5 / 4; }
+  .feature .ph-illo .il, .services.six .ph-illo .il { top: 3%; height: 97%; left: 2%; width: 96%; }
   .feature h3 { font-size: 1.9rem; margin-bottom: 12px; }
   .feature > div > p { font-size: 1.02rem; }
   .feature .row-links { margin-top: 22px; }
