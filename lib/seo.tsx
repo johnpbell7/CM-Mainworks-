@@ -8,20 +8,28 @@ import { business, siteUrl } from "@/content/site";
 
 const ogImage = { url: "/images/og-cm-mainworks.jpg", width: 1200, height: 630, alt: "CM MainWorks, carpentry and construction" };
 
-export function pageMeta({ title, description, path, absolute = false, noindex = false }: {
+/** A page's own share image: made by scripts/make-share-images.mjs into public/images/share/<name>.jpg (1200 x 630). */
+export function shareImage(name: string, alt: string) {
+  return { src: `/images/share/${name}.jpg`, alt };
+}
+
+export function pageMeta({ title, description, path, absolute = false, noindex = false, image }: {
   title: string;
   description: string;
   path: string;
   absolute?: boolean;
   noindex?: boolean;
+  /** Its own share image; pages without one use the shared logo card. */
+  image?: { src: string; alt: string };
 }): Metadata {
   const full = absolute ? title : `${title} | ${business.name}`;
+  const card = image ? { url: image.src, width: 1200, height: 630, alt: image.alt } : ogImage;
   return {
     title: absolute ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
-    openGraph: { type: "website", locale: "en_GB", siteName: business.name, url: path, title: full, description, images: [ogImage] },
-    twitter: { card: "summary_large_image", title: full, description, images: [ogImage.url] },
+    openGraph: { type: "website", locale: "en_GB", siteName: business.name, url: path, title: full, description, images: [card] },
+    twitter: { card: "summary_large_image", title: full, description, images: [card.url] },
     ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }
@@ -49,6 +57,19 @@ export function faqLd(faqs: { q: string; a: string }[]) {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
+}
+
+/** Home page only: tells Google the site's name. The business itself is described once, in components/JsonLd.tsx. */
+export function websiteLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    name: business.name,
+    url: siteUrl,
+    inLanguage: "en-GB",
+    publisher: { "@id": businessId },
   };
 }
 

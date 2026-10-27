@@ -4,12 +4,13 @@ import QuoteForm from "@/components/QuoteForm";
 import Link from "next/link";
 import { business } from "@/content/site";
 import { areas } from "@/content/areas";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Contact and free quote",
   description: "Get a free written quote from me, Connor at CM MainWorks. Send a few photos of the job, ring 07742 135592 or WhatsApp me. Covering the Midlands.",
   path: "/contact",
+  image: shareImage("contact", "CM MainWorks: Get a free quote from CM MainWorks"),
 });
 
 export default function Contact() {

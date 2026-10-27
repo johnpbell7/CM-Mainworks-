@@ -279,7 +279,7 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     title: "Carpenter across the Midlands",
     h1: "Carpentry jobs, big or small",
     description:
-      "I’m Connor, a carpenter working across the Midlands. Doors eased and hung, fitted wardrobes, kitchen fitting and garden canopies. No job too small. Free written quotes.",
+      "I’m Connor, a carpenter working across the Midlands. Doors eased and hung, fitted wardrobes, kitchen fitting and garden canopies. Free written quotes.",
     lede: "I started as a carpenter, and small jobs are still welcome. One sticking door included.",
     body: [
       "Most small carpentry jobs are in lived-in homes. A door that’s started catching since the new flooring went down. A cupboard door that’s never shut properly. A gap that’s been bugging you for months. Small things, but they’re what make a place feel unfinished.",
@@ -318,7 +318,7 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     title: "Joiner across the Midlands",
     h1: "Joinery, made to fit",
     description:
-      "I’m Connor, a joiner working across the Midlands. Made-to-measure media walls, alcove units, shelving and under-stairs storage, built for your room, not adapted from flat-pack.",
+      "I’m Connor, a joiner across the Midlands. Made-to-measure media walls, alcove units, shelving and under-stairs storage, built for your room, not flat-pack.",
     lede: "Media walls, alcove units and storage, made for the room they’re going in.",
     body: [
       "Shop-bought furniture never quite fits an alcove. There’s a gap down one side, a skirting board in the way, or a wall that leans. What I build is made for the actual space, so it runs right up to the walls and ceiling and looks like it’s always been there.",
@@ -359,7 +359,7 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     title: "Painter and decorator across the Midlands",
     h1: "Decorating, right to the last coat",
     description:
-      "I’m Connor, a painter and decorator working across the Midlands. Walls, ceilings, woodwork, timber windows and outside paintwork, with proper prep under every coat.",
+      "I’m Connor, a painter and decorator across the Midlands. Walls, ceilings, woodwork, timber windows and outside paintwork, with proper prep under each coat.",
     lede: "Clean lines, proper prep and paint that lasts, inside and out.",
     body: [
       "A paint job lives or dies on the preparation. Filling, sanding, sealing new plaster and masking off take longer than the painting, and they’re the reason a finish still looks sharp a year later, not just on the day.",

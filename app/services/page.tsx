@@ -8,12 +8,13 @@ import { Arrow } from "@/components/Icons";
 import { renovation, renovationServices, type Section } from "@/content/site";
 import { media } from "@/content/media";
 import { serviceContent } from "@/content/services";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Renovation services: kitchens, bathrooms, extensions and more",
+  title: "Home renovation services across the Midlands",
   description: "I’m Connor. Full renovations, extensions, kitchens, bathrooms, stairs, floors, roofing and decorating across the Midlands, managed by one team.",
   path: "/services",
+  image: shareImage("services", "CM MainWorks: Everything your home needs, one team"),
 });
 
 function Row({ s }: { s: Section }) {

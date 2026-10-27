@@ -8,12 +8,13 @@ import { business, getSection, renovation } from "@/content/site";
 import { Calendar, Eye, Layers, QuoteDoc } from "@/components/Icons";
 import { packages, roomPrices } from "@/content/prices";
 import { priceFaqs } from "@/content/faqs";
-import { faqLd, JsonLd, pageMeta } from "@/lib/seo";
+import { faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Renovation prices and packages",
   description: "A guide to my prices for full renovations, kitchens, bathrooms, extensions and smaller jobs across the Midlands. Free written quotes, no surprises.",
   path: "/prices",
+  image: shareImage("prices", "CM MainWorks: Clear renovation prices, no surprises"),
 });
 
 const how = [

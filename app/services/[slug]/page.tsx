@@ -12,7 +12,7 @@ import { serviceContent } from "@/content/services";
 import { media } from "@/content/media";
 import { publishedProjects } from "@/content/projects";
 import { areas } from "@/content/areas";
-import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
+import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -24,7 +24,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const s = getSection((await params).slug);
   if (!s) return {};
   const c = serviceContent[s.slug];
-  return pageMeta({ title: c.title, description: c.description, path: `/services/${s.slug}` });
+  return pageMeta({
+    title: c.title,
+    description: c.description,
+    path: `/services/${s.slug}`,
+    image: shareImage(`service-${s.slug}`, `CM MainWorks: ${c.h1}`),
+  });
 }
 
 export default async function Service({ params }: Props) {

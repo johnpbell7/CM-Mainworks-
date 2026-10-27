@@ -58,7 +58,7 @@ export const areas: Area[] = [
     where: "About four miles west of Lichfield",
     title: "Builder and home renovations in Burntwood",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Burntwood, Chase Terrace and Chasetown. I’m Connor, based just down the road in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Burntwood, Chase Terrace and Chasetown. I’m Connor, based in nearby Lichfield. Free written quotes.",
     intro:
       "Burntwood is about four miles west of Lichfield, a straight run along the A5190, so it’s well within my patch. I cover the whole town, including Chase Terrace, Chasetown, Boney Hay and the roads out towards Chasewater.",
     local:
@@ -82,7 +82,7 @@ export const areas: Area[] = [
     where: "About seven miles south-east of Lichfield",
     title: "Builder and home renovations in Tamworth",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Tamworth, Wilnecote, Amington and Fazeley. I’m Connor, based in nearby Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Tamworth, Wilnecote, Amington and Fazeley. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Tamworth is about seven miles south-east of Lichfield along the A51, and I cover the whole town. That takes in Wilnecote, Amington, Glascote, Belgrave, Fazeley and the estates in between.",
     local:
@@ -106,7 +106,7 @@ export const areas: Area[] = [
     where: "About eight miles south of Lichfield",
     title: "Builder and home renovations in Sutton Coldfield",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Sutton Coldfield, Four Oaks, Mere Green and Little Aston. I’m Connor, based in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Sutton Coldfield, Four Oaks and Mere Green. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Sutton Coldfield is about eight miles south of Lichfield, straight down the A5127. I cover the town, including Four Oaks, Mere Green and Little Aston.",
     local:
@@ -154,7 +154,7 @@ export const areas: Area[] = [
     where: "About three miles east of Lichfield",
     title: "Builder and home renovations in Whittington",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Whittington, Hopwas, Huddlesford and Fisherwick. I’m Connor, based in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Whittington, Hopwas and Huddlesford. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Whittington is about three miles east of Lichfield, on the way to Tamworth. I cover the village along with Hopwas, Huddlesford and Fisherwick.",
     local:
@@ -178,7 +178,7 @@ export const areas: Area[] = [
     where: "About four miles north-east of Lichfield",
     title: "Builder and home renovations in Fradley",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Fradley, Alrewas and Streethay. Fitted wardrobes, media walls and door upgrades. I’m Connor, based in Lichfield.",
+      "Full renovations, extensions, kitchens and bathrooms in Fradley, Alrewas and Streethay, plus fitted wardrobes and media walls. I’m Connor, in Lichfield.",
     intro:
       "Fradley is about four miles north-east of Lichfield, near the canal junction. I cover the village, the newer estates around it, and nearby Alrewas and Streethay.",
     local:
@@ -202,7 +202,7 @@ export const areas: Area[] = [
     where: "About nine miles south-west of Lichfield",
     title: "Builder and home renovations in Walsall",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Walsall, Aldridge, Pelsall and Bloxwich. I’m Connor, based up the road in Lichfield. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Walsall, Aldridge and Pelsall. I’m Connor, based in Lichfield. Insured, free written quotes.",
     intro:
       "Walsall is about nine miles south-west of Lichfield, and I cover the town and the areas around it, including Aldridge, Pelsall, Bloxwich, Rushall and Walsall Wood.",
     local:
@@ -226,7 +226,7 @@ export const areas: Area[] = [
     where: "About eight miles west of Lichfield",
     title: "Builder and home renovations in Cannock",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Cannock, Hednesford, Heath Hayes and Norton Canes. I’m Connor, based in Lichfield. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Cannock, Hednesford and Heath Hayes. I’m Connor, based in Lichfield. Insured, free written quotes.",
     intro:
       "Cannock is about eight miles west of Lichfield, on the edge of Cannock Chase. I cover the town along with Hednesford, Heath Hayes, Norton Canes and Huntington.",
     local:
@@ -250,7 +250,7 @@ export const areas: Area[] = [
     where: "About eleven miles north-east of Lichfield",
     title: "Builder and home renovations in Burton upon Trent",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Burton upon Trent, Stapenhill, Winshill and Branston. I’m Connor, based in Lichfield. Free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms in Burton upon Trent, Stapenhill and Winshill. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Burton upon Trent is about eleven miles north-east of Lichfield, straight up the A38. I cover the town, including Stapenhill, Winshill, Horninglow and Branston.",
     local:
@@ -274,7 +274,7 @@ export const areas: Area[] = [
     where: "About fifteen miles south-west of Lichfield",
     title: "Builder and home renovations in Birmingham",
     description:
-      "Full renovations, extensions, kitchens and bathrooms across Birmingham, from Erdington and Great Barr to Moseley and Harborne. I’m Connor. Insured, free written quotes.",
+      "Full renovations, extensions, kitchens and bathrooms across Birmingham, from Erdington to Moseley and Harborne. I’m Connor. Insured, free written quotes.",
     intro:
       "Birmingham is about fifteen miles south-west of Lichfield, down the A38. I work across the city, from Erdington, Kingstanding and Great Barr in the north to Moseley, Kings Heath and Harborne.",
     local:

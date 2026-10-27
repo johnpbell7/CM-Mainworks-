@@ -15,7 +15,7 @@ import { packages } from "@/content/prices";
 import { media } from "@/content/media";
 import { beforeAfters } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
-import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageMeta, shareImage, websiteLd } from "@/lib/seo";
 import FaqList from "@/components/FaqList";
 
 const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
@@ -24,14 +24,16 @@ const tintOf = (slug: string) => sections.find((s) => s.slug === slug)!.tint;
 
 export const metadata: Metadata = pageMeta({
   title: "Home renovations across the Midlands | CM MainWorks",
-  description: "I’m Connor. Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and roofs. Insured, with free written quotes.",
+  description: "I’m Connor. Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors and roofs. Insured, free written quotes.",
   path: "/",
   absolute: true,
+  image: shareImage("home", "CM MainWorks: your whole renovation, one team"),
 });
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={websiteLd()} />
       {/* ---------------- Hero ---------------- */}
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-bg">

@@ -6,12 +6,13 @@ import Closing from "@/components/Closing";
 import { business, renovation, sections } from "@/content/site";
 import { media } from "@/content/media";
 import { areas } from "@/content/areas";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "About me",
+  title: "About Connor: renovations across the Midlands",
   description: `I’m Connor. I run CM MainWorks, managing full home renovations with one team across the Midlands, with ${business.experience} in the trade.`,
   path: "/about",
+  image: shareImage("about", "CM MainWorks: Hi, I’m Connor"),
 });
 
 const promises = [
