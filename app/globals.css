@@ -923,7 +923,7 @@ html.js.intro-on { overflow: hidden; }
   /* room for the sticky call / quote bar, inside the navy footer so no white strip shows */
   .foot { padding-bottom: calc(28px + 76px + env(safe-area-inset-bottom, 0px)); }
   .logo { height: 38px; }
-  .logo-head { height: 48px; }
+  .logo-head { height: 38px; }
   /* the bottom bar already has Call, so the header keeps just the logo and menu */
   .head .tel { display: none; }
   .menu-btn { width: 42px; height: 42px; padding: 0; justify-content: center; margin-left: auto; }
