@@ -6,8 +6,8 @@ import Phases from "@/components/Phases";
 import PackageCard, { PriceNote } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
-import { Arrow, Check, Cross } from "@/components/Icons";
-import { business, renovation, renovationServices, smallerServices } from "@/content/site";
+import { Check, Cross } from "@/components/Icons";
+import { business, getSection, renovation, type SectionSlug } from "@/content/site";
 import { media } from "@/content/media";
 import { packages } from "@/content/prices";
 import { renovationFaqs } from "@/content/faqs";
@@ -28,6 +28,20 @@ const usual = [
   "Nobody responsible for the whole job",
   "No idea if it’s on time or budget",
 ];
+// A full renovation is every job Connor also does on its own, joined up. In the
+// order they usually come in a job; each card is tapped through to its service page.
+const trades: { slug: SectionSlug; stage: string; text: string }[] = [
+  { slug: "extensions", stage: "Structure", text: "More room, built first so everything else can follow." },
+  { slug: "roofing", stage: "Structure", text: "A sound roof over the new work." },
+  { slug: "kitchens", stage: "Fitting", text: "Old kitchen out, new one fitted level and square." },
+  { slug: "bathrooms", stage: "Fitting", text: "Strip-out to tiling and the final seal." },
+  { slug: "flooring-and-tiling", stage: "Fitting", text: "Floors levelled and laid, walls and floors tiled." },
+  { slug: "staircases", stage: "Fitting", text: "Stairs, doors, skirting and architrave." },
+  { slug: "carpentry", stage: "Throughout", text: "Boxing-in, trims and the woodwork in between." },
+  { slug: "joinery", stage: "Finishing", text: "Media walls, alcove units and built-in storage." },
+  { slug: "decorating", stage: "Finishing", text: "Every room painted, right through to the last coat." },
+];
+
 const ours = [
   "One person to deal with throughout",
   "Clear phases that keep the job moving",
@@ -60,7 +74,7 @@ export default function Renovations() {
       <PageHead
         crumbs={[{ href: "/renovations", label: "Renovations" }]}
         title={<>Your whole renovation, <span className="hl">one team.</span></>}
-        lede="Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me in clear phases."
+        lede="Every trade I do, in one job: kitchens, bathrooms, extensions, floors, stairs and decorating, managed by me in clear phases."
       />
 
       <section className="sec" style={{ paddingTop: 0 }} aria-label="How I work">
@@ -69,7 +83,8 @@ export default function Renovations() {
             <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
             <div className="prose" data-reveal="up">
               <p>Renovating is exciting. Managing it is stressful: finding trades, getting the order right, chasing no-shows.</p>
-              <p>That’s the part I take off your hands. One team, one person to ring and one written quote, paid phase by phase.</p>
+              <p>A full renovation is really every job I do on its own, joined up: the extension, the kitchen and bathroom, floors, stairs, doors, joinery and decorating.</p>
+              <p>So I take the managing off your hands too. One team, one person to ring and one written quote, paid phase by phase.</p>
             </div>
           </div>
         </div>
@@ -97,17 +112,23 @@ export default function Renovations() {
       <section className="sec" aria-labelledby="inc-title">
         <div className="wrap">
           <div className="sec-head">
-            <div data-reveal="up"><h2 id="inc-title">What your renovation can include</h2></div>
-            <p data-reveal="up">One room or the whole house, <span className="hl">all managed by me</span>.</p>
+            <div data-reveal="up"><h2 id="inc-title">Every trade I do, in one renovation</h2></div>
+            <p data-reveal="up">I take on each of these as a job by itself. A renovation is <span className="hl">all of them, joined up</span>.</p>
           </div>
-          <ul className="incl" data-reveal="stagger">
-            {[...renovationServices, ...smallerServices.filter((s) => s.slug !== "carpentry")].map((s) => (
-              <li key={s.slug} style={{ "--c": s.color } as React.CSSProperties}>
-                <Link href={`/services/${s.slug}`}>{s.name} <Arrow /></Link>
-              </li>
-            ))}
-            <li><span>Electrics, plumbing and plastering, organised for you</span></li>
-          </ul>
+          <div className="trades" data-reveal="stagger">
+            {trades.map((t) => {
+              const s = getSection(t.slug)!;
+              return (
+                <Link className="trade" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
+                  <Photo media={media[s.slug]} illo={s.illo} sizes="(max-width: 1080px) 50vw, 33vw" />
+                  <span className="proj-tag">{t.stage}</span>
+                  <h3>{s.name}</h3>
+                  <p>{t.text}</p>
+                </Link>
+              );
+            })}
+          </div>
+          <p className="more-note">Any specialist trades the job needs are organised by me, so you still only deal with one person.</p>
         </div>
       </section>
 

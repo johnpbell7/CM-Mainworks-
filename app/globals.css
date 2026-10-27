@@ -161,7 +161,6 @@ ul, ol { margin: 0; padding: 0; }
 .menu-btn { display: none; }
 .menu { display: none; }
 @media (max-width: 1080px) {
-  .incl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ba-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .smaller { grid-template-columns: minmax(0, 1fr); }
   .menu-btn {
@@ -635,6 +634,22 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .proj-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); margin-top: clamp(40px, 5vw, 72px); }
 .proj-photos .ph { aspect-ratio: 4 / 3; }
 .area-work { margin-top: clamp(56px, 7vw, 104px); }
+/* renovations page: every trade as one renovation, each card tapped through to its service */
+.trades { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(20px, 2.4vw, 36px); }
+.trade { display: block; text-decoration: none; color: inherit; }
+.trade .ph { aspect-ratio: 4 / 3; background: var(--pen); }
+.trade .ph > img { transition: transform 1.2s var(--ease); }
+.trade:hover .ph > img { transform: scale(1.04); }
+.trade h3 { font-size: 1.35rem; letter-spacing: -.02em; margin-top: 6px; transition: color .3s var(--ease); }
+.trade:hover h3 { color: var(--gold-ink); }
+.trade p { color: var(--ink-2); margin-top: 6px; }
+@media (max-width: 1080px) { .trades { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .trades { gap: 28px 14px; }
+  .trade h3 { font-size: 1.05rem; }
+  .trade p { font-size: .9rem; }
+  .trade .proj-tag { font-size: .78rem; margin-top: 12px; }
+}
 @media (max-width: 720px) { .proj-photos { grid-template-columns: minmax(0, 1fr); } }
 .mid-h { font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.035em; margin-bottom: 16px; }
 .big-h { font-size: var(--h2); }
@@ -736,14 +751,6 @@ a.pkg:hover h3 svg { transform: translateX(4px); }
 .compare .ours svg { color: var(--gold-ink); }
 
 /* ---------- renovations: what it can include ---------- */
-.incl { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); border-top: 1px solid var(--line); }
-.incl li { border-bottom: 1px solid var(--line); }
-.incl a, .incl span { display: flex; align-items: center; gap: 12px; padding: 18px 0; font-weight: 600; font-size: 1.1rem; letter-spacing: -.01em; text-decoration: none; }
-.incl span { color: var(--ink-2); font-weight: 500; }
-.incl a::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 2px; background: var(--c); }
-.incl a svg { width: 18px; height: 18px; margin-left: auto; transition: transform .3s var(--ease); }
-.incl a:hover { color: var(--gold-ink); }
-.incl a:hover svg { transform: translateX(4px); }
 
 /* ---------- renovations: how it runs ---------- */
 .timeline { list-style: none; counter-reset: t; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 3vw, 44px) clamp(24px, 3.4vw, 52px); }
@@ -1003,8 +1010,6 @@ html.js.intro-on { overflow: hidden; }
   .feature > div > p { font-size: 1.02rem; }
   .feature .row-links { margin-top: 22px; }
   .work.solo .ph { aspect-ratio: 4 / 3; }
-  .incl { grid-template-columns: minmax(0, 1fr); }
-  .incl a, .incl span { padding: 15px 0; font-size: 1.02rem; }
   .ph-after { gap: 4px 16px; font-size: .84rem; margin-top: 10px; padding-top: 10px; }
   .phases li { padding-bottom: 24px; }
   .phases li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
