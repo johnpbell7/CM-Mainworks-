@@ -48,7 +48,7 @@ const boot = `(function(){var d=document.documentElement;d.classList.add('js');t
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={bricolage.variable} suppressHydrationWarning>
+    <html lang="en-GB" data-scroll-behavior="smooth" className={bricolage.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: boot }} />
         <JsonLd />
