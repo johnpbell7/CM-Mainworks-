@@ -13,7 +13,7 @@ import PackageCard, { PriceNote } from "@/components/PackageCard";
 import { business, renovation, renovationServices, sections } from "@/content/site";
 import { packages } from "@/content/prices";
 import { media } from "@/content/media";
-import { beforeAfters } from "@/content/projects";
+import { beforeAfters, projectPhotos, publishedProjects } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
 import { JsonLd, pageMeta, shareImage, websiteLd } from "@/lib/seo";
 import FaqList from "@/components/FaqList";
@@ -21,6 +21,13 @@ import FaqList from "@/components/FaqList";
 const colorOf = (slug: string) => sections.find((s) => s.slug === slug)!.color;
 const nameOf = (slug: string) => sections.find((s) => s.slug === slug)!.name;
 const tintOf = (slug: string) => sections.find((s) => s.slug === slug)!.tint;
+
+// Up to six more photos from real jobs, under the before and afters (not repeating
+// the photos in the sliders). Shows once there are at least three.
+const inSliders = new Set(beforeAfters.flatMap((w) => [w.before.src, w.after.src]));
+const recentPhotos = publishedProjects
+  .flatMap((p) => projectPhotos(p).filter((m) => !inSliders.has(m.src)).map((m) => ({ m, p })))
+  .slice(0, 6);
 
 export const metadata: Metadata = pageMeta({
   title: "Home renovations across the Midlands | CM MainWorks",
@@ -71,6 +78,7 @@ export default function Home() {
             </p>
           </div>
           <Benefits />
+          {media.team.src && <Photo media={media.team} className="why-photo" sizes="(max-width: 1240px) 100vw, 1200px" />}
         </div>
       </section>
 
@@ -169,6 +177,15 @@ export default function Home() {
               </figure>
             ))}
           </div>
+          {recentPhotos.length >= 3 && (
+            <div className="recent-strip" style={{ "--n": recentPhotos.length } as React.CSSProperties}>
+              {recentPhotos.map(({ m, p }) => (
+                <Link key={m.src} href={`/projects/${p.slug}`} aria-label={p.name}>
+                  <Photo media={m} sizes="(max-width: 1080px) 33vw, 16vw" />
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
