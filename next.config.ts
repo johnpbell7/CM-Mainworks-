@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
       { source: "/areas", destination: "/", permanent: true },
       // Building work became its own Extensions page in the renovation rework
       { source: "/services/building", destination: "/services/extensions", permanent: true },
+      // The villages around Lichfield are covered on the Lichfield page
+      { source: "/areas/fradley", destination: "/areas/lichfield", permanent: true },
+      { source: "/areas/shenstone", destination: "/areas/lichfield", permanent: true },
+      { source: "/areas/whittington", destination: "/areas/lichfield", permanent: true },
     ];
   },
   images: {

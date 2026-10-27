@@ -26,7 +26,7 @@ export const business = {
     source: "Facebook",
   },
   // Headline towns for copy. Full list (with town pages) is in content/areas.ts.
-  areas: ["Lichfield", "Birmingham", "Solihull", "Sutton Coldfield", "Tamworth", "Walsall", "Cannock", "Burton upon Trent", "Redditch", "Leicester"],
+  areas: ["Lichfield", "Burntwood", "Birmingham", "Solihull", "Sutton Coldfield", "Tamworth", "Walsall", "Cannock", "Burton upon Trent", "Redditch", "Leicester"],
 } as const;
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cm-mainworks.vercel.app";

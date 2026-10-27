@@ -17,7 +17,10 @@ export default function BusinessJsonLd() {
         logo: `${siteUrl}/images/og.jpg`,
         image: [`${siteUrl}/images/hero-oak-canopy.jpg`, `${siteUrl}/images/bay-window-after.jpg`],
         address: { "@type": "PostalAddress", addressLocality: "Lichfield", addressRegion: "Staffordshire", addressCountry: "GB" },
-        areaServed: areas.map((a) => ({ "@type": "City", name: a.name })),
+        areaServed: [
+          ...areas.map((a) => ({ "@type": "City", name: a.name })),
+          ...areas.flatMap((a) => (a.alsoCovers ?? []).map((n) => ({ "@type": "Place", name: n }))),
+        ],
         sameAs: [business.facebook],
         founder: { "@type": "Person", name: business.owner },
         hasOfferCatalog: {

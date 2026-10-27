@@ -40,7 +40,7 @@ export default async function AreaPage({ params }: Props) {
           description: a.description,
           url: abs(`/areas/${a.slug}`),
           provider: { "@id": businessId },
-          areaServed: { "@type": "City", name: a.name },
+          areaServed: [{ "@type": "City", name: a.name }, ...(a.alsoCovers ?? []).map((n) => ({ "@type": "Place", name: n }))],
         }}
       />
       <PageHead
@@ -55,7 +55,7 @@ export default async function AreaPage({ params }: Props) {
             <Photo media={media[lead.slug]} illo={lead.illo} sizes="(max-width: 720px) 100vw, 50vw" />
             <div className="prose" data-reveal="up">
               <h2 id="local-title" className="mid-h">Homes in {a.name}</h2>
-              <p>{a.local}</p>
+              {a.local.map((t) => <p key={t}>{t}</p>)}
               <ul className="facts">
                 <li><span>Where</span>{a.where[0].toUpperCase() + a.where.slice(1)}</li>
                 <li><span>Quotes</span>Free and written, with no obligation</li>
