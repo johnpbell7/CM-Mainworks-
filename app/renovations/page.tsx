@@ -46,7 +46,7 @@ const wall: { slug: SectionSlug; label: string; media: Media }[][] = [
   [
     { slug: "extensions", label: "Extension", media: photo("extension-build/rear", "An extension going up, seen from the garden, with the roof joists across the walls") },
     { slug: "roofing", label: "Roof", media: photo("extension-build/roof-frame", "Roof framing on an extension") },
-    { slug: "flooring-and-tiling", label: "Floors", media: photo("conservatory/after-carpet", "New grey carpet right across a conservatory") },
+    { slug: "flooring-and-tiling", label: "Floors", media: photo("garage-conversion-cannock/after-room", "Herringbone floor in a garage conversion, with a new loft ladder") },
   ],
   [
     { slug: "kitchens", label: "Kitchen", media: photo("hmo-renovation/after-kitchen", "Kitchen fitted: white units, a dark worktop and a white metro tile splashback") },

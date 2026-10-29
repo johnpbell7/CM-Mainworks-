@@ -40,7 +40,7 @@ export const media = {
   bathrooms: photo("hmo-renovation/bathroom-tiled", "New bath fitted with large grey wall tiles going up", "Bathroom photo"),
   staircases: photo("oak-internal-doors/door", "Oak internal door hung in a white frame", "Doors photo"),
   roofing: photo("extension-build/roof-light", "Roof timbers on an extension with the frame for a roof light, looking up at the sky", "Roofing photo"),
-  "flooring-and-tiling": photo("conservatory/after-corner", "Conservatory with the old tiled floor taken up and a new grey carpet laid", "Flooring photo"),
+  "flooring-and-tiling": photo("garage-conversion-cannock/floor", "New herringbone floor in a garage conversion in Cannock", "Flooring photo"),
   carpentry: photo("bay-window-restoration/after-bay", "Bay window restored and painted white, with new timber cills", "Carpentry photo"),
   joinery: photo("panelled-feature-wall/after", "Panelled feature wall painted a warm taupe", "Joinery photo"),
   decorating: photo("hall-stairs-landing/after-stairs", "Stairs and hall painted light grey with a white handrail", "Decorating photo"),

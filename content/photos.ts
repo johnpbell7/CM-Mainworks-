@@ -10,6 +10,7 @@ export const photoFiles: Record<string, PhotoFile> = {
   "garage-conversion-cannock/before-room": { src: "/images/projects/garage-conversion-cannock/before-room.jpg", w: 1050, h: 1400 },
   "garage-conversion-cannock/before-skylight": { src: "/images/projects/garage-conversion-cannock/before-skylight.jpg", w: 1049, h: 1400 },
   "garage-conversion-cannock/before-corridor": { src: "/images/projects/garage-conversion-cannock/before-corridor.jpg", w: 1049, h: 1400 },
+  "garage-conversion-cannock/floor": { src: "/images/projects/garage-conversion-cannock/floor.jpg", w: 1400, h: 1050 },
   "conservatory/after-wide": { src: "/images/projects/conservatory/after-wide.jpg", w: 1050, h: 1400 },
   "conservatory/after-carpet": { src: "/images/projects/conservatory/after-carpet.jpg", w: 1049, h: 1400 },
   "conservatory/after-windows": { src: "/images/projects/conservatory/after-windows.jpg", w: 1050, h: 1400 },

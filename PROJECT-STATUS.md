@@ -68,7 +68,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
   - The homepage renovation feature shows the full drawing too.
   - Every other feature row (a service's intro, the services list, the renovations intro, a town's "Homes in …") shows Connor's photo on its own (`components/Photo.tsx`).
   - Proof is photos only: project pages and cards, before and afters, the six job photos under them on the homepage, and the renovations page's "A renovation, trade by trade" wall (one photo per trade, rows that share a height so none is cropped; two across on phones).
-  - Floors use the conservatory (carpet, old tiles out). A laminate, LVT or tiled floor from Connor would suit the floors page better.
+  - Floors use the herringbone floor from the Cannock garage conversion (John, 29 Oct): a landscape crop on the floors page, the whole room on the renovations photo wall.
   - Photos are calm: same rounded corners as the tiles, no shadows or frames, the section colour only as the accent.
 - **Projects (27 Oct):** 14 real jobs from Connor's Facebook posts (1 Apr to 1 Oct 2026), written from his own captions, nothing added. The town appears only where he named it (Cannock, Lichfield).
 - **Before and afters:** a slider only where both photos were taken from the same spot (`aligned: true`, just the panelled wall so far); otherwise the two sit side by side (`BeforeAfterSplit`). Homepage order is set by `homepage: 1–3` in `content/projects.ts`.
@@ -143,14 +143,14 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 2. **Photos.** 14 jobs are in from his Facebook (27 Oct). Still wanted:
    - a portrait of Connor (none of the Facebook photos show him clearly, and his face stays off until he says),
    - before and after pairs taken from the same spot, so more of them can be sliders,
-   - finished photos of the garage and porch, a floors or tiling job, and a bathroom,
+   - finished photos of the garage and porch, a tiling job, and a bathroom,
    - a line or two from him per job (they're short at about 200 words each).
 3. **A read-through of the wording**, including:
    - which trades he organises (electrics, plumbing, plastering, gas),
    - exactly what roofing he takes on,
    - whether he helps with plans and approvals for extensions,
    - "over 10 years" (taken from his Facebook).
-4. **Email address and domain**, so quotes reach him and the site can go live.
+4. **A domain**, so the site can go live and the quote form can send from it. (The email quotes go to is confirmed: his business Gmail, John 29 Oct.)
 
 Confirmed so far: he's insured; he runs a team, with labourers he trusts; he covers the wider Midlands; renovations are his main focus; work is done in phases and invoiced phase by phase.
 
@@ -163,7 +163,7 @@ Confirmed so far: he's insured; he runs a team, with labourers he trusts; he cov
    - `NEXT_PUBLIC_SITE_URL` (the real domain)
    - `NEXT_PUBLIC_ALLOW_INDEXING=true`. Until this is set, the site tells Google not to index it, which is why Lighthouse SEO shows 69 on the preview
    - `RESEND_API_KEY`
-   - `QUOTE_TO_EMAIL`
+   - `QUOTE_TO_EMAIL` (Connor's business Gmail, in the studio's client sheet; kept out of this public repo)
    - `QUOTE_FROM_EMAIL`
 3. Send a test quote, then submit the sitemap (`/sitemap.xml`) in Google Search Console.
 

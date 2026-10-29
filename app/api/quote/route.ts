@@ -6,7 +6,7 @@ import { MAX_PHOTOS, formatPostcode, ruleKeys, rules } from "@/lib/validation";
   Quote form handler. Emails each lead to Connor through Resend, with photos attached.
   Env vars (set in Vercel):
     RESEND_API_KEY    Resend API key
-    QUOTE_TO_EMAIL    where leads go (waiting on Connor)
+    QUOTE_TO_EMAIL    where leads go: Connor's business Gmail (confirmed by John 29 Oct; the address is in the studio's client sheet)
     QUOTE_FROM_EMAIL  verified sender, e.g. "CM MainWorks website <quotes@yourdomain>"
   Nothing personal is logged. No database is used.
 */

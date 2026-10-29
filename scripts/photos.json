@@ -35,6 +35,16 @@
    {
     "name": "before-corridor",
     "fbid": "122131041674810054"
+   },
+   {
+    "name": "floor",
+    "fbid": "122131187558810054",
+    "crop": [
+     0,
+     0.4375,
+     1,
+     1
+    ]
    }
   ],
   "conservatory": [
