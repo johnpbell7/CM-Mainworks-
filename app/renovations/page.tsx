@@ -8,7 +8,7 @@ import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
 import { Check, Cross } from "@/components/Icons";
 import { business, getSection, renovation, type SectionSlug } from "@/content/site";
-import { media } from "@/content/media";
+import { media, photo, type Media } from "@/content/media";
 import { packages } from "@/content/prices";
 import { renovationFaqs } from "@/content/faqs";
 import { areas } from "@/content/areas";
@@ -40,6 +40,26 @@ const trades: { slug: SectionSlug; stage: string; text: string }[] = [
   { slug: "carpentry", stage: "Throughout", text: "Boxing-in, trims and the woodwork in between." },
   { slug: "joinery", stage: "Finishing", text: "Media walls, alcove units and built-in storage." },
   { slug: "decorating", stage: "Finishing", text: "Every room painted, right through to the last coat." },
+];
+
+// A renovation in pictures: the best photo of each trade from Connor's recent jobs, in the
+// same order as the trades. Each row's photos share one height, so none is cropped.
+const wall: { slug: SectionSlug; label: string; media: Media }[][] = [
+  [
+    { slug: "extensions", label: "Extension", media: photo("extension-build/rear", "An extension going up, seen from the garden, with the roof joists across the walls") },
+    { slug: "roofing", label: "Roof", media: photo("extension-build/roof-frame", "Roof framing on an extension") },
+    { slug: "flooring-and-tiling", label: "Floors", media: photo("conservatory/after-carpet", "New grey carpet right across a conservatory") },
+  ],
+  [
+    { slug: "kitchens", label: "Kitchen", media: photo("hmo-renovation/after-kitchen", "Kitchen fitted: white units, a dark worktop and a white metro tile splashback") },
+    { slug: "bathrooms", label: "Bathroom", media: photo("hmo-renovation/bathroom-tiled", "New bath fitted with large grey wall tiles") },
+    { slug: "staircases", label: "Doors", media: photo("oak-internal-doors/double-doors", "Glazed oak double doors in a white frame") },
+  ],
+  [
+    { slug: "carpentry", label: "Carpentry", media: photo("bay-window-restoration/after-full-bay", "A bay window restored, with new timber cills and fresh white paint") },
+    { slug: "joinery", label: "Panelling", media: photo("panelled-feature-wall/after", "A panelled feature wall painted a warm taupe") },
+    { slug: "decorating", label: "Decorating", media: photo("three-bed-house-repaint/after-fireplace", "Freshly painted room with a black cast-iron fireplace") },
+  ],
 ];
 
 const ours = [
@@ -77,7 +97,7 @@ export default function Renovations() {
         lede="Every trade I do, in one job: kitchens, bathrooms, extensions, floors, stairs and decorating, managed by me in clear phases."
       />
 
-      <section className="sec" style={{ paddingTop: 0 }} aria-label="How I work">
+      <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="wall-title">
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
             <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
@@ -86,6 +106,25 @@ export default function Renovations() {
               <p>A full renovation is really every job I do on its own, joined up: the extension, the kitchen and bathroom, floors, stairs, doors, joinery and decorating.</p>
               <p>So I take the managing off your hands too. One team, one person to ring and one written quote, paid phase by phase.</p>
             </div>
+          </div>
+          <div className="sec-head" style={{ marginTop: "clamp(24px, 4vw, 56px)" }}>
+            <div data-reveal="up"><h2 id="wall-title">A renovation, trade by trade</h2></div>
+            <p data-reveal="up">Each photo is from one of my recent jobs. A renovation brings them all into one home.</p>
+          </div>
+          <div className="reno-wall">
+            {wall.map((row, i) => (
+              <div className="wall-row" key={i}>
+                {row.map((t) => {
+                  const s = getSection(t.slug)!;
+                  return (
+                    <figure key={t.label} style={{ "--r": (t.media.w! / t.media.h!).toFixed(3), "--c": s.color } as React.CSSProperties}>
+                      <Photo media={t.media} sizes="(max-width: 720px) 50vw, 40vw" />
+                      <figcaption className="proj-tag">{t.label}</figcaption>
+                    </figure>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
       </section>

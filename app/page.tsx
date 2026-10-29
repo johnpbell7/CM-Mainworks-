@@ -98,7 +98,7 @@ export default function Home() {
 
           <article className="feature" style={{ "--c": renovation.color, "--pen": renovation.tint } as React.CSSProperties}>
             <Link href={renovation.href} tabIndex={-1} aria-hidden="true" className="card-img">
-              <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 1080px) 100vw, 48vw" />
+              <Photo media={media.renovation} illo={renovation.illo} drawingOnly sizes="(max-width: 1080px) 100vw, 48vw" />
             </Link>
             <div data-reveal="up">
               <h3><Link className="head-link" href={renovation.href}>Full home renovations <Arrow /></Link></h3>

@@ -4,14 +4,15 @@ import { photoFiles } from "./photos";
   Every photo slot on the site. While `src` is null, the drawing (or a labelled
   placeholder) shows instead.
 
-  How photos and drawings work together (John, 27 Oct 2026: keep every icon and
-  drawing, and work photography in alongside them):
+  How photos and drawings work together (John, 27 and 29 Oct 2026: keep every icon and
+  drawing, and work photography in alongside them; never both in one frame):
   - Cards (service cards, the renovation trades, smaller jobs, steps) always show the
     drawing: it's each service's sign.
-  - Feature rows (a service's intro, the renovations intro, a town's "Homes in …",
-    the homepage renovation feature) lead with Connor's photo when there is one, with
-    the drawing tucked into the corner on its section colour.
-  - Proof (projects, before and afters, recent work) is photos only.
+  - The homepage renovation feature shows the full drawing too.
+  - Every other feature row (a service's intro, the services list, the renovations
+    intro, a town's "Homes in …") shows Connor's photo on its own once there is one.
+  - Proof (projects, before and afters, recent work, the renovation photo wall) is
+    photos only.
   Connor's photos come from his Facebook posts, made into web copies by
   scripts/make-photos.py. `photo()` looks one up by job and name.
 */
@@ -39,7 +40,7 @@ export const media = {
   bathrooms: photo("hmo-renovation/bathroom-tiled", "New bath fitted with large grey wall tiles going up", "Bathroom photo"),
   staircases: photo("oak-internal-doors/door", "Oak internal door hung in a white frame", "Doors photo"),
   roofing: photo("extension-build/roof-light", "Roof timbers on an extension with the frame for a roof light, looking up at the sky", "Roofing photo"),
-  "flooring-and-tiling": { src: null, alt: "Flooring and tiling by CM MainWorks", label: "Flooring photo" },
+  "flooring-and-tiling": photo("conservatory/after-corner", "Conservatory with the old tiled floor taken up and a new grey carpet laid", "Flooring photo"),
   carpentry: photo("bay-window-restoration/after-bay", "Bay window restored and painted white, with new timber cills", "Carpentry photo"),
   joinery: photo("panelled-feature-wall/after", "Panelled feature wall painted a warm taupe", "Joinery photo"),
   decorating: photo("hall-stairs-landing/after-stairs", "Stairs and hall painted light grey with a white handrail", "Decorating photo"),

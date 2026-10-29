@@ -128,7 +128,7 @@ ul, ol { margin: 0; padding: 0; }
 
 /* ---------- logo ---------- */
 .logo { height: 46px; width: auto; }
-.logo-head { height: 50px; }
+.logo-head { height: 42px; }
 
 /* ---------- header ---------- */
 .head {
@@ -639,14 +639,6 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .proj-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .proj-grid.three h3 { font-size: 1.2rem; }
 
-/* Connor's photo leading a feature row, the service's drawing tucked into its corner */
-.ph-pair > img { object-fit: cover; }
-.pair-ill {
-  position: absolute; left: clamp(10px, 1.6vw, 18px); bottom: clamp(10px, 1.6vw, 18px); z-index: 1;
-  width: 30%; aspect-ratio: 1; border-radius: 14px; background: var(--pen, var(--soft));
-  border: 4px solid #fff; overflow: hidden;
-}
-.pair-ill .il { position: absolute; left: 6%; top: 8%; width: 88%; height: 92%; }
 
 /* before and after side by side, for pairs not taken from the same spot */
 .ba-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; border-radius: var(--radius); overflow: hidden; background: #fff; }
@@ -686,7 +678,21 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 @media (max-width: 720px) {
   .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .proj-grid.three { grid-template-columns: minmax(0, 1fr); }
-  .pair-ill { width: 32%; border-width: 3px; border-radius: 12px; }
+}
+/* renovations: a photo per trade, in rows of three that share one height so none is cropped */
+.reno-wall { display: grid; gap: clamp(18px, 2.2vw, 30px); }
+.wall-row { display: flex; gap: clamp(10px, 1.6vw, 20px); }
+.wall-row figure { flex: var(--r) 1 0; min-width: 0; margin: 0; }
+.wall-row .ph { aspect-ratio: var(--r); }
+.wall-row .proj-tag { margin-top: 12px; }
+@media (max-width: 720px) {
+  /* phones: two across in one shape, the first photo full width */
+  .reno-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 10px; }
+  .wall-row { display: contents; }
+  .wall-row .ph { aspect-ratio: 3 / 4; }
+  .wall-row:first-child figure:first-child { grid-column: span 2; }
+  .wall-row:first-child figure:first-child .ph { aspect-ratio: 4 / 3; }
+  .wall-row .proj-tag { margin-top: 8px; font-size: .8rem; }
 }
 .mid-h { font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.035em; margin-bottom: 16px; }
 .big-h { font-size: var(--h2); }

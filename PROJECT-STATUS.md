@@ -63,10 +63,12 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
   - Every "from" price has an asterisk, explained by: "Prices are a guide and subject to seeing the job…".
   - **All figures are placeholders (`£TBC`) until Connor supplies them.** Never invent prices.
 - **Homepage before and afters:** at most three sliders, taken from jobs marked `homepage: true` in `content/projects.ts` (both photos needed); placeholder slots fill the gaps until there are three. Jobs with only one photo go on the projects page as single-photo posts.
-- **Photos alongside the drawings (John, 27 Oct: keep every icon and drawing, work photography in):**
+- **Photos alongside the drawings (John, 27 Oct: keep every icon and drawing, work photography in; 29 Oct: never both in one frame):**
   - Cards (service cards, the renovation trades, smaller jobs, steps) always keep the drawing (`drawingOnly`).
-  - Feature rows (a service's intro, the renovations intro, a town's "Homes in …", the homepage renovation feature) lead with Connor's photo, the drawing tucked into the corner on its section colour (`components/Photo.tsx`).
-  - Proof is photos only: project pages and cards, before and afters, the six job photos under them on the homepage.
+  - The homepage renovation feature shows the full drawing too.
+  - Every other feature row (a service's intro, the services list, the renovations intro, a town's "Homes in …") shows Connor's photo on its own (`components/Photo.tsx`).
+  - Proof is photos only: project pages and cards, before and afters, the six job photos under them on the homepage, and the renovations page's "A renovation, trade by trade" wall (one photo per trade, rows that share a height so none is cropped; two across on phones).
+  - Floors use the conservatory (carpet, old tiles out). A laminate, LVT or tiled floor from Connor would suit the floors page better.
   - Photos are calm: same rounded corners as the tiles, no shadows or frames, the section colour only as the accent.
 - **Projects (27 Oct):** 14 real jobs from Connor's Facebook posts (1 Apr to 1 Oct 2026), written from his own captions, nothing added. The town appears only where he named it (Cannock, Lichfield).
 - **Before and afters:** a slider only where both photos were taken from the same spot (`aligned: true`, just the panelled wall so far); otherwise the two sit side by side (`BeforeAfterSplit`). Homepage order is set by `homepage: 1–3` in `content/projects.ts`.
@@ -76,7 +78,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 - **Header:**
   - The logo lockup has "Carpentry & Construction" made legible: `scripts/make-header-logo.mjs` rescales the supplied shapes, nothing is retyped.
   - On phones the header shows just the logo and the menu, because the bottom bar has Call.
-  - The logo is 50px tall on desktop (John, 27 Oct: a little smaller) and 48px on phones.
+  - The logo is 42px tall on desktop and 38px on phones (John, 27 and 29 Oct: smaller).
 - **Footer:** navy, with the on-navy logo, light text and gold headings.
 - **Town pages** (`/areas/[slug]`, 11 towns) are in scope. They are linked from the footer only, and there is no areas hub page (`/areas` redirects to `/`).
   - Each leads with renovation work (kitchens, bathrooms, extensions), has its own write-up of the local houses and three or four questions of its own.
