@@ -680,6 +680,10 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
   .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .proj-grid.three { grid-template-columns: minmax(0, 1fr); }
 }
+/* renovations: three opening photos, one tall and two stacked beside it */
+.bento { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr 1fr; gap: clamp(6px, .8vw, 10px); aspect-ratio: 4 / 3; }
+.svc-row .bento .ph { aspect-ratio: auto; min-height: 0; }
+.bento .ph:first-child { grid-row: span 2; }
 /* renovations: a photo per trade, in rows of three that share one height so none is cropped */
 .reno-wall { display: grid; gap: clamp(18px, 2.2vw, 30px); }
 .wall-row { display: flex; gap: clamp(10px, 1.6vw, 20px); }

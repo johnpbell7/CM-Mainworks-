@@ -34,7 +34,7 @@ export const media = {
     label: "Hero photo",
   },
   // Feature-row photos, one per service, from Connor's real jobs (null keeps the drawing alone)
-  renovation: photo("garage-conversion-cannock/after-loft-room", "Garage conversion in Cannock, finished: a deep red feature wall under a sloped ceiling with a roof window", "Renovation photo"),
+  renovation: photo("conservatory/after-wide", "Conservatory finished: new grey carpet, a deep green feature wall and white woodwork", "Renovation photo"),
   extensions: photo("extension-build/roof-timbers", "An extension going up: new block walls with the roof timbers on", "Extension photo"),
   kitchens: photo("hmo-renovation/after-kitchen", "New kitchen fitted with white units, a dark worktop and a white metro tile splashback", "Kitchen photo"),
   bathrooms: photo("hmo-renovation/bathroom-tiled", "New bath fitted with large grey wall tiles going up", "Bathroom photo"),

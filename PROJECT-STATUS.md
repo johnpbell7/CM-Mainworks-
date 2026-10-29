@@ -66,7 +66,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 - **Photos alongside the drawings (John, 27 Oct: keep every icon and drawing, work photography in; 29 Oct: never both in one frame):**
   - Cards (service cards, the renovation trades, smaller jobs, steps) always keep the drawing (`drawingOnly`).
   - The homepage renovation feature shows the full drawing too.
-  - Every other feature row (a service's intro, the services list, the renovations intro, a town's "Homes in …") shows Connor's photo on its own (`components/Photo.tsx`).
+  - Every other feature row (a service's intro, a town's "Homes in …") shows Connor's photo on its own (`components/Photo.tsx`). The renovations page opens with three finished rooms from three jobs in a bento (conservatory, Cannock loft room, three-bed living room), none repeated on its photo wall.
   - Proof is photos only: project pages and cards, before and afters, the six job photos under them on the homepage, and the renovations page's "A renovation, trade by trade" wall (one photo per trade, rows that share a height so none is cropped; two across on phones).
   - Floors use the herringbone floor from the Cannock garage conversion (John, 29 Oct): a landscape crop on the floors page, the whole room on the renovations photo wall.
   - Photos are calm: same rounded corners as the tiles, no shadows or frames, the section colour only as the accent.

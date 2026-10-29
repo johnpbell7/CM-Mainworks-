@@ -40,13 +40,21 @@ const trades: { slug: SectionSlug; stage: string; text: string }[] = [
   { slug: "decorating", stage: "Finishing", text: "Every room painted, right through to the last coat." },
 ];
 
+// Opening photos: three finished rooms from three different jobs, so it reads as a whole home.
+// The first leads, tall; the other two stack beside it. None repeats on the photo wall below.
+const bento: Media[] = [
+  media.renovation,
+  photo("garage-conversion-cannock/after-hatch", "Garage conversion in Cannock, finished, with a loft ladder up to the hatch"),
+  photo("three-bed-house-repaint/after-living-room", "Living room finished in grey and white around a black cast-iron fireplace"),
+];
+
 // A renovation in pictures: the best photo of each trade from Connor's recent jobs, in the
 // same order as the trades. Each row's photos share one height, so none is cropped.
 const wall: { slug: SectionSlug; label: string; media: Media }[][] = [
   [
     { slug: "extensions", label: "Extension", media: photo("extension-build/rear", "An extension going up, seen from the garden, with the roof joists across the walls") },
     { slug: "roofing", label: "Roof", media: photo("extension-build/roof-frame", "Roof framing on an extension") },
-    { slug: "flooring-and-tiling", label: "Floors", media: photo("garage-conversion-cannock/after-room", "Herringbone floor in a garage conversion, with a new loft ladder") },
+    { slug: "flooring-and-tiling", label: "Floors", media: photo("garage-conversion-cannock/floor", "New herringbone floor in a garage conversion") },
   ],
   [
     { slug: "kitchens", label: "Kitchen", media: photo("hmo-renovation/after-kitchen", "Kitchen fitted: white units, a dark worktop and a white metro tile splashback") },
@@ -56,7 +64,7 @@ const wall: { slug: SectionSlug; label: string; media: Media }[][] = [
   [
     { slug: "carpentry", label: "Carpentry", media: photo("bay-window-restoration/after-full-bay", "A bay window restored, with new timber cills and fresh white paint") },
     { slug: "joinery", label: "Panelling", media: photo("panelled-feature-wall/after", "A panelled feature wall painted a warm taupe") },
-    { slug: "decorating", label: "Decorating", media: photo("three-bed-house-repaint/after-fireplace", "Freshly painted room with a black cast-iron fireplace") },
+    { slug: "decorating", label: "Decorating", media: photo("hall-stairs-landing/after-stairs", "Stairs and hall finished in light grey with a white handrail") },
   ],
 ];
 
@@ -97,7 +105,9 @@ export default function Renovations() {
       <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="wall-title">
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
-            <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 720px) 100vw, 50vw" priority />
+            <div className="bento">
+              {bento.map((m, i) => <Photo key={m.src} media={m} sizes={i ? "(max-width: 720px) 45vw, 22vw" : "(max-width: 720px) 55vw, 27vw"} priority={!i} />)}
+            </div>
             <div className="prose" data-reveal="up">
               <p>Renovating is exciting. Managing it is stressful: finding trades, getting the order right, chasing no-shows.</p>
               <p>A full renovation is really every job I do on its own, joined up: the extension, the kitchen and bathroom, floors, stairs, doors, joinery and decorating.</p>
