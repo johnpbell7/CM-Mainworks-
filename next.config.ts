@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/areas", destination: "/", permanent: true },
+      // Renovations lists every trade, so the separate services list went (John, 29 Oct)
+      { source: "/services", destination: "/renovations", permanent: true },
       // Building work became its own Extensions page in the renovation rework
       { source: "/services/building", destination: "/services/extensions", permanent: true },
       // The villages around Lichfield are covered on the Lichfield page

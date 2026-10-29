@@ -8,7 +8,7 @@ import Steps from "@/components/Steps";
 import { areas, getArea } from "@/content/areas";
 import { business, getSection, renovation } from "@/content/site";
 import { media } from "@/content/media";
-import { projectsIn } from "@/content/projects";
+import { projectHref, projectsIn } from "@/content/projects";
 import FaqList from "@/components/FaqList";
 import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
@@ -74,7 +74,7 @@ export default async function AreaPage({ params }: Props) {
                 {work.map((p) => {
                   const s = getSection(p.section)!;
                   return (
-                    <Link className="proj" key={p.slug} href={`/projects/${p.slug}`}>
+                    <Link className="proj" key={p.slug} href={projectHref(p)}>
                       <Photo media={p.after} sizes="(max-width: 720px) 100vw, 50vw" />
                       <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                       <h3>{p.name}</h3>

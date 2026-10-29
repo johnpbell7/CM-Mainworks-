@@ -3,9 +3,10 @@ import type { SectionSlug } from "./site";
 
 /*
   Connor's jobs, from his Facebook posts (1 Apr to 1 Oct 2026). One entry per job feeds
-  its own page (/projects/<slug>), the projects page, its service page ("Recent … work"),
-  its town page ("Recent work in …", matched by `place`), the sitemap (with its photos)
-  and, with `homepage`, the homepage before and afters.
+  the projects page, its service page ("Recent … work"), its town page ("Recent work in …",
+  matched by `place`) and, with `homepage`, the homepage before and afters. A job with at
+  least four photos also gets its own page (/projects/<slug>) and a sitemap entry; smaller
+  ones are shown in full on the projects page instead (see `hasPage`).
 
   Only real jobs, written from Connor's own captions and what the photos show. Nothing
   added: no towns he didn't name, no customer names, no reviews (those wait for Connor's
@@ -341,7 +342,7 @@ export const projects: Project[] = [
 export const publishedProjects = projects.filter((p) => !p.placeholder).sort((a, b) => b.date.localeCompare(a.date));
 
 export function getProject(slug: string) {
-  return publishedProjects.find((p) => p.slug === slug);
+  return projectPages.find((p) => p.slug === slug);
 }
 
 /** Every real photo of a job, after first, without repeats. */
@@ -353,6 +354,17 @@ export function projectPhotos(p: Project): (Media & { src: string })[] {
     return true;
   });
 }
+
+/*
+  Fewer, stronger pages (John, 29 Oct): a job gets its own page once it has at least four
+  photos. The others are shown in full on the projects page, at /projects#<slug>, and
+  get their own page as soon as Connor sends more photos of them.
+*/
+export const hasPage = (p: Project) => projectPhotos(p).length >= 4;
+export const projectPages = publishedProjects.filter(hasPage);
+
+/** Where a job's card or caption links: its own page, or its place on the projects page. */
+export const projectHref = (p: Project) => (hasPage(p) ? `/projects/${p.slug}` : `/projects#${p.slug}`);
 
 /** Real jobs in a town, or in one of the villages its page covers. Matches `place` by name. */
 export function projectsIn(town: string, alsoCovers: string[] = []) {
@@ -375,4 +387,4 @@ export const beforeAfters: BeforeAfterPair[] = publishedProjects
   .filter((p) => p.homepage && p.before.src && p.after.src)
   .sort((a, b) => a.homepage! - b.homepage!)
   .slice(0, 3)
-  .map((p) => ({ name: p.place ? `${p.name}, ${p.place}` : p.name, section: p.section, before: p.before, after: p.after, aligned: !!p.aligned, href: `/projects/${p.slug}` }));
+  .map((p) => ({ name: p.place ? `${p.name}, ${p.place}` : p.name, section: p.section, before: p.before, after: p.after, aligned: !!p.aligned, href: projectHref(p) }));

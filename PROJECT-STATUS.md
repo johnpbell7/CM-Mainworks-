@@ -75,6 +75,12 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 - **Photo files:** `scripts/photos.json` lists every published photo (job, name, crop); `python3 scripts/make-photos.py` makes the 1400px JPEGs in `public/images/projects/` (no camera or location data) and `content/photos.ts`. The originals stay in the studio (`Clients/CM MainWorks/Documents/Facebook/photos/`), not in this public repo. Every photo is checked for faces, names, house numbers and number plates first; Connor's own face is left out until he says.
 - **Reviews:** no customer comment goes on the site until Connor OKs it. The bay window review (homepage and bay window page) went in before that rule and is waiting on John.
 - **FAQs:** every FAQ starts closed.
+- **Structure (John, 29 Oct: easier to navigate):**
+  - Menu: Renovations, Recent work, Prices, About (phones add Contact). FAQs are in the footer only.
+  - Renovations is the one list of services; the service pages light up Renovations in the menu.
+  - Prices live on the Prices page only; the homepage and renovations page each have one line linking there.
+  - The homepage dropped "One team. Less stress." and "Prices from"; smaller jobs are a line under the nine service cards.
+  - The 10 job pages left are still short (about 180 to 230 words) and the SEO check calls them thin. Only Connor's own words about each job can fix that: what the customer wanted, what he found, how long it took.
 - **Header:**
   - The logo lockup has "Carpentry & Construction" made legible: `scripts/make-header-logo.mjs` rescales the supplied shapes, nothing is retyped.
   - On phones the header shows just the logo and the menu, because the bottom bar has Call.
@@ -102,12 +108,12 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 
 | Route | What it is |
 |---|---|
-| `/` | Home: hero and quote form, one-team benefits, renovation feature plus six renovation services, smaller jobs, prices, before and afters, how it works, about, review, FAQs |
-| `/renovations` | **The main pitch page.** It covers the usual way versus one team, what a renovation includes, built in phases (with the timeline), prices, FAQs and the quote form |
-| `/prices` | Packages, how pricing works, smaller jobs, price FAQs and the quote form |
-| `/services` and `/services/[slug]` | Nine services. Six are renovation services: extensions, kitchens, bathrooms, staircases, roofing, and flooring-and-tiling. Three are smaller jobs: carpentry, joinery and decorating. (`/services/building` redirects to extensions) |
-| `/areas/[slug]` | 11 town pages for local SEO (the villages round Lichfield are on its page) |
-| `/projects` and `/projects/[slug]` | Recent work. Only real jobs are published; placeholders stay hidden |
+| `/` | Home: hero and quote form, renovation feature plus all nine services (smaller jobs as a line under them), before and afters, how it works (with one link to prices), about, review, FAQs |
+| `/renovations` | **The main pitch page, and the one list of services.** It covers a renovation trade by trade in photos, the usual way versus one team, every trade as a card through to its page, built in phases (with one link to prices), FAQs and the quote form |
+| `/prices` | The one place for prices: packages, how pricing works, smaller jobs, price FAQs and the quote form |
+| `/services/[slug]` | Nine services, under Renovations in the breadcrumb and menu. Six are renovation services: extensions, kitchens, bathrooms, staircases, roofing, and flooring-and-tiling. Three are smaller jobs: carpentry, joinery and decorating. (`/services` redirects to renovations, `/services/building` to extensions) |
+| `/areas/[slug]` | 11 town pages for local SEO (the villages round Lichfield are on its page), linked from the footer |
+| `/projects` and `/projects/[slug]` | Recent work: every real job on the projects page; a job with four or more photos also gets its own page (11 now), the others are shown in full at `/projects#<slug>` |
 | `/about`, `/faqs`, `/contact`, `/privacy` | As named |
 | `/logo-animation` | Unlinked page used to render the square logo video |
 
@@ -122,10 +128,10 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 | `content/prices.ts` | Packages, smaller-job rows and the price note. Prices are `null` until Connor confirms them |
 | `content/faqs.ts` | All FAQs (home, renovations, prices, the full list) |
 | `content/areas.ts` | Town page copy |
-| `content/projects.ts` | Connor's jobs. One entry per job feeds its own page, the projects page, its service and town pages (matched by `place`), the sitemap with its photos, and the homepage (`homepage: true`) |
+| `content/projects.ts` | Connor's jobs. One entry per job feeds the projects page, its service and town pages (matched by `place`) and the homepage (`homepage: 1–3`); `hasPage` (four or more photos) decides which get their own page and sitemap entry, and `projectHref` where each links |
 | `content/media.ts` | Every photo slot and `photo()`, which looks up one of Connor's photos by job and name. Where photos and drawings go is written at the top |
 | `scripts/photos.json`, `scripts/make-photos.py` | The published photos and the script that makes their web copies |
-| `components/` | Header, Footer, MobileMenu, MobileBar, QuoteForm, Intro, Motion (GSAP scroll reveals, set up lazily for speed), Illustration (all drawings), Phases, Benefits, PackageCard, SmallerJobs, BeforeAfter, FaqList and others |
+| `components/` | Header, Footer, MobileMenu, MobileBar, QuoteForm, Intro, Motion (GSAP scroll reveals, set up lazily for speed), Illustration (all drawings), Phases, PackageCard, BeforeAfter, BeforeAfterSplit, ProjectGrid, FaqList and others |
 | `lib/seo.tsx` | `pageMeta()`, breadcrumb and FAQ schema |
 | `app/api/quote/route.ts` | The quote form handler (Resend email, honeypot, rate limit) |
 

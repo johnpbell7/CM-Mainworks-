@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { business, nav } from "@/content/site";
+import { business, isCurrent, nav } from "@/content/site";
 import { Phone } from "./Icons";
 import MobileMenu from "./MobileMenu";
 
@@ -27,7 +27,7 @@ export default function Header() {
         </Link>
         <nav className="main-nav" aria-label="Main">
           {nav.map((n) => (
-            <Link key={n.href} href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}>
+            <Link key={n.href} href={n.href} aria-current={isCurrent(path, n.href) ? "page" : undefined}>
               {n.label}
             </Link>
           ))}

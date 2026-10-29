@@ -33,7 +33,7 @@ The whole site is written in Connor’s own voice (I, me, my), in plain British 
 - Every page sets a unique title, description, canonical URL and social card through `pageMeta()` in `lib/seo.tsx`, and has exactly one H1.
 - Structured data: `HomeAndConstructionBusiness` site-wide, plus `Service`, `FAQPage` and `BreadcrumbList` where they apply.
 - Town pages live in `content/areas.ts` (served at `/areas/[slug]`). Each has its own copy; add a town there and it appears in the footer, the sitemap and the Areas page.
-- Service page copy lives in `content/services.ts`; the list of services (renovation and smaller jobs) is in `content/site.ts`.
+- Service page copy lives in `content/services.ts`; the list of services (renovation and smaller jobs) is in `content/site.ts`. There's no separate services list page: `/renovations` lists every trade.
 - `/renovations` is the main pitch page. `/prices` reads `content/prices.ts`, where every `from` is `null` (shown as “£ to confirm”) until Connor gives real figures.
 - Placeholder projects are kept out of the projects page, the sitemap and search until real photos replace them.
 

@@ -7,14 +7,10 @@ import BeforeAfter from "@/components/BeforeAfter";
 import BeforeAfterSplit from "@/components/BeforeAfterSplit";
 import { Arrow, Award, QuoteDoc, Shield, Team } from "@/components/Icons";
 import Closing from "@/components/Closing";
-import SmallerJobs from "@/components/SmallerJobs";
 import Steps from "@/components/Steps";
-import Benefits from "@/components/Benefits";
-import PackageCard, { PriceNote } from "@/components/PackageCard";
-import { business, renovation, renovationServices, sections } from "@/content/site";
-import { packages } from "@/content/prices";
+import { business, renovation, sections } from "@/content/site";
 import { media } from "@/content/media";
-import { beforeAfters, publishedProjects } from "@/content/projects";
+import { beforeAfters, projectHref, publishedProjects } from "@/content/projects";
 import { homeFaqs } from "@/content/faqs";
 import { JsonLd, pageMeta, shareImage, websiteLd } from "@/lib/seo";
 import FaqList from "@/components/FaqList";
@@ -27,7 +23,7 @@ const tintOf = (slug: string) => sections.find((s) => s.slug === slug)!.tint;
 // (not the jobs already shown there). Shows once there are at least three.
 const onHome = new Set(beforeAfters.map((w) => w.href));
 const recentPhotos = publishedProjects
-  .filter((p) => p.after.src && !onHome.has(`/projects/${p.slug}`))
+  .filter((p) => p.after.src && !onHome.has(projectHref(p)))
   .map((p) => ({ m: p.after, p }))
   .slice(0, 6);
 
@@ -68,22 +64,6 @@ export default function Home() {
         <p className="hero-credit">Pictured: an oak-framed garden canopy I built</p>
       </section>
 
-      {/* ---------------- Why one team ---------------- */}
-      <section className="sec" id="why" aria-labelledby="why-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up">
-              <h2 id="why-title">One team. Less stress.</h2>
-            </div>
-            <p data-reveal="up">
-              <span className="hl">I manage the whole thing</span>, so you don’t have to.
-            </p>
-          </div>
-          <Benefits />
-          {media.team.src && <Photo media={media.team} className="why-photo" sizes="(max-width: 1240px) 100vw, 1200px" />}
-        </div>
-      </section>
-
       {/* ---------------- Renovations ---------------- */}
       <section className="sec grey" id="services" aria-labelledby="svc-title">
         <div className="wrap">
@@ -114,8 +94,9 @@ export default function Home() {
             </div>
           </article>
 
+          {/* Every trade, renovation work first, then the smaller jobs */}
           <div className="services six">
-            {renovationServices.map((s) => (
+            {sections.map((s) => (
               <Link className="service" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
                 <Photo media={media[s.slug]} illo={s.illo} drawingOnly sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
                 <h3><span className="hl" data-pen={s.pen}>{s.name}</span> <Arrow /></h3>
@@ -123,37 +104,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ---------------- Smaller jobs ---------------- */}
-      <section className="sec" aria-labelledby="small-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up">
-              <h2 id="small-title">Smaller jobs, just as welcome</h2>
-            </div>
-            <p data-reveal="up"><span className="hl" data-pen="oak">One sticking door</span> gets the same care.</p>
-          </div>
-          <SmallerJobs />
-        </div>
-      </section>
-
-      {/* ---------------- Prices ---------------- */}
-      <section className="sec grey" id="prices" aria-labelledby="price-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up">
-              <h2 id="price-title">Prices from</h2>
-            </div>
-            <p data-reveal="up">
-              A guide first, then <span className="hl">a written quote</span>.
-            </p>
-          </div>
-          <div className="pkgs three swipe" data-reveal="stagger">
-            {packages.slice(0, 3).map((p) => <PackageCard key={p.name} p={p} compact />)}
-          </div>
-          <PriceNote />
+          <p className="more-note">Smaller jobs are just as welcome. One sticking door gets the same care.</p>
         </div>
       </section>
 
@@ -184,7 +135,7 @@ export default function Home() {
           {recentPhotos.length >= 3 && (
             <div className="recent-strip" style={{ "--n": recentPhotos.length } as React.CSSProperties}>
               {recentPhotos.map(({ m, p }) => (
-                <Link key={m.src} href={`/projects/${p.slug}`} aria-label={p.name}>
+                <Link key={m.src} href={projectHref(p)} aria-label={p.name}>
                   <Photo media={m} sizes="(max-width: 1080px) 33vw, 16vw" />
                 </Link>
               ))}
@@ -203,6 +154,7 @@ export default function Home() {
             <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
           </div>
           <Steps />
+          <p className="more-note">Want a rough figure first? <Link href="/prices">See my prices</Link>.</p>
         </div>
       </section>
 

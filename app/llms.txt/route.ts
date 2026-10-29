@@ -1,7 +1,7 @@
 import { business, sections, siteUrl } from "@/content/site";
 import { serviceContent } from "@/content/services";
 import { areas } from "@/content/areas";
-import { publishedProjects } from "@/content/projects";
+import { projectPages } from "@/content/projects";
 
 /*
   /llms.txt: a plain list of the site for AI tools (https://llmstxt.org), in the format the studio's
@@ -14,7 +14,6 @@ const fixed = [
   ["Home renovations across the Midlands", "/", "Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors and roofs. Insured, free written quotes."],
   ["Full home renovations across the Midlands", "/renovations", "Full renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and decorating. Free written quotes."],
   ["Renovation prices and packages", "/prices", "A guide to my prices for full renovations, kitchens, bathrooms, extensions and smaller jobs across the Midlands. Free written quotes, no surprises."],
-  ["Home renovation services across the Midlands", "/services", "Full renovations, extensions, kitchens, bathrooms, stairs, floors, roofing and decorating across the Midlands, managed by one team."],
   ["About Connor", "/about", `I run CM MainWorks, managing full home renovations with one team across the Midlands, with ${business.experience} in the trade.`],
   ["Recent work", "/projects", "Recent renovation, carpentry and decorating jobs from CM MainWorks, including a 140-year-old bay window I repaired and repainted."],
   ["FAQs: quotes, materials, small jobs and areas", "/faqs", "Straight answers about free quotes, materials, small jobs, insurance, how I run a job and the areas I cover across the Midlands."],
@@ -42,8 +41,8 @@ export function GET() {
     "",
     ...areas.map((a) => line(a.title, `/areas/${a.slug}`, a.description)),
     "",
-    ...(publishedProjects.length
-      ? ["## Work", "", ...publishedProjects.map((p) => line(p.name, `/projects/${p.slug}`, p.summary)), ""]
+    ...(projectPages.length
+      ? ["## Work", "", ...projectPages.map((p) => line(p.name, `/projects/${p.slug}`, p.summary)), ""]
       : []),
   ].join("\n");
 

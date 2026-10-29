@@ -143,7 +143,6 @@ export const sections: Section[] = [
 ];
 
 export const renovationServices = sections.filter((s) => s.group === "renovation");
-export const smallerServices = sections.filter((s) => s.group === "smaller");
 
 /** The full-renovation offer has its own page and uses brand gold. */
 export const renovation = {
@@ -167,8 +166,10 @@ export function jobColor(j: JobType | "") {
 
 export const nav = [
   { href: "/renovations", label: "Renovations" },
-  { href: "/services", label: "Services" },
-  { href: "/prices", label: "Prices" },
   { href: "/projects", label: "Recent work" },
+  { href: "/prices", label: "Prices" },
   { href: "/about", label: "About" },
 ] as const;
+/** Which menu item is lit: the service pages sit under Renovations. */
+export const isCurrent = (path: string, href: string) =>
+  path.startsWith(href) || (href === "/renovations" && path.startsWith("/services/"));

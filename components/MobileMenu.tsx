@@ -3,16 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { business } from "@/content/site";
+import { business, isCurrent } from "@/content/site";
 import { Phone, WhatsApp } from "./Icons";
 
 const links = [
   { href: "/renovations", label: "Renovations", c: "var(--gold)" },
-  { href: "/services", label: "Services", c: "var(--oak)" },
-  { href: "/prices", label: "Prices", c: "var(--steel)" },
   { href: "/projects", label: "Recent work", c: "var(--sage)" },
+  { href: "/prices", label: "Prices", c: "var(--steel)" },
   { href: "/about", label: "About me", c: "var(--brick)" },
-  { href: "/faqs", label: "FAQs", c: "var(--ink-3)" },
   { href: "/contact", label: "Contact", c: "var(--ink-3)" },
 ];
 
@@ -67,7 +65,7 @@ export default function MobileMenu() {
           <ul className="menu-links">
             {links.map((l, i) => (
               <li key={l.href} style={{ "--i": i, "--c": l.c } as React.CSSProperties}>
-                <Link href={l.href} aria-current={path.startsWith(l.href) ? "page" : undefined}>{l.label}</Link>
+                <Link href={l.href} aria-current={isCurrent(path, l.href) ? "page" : undefined}>{l.label}</Link>
               </li>
             ))}
           </ul>

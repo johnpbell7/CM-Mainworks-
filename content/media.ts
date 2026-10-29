@@ -51,6 +51,4 @@ export const media = {
     label: "Reviews background",
   },
   portrait: { src: null, alt: "Connor, who runs CM MainWorks", label: "Photo of Connor" },
-  // Wide photo under "One team. Less stress." on the homepage. Only shows once set.
-  team: { src: null, alt: "Connor and the team at work on a renovation", label: "Team on site" },
 } satisfies Record<string, Media>;

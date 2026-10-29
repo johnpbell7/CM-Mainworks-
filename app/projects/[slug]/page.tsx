@@ -7,14 +7,14 @@ import BeforeAfter from "@/components/BeforeAfter";
 import BeforeAfterSplit from "@/components/BeforeAfterSplit";
 import Closing from "@/components/Closing";
 import type { Media } from "@/content/media";
-import { getProject, monthOf, projectPhotos, publishedProjects } from "@/content/projects";
+import { getProject, monthOf, projectPages, projectPhotos } from "@/content/projects";
 import { getSection } from "@/content/site";
 import { pageMeta } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return publishedProjects.map((p) => ({ slug: p.slug }));
+  return projectPages.map((p) => ({ slug: p.slug }));
 }
 export const dynamicParams = false;
 
@@ -40,7 +40,7 @@ export default async function ProjectPage({ params }: Props) {
   const r = pair ? (p.aligned ? ratio(p.after) : ratio(p.after) * 2) : 1;
   const pairStyle = { aspectRatio: String(r), maxWidth: `min(100%, calc(78svh * ${r.toFixed(3)}))`, marginInline: "auto" };
   // More work: the same kind of job first, then the newest
-  const more = [...publishedProjects.filter((x) => x.slug !== p.slug && x.section === p.section), ...publishedProjects.filter((x) => x.section !== p.section)].slice(0, 3);
+  const more = [...projectPages.filter((x) => x.slug !== p.slug && x.section === p.section), ...projectPages.filter((x) => x.section !== p.section)].slice(0, 3);
 
   return (
     <div style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>

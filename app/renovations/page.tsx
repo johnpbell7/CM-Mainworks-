@@ -3,13 +3,11 @@ import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Phases from "@/components/Phases";
-import PackageCard, { PriceNote } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
 import { Check, Cross } from "@/components/Icons";
 import { business, getSection, renovation, type SectionSlug } from "@/content/site";
 import { media, photo, type Media } from "@/content/media";
-import { packages } from "@/content/prices";
 import { renovationFaqs } from "@/content/faqs";
 import { areas } from "@/content/areas";
 import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
@@ -72,7 +70,6 @@ const ours = [
 
 
 export default function Renovations() {
-  const [full, ...rest] = packages;
   return (
     <div style={{ "--c": renovation.color, "--pen": renovation.tint } as React.CSSProperties}>
       <JsonLd
@@ -174,23 +171,11 @@ export default function Renovations() {
       <section className="sec grey" aria-labelledby="how-title">
         <div className="wrap">
           <Phases titleId="how-title" />
+          <p className="more-note">Want a rough figure first? <Link href="/prices">See my renovation prices</Link>.</p>
         </div>
       </section>
 
-      <section className="sec" aria-labelledby="pkg-title">
-        <div className="wrap">
-          <div className="sec-head">
-            <div data-reveal="up"><h2 id="pkg-title">Prices from</h2></div>
-            <p data-reveal="up">A guide first, then a written quote.</p>
-          </div>
-          <div className="pkgs three swipe" data-reveal="stagger">
-            {[full, ...rest.slice(0, 2)].map((p) => <PackageCard key={p.name} p={p} compact />)}
-          </div>
-          <PriceNote />
-        </div>
-      </section>
-
-      <section className="sec grey" aria-labelledby="faq-title">
+      <section className="sec" aria-labelledby="faq-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
             <h2 id="faq-title">Renovation questions</h2>
@@ -199,7 +184,7 @@ export default function Renovations() {
         </div>
       </section>
 
-      <section className="sec" aria-labelledby="ask-title">
+      <section className="sec grey" aria-labelledby="ask-title">
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Let’s talk about your home</h2>

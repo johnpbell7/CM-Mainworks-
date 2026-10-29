@@ -10,7 +10,7 @@ import { Arrow } from "@/components/Icons";
 import { business, getSection, renovation, sections } from "@/content/site";
 import { serviceContent } from "@/content/services";
 import { media } from "@/content/media";
-import { publishedProjects } from "@/content/projects";
+import { projectHref, publishedProjects } from "@/content/projects";
 import { areas } from "@/content/areas";
 import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
@@ -69,7 +69,7 @@ export default async function Service({ params }: Props) {
       />
 
       <PageHead
-        crumbs={[{ href: "/services", label: "Services" }, { href: `/services/${s.slug}`, label: s.name }]}
+        crumbs={[{ href: "/renovations", label: "Renovations" }, { href: `/services/${s.slug}`, label: s.name }]}
         title={<><span className="hl" data-pen={s.pen}>{first}</span> {rest.join(" ")}</>}
         lede={c.lede}
       />
@@ -148,7 +148,7 @@ export default async function Service({ params }: Props) {
             </div>
             <div className="proj-grid">
               {work.map((p) => (
-                <Link className="proj" key={p.slug} href={`/projects/${p.slug}`}>
+                <Link className="proj" key={p.slug} href={projectHref(p)}>
                   <Photo media={p.after} sizes="(max-width: 720px) 100vw, 50vw" />
                   <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                   <h3>{p.name}</h3>

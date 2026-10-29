@@ -162,7 +162,6 @@ ul, ol { margin: 0; padding: 0; }
 .menu { display: none; }
 @media (max-width: 1080px) {
   .ba-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .smaller { grid-template-columns: minmax(0, 1fr); }
   .menu-btn {
     display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 16px 0 14px; margin-left: 4px;
     border: 1.5px solid var(--line-2); border-radius: 999px; background: #fff; font-weight: 600; font-size: .95rem; cursor: pointer;
@@ -637,6 +636,11 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .gallery .ph { aspect-ratio: 3 / 4; }
 .gallery .ph.wide { grid-column: span 2; aspect-ratio: 3 / 2; }
 .proj-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* a job without its own page, shown in full on the projects page */
+.proj .ba, .proj .ba-split { min-height: 0; aspect-ratio: 4 / 3; flex: none; }
+.proj .ba .ph, .proj .ba-split .ph { aspect-ratio: auto; }
+.proj-set { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 4px; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; }
+.proj-set .ph { aspect-ratio: auto; border-radius: 0; }
 .proj-grid.three h3 { font-size: 1.2rem; }
 
 
@@ -649,15 +653,12 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
   padding: 4px 10px; border-radius: 999px; background: rgb(255 255 255 / .9); color: var(--ink-2); pointer-events: none;
 }
 .area-work { margin-top: clamp(56px, 7vw, 104px); }
-/* homepage photos that appear once Connor's are in: the team under the benefits, and recent jobs under the before and afters */
-.why-photo { aspect-ratio: 21 / 9; margin-top: clamp(40px, 5vw, 72px); }
+/* homepage: one photo from each of the other recent jobs, under the before and afters */
 .recent-strip { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); margin-top: clamp(28px, 4vw, 48px); }
 .recent-strip .ph { aspect-ratio: 1; }
 .recent-strip a .ph > img { transition: transform 1.2s var(--ease); }
 .recent-strip a:hover .ph > img { transform: scale(1.04); }
-.sj-ill > img { object-fit: cover; }
 @media (max-width: 1080px) { .recent-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 720px) { .why-photo { aspect-ratio: 4 / 3; } }
 /* renovations page: every trade as one renovation, each card tapped through to its service */
 .trades { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(20px, 2.4vw, 36px); }
 .trade { display: block; text-decoration: none; color: inherit; }
@@ -731,17 +732,6 @@ figcaption.cap span { font-weight: 500; color: color-mix(in srgb, var(--c) 70%, 
 .services.six { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: clamp(40px, 4.5vw, 64px); }
 .services.six .service .ph { aspect-ratio: 4 / 3; }
 
-/* smaller jobs: three plain rows */
-.smaller { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
-.sj { display: grid; grid-template-columns: 104px minmax(0, 1fr) 20px; align-items: center; gap: 20px; padding: 14px 20px 14px 14px; border: 1px solid var(--line); border-radius: 20px; background: #fff; text-decoration: none; transition: border-color .25s var(--ease), transform .25s var(--ease); }
-.grey .sj { border-color: transparent; }
-.sj:hover { border-color: var(--c); }
-.sj-ill { position: relative; display: block; aspect-ratio: 1; border-radius: 14px; background: var(--pen); overflow: hidden; }
-.sj-ill .il { position: absolute; left: 6%; top: 8%; width: 88%; height: 92%; }
-.sj h3 { font-size: 1.25rem; letter-spacing: -.01em; }
-.sj p { color: var(--ink-2); font-size: .95rem; line-height: 1.45; margin-top: 4px; }
-.sj-arrow { width: 20px; height: 20px; color: color-mix(in srgb, var(--c) 70%, var(--ink)); transition: transform .3s var(--ease); }
-.sj:hover .sj-arrow { transform: translateX(4px); }
 
 /* ---------- prices ---------- */
 .pkgs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
@@ -1027,7 +1017,7 @@ html.js.intro-on { overflow: hidden; }
   .feature .ticks { grid-template-columns: minmax(0, 1fr); }
   .services.six .service { flex: 0 0 64%; }
   .services.six .service .ph { aspect-ratio: 1 / 1.02; }
-  .smaller, .pkgs, .compare, .timeline { grid-template-columns: minmax(0, 1fr); }
+  .pkgs, .compare, .timeline { grid-template-columns: minmax(0, 1fr); }
   .pkgs.swipe {
     display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
     margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scroll-padding-inline: var(--gutter); scrollbar-width: none;
@@ -1043,9 +1033,6 @@ html.js.intro-on { overflow: hidden; }
   .hide-m { display: none !important; }
   .ba-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .ba-grid .ba { aspect-ratio: 4 / 3.4; }
-  .sj { grid-template-columns: 84px minmax(0, 1fr) 18px; gap: 16px; padding: 10px 16px 10px 10px; border-radius: 18px; }
-  .sj h3 { font-size: 1.12rem; }
-  .sj p { font-size: .9rem; }
   .feature { gap: 24px; margin-bottom: 40px; }
   .feature .ph { aspect-ratio: 5 / 4; }
   .feature .ph-illo .il, .services.six .ph-illo .il { top: 3%; height: 97%; left: 2%; width: 96%; }
