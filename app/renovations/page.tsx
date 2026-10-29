@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
+import RenovationBento from "@/components/RenovationBento";
 import Phases from "@/components/Phases";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
 import { Check, Cross } from "@/components/Icons";
 import { business, getSection, renovation, type SectionSlug } from "@/content/site";
-import { media, photo, type Media } from "@/content/media";
+import { media, photo, renovationBento, type Media } from "@/content/media";
 import { renovationFaqs } from "@/content/faqs";
 import { areas } from "@/content/areas";
 import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
@@ -38,14 +39,6 @@ const trades: { slug: SectionSlug; stage: string; text: string }[] = [
   { slug: "carpentry", stage: "Throughout", text: "Boxing-in, trims and the woodwork in between." },
   { slug: "joinery", stage: "Finishing", text: "Media walls, alcove units and built-in storage." },
   { slug: "decorating", stage: "Finishing", text: "Every room painted, right through to the last coat." },
-];
-
-// Opening photos: three finished rooms from three different jobs, so it reads as a whole home.
-// The first leads, tall; the other two stack beside it. None repeats on the photo wall below.
-const bento: Media[] = [
-  media.renovation,
-  photo("garage-conversion-cannock/after-hatch", "Garage conversion in Cannock, finished, with a loft ladder up to the hatch"),
-  photo("three-bed-house-repaint/after-living-room", "Living room finished in grey and white around a black cast-iron fireplace"),
 ];
 
 // A renovation in pictures: the best photo of each trade from Connor's recent jobs, in the
@@ -105,9 +98,7 @@ export default function Renovations() {
       <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="wall-title">
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0 }}>
-            <div className="bento">
-              {bento.map((m, i) => <Photo key={m.src} media={m} sizes={i ? "(max-width: 720px) 45vw, 22vw" : "(max-width: 720px) 55vw, 27vw"} priority={!i} />)}
-            </div>
+            <RenovationBento photos={renovationBento(wall.flat().map((t) => t.media.src))} priority />
             <div className="prose" data-reveal="up">
               <p>Renovating is exciting. Managing it is stressful: finding trades, getting the order right, chasing no-shows.</p>
               <p>A full renovation is really every job I do on its own, joined up: the extension, the kitchen and bathroom, floors, stairs, doors, joinery and decorating.</p>

@@ -9,8 +9,10 @@ import { photoFiles } from "./photos";
   - Cards (service cards, the renovation trades, smaller jobs, steps) always show the
     drawing: it's each service's sign.
   - The homepage renovation feature shows the full drawing too.
-  - Every other feature row (a service's intro, the services list, the renovations
-    intro, a town's "Homes in …") shows Connor's photo on its own once there is one.
+  - Wherever a full renovation is pitched (the renovations page, "Part of a bigger
+    project?" on service pages, the town pages), three photos sit together in a bento
+    (`renovationBento`, at the bottom of this file).
+  - A service's own intro shows Connor's photo on its own once there is one.
   - Proof (projects, before and afters, recent work, the renovation photo wall) is
     photos only.
   Connor's photos come from his Facebook posts, made into web copies by
@@ -52,3 +54,29 @@ export const media = {
   },
   portrait: { src: null, alt: "Connor, who runs CM MainWorks", label: "Photo of Connor" },
 } satisfies Record<string, Media>;
+
+/*
+  Full-renovation photos, best first: finished rooms from different jobs. Wherever a full
+  renovation is pitched (the renovations page, "Part of a bigger project?" on each service
+  page, the town pages), three of them sit together in a bento (John, 29 Oct 2026).
+*/
+const renovationSet: Media[] = [
+  media.renovation,
+  photo("garage-conversion-cannock/after-hatch", "Garage conversion in Cannock, finished, with a loft ladder up to the hatch"),
+  photo("three-bed-house-repaint/after-living-room", "Living room finished in grey and white around a black cast-iron fireplace"),
+  photo("hmo-renovation/after-kitchen", "Kitchen fitted: white units, a dark worktop and a white metro tile splashback"),
+  photo("three-bed-house-repaint/after-front-room", "Front room painted, with a dark wood-effect floor"),
+  photo("panelled-feature-wall/after", "Panelled feature wall painted a warm taupe"),
+];
+
+/**
+ * Three photos for a renovation bento. `skip` leaves out photos already on the page;
+ * `first` puts the page's own photo in (a town's main service). The tall cell gets an
+ * upright photo when there is one.
+ */
+export function renovationBento(skip: (string | null)[] = [], first?: Media): Media[] {
+  const pool = [...(first?.src ? [first] : []), ...renovationSet.filter((m) => !skip.includes(m.src) && m.src !== first?.src)];
+  const pick = pool.slice(0, 3);
+  const tall = Math.max(0, pick.findIndex((m) => (m.h ?? 0) > (m.w ?? 0)));
+  return [pick[tall], ...pick.filter((_, i) => i !== tall)];
+}

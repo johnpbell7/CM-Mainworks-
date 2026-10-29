@@ -3,11 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
+import RenovationBento from "@/components/RenovationBento";
 import QuoteForm from "@/components/QuoteForm";
 import Steps from "@/components/Steps";
 import { areas, getArea } from "@/content/areas";
 import { business, getSection, renovation } from "@/content/site";
-import { media } from "@/content/media";
+import { media, renovationBento } from "@/content/media";
 import { projectHref, projectsIn } from "@/content/projects";
 import FaqList from "@/components/FaqList";
 import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
@@ -54,7 +55,7 @@ export default async function AreaPage({ params }: Props) {
       <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="local-title">
         <div className="wrap">
           <div className="svc-row" style={{ borderTop: 0, paddingTop: 0, "--c": lead.color, "--pen": lead.tint } as React.CSSProperties}>
-            <Photo media={media[lead.slug]} illo={lead.illo} sizes="(max-width: 720px) 100vw, 50vw" />
+            <RenovationBento photos={renovationBento(work.map((p) => p.after.src), media[lead.slug])} priority />
             <div className="prose" data-reveal="up">
               <h2 id="local-title" className="mid-h">Homes in {a.name}</h2>
               {a.local.map((t) => <p key={t}>{t}</p>)}

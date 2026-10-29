@@ -3,13 +3,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
+import RenovationBento from "@/components/RenovationBento";
+import BeforeAfterSplit from "@/components/BeforeAfterSplit";
 import QuoteForm from "@/components/QuoteForm";
 import Steps from "@/components/Steps";
 import FaqList from "@/components/FaqList";
 import { Arrow } from "@/components/Icons";
 import { business, getSection, renovation, sections } from "@/content/site";
 import { serviceContent } from "@/content/services";
-import { media } from "@/content/media";
+import { media, renovationBento } from "@/content/media";
 import { projectHref, publishedProjects } from "@/content/projects";
 import { areas } from "@/content/areas";
 import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
@@ -37,6 +39,11 @@ export default async function Service({ params }: Props) {
   if (!s) notFound();
   const c = serviceContent[s.slug];
   const work = publishedProjects.filter((p) => p.section === s.slug);
+  // A job's card shows another of its photos when its finished one already leads the page,
+  // or its before and after side by side when it has no other
+  const repeats = (p: (typeof work)[number]) => p.after.src === media[s.slug].src;
+  const cover = (p: (typeof work)[number]) => (repeats(p) ? p.gallery.find((m) => m.src) ?? p.after : p.after);
+  const asPair = (p: (typeof work)[number]) => repeats(p) && !p.gallery.some((m) => m.src) && !!p.before.src;
   const name = s.name.toLowerCase();
   const [first, ...rest] = c.h1.split(" ");
   const faqs = c.faqs.map((f) => ({ ...f, color: s.slug }));
@@ -149,7 +156,9 @@ export default async function Service({ params }: Props) {
             <div className="proj-grid">
               {work.map((p) => (
                 <Link className="proj" key={p.slug} href={projectHref(p)}>
-                  <Photo media={p.after} sizes="(max-width: 720px) 100vw, 50vw" />
+                  {asPair(p)
+                    ? <BeforeAfterSplit before={p.before} after={p.after} sizes="(max-width: 720px) 50vw, 25vw" />
+                    : <Photo media={cover(p)} sizes="(max-width: 720px) 100vw, 50vw" />}
                   <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                   <h3>{p.name}</h3>
                   <p>{p.summary}</p>
@@ -165,7 +174,7 @@ export default async function Service({ params }: Props) {
         <section className={`sec${renoGrey ? " grey" : ""}`} aria-labelledby="reno-title" style={{ "--c": renovation.color, "--pen": renovation.tint } as React.CSSProperties}>
           <div className="wrap">
             <div className="feature" style={{ marginBottom: 0 }}>
-              <Photo media={media.renovation} illo={renovation.illo} sizes="(max-width: 1080px) 100vw, 48vw" />
+              <RenovationBento photos={renovationBento([media[s.slug].src, ...work.map((p) => cover(p).src)])} />
               <div data-reveal="up">
                 <h2 id="reno-title" className="big-h">Part of a bigger project?</h2>
                 <p>{s.work} is often one piece of a wider renovation. I can manage the whole job with one team, so everything is planned together and you’ve only got one person to deal with.</p>
