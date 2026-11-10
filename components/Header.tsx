@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { business, isCurrent, nav } from "@/content/site";
-import { Arrow, ChevronDown, Phone } from "./Icons";
-import ServiceLinks, { Mini } from "./ServiceLinks";
+import { ChevronDown, Phone } from "./Icons";
+import ServiceLinks, { RenovationLink } from "./ServiceLinks";
 import MobileMenu from "./MobileMenu";
 
 export default function Header() {
@@ -61,11 +61,7 @@ export default function Header() {
                 <ChevronDown />
               </button>
               <div className="nav-panel" id="nav-services" inert={!drop}>
-                <Link className="nav-panel-top" href="/renovations">
-                  <Mini kind="renovation" show={seen} />
-                  <span><strong>Full home renovations</strong><small>Every trade in one job, managed by one team</small></span>
-                  <Arrow />
-                </Link>
+                <RenovationLink art={seen} path={path} />
                 <ServiceLinks art={seen} path={path} />
               </div>
             </div>

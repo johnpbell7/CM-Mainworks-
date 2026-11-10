@@ -68,7 +68,8 @@ export default function ClosingScene() {
         place();
         gsap.set(puffs, { opacity: 0 });
 
-        gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", once: true } })
+        // the exhaust puffs only while the van moves, then everything is still (see .is-driving in concept.css)
+        gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", once: true }, onStart: () => van.classList.add("is-driving"), onComplete: () => van.classList.remove("is-driving") })
           .to(lines, { strokeDashoffset: 0, duration: 0.5, ease: "power1.inOut", stagger: 0.16 })
           .to(pencil, { x: 6, y: -4, rotation: -6, duration: 0.16, yoyo: true, repeat: 13, ease: "sine.inOut" }, 0)
           .to(puffs, { opacity: 1, duration: 0.2 }, 0.9)

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Arrow } from "./Icons";
 import Illustration, { type IllustrationKind } from "./Illustration";
 import { frame } from "./concept/frames";
 import { sections } from "@/content/site";
@@ -6,6 +7,17 @@ import { sections } from "@/content/site";
 /** A service's drawing, small, framed like the page heads. Drawn only once its menu has been opened, so pages stay light. */
 export function Mini({ kind, show }: { kind: IllustrationKind; show: boolean }) {
   return <span className="mini" aria-hidden="true">{show && <Illustration kind={kind} view={frame(kind).view} decorative />}</span>;
+}
+
+/** The way to the full renovations page, top of both menus, worded plainly in case people don't know Renovations itself can be tapped (John). */
+export function RenovationLink({ art, path }: { art: boolean; path: string }) {
+  return (
+    <Link className="reno-link" href="/renovations" aria-current={path === "/renovations" ? "page" : undefined}>
+      <Mini kind="renovation" show={art} />
+      <span><strong>View full renovations</strong><small>Every trade in one job, managed by one team</small></span>
+      <Arrow />
+    </Link>
+  );
 }
 
 /**

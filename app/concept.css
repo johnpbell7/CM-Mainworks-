@@ -42,7 +42,7 @@
 .kg-gold, .kdoor { fill: var(--gold); }
 .kb1 { fill: var(--b1); }
 .kb2 { fill: var(--b2); }
-.sh { fill: var(--b2); stroke: none; mix-blend-mode: multiply; } /* tints what's under it, so lines show through */
+.sh { fill: var(--b2); fill-opacity: .72; stroke: none; } /* a see-through tint, so lines show through. No blend mode: it made every redraw costly, and Safari froze (John, 10 Nov) */
 .far { fill: color-mix(in srgb, var(--b1) 70%, #fff); stroke: none; }
 .farw { stroke: #fff; stroke-width: 2.2; }
 .rd { fill: color-mix(in srgb, var(--b1) 40%, #fff); }
@@ -97,7 +97,9 @@
 .vh-meta li { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: .98rem; }
 .vh-meta svg { flex: none; width: 26px; height: 26px; color: var(--gold-ink); }
 
-/* idle life in the scene: clouds drift, birds bob, exhaust puffs */
+/* life in the scene: clouds drift, birds bob, the chimney steams, the exhaust puffs. They run while the van
+   drives (.is-live on the hero, .is-driving on a van), then pause where they are, so the page goes still:
+   left running for ever, they kept the big street drawings redrawing and froze phones (John, 10 Nov) */
 @media (prefers-reduced-motion: no-preference) {
   .vh-cloud { animation: vh-drift 38s linear infinite alternate; }
   .vh-cloud.c2 { animation-duration: 46s; animation-direction: alternate-reverse; }
@@ -107,6 +109,8 @@
   .puff.p2 { animation-delay: .35s; }
   .puff.p3 { animation-delay: .7s; }
   .vh-steam { animation: vh-steam 2.4s ease-in-out infinite; }
+  .vh-cloud, .vh-birds, .vh-steam, .puff { animation-play-state: paused; }
+  .vh.is-live .vh-cloud, .vh.is-live .vh-birds, .vh.is-live .vh-steam, .is-driving .puff { animation-play-state: running; }
 }
 @keyframes vh-drift { to { transform: translateX(60px); } }
 @keyframes vh-bob { 50% { transform: translateY(-6px); } }
@@ -554,11 +558,11 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
 .head .main-nav .nav-panel a::after { content: none; }
 .head .main-nav .nav-panel a:hover { background: color-mix(in srgb, var(--b1) 45%, #fff); }
 .head .main-nav .nav-panel a[aria-current="page"] { color: var(--gold-ink); }
-.nav-panel-top { display: flex; align-items: center; gap: 14px; background: color-mix(in srgb, var(--b1) 45%, #fff); }
-.nav-panel-top .mini { width: 84px; }
-.nav-panel-top strong { display: block; font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em; }
-.nav-panel-top small { display: block; margin-top: 2px; font-size: .85rem; color: var(--ink-2); font-weight: 500; }
-.nav-panel-top > svg { width: 18px; height: 18px; margin-left: auto; color: var(--gold-ink); }
+.reno-link { display: flex; align-items: center; gap: 14px; background: color-mix(in srgb, var(--b1) 45%, #fff); }
+.reno-link .mini { width: 84px; }
+.reno-link strong { display: block; font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em; }
+.reno-link small { display: block; margin-top: 2px; font-size: .85rem; color: var(--ink-2); font-weight: 500; }
+.reno-link > svg { width: 18px; height: 18px; margin-left: auto; color: var(--gold-ink); }
 .nav-panel .svc-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 8px; }
 /* the service links, in both menus */
 .svc-links { list-style: none; margin: 0; padding: 0; }
@@ -586,7 +590,7 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
 .mini .kw { stroke-width: 1; }
 .mini .kwl { stroke-width: .7; }
 .mini .kerb, .mini .khatch { stroke-width: .5; }
-.nav-panel-top .mini { --lw: .9; }
+.reno-link .mini { --lw: .9; }
 .svc-nav-art { --lw: 1.15; }
 .svc-nav-art .kw { stroke-width: 1.4; }
 .svc-nav-art .kwl { stroke-width: 1; }
@@ -595,4 +599,13 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
   .menu-sub .svc-links { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 10px; padding: 14px 0 18px; }
   .menu-links .menu-sub .svc-links a { flex-direction: column; align-items: stretch; gap: 7px; padding: 0; font-size: .86rem; line-height: 1.25; }
   .menu-sub .mini { width: 100%; border-radius: 10px; --lw: .95; }
+}
+
+/* "View full renovations" at the top of the phone menu's services too */
+@media (max-width: 1080px) {
+  .menu-links .menu-sub .reno-link { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 10px; border: 0; border-radius: 12px; font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+  .menu-links .menu-sub .reno-link::before { content: none; }
+  .menu-links .menu-sub .reno-link .mini { width: 84px; --lw: .9; }
+  .menu-links .menu-sub .reno-link strong { font-size: 1.05rem; }
+  .menu-sub .reno-link + .svc-links { padding-top: 12px; }
 }

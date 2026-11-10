@@ -281,7 +281,14 @@ export default function VanHero() {
           bounce.play();
           const run1 = 5.6 * Math.max(0.55, (past - from) / FULL_RUN);
           const speed = (1.62 * (past - from)) / run1; // how fast it's going as it leaves
-          gsap.timeline({ onComplete: () => { bounce.pause(); } })
+          // once the van has gone, everything settles: the dog stops wagging, so the street stops redrawing
+          // (an endless wag kept the whole hero redrawing, which froze phones and Safari; John, 10 Nov)
+          root.current?.classList.add("is-live");
+          van.classList.add("is-driving");
+          gsap.timeline({ onComplete: () => {
+            bounce.pause(); wag.pause(); van.classList.remove("is-driving");
+            gsap.to(tail, { rotation: 0, duration: 0.4, ease: "sine.out", onComplete: () => root.current?.classList.remove("is-live") });
+          } })
             .to(state, { x: past, duration: run1, ease: lingering, onUpdate: render })
             .to(state, { x: off, duration: (off - past) / speed, ease: "none", onUpdate: render });
         };

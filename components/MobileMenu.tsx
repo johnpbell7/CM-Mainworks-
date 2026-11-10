@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { business, isCurrent } from "@/content/site";
 import { ChevronDown, Phone, WhatsApp } from "./Icons";
-import ServiceLinks from "./ServiceLinks";
+import ServiceLinks, { RenovationLink } from "./ServiceLinks";
 
 const links = [
   { href: "/renovations", label: "Renovations", c: "var(--gold)" },
@@ -80,7 +80,7 @@ export default function MobileMenu() {
                       </button>
                     </div>
                     <div className="menu-sub" data-open={subs} inert={!subs}>
-                      <div><ServiceLinks art={seen} path={path} id="menu-services" /></div>
+                      <div id="menu-services"><RenovationLink art={seen} path={path} /><ServiceLinks art={seen} path={path} /></div>
                     </div>
                   </>
                 )}
