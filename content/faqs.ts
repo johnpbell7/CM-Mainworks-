@@ -13,7 +13,7 @@ const smallJobs: Faq = { q: "Do you still take on small jobs?", a: "Yes. Renovat
 const freeQuote: Faq = { q: "Is the quote free?", a: "Yes, and there’s no obligation to go ahead.", color: "extensions" };
 const insured: Faq = { q: "Are you insured?", a: "Yes, I’m insured. If you’d like to see the details before I start, just ask.", color: "kitchens" };
 const budget: Faq = { q: "Can you work to a budget?", a: "Yes. Tell me what you’ve got to spend and I’ll be honest about what it can do, and where it’s worth spending a bit more or saving.", color: "bathrooms" };
-const surprises: Faq = { q: "What if something unexpected turns up?", a: "In older houses it sometimes does. If I find something, I’ll show you, explain your options and agree the cost with you before I carry on. No surprises on the bill.", color: "renovation" };
+const surprises: Faq = { q: "What if something unexpected turns up?", a: "In older houses it sometimes does: rot, old wiring, or things you can’t see until a wall or floor is opened up. If I find something, I’ll show you, explain your options and agree the cost with you before I carry on.", color: "renovation" };
 
 const pay: Faq = { q: "How do I pay for a renovation?", a: "In phases. Before we start, the job is split into clear phases and you’re invoiced phase by phase, so you never pay for the whole job at once and you can see exactly what each invoice covers.", color: "renovation" };
 const onTrack: Faq = { q: "How will I know it’s on track?", a: "Before we start, we sit down and agree the process, timescales and targets for each phase. Then we sit down again as the job goes on to check they’re being met. If anything’s slipping, you’ll hear it from me first, with a plan to put it right.", color: "staircases" };
@@ -37,7 +37,8 @@ export const renovationFaqs: Faq[] = [
 
 export const priceFaqs: Faq[] = [
   pay,
-  { q: "Why do you show “from” prices?", a: "So you’ve got a rough idea before you get in touch. Every home is different, so your written quote is based on your job, not a price list.", color: "renovation" },
+  { q: "Why don’t you give a fixed price online?", a: "Because every home is different, and a lot depends on what I see when I visit. The sizes give you a rough idea before you get in touch; your written quote is based on your job, not a price list.", color: "renovation" },
+  surprises,
   budget,
   { q: "Why can one team cost less?", a: "Fewer people each adding their own margin, no days lost waiting between trades, and nobody paid twice to fix what someone else left.", color: "extensions" },
 ];

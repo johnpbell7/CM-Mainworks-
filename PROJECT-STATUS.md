@@ -4,7 +4,7 @@
 
 - **Client:** Connor, CM MainWorks.
 - **Built by:** John Bell, JB Design Agency.
-- **Last updated:** October 2026.
+- **Last updated:** 10 November 2026 (the illustrated look and the new prices layout).
 
 ---
 
@@ -103,6 +103,22 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 - No navy buttons.
 - No invented facts.
 
+### The illustrated look (John, 10 Nov 2026)
+
+The whole site was restyled from a Lemonade-style concept John liked. Keep to it:
+
+- **Line drawings** in Connor's palette only: navy line, white, the palest blue tints, gold as the one accent. No pink, no warm creams, no beiges. Every scene is drawn in a 320 x 240 box standing on a pavement line at y=210, from the kit in `components/concept/art/kit.tsx` (`Base` gives the street, plus `Tick` and `Plant`). All the styles are in `app/concept.css`.
+- **The homepage hero is the brand feel:** the van drives past and the house is renovated as it passes (`components/concept/VanHero.tsx`). Every page head echoes it: a pale sky at the top, the heading on the left, and the page's drawing on the right, standing on a street that runs the full width (`components/PageHead.tsx`).
+- **One small loop per drawing** (steam, a drip, a roller…). It runs only while the drawing is on screen, and never under reduced motion.
+- **Page-head framing:** each drawing is framed to its own edges (`headFrame` in PageHead), so nothing is ever cut off and its pavement lines up with the street. After changing a drawing, re-measure with `node .concept-tools/frames.mjs`. That only works on John's Mac: it needs the dev server, and it reads `/art-preview`, a working page that exists only in dev.
+- **The one gradient allowed** is the pale blue sky that fades to white at the top of the hero and the page heads.
+- **Not in the drawings:** people (John: they looked weird), birds or cats. The price cards carry no drawings.
+- **Prices (10 Nov):**
+  - A full renovation, and every smaller job, is "priced after a visit".
+  - Kitchens, bathrooms and single-storey extensions show small, medium and large, each with a rough "from" figure (£TBC until Connor gives them).
+  - The four cards are one size, and "What's included" is a dropdown.
+  - No "no surprises" or "no hidden costs" claims anywhere. The honest line: old houses can hide things, and any change is shown and agreed before work carries on.
+
 ---
 
 ## 4. Site map
@@ -132,6 +148,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 | `content/projects.ts` | Connor's jobs. One entry per job feeds the projects page, its service and town pages (matched by `place`) and the homepage (`homepage: 1–3`); `hasPage` (four or more photos) decides which get their own page and sitemap entry, and `projectHref` where each links |
 | `content/media.ts` | Every photo slot and `photo()`, which looks up one of Connor's photos by job and name. Where photos and drawings go is written at the top |
 | `scripts/photos.json`, `scripts/make-photos.py` | The published photos and the script that makes their web copies |
+| `app/concept.css`, `components/concept/` | The illustrated look: every drawing (`art/`), the van hero, the closing scene, the step drawings and the services scroll row |
 | `components/` | Header, Footer, MobileMenu, MobileBar, QuoteForm, Intro, Motion (GSAP scroll reveals, set up lazily for speed), Illustration (all drawings), Phases, PackageCard, BeforeAfter, BeforeAfterSplit, ProjectGrid, FaqList and others |
 | `lib/seo.tsx` | `pageMeta()`, breadcrumb and FAQ schema |
 | `app/api/quote/route.ts` | The quote form handler (Resend email, honeypot, rate limit) |
@@ -140,7 +157,7 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
 
 ## 6. Waiting on Connor
 
-1. **"From" prices** for every package and smaller-job row (`content/prices.ts`).
+1. **"From" prices** for small, medium and large kitchens, bathrooms and single-storey extensions, and a check of the size descriptions (`content/prices.ts`). Full renovations and smaller jobs are priced after a visit, so they need no figure.
 2. **Photos.** 14 jobs are in from his Facebook (27 Oct). Still wanted:
    - a portrait of Connor (none of the Facebook photos show him clearly, and his face stays off until he says),
    - before and after pairs taken from the same spot, so more of them can be sliders,

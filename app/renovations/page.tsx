@@ -91,6 +91,7 @@ export default function Renovations() {
 
       <PageHead
         crumbs={[{ href: "/renovations", label: "Renovations" }]}
+        art="renovation"
         title={<>Your whole renovation, <span className="hl">one team.</span></>}
         lede="Every trade I do, in one job: kitchens, bathrooms, extensions, floors, stairs and decorating, managed by me in clear phases."
       />

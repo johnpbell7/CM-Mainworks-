@@ -13,7 +13,7 @@ export const dynamic = "force-static";
 const fixed = [
   ["Home renovations across the Midlands", "/", "Full home renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors and roofs. Insured, free written quotes."],
   ["Full home renovations across the Midlands", "/renovations", "Full renovations managed by one team, start to finish: kitchens, bathrooms, extensions, floors, stairs and decorating. Free written quotes."],
-  ["Renovation prices and packages", "/prices", "A guide to my prices for full renovations, kitchens, bathrooms, extensions and smaller jobs across the Midlands. Free written quotes, no surprises."],
+  ["Renovation prices and packages", "/prices", "A rough guide to my prices for kitchens, bathrooms and extensions across the Midlands. Every job is priced after a free visit, with a written quote."],
   ["About Connor", "/about", `I run CM MainWorks, managing full home renovations with one team across the Midlands, with ${business.experience} in the trade.`],
   ["Recent work", "/projects", "Recent renovation, carpentry and decorating jobs from CM MainWorks, including a 140-year-old bay window I repaired and repainted."],
   ["FAQs: quotes, materials, small jobs and areas", "/faqs", "Straight answers about free quotes, materials, small jobs, insurance, how I run a job and the areas I cover across the Midlands."],

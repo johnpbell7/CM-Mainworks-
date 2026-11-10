@@ -1,0 +1,12 @@
+/* Quote: the tick drops onto the total, bounces once, and stays a while. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .land { animation: land 4.4s var(--ease, ease-out) infinite; }
+}
+@keyframes land {
+  0% { opacity: 0; transform: translateY(-46px); }
+  8% { opacity: 1; }
+  26% { transform: translateY(0); }
+  32% { transform: translateY(-5px); }
+  38%, 86% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(0); }
+}

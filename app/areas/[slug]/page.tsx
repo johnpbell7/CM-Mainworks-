@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Arrow } from "@/components/Icons";
 import { notFound } from "next/navigation";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
+import Illustration from "@/components/Illustration";
 import RenovationBento from "@/components/RenovationBento";
 import QuoteForm from "@/components/QuoteForm";
 import Steps from "@/components/Steps";
 import { areas, getArea } from "@/content/areas";
 import { business, getSection, renovation } from "@/content/site";
 import { media, renovationBento } from "@/content/media";
-import { projectHref, projectsIn } from "@/content/projects";
+import { hasPage, projectHref, projectsIn } from "@/content/projects";
 import FaqList from "@/components/FaqList";
 import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
 
@@ -48,6 +50,7 @@ export default async function AreaPage({ params }: Props) {
       />
       <PageHead
         crumbs={[{ href: `/areas/${a.slug}`, label: a.name }]}
+        art="town"
         title={<>Home renovations in <span className="hl">{a.name}</span></>}
         lede={a.intro}
       />
@@ -80,6 +83,7 @@ export default async function AreaPage({ params }: Props) {
                       <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                       <h3>{p.name}</h3>
                       <p>{p.summary}</p>
+                      <span className="proj-more">{hasPage(p) ? "See the job" : "See the photos"} <Arrow /></span>
                     </Link>
                   );
                 })}
@@ -97,6 +101,7 @@ export default async function AreaPage({ params }: Props) {
           </div>
           <div className="items" data-reveal="stagger">
             <div className="item" style={{ "--c": renovation.color } as React.CSSProperties}>
+              <div className="item-art"><Illustration kind={renovation.illo} fit="bottom" decorative /></div>
               <h3><Link href={renovation.href}>Full renovations in {a.name}</Link></h3>
               <p>Kitchens, bathrooms, floors, stairs and decorating, planned with you and managed by me from start to finish.</p>
             </div>
@@ -104,6 +109,7 @@ export default async function AreaPage({ params }: Props) {
               const s = getSection(f.service)!;
               return (
                 <div className="item" key={f.service} style={{ "--c": s.color } as React.CSSProperties}>
+                  <div className="item-art"><Illustration kind={s.illo} fit="bottom" decorative /></div>
                   <h3><Link href={`/services/${s.slug}`}>{s.name} in {a.name}</Link></h3>
                   <p>{f.text}</p>
                 </div>
@@ -117,7 +123,7 @@ export default async function AreaPage({ params }: Props) {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="how-title">How it works</h2></div>
-            <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
+            <p data-reveal="up">You get <span className="hl" data-pen="steel">a written quote before any work starts</span>.</p>
           </div>
           <Steps />
         </div>

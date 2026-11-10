@@ -1,0 +1,494 @@
+/*
+  Concept styles (John, 10 Nov 2026): line drawings in the spirit of Lemonade, in
+  Connor's palette. Navy line on white, light grey fills, gold as the one accent.
+  Colours come from brand/tokens.css only.
+*/
+
+/* ---------- line drawing kit ---------- */
+.vh svg *, .li svg *, svg.li-art * { vector-effect: non-scaling-stroke; }
+/* light blue tints from the brand's steel tint, for depth */
+:root { --b1: color-mix(in srgb, var(--t-steel) 45%, #fff); --b2: color-mix(in srgb, var(--t-steel) 80%, #fff);
+  /* blues, golds and greys only (John, 10 Nov): the other section colours fold into them */
+  --oak: var(--gold-ink); --t-oak: var(--t-gold);
+  --sage: var(--steel); --t-sage: var(--b2);
+  --brick: var(--steel); --t-brick: var(--b2);
+  /* cool neutrals that sit with the blue (John: the warm grey didn't work) */
+  /* restraint (John: the blue everywhere was too much): white and near-white neutral
+     greys for the page, blue only inside the drawings and the hero's sky, gold for
+     highlights and actions */
+  --grey: color-mix(in srgb, var(--ink-3) 7%, #fff);
+  --soft: color-mix(in srgb, var(--ink-3) 9%, #fff);
+  --line: color-mix(in srgb, var(--ink-3) 24%, #fff);
+  --line-2: color-mix(in srgb, var(--ink-3) 45%, #fff); }
+/* one highlight colour: gold */
+.hl, .hl[data-pen] { --pen: var(--t-gold); }
+/* form errors keep their warning red, so a mistake still stands out */
+.field.invalid .input { border-color: #B5473A; }
+.field.invalid .bar { background: #B5473A; }
+.err { color: #B5473A; }
+/* one line-weight system: --lw is the main line, fine lines are always 0.6 of it.
+   1.8px in the hero, 1.6px everywhere else, 1.3px on phones */
+:root { --lw: 1.6; }
+.vh, .cs { --lw: 1.8; }
+.k, .kf, .kg, .kd, .kgl, .kg-gold, .kb1, .kb2, .kroof, .kdoor, .kdingy, .kplank, .ktarp, .khole, .tk-c {
+  stroke: var(--ink); stroke-width: var(--lw); stroke-linecap: round; stroke-linejoin: round;
+}
+.k { fill: none; }
+.k.thin, .thin { stroke-width: calc(var(--lw) * .6); }
+.kf { fill: #fff; }
+.kg, .kroof { fill: var(--grey); }
+.kd { fill: var(--ink); }
+.kgl { fill: var(--t-gold); }
+.kg-gold, .kdoor { fill: var(--gold); }
+.kb1 { fill: var(--b1); }
+.kb2 { fill: var(--b2); }
+.sh { fill: var(--b2); stroke: none; mix-blend-mode: multiply; } /* tints what's under it, so lines show through */
+.far { fill: color-mix(in srgb, var(--b1) 70%, #fff); stroke: none; }
+.farw { stroke: #fff; stroke-width: 2.2; }
+.rd { fill: color-mix(in srgb, var(--b1) 40%, #fff); }
+.kerb { fill: none; stroke: var(--b2); stroke-width: 1; }
+.collar { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; }
+.vh-steam { fill: none; stroke: var(--ink-3); stroke-width: calc(var(--lw) * .65); stroke-linecap: round; }
+.kw { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
+.kdingy { fill: var(--line); }
+.kplank { fill: var(--t-oak); }
+.ktarp { fill: var(--t-steel); }
+.khole { fill: var(--ink-2); }
+.khatch { fill: none; stroke: var(--ink-3); stroke-width: 1; stroke-linecap: round; }
+.ktape { fill: none; stroke: var(--ink-2); stroke-width: 3; stroke-linecap: round; opacity: .7; }
+.vb { fill: none; stroke: color-mix(in srgb, var(--t-steel) 80%, var(--ink-3)); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.vb .vh-cloud path { fill: #fff; }
+.pv { fill: var(--b1); }
+.road { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 26 22; }
+.tk-c { fill: var(--gold); }
+.tk-v { fill: none; stroke: var(--ink); stroke-width: calc(var(--lw) * 1.3); stroke-linecap: round; stroke-linejoin: round; }
+.vh-spark { fill: var(--gold); }
+.vh-stripe { fill: var(--gold); }
+.vh-tel { font: 700 11px var(--font); fill: var(--navy); letter-spacing: .02em; }
+.puff { fill: #fff; stroke: var(--ink-3); stroke-width: calc(var(--lw) * .65); }
+
+/* ---------- hero ---------- */
+/* sky: light blue under the nav, feathered out to white before the street starts */
+.vh { position: relative; padding-top: clamp(20px, 3vw, 40px); overflow: hidden;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--t-steel) 70%, #fff) 0, color-mix(in srgb, var(--t-steel) 45%, #fff) 120px, #fff 400px); }
+.vh-top { position: relative; }
+.vh-text { max-width: 640px; }
+.vh-text h1 { font-size: clamp(2.5rem, 4.1vw, 4rem); letter-spacing: -.045em; line-height: .98; }
+.vh .lede { margin-top: 14px; max-width: 40ch; color: var(--ink-2); font-size: clamp(1.08rem, 1.4vw, 1.28rem); }
+.vh .quote { border: 1px solid var(--line); }
+/* the hero form, tightened so the street stays above the fold */
+.vh .quote-call { display: none; }
+@media (min-width: 1081px) {
+  .vh .quote { padding: 20px 24px 18px; }
+  .vh .quote-head h2 { font-size: 1.4rem; }
+  .vh .quote-head p { margin: 2px 0 8px; font-size: .94rem; }
+  .vh .field { margin-bottom: 8px; }
+}
+@media (min-width: 1081px) {
+  .vh-text { max-width: calc(100% - 480px); }
+  .vh-form { position: absolute; top: 0; right: var(--gutter); width: min(420px, 34vw); z-index: 3; }
+}
+.vh-stage { position: relative; width: 100%; height: clamp(260px, 46svh, 440px); margin-top: clamp(4px, 1.2vw, 14px); }
+.vh-stage > svg { display: block; width: 100%; max-width: none; height: 100%; overflow: visible; }
+.vh-meta {
+  list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 28px;
+  padding-top: 22px; padding-bottom: clamp(28px, 4vw, 44px); text-align: left;
+}
+.vh-meta li { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: .98rem; }
+.vh-meta svg { flex: none; width: 26px; height: 26px; color: var(--gold-ink); }
+
+/* idle life in the scene: clouds drift, birds bob, exhaust puffs */
+@media (prefers-reduced-motion: no-preference) {
+  .vh-cloud { animation: vh-drift 38s linear infinite alternate; }
+  .vh-cloud.c2 { animation-duration: 46s; animation-direction: alternate-reverse; }
+  .vh-cloud.c3 { animation-duration: 54s; }
+  .vh-birds { animation: vh-bob 3.2s ease-in-out infinite; }
+  .puff { transform-box: fill-box; transform-origin: center; animation: vh-puff 1.1s ease-out infinite; }
+  .puff.p2 { animation-delay: .35s; }
+  .puff.p3 { animation-delay: .7s; }
+  .vh-steam { animation: vh-steam 2.4s ease-in-out infinite; }
+}
+@keyframes vh-drift { to { transform: translateX(60px); } }
+@keyframes vh-bob { 50% { transform: translateY(-6px); } }
+@keyframes vh-puff { 0% { opacity: 0; transform: translateX(0) scale(.4); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateX(-26px) scale(1.25); } }
+@keyframes vh-steam { 0%, 100% { opacity: .35; transform: translateY(1px); } 50% { opacity: 1; transform: translateY(-2px); } }
+@keyframes vh-fade { from { opacity: 0; transform: translateY(6px); } }
+
+@media (min-width: 721px) and (max-width: 1080px) {
+  .vh-form { margin-top: 24px; }
+}
+@media (max-width: 720px) {
+  /* phones: headline, intro, the street, then the quote button, all above the fold */
+  .vh { display: flex; flex-direction: column; padding-top: 18px; }
+  .vh-top { display: contents; }
+  .vh-text { order: 1; padding: 0 var(--gutter); }
+  .vh-stage { order: 2; }
+  .vh-form { order: 3; padding: 0 var(--gutter); margin-top: 14px; }
+  .vh-meta { order: 4; }
+  .vh-text h1 { font-size: clamp(2.6rem, 13.4vw, 3.4rem); line-height: .94; }
+  .vh .lede { font-size: 1.02rem; margin-top: 12px; }
+  /* phones: the street is drawn bigger than the screen, from the man and his dog to the extension */
+  .vh-stage { height: 55vw; margin-top: 6px; overflow: hidden; }
+  .vh-stage > svg { width: 200vw; max-width: none; margin-left: -45vw; overflow: hidden; }
+  /* lighter lines on a small screen, so the drawings never look heavy */
+  :root, .vh, .cs { --lw: 1.3; }
+  .vh-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
+  .vh-meta li { font-size: .9rem; align-items: flex-start; }
+  .vh-meta svg { width: 22px; height: 22px; }
+}
+
+/* ---------- closing: the plan sketches itself, the van pulls up ---------- */
+.closing .wrap { position: relative; z-index: 1; }
+.cs { position: absolute; right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); top: 50%; transform: translateY(-50%); width: min(500px, 38vw); }
+.cs svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.cs-line { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.cs-grid { fill: none; stroke: #fff; stroke-width: 1; }
+@media (max-width: 1080px) {
+  .cs { position: relative; right: auto; top: auto; transform: none; width: 100%; max-width: 520px; margin: 40px auto 0; padding: 0 var(--gutter); }
+}
+.cs svg *:not(.cs-line) { vector-effect: non-scaling-stroke; }
+
+/* ---------- the drawing set (components/Illustration.tsx) ---------- */
+.li-art .isky { fill: var(--b1); }
+.li-art .kwl { fill: none; stroke: #fff; stroke-width: 1.4; }
+.li-art .nostroke { stroke: none; }
+.li-art .cut { fill: none; stroke: var(--ink); stroke-width: calc(var(--lw) * .7); stroke-dasharray: 3 3; }
+.li-art .rope { fill: none; stroke: var(--ink); stroke-width: calc(var(--lw) * .7); }
+.li-art .lock { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: round; }
+.li-art .iq { font: 800 64px var(--font); fill: var(--ink); text-anchor: middle; }
+.li-art .ipound { font: 800 30px var(--font); fill: var(--gold-ink); }
+.li-art .ilabel { font: 700 9px var(--font); fill: var(--ink-2); letter-spacing: .04em; }
+.li-art .a-steam { fill: none; stroke: var(--ink-3); stroke-width: calc(var(--lw) * .7); stroke-linecap: round; }
+.li-art .a-drip { fill: none; stroke: var(--steel); stroke-width: 1.6; stroke-linecap: round; }
+/* each drawing in its own card (John: side by side they ran into one busy street):
+   white, a fine border, the street running to the card's edges */
+.ph.ph-illo, .feature .ph.ph-illo, .svc-row .ph.ph-illo, .services .ph.ph-illo, .trade .ph.ph-illo, .grey .ph.ph-illo {
+  background: #fff; box-shadow: inset 0 0 0 1px var(--line); border-radius: 14px; overflow: hidden; }
+.ph-illo .il, .feature .ph-illo .il, .services.six .ph-illo .il { left: 0; top: 7%; width: 100%; height: 93%; }
+.vb .cloudf { fill: #fff; }
+.ph-illo .il, .feature .ph-illo .il, .services.six .ph-illo .il { left: 0; top: 0; width: 100%; height: 100%; }
+.step-mark { position: relative; width: 168px; height: 126px; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; }
+.step-mark .step-art { width: 140px; height: 105px; }
+.step-art * { vector-effect: non-scaling-stroke; }
+.step-art .sa-pound { font: 800 15px var(--font); fill: var(--gold-ink); }
+.step-art .spark-s { fill: var(--gold); }
+.step-n { color: var(--gold-ink); }
+.steps li:not(:last-child)::after { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .il.is-on .a-steam { animation: il-steam 2.4s ease-in-out infinite; }
+  .il.is-on .a-drip { animation: il-drip 1s linear infinite; }
+  .il.is-on .a-swing { transform-box: view-box; animation: il-swing 3.2s ease-in-out infinite alternate; }
+  .il.is-on .a-bob { animation: il-bob 2.4s ease-in-out infinite alternate; }
+  .il.is-on .a-drop { animation: il-drop 4s var(--ease) infinite; }
+  .il.is-on .a-door { transform-box: view-box; animation: il-door 4.4s ease-in-out infinite; }
+  .il.is-on .a-tile { animation: il-tile 4s var(--ease) infinite; }
+  .il.is-on .a-plank { animation: il-plank 4.2s var(--ease) infinite; }
+  .il.is-on .a-saw { animation: il-saw .5s ease-in-out infinite alternate; }
+  .il.is-on .a-dust { animation: il-dust 1.2s ease-in infinite; }
+  .il.is-on .a-book { animation: il-book 4s var(--ease) infinite; }
+  .il.is-on .a-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: il-flame .9s ease-in-out infinite alternate; }
+  .il.is-on .a-paint { transform-box: view-box; animation: il-paint 5s ease-in-out infinite; }
+  .il.is-on .a-roller { animation: il-roller 5s ease-in-out infinite; }
+  .il.is-on .a-rope { transform-box: view-box; animation: il-rope 3.4s ease-in-out infinite alternate; }
+  .il.is-on .a-bucket { animation: il-bucket 3.4s ease-in-out infinite alternate; }
+  .il.is-on .a-pop { transform-box: fill-box; transform-origin: center; animation: il-pop 5s var(--ease) infinite; }
+  .il.is-on .a-dot { animation: il-dot 1.2s ease-in-out infinite; }
+  .il.is-on .a-lock { animation: il-lock 4s var(--ease) infinite; }
+  .il.is-on .a-pin { animation: il-pin 1.6s ease-in-out infinite alternate; }
+  .il.is-on .a-slide { animation: il-slide 3.6s ease-in-out infinite alternate; }
+  .il.is-on .d2 { animation-delay: .4s; }
+  .il.is-on .d3 { animation-delay: .8s; }
+  .il.is-on .a-drip.d2, .il.is-on .a-dust.d2 { animation-delay: .33s; }
+  .il.is-on .a-drip.d3, .il.is-on .a-dust.d3 { animation-delay: .66s; }
+}
+@keyframes il-steam { 0%, 100% { opacity: .2; transform: translateY(2px); } 50% { opacity: 1; transform: translateY(-4px); } }
+@keyframes il-drip { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(30px); } }
+@keyframes il-swing { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+@keyframes il-bob { to { transform: translateY(-3px); } }
+@keyframes il-drop { 0% { opacity: 0; transform: translateY(-56px); } 12% { opacity: 1; } 32% { transform: translateY(0); } 38% { transform: translateY(-5px); } 44%, 86% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(0); } }
+@keyframes il-door { 0%, 12% { transform: scaleX(1); } 40%, 70% { transform: scaleX(.62); } 92%, 100% { transform: scaleX(1); } }
+@keyframes il-tile { 0% { opacity: 0; transform: translate(18px, -20px); } 30%, 86% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; } }
+@keyframes il-plank { 0% { opacity: 0; transform: translateX(56px); } 34%, 86% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
+@keyframes il-saw { from { transform: translate(-8px, -4px); } to { transform: translate(8px, 4px); } }
+@keyframes il-dust { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(9px); } } /* sawdust lands on the floor, never through it */
+@keyframes il-book { 0% { opacity: 0; transform: translateX(30px); } 34%, 86% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
+@keyframes il-flame { from { transform: scaleY(.8); } to { transform: scaleY(1.12); } }
+@keyframes il-paint { 0% { opacity: 1; transform: scaleY(.14); } 70%, 88% { opacity: 1; transform: scaleY(1); } 96% { opacity: 0; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(.14); } }
+@keyframes il-roller { 0% { transform: translateY(155px); } 70%, 88% { transform: translateY(0); } 100% { transform: translateY(155px); } }
+@keyframes il-rope { from { transform: scaleY(1); } to { transform: scaleY(.3); } }
+@keyframes il-bucket { from { transform: translateY(0); } to { transform: translateY(-90px); } }
+@keyframes il-pop { 0% { transform: scale(0); } 8% { transform: scale(1.15); } 12%, 88% { transform: scale(1); } 96%, 100% { transform: scale(0); } }
+@keyframes il-dot { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+@keyframes il-lock { 0% { transform: translateY(-12px); } 30%, 86% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
+@keyframes il-pin { to { transform: translateY(-9px); } }
+@keyframes il-slide { from { transform: translateX(14px); } to { transform: translateX(0); } }
+
+/* ---------- page heads feel like the homepage hero ----------
+   Sky at the top, the heading on the left, the page's drawing on the right standing
+   on a street that runs the full width of the screen. The street strip lines up with
+   the pavement drawn inside the drawing (y 210 to 220 of its 240). */
+.page-head.has-street {
+  --A: clamp(360px, 46vw, 680px);
+  padding-bottom: 0; overflow: hidden;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--t-steel) 70%, #fff) 0, color-mix(in srgb, var(--t-steel) 38%, #fff) 140px, #fff 82%);
+}
+/* the words sit in the middle of the drawing's height above the street, not low down under empty sky */
+.page-head.has-street { padding-top: clamp(32px, 4vw, 64px); }
+.page-head .wrap.has-art { display: grid; grid-template-columns: minmax(0, 1fr) var(--A); column-gap: clamp(24px, 3vw, 56px); align-items: center; }
+.page-head .head-text { padding-bottom: calc(var(--A) * .75 * .16); }
+.page-head .head-art { position: relative; z-index: 0; width: var(--A); align-self: end; }
+.page-head .head-art .il { display: block; width: 100%; height: auto; }
+/* each drawing is framed to its own edges in PageHead (headFrame), so nothing is ever cut off;
+   the far town is left out here, as its blocks would stop hard at the frame */
+.page-head .head-art .far { display: none; }
+.page-head .head-art::before, .page-head .head-art::after { content: ""; position: absolute; left: -100vw; right: -100vw; z-index: -1; }
+.page-head .head-art::before {
+  box-sizing: border-box; bottom: calc(12.5% - 4.1667% * var(--z, 1) - var(--lw) * .5px); height: calc(4.1667% * var(--z, 1) + var(--lw) * 1px);
+  background: repeating-linear-gradient(90deg, transparent 0 39px, var(--b2) 39px 40px), var(--b1);
+  border-top: calc(var(--lw) * 1px) solid var(--ink); border-bottom: calc(var(--lw) * 1px) solid var(--ink);
+}
+/* the road sits under the pavement strip, so it never covers the pavement's bottom line */
+.page-head .head-art::after { z-index: -2; bottom: 0; height: calc(12.5% - 4.1667% * var(--z, 1)); background: color-mix(in srgb, var(--b1) 40%, #fff); }
+@media (max-width: 900px) {
+  .page-head .wrap.has-art { display: block; }
+  .page-head .head-text { padding-bottom: 0; }
+  .page-head .head-art { width: min(100%, 420px); margin: 28px auto 0; }
+}
+
+/* ---------- palette tidy (John, 10 Nov): no warm creams or beiges left ---------- */
+.drop:hover, .drop.over { background: var(--b1); }
+.ba .after { background: var(--soft); }
+.grey .ba .after.ph-empty { background: var(--grey); }
+.foot { color: #fff; }
+.foot-brand p { color: rgb(255 255 255 / .78); }
+.foot nav a { color: rgb(255 255 255 / .82); }
+.foot-base, .foot-base a { color: rgb(255 255 255 / .7); }
+.foot-base { border-top-color: rgb(255 255 255 / .16); }
+
+/* ---------- less dead space ---------- */
+.sec { padding: clamp(64px, 7.5vw, 116px) 0; }
+.proj-grid > .proj:only-child { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); column-gap: clamp(28px, 4vw, 64px); align-content: center; }
+.proj-grid > .proj:only-child > :first-child { grid-row: 1 / span 4; }
+.proj-grid > .proj:only-child > :not(:first-child) { grid-column: 2; align-self: end; }
+.proj-grid > .proj:only-child > p { align-self: start; }
+@media (max-width: 720px) { .proj-grid > .proj:only-child { display: block; } }
+
+/* ---------- job cards look clickable ---------- */
+a.proj .proj-more { color: var(--ink); }
+a.proj:hover h2, a.proj:hover h3 { text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* ---------- homepage services: one row that scrolls sideways ---------- */
+.srow { position: relative; margin-top: clamp(36px, 4vw, 56px); }
+.srow-nav { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 18px; }
+.srow-nav button { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid var(--line-2); background: #fff; color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color .2s var(--ease), opacity .2s; }
+.srow-nav button:hover:not(:disabled) { border-color: var(--ink); }
+.srow-nav button:disabled { opacity: .35; cursor: default; }
+.srow-nav svg { width: 18px; height: 18px; }
+.srow-track.services.six {
+  display: flex; gap: clamp(16px, 2vw, 28px); overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scroll-padding-inline: var(--gutter); scrollbar-width: none;
+}
+.srow-track::-webkit-scrollbar { display: none; }
+.srow-track.services.six > .service { flex: 0 0 clamp(250px, 29%, 380px); scroll-snap-align: start; }
+@media (max-width: 720px) {
+  .srow-nav { display: none; }
+  .srow-track.services.six > .service { flex-basis: 76%; }
+}
+
+/* card titles stay plain: the highlight is for the big headings (it blocked out on two-line titles) */
+.service h3 .hl, .trade h3 .hl, .proj h2 .hl, .proj h3 .hl { background: none; padding: 0; margin: 0; }
+
+/* "See all my recent work" under the before and afters */
+.work-more { margin-top: clamp(28px, 3vw, 40px); }
+.work-more .btn svg { transition: transform .3s var(--ease); }
+
+/* ---------- services: tighter cards; all nine at a glance on phones ----------
+   The drawings are cropped close to their scene (the empty sky above is trimmed) */
+.srow-track.services.six > .service .ph { aspect-ratio: 16 / 10; }
+.srow-track.services.six > .service .ph-illo .il { top: auto; bottom: 0; height: auto; aspect-ratio: 4 / 3; }
+@media (max-width: 720px) {
+  /* phones: the same sideways row, one and a bit cards on screen, drawings centred */
+  .srow-track.services.six > .service { flex-basis: 74%; }
+  .srow-track.services.six > .service h3 { display: block; font-size: 1.25rem; }
+  .srow-track.services.six > .service h3 svg { display: inline; width: 16px; height: 16px; margin-left: 6px; vertical-align: -2px; }
+}
+
+/* steps on phones: the drawing card beside the words, sized to fit */
+@media (max-width: 720px) {
+  .steps li { grid-template-columns: 112px minmax(0, 1fr); gap: 16px; align-items: center; }
+  .step-mark { width: 112px; height: 84px; border-radius: 12px; }
+  .step-mark .step-art { width: 100px; height: 75px; }
+}
+
+/* service lists on the town and About pages: each service with its small drawing */
+.item:has(.item-art) { border-top: 0; padding-top: 0; }
+.item-art { position: relative; aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 1px var(--line); margin-bottom: 16px; }
+.item-art .il { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+.items:has(.item-art) { row-gap: clamp(28px, 3vw, 40px); }
+
+/* the very light blue, in a few chosen places: "How it works" and the renovation phases */
+.sec:has(.steps), .sec:has(.timeline) { background: color-mix(in srgb, var(--t-steel) 30%, #fff); }
+.sec:has(.steps) + .sec:not(.grey), .sec:has(.timeline) + .sec:not(.grey) { border-top: 0; }
+.li-art .arc { fill: none; stroke: var(--ink-3); stroke-width: calc(var(--lw) * .7); stroke-dasharray: 3 5; stroke-linecap: round; }
+@media (max-width: 720px) {
+  /* service lists with drawings: two to a row on phones, so ten don't make a long scroll */
+  .items:has(.item-art) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+  .items:has(.item-art) .item-art { aspect-ratio: 4 / 3; margin-bottom: 10px; border-radius: 10px; }
+  .items:has(.item-art) .item { padding-bottom: 0; }
+  .items:has(.item-art) h3 { font-size: 1rem; line-height: 1.2; margin-bottom: 4px; }
+  .items:has(.item-art) p { font-size: .86rem; line-height: 1.4; }
+}
+
+/* ---------- filters: lozenges that look clickable; one sideways row on phones (John, 10 Nov) ---------- */
+.filters { gap: 10px; border-bottom: 0; margin-bottom: clamp(28px, 3vw, 40px); }
+.filters button {
+  padding: 9px 18px; border: 1.5px solid var(--line-2); border-radius: 999px; background: #fff;
+  margin: 0; min-height: 0; font: 600 .95rem var(--font); color: var(--ink-2); cursor: pointer; white-space: nowrap;
+  transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+}
+.filters button:hover { border-color: var(--ink); color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--t-gold); border-color: var(--gold); color: var(--ink); }
+.filters button::after { display: none; }
+@media (max-width: 720px) {
+  .filters {
+    flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
+    margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); padding: 2px var(--gutter) 4px;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters button { scroll-snap-align: start; padding: 8px 15px; font-size: .9rem; }
+}
+
+/* ================= refinement pass: one design language throughout (John, 10 Nov) ================= */
+
+/* highlights: a hand-drawn gold underline, in the same spirit as the line drawings.
+   It sits below the letters, fine under body text and a little fuller under headings;
+   the scroll animation only grows its width (--hlw) */
+.hl, .hl[data-pen] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6.2Q50 4.2 100 5.6T198 4.8' fill='none' stroke='%23D9A441' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: var(--hlw, 100%) .2em; background-position: 0 100%; background-repeat: no-repeat;
+  padding: 0 0 .2em; margin: 0; border-radius: 0;
+}
+h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; padding-bottom: .12em; }
+
+/* one corner radius for every card and photo; buttons and filters fully round */
+:root { --radius: 14px; }
+.pkg, .compare > div, .faq-item, .faq-item summary, .quote, .ba, .ba-split, .reviews-photo, .item-art, .ph { border-radius: var(--radius); }
+
+/* one card style: white, a fine border, no tinted blocks */
+.faq-item, .faq-item[open] { background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+.faq-item .dot { border-radius: 50%; background: var(--gold); }
+.faq-item .pm { background: #fff; box-shadow: inset 0 0 0 1.5px var(--line-2); }
+.faq-item summary:hover .pm { background: var(--t-gold); box-shadow: inset 0 0 0 1.5px var(--gold); }
+.compare > div { box-shadow: inset 0 0 0 1px var(--line); }
+.compare .ours { box-shadow: inset 0 0 0 2px var(--gold); }
+
+/* tags and small labels in one colour */
+.proj-tag { color: var(--gold-ink); }
+.proj-tag::before { background: var(--gold); }
+
+/* icons sit in light round badges, the way the drawings sit in the page */
+.benefit-ico, .principles .benefit-ico { border-radius: 50%; background: var(--b1); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* price cards: plain white, no drawings (John, 10 Nov) */
+.pkg-head { background: #fff; padding-bottom: 6px; }
+.pkg-head .from strong { color: var(--ink); }
+
+/* the review: light and airy, the job it's about beside it */
+.reviews.light { color: var(--ink); background: color-mix(in srgb, var(--t-steel) 30%, #fff); }
+.reviews.light h2 { color: var(--ink); }
+.reviews.light .quote-by { color: var(--ink-2); }
+.reviews.light .quote-by strong { color: var(--ink); }
+.reviews-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.reviews-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.reviews-photo img { object-fit: cover; }
+@media (max-width: 900px) {
+  .reviews-grid { grid-template-columns: minmax(0, 1fr); }
+  .reviews-photo { aspect-ratio: 4 / 3; }
+}
+.reviews.light .quote-big { color: var(--ink); }
+/* bullets in one colour everywhere */
+.ticks li::before { background: var(--gold); }
+
+/* "Hi, I'm Connor": the photo stays a modest size beside the words, never full width */
+@media (min-width: 1081px) { .about .wrap { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } .about .ph { justify-self: end; } }
+.about .ph { width: 100%; max-width: 520px; aspect-ratio: 4 / 3; }
+@media (max-width: 1080px) {
+  .about .ph { max-width: 560px; aspect-ratio: 16 / 10; }
+}
+
+/* ---------- price cards: four side by side, whole drawings; a sideways row on phones ---------- */
+.pkgs:not(.three) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 22px); }
+.pkgs:not(.three) .pkg h2, .pkgs:not(.three) .pkg h3 { font-size: clamp(1.1rem, 1.3vw, 1.3rem); }
+.pkgs:not(.three) .pkg-head, .pkgs:not(.three) .pkg-body { padding-left: clamp(16px, 1.6vw, 24px); padding-right: clamp(16px, 1.6vw, 24px); }
+.pkgs:not(.three) .pkg .ticks li { font-size: .92rem; padding: 8px 0; }
+@media (max-width: 1080px) { .pkgs:not(.three) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .pkgs:not(.three) {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+    margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scroll-padding-inline: var(--gutter);
+  }
+  .pkgs:not(.three)::-webkit-scrollbar { display: none; }
+  .pkgs:not(.three) > .pkg { flex: 0 0 82%; scroll-snap-align: start; }
+}
+
+/* page heads: no clouds in the zoomed drawings (they'd be cut off at the top) */
+.page-head .head-art .cloudf { display: none; }
+
+/* the trust strip under the hero: each icon in a light round badge, evenly spaced, fine dividers */
+.vh-meta { border-top: 1px solid var(--line); padding-top: 20px; gap: 0; }
+.vh-meta li { justify-content: center; gap: 12px; padding: 4px 12px; }
+.vh-meta li + li { border-left: 1px solid var(--line); }
+.vh-meta svg {
+  box-sizing: content-box; width: 20px; height: 20px; padding: 10px; border-radius: 50%;
+  background: var(--b1); box-shadow: inset 0 0 0 1px var(--line); color: var(--gold-ink);
+}
+@media (max-width: 720px) {
+  .vh-meta { gap: 14px 0; }
+  .vh-meta li { justify-content: flex-start; padding: 2px 8px; }
+  .vh-meta li:nth-child(odd) { border-left: 0; }
+  .vh-meta svg { width: 18px; height: 18px; padding: 8px; }
+}
+.vh-meta li { align-items: center; }
+@media (max-width: 720px) { .vh-meta li { font-size: 15px; line-height: 1.3; } }
+
+/* ---------- prices (John, 10 Nov): sizes with rough figures, everything else priced after a visit ---------- */
+.pkg .sizes { list-style: none; margin: 0 0 18px; border-top: 1px solid var(--line); }
+.pkg .sizes li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.pkg .sizes span { display: flex; flex-direction: column; font-size: .86rem; color: var(--ink-2); line-height: 1.35; }
+.pkg .sizes b { font-size: 1rem; color: var(--ink); font-weight: 700; }
+.pkg .sizes strong { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); white-space: nowrap; }
+.pkg .sizes sup { font-size: .5em; vertical-align: super; margin-left: 1px; }
+.from.visit strong { font-size: clamp(1.15rem, 1.5vw, 1.35rem); color: var(--ink); letter-spacing: -.01em; }
+.price-rows .from.visit strong { font-size: 1rem; color: var(--ink-2); font-weight: 600; letter-spacing: 0; }
+.price-rows a::before { background: var(--gold); }
+
+/* page heads with a drawing: the heading a size smaller on computers, so it sits in two or
+   three lines beside the drawing and the head doesn't grow tall (John, 10 Nov) */
+@media (min-width: 901px) {
+  .page-head .wrap.has-art h1 { font-size: clamp(2.4rem, 3.9vw, 4rem); max-width: 14ch; }
+  .page-head .wrap.has-art .head-text > p { font-size: clamp(1.02rem, 1.15vw, 1.15rem); max-width: 40ch; }
+}
+/* the "Draft: Connor to confirm…" line: small and marked, not another paragraph */
+.page-head .head-text p.draft { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: .85rem; font-weight: 600; color: var(--ink-2); }
+.page-head .head-text p.draft::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--gold); }
+
+/* ---------- price cards: all one height, rows lined up across them, what's included as a dropdown ---------- */
+.pkgs:not(.three) > .pkg { padding: clamp(20px, 2vw, 28px) clamp(16px, 1.6vw, 24px); }
+.pkg .pkg-name { margin: 0; }
+.pkg .pkg-sum { margin-top: 6px; font-size: .95rem; line-height: 1.45; color: var(--ink-2); }
+.pkg .pkg-price { margin-top: 18px; }
+.pkg .pkg-price .sizes { margin: 0; }
+.pkg-visit { box-sizing: border-box; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 18px; border-radius: 10px; background: color-mix(in srgb, var(--b1) 55%, #fff); }
+.pkg-visit strong { font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em; color: var(--ink); }
+.pkg-visit span { font-size: .88rem; line-height: 1.45; color: var(--ink-2); }
+.pkg-inc { margin-top: 14px; }
+.pkg-inc summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0 2px; font-size: .95rem; font-weight: 600; color: var(--ink); }
+.pkg-inc summary::-webkit-details-marker { display: none; }
+.pkg-inc summary::after { content: ""; flex: none; width: 7px; height: 7px; margin-right: 4px; border-right: 2px solid var(--gold-ink); border-bottom: 2px solid var(--gold-ink); transform: translateY(-2px) rotate(45deg); transition: transform .25s var(--ease); }
+.pkg-inc[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+.pkg-inc summary:hover { color: var(--gold-ink); }
+.pkg-inc .ticks { margin-top: 6px; }
+@media (min-width: 721px) {
+  .pkgs:not(.three) > .pkg { display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: 0; align-content: start; }
+}

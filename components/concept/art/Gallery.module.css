@@ -1,0 +1,9 @@
+/* Gallery: the gold handle wipes the picture from tired to renovated and back. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .wipe, :global(.il.is-on) .handle { animation: wipe 6s ease-in-out infinite; }
+}
+@keyframes wipe {
+  0%, 8% { transform: translateX(34px); }
+  46%, 58% { transform: translateX(-34px); }
+  96%, 100% { transform: translateX(34px); }
+}

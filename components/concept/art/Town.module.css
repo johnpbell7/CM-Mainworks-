@@ -1,0 +1,12 @@
+/* The cat's tail swishes slowly while the street is on screen. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .tail {
+    transform-box: fill-box;
+    transform-origin: 0% 100%;
+    animation: swish 1.8s ease-in-out infinite alternate;
+  }
+}
+@keyframes swish {
+  from { transform: rotate(-8deg); }
+  to { transform: rotate(16deg); }
+}

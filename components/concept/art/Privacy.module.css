@@ -1,0 +1,21 @@
+/* Privacy: the form goes in, the padlock clicks, a tick lands. Everything on one 4s beat. */
+.env { transform-box: fill-box; transform-origin: 100% 50%; }
+.tick { transform-box: fill-box; transform-origin: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .env { animation: post 4s ease-in-out infinite; }
+  :global(.il.is-on) .tick { animation: tickin 4s var(--ease, ease-out) infinite; }
+}
+@keyframes post {
+  0% { opacity: 0; transform: translateX(-12px); }
+  10%, 24% { opacity: 1; transform: translateX(0); }
+  40% { opacity: 1; transform: translateX(62px) scale(.8); }
+  46%, 90% { opacity: 0; transform: translateX(70px) scale(.7); }
+  100% { opacity: 0; transform: translateX(-12px); }
+}
+@keyframes tickin {
+  0%, 36% { transform: scale(0); }
+  44% { transform: scale(1.2); }
+  50%, 88% { transform: scale(1); }
+  96%, 100% { transform: scale(0); }
+}

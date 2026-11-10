@@ -93,10 +93,10 @@ export default function Motion() {
           });
 
           // ---- marker highlights ----
-          gsap.set(marks, { backgroundSize: "0% 74%" });
+          gsap.set(marks, { "--hlw": "0%" });
           ScrollTrigger.batch(marks, {
             start: "top 94%", once: true,
-            onEnter: (els) => gsap.to(els, { backgroundSize: "100% 74%", duration: 0.45, ease: "power2.inOut", delay: 0.05 }),
+            onEnter: (els) => gsap.to(els, { "--hlw": "100%", duration: 0.5, ease: "power2.inOut", delay: 0.05 }),
           });
 
           // ---- illustrations fade up as a whole ----

@@ -12,7 +12,7 @@ import { Arrow } from "@/components/Icons";
 import { business, getSection, renovation, sections } from "@/content/site";
 import { serviceContent } from "@/content/services";
 import { media, renovationBento } from "@/content/media";
-import { projectHref, publishedProjects } from "@/content/projects";
+import { hasPage, projectHref, publishedProjects } from "@/content/projects";
 import { areas } from "@/content/areas";
 import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
@@ -77,6 +77,7 @@ export default async function Service({ params }: Props) {
 
       <PageHead
         crumbs={[{ href: "/renovations", label: "Renovations" }, { href: `/services/${s.slug}`, label: s.name }]}
+        art={s.illo}
         title={<><span className="hl" data-pen={s.pen}>{first}</span> {rest.join(" ")}</>}
         lede={c.lede}
       />
@@ -116,7 +117,7 @@ export default async function Service({ params }: Props) {
         <div className="wrap">
           <div className="sec-head">
             <div data-reveal="up"><h2 id="how-title">{s.how}</h2></div>
-            <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
+            <p data-reveal="up">You get <span className="hl" data-pen="steel">a written quote before any work starts</span>.</p>
           </div>
           <Steps steps={c.steps} />
           <div className="faq-wrap time-wrap">
@@ -162,6 +163,7 @@ export default async function Service({ params }: Props) {
                   <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
                   <h3>{p.name}</h3>
                   <p>{p.summary}</p>
+                  <span className="proj-more">{hasPage(p) ? "See the job" : "See the photos"} <Arrow /></span>
                 </Link>
               ))}
             </div>

@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+import "./concept.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBar from "@/components/MobileBar";
-import Intro from "@/components/Intro";
 import Motion from "@/components/Motion";
+import IlloPlay from "@/components/concept/IlloPlay";
 import JsonLd from "@/components/JsonLd";
 import { siteUrl } from "@/content/site";
 
@@ -41,10 +42,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-// Runs before first paint: marks JS as available and decides whether the intro plays.
-// Two failsafes so a slow phone never sits on the navy screen: if the intro hasn't
-// started within 1.8s it's skipped, and after 7s the page always opens.
-const boot = `(function(){var d=document.documentElement;d.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('cm-intro-seen')){d.classList.add('intro-on');var off=function(){d.classList.remove('intro-on');try{sessionStorage.setItem('cm-intro-seen','1')}catch(e){}};setTimeout(function(){if(!window.__cmIntroStarted)off()},1800);setTimeout(off,7000)}}catch(e){}})();`;
+// Runs before first paint: marks JS as available. (The logo intro was taken out in the
+// concept, John 10 Nov 2026: the van hero opens the site now.)
+const boot = `document.documentElement.classList.add('js');`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -55,12 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body id="top">
         <a className="skip" href="#main">Skip to content</a>
-        <Intro />
         <Header />
         <main id="main">{children}</main>
         <Footer />
         <MobileBar />
         <Motion />
+        <IlloPlay />
       </body>
     </html>
   );

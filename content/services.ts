@@ -303,7 +303,7 @@ export const serviceContent: Record<SectionSlug, ServiceContent> = {
     },
     steps: [
       { title: "Show me the rooms", text: "Photos and rough sizes, and the floor or tiles you like." },
-      { title: "A clear, written quote", text: "Including any preparation the base needs, so there are no surprises." },
+      { title: "A clear, written quote", text: "Including the preparation the base needs, once I’ve seen it." },
       { title: "Laid and finished", text: "Floors down, trims fitted and the room put back." },
     ],
     time: {

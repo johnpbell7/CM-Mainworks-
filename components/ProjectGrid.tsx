@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Photo from "./PhotoBasic";
+import { Arrow } from "./Icons";
 import BeforeAfter from "./BeforeAfter";
 import BeforeAfterSplit from "./BeforeAfterSplit";
 import { sections, type SectionSlug } from "@/content/site";
@@ -64,6 +65,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
               <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
               <h2>{p.name}</h2>
               <p>{p.summary}</p>
+              <span className="proj-more">See the job <Arrow /></span>
             </Link>
           );
         })}

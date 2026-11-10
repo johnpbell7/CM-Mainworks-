@@ -1,0 +1,6 @@
+/* The TV catches the light now and then. Only while the drawing is on screen. */
+.glint { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .glint { animation: glint 4.5s ease-in-out infinite; }
+}
+@keyframes glint { 0%, 45% { opacity: 0; transform: translateX(-6px); } 55% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateX(44px); } }

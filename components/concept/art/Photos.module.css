@@ -1,0 +1,8 @@
+/* Photos: the three prints fly over in turn, then start again. Only while on screen. */
+.fly { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .fly { animation: fly 4.5s var(--ease, ease-out) infinite; }
+  :global(.il.is-on) .f2 { animation-delay: .35s; }
+  :global(.il.is-on) .f3 { animation-delay: .7s; }
+}
+@keyframes fly { 0% { opacity: 0; transform: translate(-30px, 20px) scale(.6); } 14% { opacity: 1; transform: translate(0, 0) scale(1); } 82% { opacity: 1; transform: translate(0, 0) scale(1); } 94%, 100% { opacity: 0; transform: translate(8px, -4px) scale(.9); } }

@@ -1,4 +1,4 @@
-import Illustration from "./Illustration";
+import StepArt from "./concept/StepArt";
 
 type Step = { title: string; text: string };
 
@@ -20,7 +20,7 @@ export default function Steps({ steps = defaultSteps }: { steps?: Step[] }) {
     <ol className="steps">
       {steps.slice(0, 3).map((st, i) => (
         <li key={st.title} style={{ "--c": looks[i].c, "--pen": looks[i].t } as React.CSSProperties} data-reveal="up">
-          <div className="step-mark"><Illustration kind={looks[i].k} decorative /></div>
+          <div className="step-mark"><StepArt step={i as 0 | 1 | 2} /></div>
           <div className="step-body">
             <p className="step-n">Step {i + 1}</p>
             <h3>{st.title}</h3>

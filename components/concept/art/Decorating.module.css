@@ -1,0 +1,8 @@
+/* The roller and the fresh coat rise together, so the roller always works the edge. Only while on screen. */
+.paint { transform-box: view-box; transform-origin: 119px 196px; }
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .paint { animation: paint 5.4s ease-in-out infinite; }
+  :global(.il.is-on) .roller { animation: roller 5.4s ease-in-out infinite; }
+}
+@keyframes paint { 0% { transform: scaleY(.04); opacity: 0; } 6% { opacity: 1; } 68%, 88% { transform: scaleY(1); opacity: 1; } 97% { transform: scaleY(1); opacity: 0; } 100% { transform: scaleY(.04); opacity: 0; } }
+@keyframes roller { 0% { transform: translateY(126px); opacity: 0; } 6% { opacity: 1; } 68%, 88% { transform: translateY(0); opacity: 1; } 97% { transform: translateY(0); opacity: 0; } 100% { transform: translateY(126px); opacity: 0; } }

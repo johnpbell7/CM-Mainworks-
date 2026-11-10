@@ -1,0 +1,29 @@
+/* The bucket rides up the scaffold on its rope, and the spaniel's tail wags. Transform and opacity only. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .rope {
+    transform-box: view-box;
+    transform-origin: 0 55px;
+    animation: rope 3.6s ease-in-out infinite alternate;
+  }
+  :global(.il.is-on) .rope { transform-origin: 254px 55px; }
+  :global(.il.is-on) .bucket {
+    animation: bucket 3.6s ease-in-out infinite alternate;
+  }
+  :global(.il.is-on) .dog :global(.vh-tail) {
+    transform-box: fill-box;
+    transform-origin: 0% 100%;
+    animation: wag 0.35s ease-in-out infinite alternate;
+  }
+}
+@keyframes rope {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0.4); }
+}
+@keyframes bucket {
+  from { transform: translateY(0); }
+  to { transform: translateY(-57px); }
+}
+@keyframes wag {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(24deg); }
+}

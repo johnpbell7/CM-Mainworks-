@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { business } from "@/content/site";
+import ClosingScene from "./concept/ClosingScene";
 
 export default function Closing() {
   return (
@@ -11,7 +12,7 @@ export default function Closing() {
           <Link className="link" href="/contact#quote">Get a free quote</Link>
         </div>
       </div>
-      <img className="big-badge" src="/brand/logo/badge/cm-badge-jaunty.svg" alt="" width={320} height={140} loading="lazy" />
+      <ClosingScene />
     </section>
   );
 }

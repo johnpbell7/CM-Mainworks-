@@ -17,6 +17,7 @@ export default function Faqs() {
       <JsonLd data={faqLd(allFaqs)} />
       <PageHead
         crumbs={[{ href: "/faqs", label: "FAQs" }]}
+        art="faq"
         title={<>Questions, <span className="hl">answered.</span></>}
         lede="The things people ask me most. Can’t see yours? Ring or WhatsApp me."
       />

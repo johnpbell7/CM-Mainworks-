@@ -19,7 +19,7 @@ export default function Photo({ illo, drawingOnly, ...props }: Props) {
   if (illo && (drawingOnly || !media.src)) {
     return (
       <div className={`ph ph-illo ${className}`} style={style} {...r}>
-        <Illustration kind={illo} fit="bottom" />
+        <Illustration kind={illo} fit="bottom" decorative />
       </div>
     );
   }

@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta({
 export default function Privacy() {
   return (
     <>
-      <PageHead crumbs={[{ href: "/privacy", label: "Privacy" }]} title="Privacy policy" lede="What happens to your details and photos when you ask me for a quote." />
+      <PageHead art="privacy" crumbs={[{ href: "/privacy", label: "Privacy" }]} title="Privacy policy" lede="What happens to your details and photos when you ask me for a quote." />
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className="wrap prose">
           {/* DRAFT: needs Connor's legal trading name and contact email before launch. */}

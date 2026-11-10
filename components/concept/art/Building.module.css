@@ -1,0 +1,11 @@
+/* The builder waves his trowel at the wall: a small, friendly loop while the drawing is on screen. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .wave {
+    transform-box: fill-box;
+    animation: wave 1.1s ease-in-out infinite alternate;
+  }
+}
+@keyframes wave {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(14deg); }
+}

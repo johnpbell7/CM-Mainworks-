@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Arrow } from "@/components/Icons";
 import { notFound } from "next/navigation";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
@@ -46,6 +47,7 @@ export default async function ProjectPage({ params }: Props) {
     <div style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties}>
       <PageHead
         crumbs={[{ href: "/projects", label: "Recent work" }, { href: `/projects/${p.slug}`, label: p.name }]}
+        art={s.illo}
         title={titleOf(p)}
         lede={<><Link href={`/services/${s.slug}`} style={{ color: `color-mix(in srgb, ${s.color} 70%, var(--ink))`, fontWeight: 600, textDecoration: "none" }}>{s.name}</Link>{p.place && ` · ${p.place}`} · {monthOf(p.date)}</>}
       />
@@ -103,6 +105,7 @@ export default async function ProjectPage({ params }: Props) {
                     <Photo media={x.after} sizes="(max-width: 720px) 100vw, 33vw" />
                     <span className="proj-tag" style={{ "--c": xs.color } as React.CSSProperties}>{xs.name}</span>
                     <h3>{titleOf(x)}</h3>
+                    <span className="proj-more">See the job <Arrow /></span>
                   </Link>
                 );
               })}

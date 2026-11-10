@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/PageHead";
-import PackageCard, { FromPrice, PriceNote } from "@/components/PackageCard";
+import PackageCard, { PriceNote, VisitPrice } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
 import { business, getSection, renovation } from "@/content/site";
@@ -12,16 +12,16 @@ import { faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Renovation prices and packages",
-  description: "A guide to my prices for full renovations, kitchens, bathrooms, extensions and smaller jobs across the Midlands. Free written quotes, no surprises.",
+  description: "A rough guide to my prices for kitchens, bathrooms and extensions across the Midlands. Every job is priced after a free visit, with a written quote.",
   path: "/prices",
-  image: shareImage("prices", "CM MainWorks: Clear renovation prices, no surprises"),
+  image: shareImage("prices", "CM MainWorks: Honest renovation prices"),
 });
 
 const how = [
-  { Icon: QuoteDoc, title: "Free written quote", text: "After a visit. No cost, no obligation." },
+  { Icon: QuoteDoc, title: "Priced after a visit", text: "I need to see the job. The written quote is free, with no obligation." },
   { Icon: Layers, title: "Paid in phases", text: "Renovations are invoiced phase by phase." },
   { Icon: Calendar, title: "Regular sit-downs", text: "We check timescales and targets together." },
-  { Icon: Eye, title: "No surprises", text: "Any change is agreed before I carry on." },
+  { Icon: Eye, title: "Changes agreed first", text: "Old houses can hide things. If something turns up, I’ll show you and we agree it before I carry on." },
 ];
 
 export default function Prices() {
@@ -30,10 +30,11 @@ export default function Prices() {
       <JsonLd data={faqLd(priceFaqs)} />
       <PageHead
         crumbs={[{ href: "/prices", label: "Prices" }]}
-        title={<>Clear prices, <span className="hl">no surprises.</span></>}
-        lede="A rough guide before we talk. You’ll always get a written quote for your home."
+        art="quote"
+        title={<>Honest prices, <span className="hl">agreed with you.</span></>}
+        lede="A rough guide before we talk. Every job is different, so I price it properly after a visit, with a written quote."
       >
-        {packages.every((p) => !p.from) && <p className="draft">Draft: Connor to confirm the “from” prices.</p>}
+        {packages.every((p) => (p.sizes ?? []).every((z) => !z.from)) && <p className="draft">Draft: Connor to confirm the sizes and prices.</p>}
       </PageHead>
 
       <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="pkg-title">
@@ -78,14 +79,14 @@ export default function Prices() {
                 <li key={r.name} style={{ "--c": s.color } as React.CSSProperties}>
                   <Link href={r.href}>
                     <h3>{r.name}</h3>
-                    <FromPrice from={r.from} />
+                    <VisitPrice />
                     <p>{r.note}</p>
                   </Link>
                 </li>
               );
             })}
           </ul>
-            <PriceNote />
+            <p className="price-note">Every job is different, so I price these once I’ve seen it. The written quote is free.</p>
           </div>
         </div>
       </section>

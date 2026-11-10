@@ -1,0 +1,18 @@
+/* The van idles with a tiny judder, and the homeowner waves her keys. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.il.is-on) .idle {
+    animation: idle 0.22s ease-in-out infinite alternate;
+  }
+  :global(.il.is-on) .wave {
+    transform-box: fill-box;
+    animation: wave 1s ease-in-out infinite alternate;
+  }
+}
+@keyframes idle {
+  from { transform: translateY(0); }
+  to { transform: translateY(-0.7px); }
+}
+@keyframes wave {
+  from { transform: rotate(-10deg); }
+  to { transform: rotate(14deg); }
+}

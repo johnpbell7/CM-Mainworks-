@@ -17,6 +17,7 @@ export default function Projects() {
     <>
       <PageHead
         crumbs={[{ href: "/projects", label: "Recent work" }]}
+        art="gallery"
         title={<>Recent <span className="hl">work</span></>}
         lede="A few of my recent jobs. I’m adding more as I get them photographed."
       />

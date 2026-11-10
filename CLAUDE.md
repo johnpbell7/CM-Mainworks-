@@ -13,12 +13,14 @@
 - **Tokens:** use the values in `brand/tokens.css` and `brand/tokens.ts`. Don't invent new colours.
 - **Logos:** use the SVGs in `brand/logo/` as supplied, or rescale the supplied shapes with a script. Never redraw, recolour or retype them.
 - **Light only, one font:** no dark mode. Bricolage Grotesque, loaded via `next/font/google`.
+- **The illustrated look:** line drawings in Connor's palette, and page heads on a full-width street like the homepage hero. The rules are in `PROJECT-STATUS.md`, section 3, "The illustrated look".
+- **Prices:** no "no surprises" or "no hidden costs" claims. Every price depends on seeing the job.
 - **Checks before every push:** `npx tsc --noEmit` and `npm run build`, then look at the page on a phone width.
 
 ## Never
 - Invent facts about Connor: prices, qualifications, guarantees, reviews or years in the trade. Placeholders stay clearly marked; prices stay `£TBC` until he gives figures.
 - Get round Facebook's login to take photos.
-- Use navy buttons, gradients, drop-shadow cards, marquees, chips or emoji.
+- Use navy buttons, drop-shadow cards, marquees, chips or emoji, or any gradient other than the pale sky fade at the top of the hero and page heads.
 - Go live, or point a production domain, without "launch".
 
 ## Heads-up rule

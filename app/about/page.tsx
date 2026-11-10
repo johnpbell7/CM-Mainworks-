@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Illustration from "@/components/Illustration";
 import PageHead from "@/components/PageHead";
 import Photo from "@/components/Photo";
 import Closing from "@/components/Closing";
@@ -17,7 +18,7 @@ export const metadata: Metadata = pageMeta({
 
 const promises = [
   { h: "I’ll listen first", p: "Your home, your budget, your plans. I’ll help you get there, not push my ideas on you.", c: "var(--gold)" },
-  { h: "You’ll know the price first", p: "A clear, written quote before I start, and on bigger jobs, invoices phase by phase.", c: "var(--oak)" },
+  { h: "A written quote first", p: "A clear quote before I start. If anything changes once work starts, we agree it first. On bigger jobs, invoices phase by phase.", c: "var(--oak)" },
   { h: "You deal with me", p: "One team, and one person to ring from the first visit to the final clean-up.", c: "var(--steel)" },
   { h: "I’m insured", p: "Happy to show you the details before I start.", c: "var(--ink-3)" },
   { h: "We check we’re on target", p: "Timescales and targets agreed up front, and regular sit-downs to check them. Always out in the open.", c: "var(--sage)" },
@@ -29,6 +30,7 @@ export default function About() {
     <>
       <PageHead
         crumbs={[{ href: "/about", label: "About" }]}
+        art="done"
         title={<>Hi, I’m <span className="hl">Connor.</span></>}
         lede="I run CM MainWorks, managing home renovations from start to finish."
       />
@@ -82,11 +84,13 @@ export default function About() {
           </div>
           <div className="items" data-reveal="stagger">
             <div className="item" style={{ "--c": renovation.color } as React.CSSProperties}>
+              <div className="item-art"><Illustration kind={renovation.illo} fit="bottom" decorative /></div>
               <h3><Link href={renovation.href}>{renovation.name}</Link></h3>
               <p>The whole job, managed by one team from start to finish.</p>
             </div>
             {sections.map((s) => (
               <div className="item" key={s.slug} style={{ "--c": s.color } as React.CSSProperties}>
+                <div className="item-art"><Illustration kind={s.illo} fit="bottom" decorative /></div>
                 <h3><Link href={`/services/${s.slug}`}>{s.name}</Link></h3>
                 <p>{s.blurb}</p>
               </div>

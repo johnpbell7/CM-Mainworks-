@@ -7,6 +7,8 @@ import BeforeAfter from "@/components/BeforeAfter";
 import BeforeAfterSplit from "@/components/BeforeAfterSplit";
 import { Arrow, Award, QuoteDoc, Shield, Team } from "@/components/Icons";
 import Closing from "@/components/Closing";
+import VanHero from "@/components/concept/VanHero";
+import ScrollRow from "@/components/concept/ScrollRow";
 import Steps from "@/components/Steps";
 import { business, renovation, sections } from "@/content/site";
 import { media } from "@/content/media";
@@ -39,30 +41,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={websiteLd()} />
-      {/* ---------------- Hero ---------------- */}
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-bg">
-          <Image src={media.hero.src!} alt={media.hero.alt} fill priority fetchPriority="high" sizes="100vw" />
-        </div>
-        <div className="wrap">
-          <div>
-            <h1 id="hero-title" data-hero>
-              Your whole renovation, <span className="hl">one team.</span>
-            </h1>
-            <p className="lede" data-hero>
-              Kitchens, bathrooms, extensions and whole homes across the Midlands, managed start to finish.
-            </p>
-            <ul className="hero-meta" data-hero aria-label="At a glance">
-              <li><Team />One team, start to finish</li>
-              <li><QuoteDoc />Free written quotes</li>
-              <li><Shield />Insured</li>
-              <li><Award />{business.experience[0].toUpperCase() + business.experience.slice(1)} in the trade</li>
-            </ul>
-          </div>
-          <QuoteForm collapsible defaultJob={renovation.job} />
-        </div>
-        <p className="hero-credit">Pictured: an oak-framed garden canopy I built</p>
-      </section>
+      <VanHero />
 
       {/* ---------------- Renovations ---------------- */}
       <section className="sec grey" id="services" aria-labelledby="svc-title">
@@ -95,15 +74,15 @@ export default function Home() {
           </article>
 
           {/* Every trade, renovation work first, then the smaller jobs */}
-          <div className="services six">
+          <ScrollRow className="services six" label="services">
             {sections.map((s) => (
-              <Link className="service" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
+              <Link role="listitem" className="service" key={s.slug} href={`/services/${s.slug}`} style={{ "--c": s.color, "--pen": s.tint } as React.CSSProperties} data-reveal="up">
                 <Photo media={media[s.slug]} illo={s.illo} drawingOnly sizes="(max-width: 720px) 78vw, (max-width: 1080px) 45vw, 30vw" />
                 <h3><span className="hl" data-pen={s.pen}>{s.name}</span> <Arrow /></h3>
                 <p>{s.blurb}</p>
               </Link>
             ))}
-          </div>
+          </ScrollRow>
           <p className="more-note">Smaller jobs are just as welcome. One sticking door gets the same care.</p>
         </div>
       </section>
@@ -141,6 +120,9 @@ export default function Home() {
               ))}
             </div>
           )}
+          <div className="work-more">
+            <Link className="btn btn-line" href="/projects">See all my recent work <Arrow /></Link>
+          </div>
         </div>
       </section>
 
@@ -151,7 +133,7 @@ export default function Home() {
             <div data-reveal="up">
               <h2 id="how-title">How it works</h2>
             </div>
-            <p data-reveal="up">You know <span className="hl" data-pen="steel">the price before any work starts</span>.</p>
+            <p data-reveal="up">You get <span className="hl" data-pen="steel">a written quote before any work starts</span>.</p>
           </div>
           <Steps />
           <p className="more-note">Want a rough figure first? <Link href="/prices">See my prices</Link>.</p>
@@ -159,9 +141,8 @@ export default function Home() {
       </section>
 
       {/* ---------------- About ---------------- */}
-      <section className={`sec about${media.portrait.src ? "" : " no-photo"}`} id="about" aria-labelledby="about-title">
+      <section className="sec about" id="about" aria-labelledby="about-title">
         <div className="wrap">
-          {media.portrait.src && <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />}
           <div data-reveal="up">
             <h2 id="about-title">Hi, I’m Connor.</h2>
             <p>
@@ -172,15 +153,15 @@ export default function Home() {
             </p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
           </div>
+          {/* to the right of the words; his own work until there's a portrait of him: the oak-framed canopy he built */}
+          <Photo media={media.portrait.src ? media.portrait : media.hero} sizes="(max-width: 1080px) 100vw, 45vw" />
         </div>
       </section>
 
       {/* ---------------- Review ---------------- */}
-      <section className="sec reviews" aria-labelledby="rev-title">
-        <div className="reviews-bg" aria-hidden="true">
-          <Image src={media.reviews.src!} alt={media.reviews.alt} fill sizes="100vw" loading="lazy" />
-        </div>
-        <div className="wrap">
+      <section className="sec reviews light" aria-labelledby="rev-title">
+        <div className="wrap reviews-grid">
+          <div>
           <div className="sec-head">
             <div data-reveal="up"><h2 id="rev-title">What customers say</h2></div>
           </div>
@@ -197,6 +178,10 @@ export default function Home() {
               <span>{business.review.job}, via {business.review.source}</span>
             </figcaption>
           </figure>
+          </div>
+          <div className="reviews-photo" data-reveal="img">
+            <Image src={media.reviews.src!} alt={media.reviews.alt} fill sizes="(max-width: 900px) 100vw, 40vw" loading="lazy" />
+          </div>
         </div>
       </section>
 
