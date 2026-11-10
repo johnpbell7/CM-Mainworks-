@@ -8,6 +8,7 @@ import BeforeAfterSplit from "@/components/BeforeAfterSplit";
 import QuoteForm from "@/components/QuoteForm";
 import Steps from "@/components/Steps";
 import FaqList from "@/components/FaqList";
+import Illustration from "@/components/Illustration";
 import { Arrow } from "@/components/Icons";
 import { business, getSection, renovation, sections } from "@/content/site";
 import { serviceContent } from "@/content/services";
@@ -45,6 +46,10 @@ export default async function Service({ params }: Props) {
   const cover = (p: (typeof work)[number]) => (repeats(p) ? p.gallery.find((m) => m.src) ?? p.after : p.after);
   const asPair = (p: (typeof work)[number]) => repeats(p) && !p.gallery.some((m) => m.src) && !!p.before.src;
   const name = s.name.toLowerCase();
+  // the services either side, for scrolling through them; it wraps round, so there's always one each way
+  const at = sections.findIndex((x) => x.slug === s.slug);
+  const prev = sections[(at - 1 + sections.length) % sections.length];
+  const next = sections[(at + 1) % sections.length];
   const [first, ...rest] = c.h1.split(" ");
   const faqs = c.faqs.map((f) => ({ ...f, color: s.slug }));
   // keep white and grey sections alternating whichever optional blocks show
@@ -210,6 +215,26 @@ export default async function Service({ params }: Props) {
           <QuoteForm defaultJob={s.job} />
         </div>
       </section>
+
+      {/* the previous and next service, to scroll through them (John, 10 Nov 2026) */}
+      <nav className="sec svc-nav" aria-label="More services">
+        <div className="wrap svc-nav-row">
+          <Link className="svc-nav-card prev" href={`/services/${prev.slug}`}>
+            <span className="svc-nav-art"><Illustration kind={prev.illo} decorative /></span>
+            <span className="svc-nav-text">
+              <span className="svc-nav-label"><Arrow />Previous</span>
+              <strong>{prev.name}</strong>
+            </span>
+          </Link>
+          <Link className="svc-nav-card next" href={`/services/${next.slug}`}>
+            <span className="svc-nav-art"><Illustration kind={next.illo} decorative /></span>
+            <span className="svc-nav-text">
+              <span className="svc-nav-label">Next<Arrow /></span>
+              <strong>{next.name}</strong>
+            </span>
+          </Link>
+        </div>
+      </nav>
 
     </div>
   );
