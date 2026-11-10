@@ -3,41 +3,53 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { business, jobColor, jobTypes, type JobType } from "@/content/site";
-import { MAX_PHOTOS, formatPostcode, ruleKeys, rules, type RuleKey } from "@/lib/validation";
-import { Alert, Arrow, Camera, ChevronDown, Cross } from "./Icons";
+import { formatPostcode, rules } from "@/lib/validation";
+import { Alert, ChevronDown, WhatsApp } from "./Icons";
 
-type Pic = { file: File; url: string };
-type Status = "idle" | "sending" | "sent";
+/*
+  The quote form (John, 10 Nov 2026: Connor works from WhatsApp, not email). Nothing is sent from the
+  website. "Send on WhatsApp" opens WhatsApp with the details written out, ready to send, and photos go
+  in with the paperclip. Email is the other way: it opens the visitor's own email app with Connor's
+  address and the same details filled in, and photos are attached there. The site stores nothing.
+  (app/api/quote, the old emailing route, isn't used by the form any more.)
+*/
 
+const keys = ["name", "postcode"] as const;
+type Key = (typeof keys)[number];
+type Sent = { first: string; via: "whatsapp" | "email"; text: string; subject: string };
 
-/** Resize a photo in the browser so uploads stay small (long edge 1600px, JPEG). */
-async function shrink(file: File): Promise<Blob> {
-  try {
-    const bmp = await createImageBitmap(file);
-    const scale = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
-    const c = document.createElement("canvas");
-    c.width = Math.round(bmp.width * scale);
-    c.height = Math.round(bmp.height * scale);
-    c.getContext("2d")!.drawImage(bmp, 0, 0, c.width, c.height);
-    bmp.close();
-    return await new Promise<Blob>((res, rej) => c.toBlob((b) => (b ? res(b) : rej()), "image/jpeg", 0.78));
-  } catch {
-    return file; // e.g. HEIC the browser can't decode; send as-is and let the server check size
-  }
+const isPhone = () => matchMedia("(pointer: coarse)").matches;
+
+function compose(f: FormData) {
+  const name = String(f.get("name") ?? "").trim();
+  const postcode = formatPostcode(String(f.get("postcode") ?? ""));
+  const job = String(f.get("job") ?? "").trim();
+  const about = String(f.get("message") ?? "").trim();
+  const lines = [
+    "Hi Connor, I’d like a free quote.",
+    "",
+    `Name: ${name}`,
+    `Postcode: ${postcode}`,
+    ...(job ? [`Type of work: ${job}`] : []),
+    ...(about ? [`About the job: ${about}`] : []),
+  ];
+  return { first: name.split(/\s+/)[0], text: lines.join("\n"), subject: `Quote request${job ? `: ${job}` : ""}${postcode ? `, ${postcode}` : ""}` };
 }
+
+const whatsappUrl = (text: string) => `${business.whatsapp}?text=${encodeURIComponent(text)}`;
+const mailUrl = (to: string, subject: string, text: string) =>
+  `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
 
 function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1; defaultJob?: JobType | "" }) {
   const formRef = useRef<HTMLFormElement>(null);
   const againRef = useRef<HTMLButtonElement>(null);
-  const [errors, setErrors] = useState<Partial<Record<RuleKey, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<Key, string>>>({});
   const [job, setJob] = useState<JobType | "">(defaultJob);
-  const [pics, setPics] = useState<Pic[]>([]);
-  const [picNote, setPicNote] = useState("");
-  const [over, setOver] = useState(false);
   const [more, setMore] = useState(false);
-  const [status, setStatus] = useState<Status>("idle");
-  const [formError, setFormError] = useState<React.ReactNode>(null);
-  const [thanks, setThanks] = useState({ first: "", phone: "" });
+  const [sent, setSent] = useState<Sent | null>(null);
+  const [mail, setMail] = useState(""); // joined after the page loads, so it isn't in the page for bots
+
+  useEffect(() => setMail(business.emailParts.join("@")), []);
 
   // "Ask about carpentry" buttons and ?job= links pre-select the type of work
   useEffect(() => {
@@ -49,94 +61,63 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
     return () => window.removeEventListener("cm:job", on);
   }, []);
 
-  useEffect(() => () => pics.forEach((p) => URL.revokeObjectURL(p.url)), [pics]);
-
-  const check = (k: RuleKey, value: string) => {
+  const check = (k: Key, value: string) => {
     const msg = rules[k](value);
     setErrors((e) => ({ ...e, [k]: msg }));
     return msg;
   };
 
-  const addFiles = (list: FileList | null) => {
-    if (!list) return;
-    const imgs = Array.from(list).filter((f) => f.type.startsWith("image/") || /\.(heic|heif)$/i.test(f.name));
-    const room = MAX_PHOTOS - pics.length;
-    const take = imgs.slice(0, Math.max(0, room));
-    const skipped = imgs.length - take.length;
-    const notImages = list.length - imgs.length;
-    setPicNote(
-      skipped > 0 ? `You can send up to ${MAX_PHOTOS} photos, so ${skipped} ${skipped === 1 ? "wasn’t" : "weren’t"} added.`
-      : notImages > 0 ? "Only photos can be added. Other files were left out."
-      : ""
-    );
-    setPics((p) => [...p, ...take.map((file) => ({ file, url: URL.createObjectURL(file) }))]);
-  };
-
-  const removePic = (i: number) => {
-    setPics((p) => p.filter((_, j) => j !== i));
-    setPicNote("");
-  };
-
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setFormError(null);
-
-    const next: Partial<Record<RuleKey, string>> = {};
-    ruleKeys.forEach((k) => (next[k] = rules[k]((form.elements.namedItem(k) as HTMLInputElement).value)));
+  // checks the name and postcode, then writes out the message; null if something needs fixing
+  const ready = () => {
+    const form = formRef.current!;
+    const next: Partial<Record<Key, string>> = {};
+    keys.forEach((k) => (next[k] = rules[k]((form.elements.namedItem(k) as HTMLInputElement).value)));
     setErrors(next);
-    const firstBad = ruleKeys.find((k) => next[k]);
+    const firstBad = keys.find((k) => next[k]);
     if (firstBad) {
       (form.elements.namedItem(firstBad) as HTMLInputElement).focus();
-      return;
+      return null;
     }
+    return compose(new FormData(form));
+  };
 
-    setStatus("sending");
-    const data = new FormData(form);
-    data.set("postcode", formatPostcode(String(data.get("postcode"))));
-    data.delete("photos");
-    try {
-      const blobs = await Promise.all(pics.map((p) => shrink(p.file)));
-      blobs.forEach((b, i) => data.append("photos", b, `photo-${i + 1}.jpg`));
+  const open = (url: string, newTab: boolean) => {
+    if (newTab) window.open(url, "_blank", "noopener");
+    else window.location.href = url;
+  };
 
-      const res = await fetch("/api/quote", { method: "POST", body: data });
-      const body = await res.json().catch(() => ({}));
-      if (!res.ok) throw Object.assign(new Error(body.message || ""), { code: body.error, status: res.status });
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const m = ready();
+    if (!m) return;
+    open(whatsappUrl(m.text), !isPhone()); // phones go straight to the app; computers open WhatsApp in a new tab
+    setSent({ ...m, via: "whatsapp" });
+  }
 
-      setThanks({ first: String(data.get("name")).trim().split(/\s+/)[0], phone: String(data.get("phone")).trim() });
-      setStatus("sent");
-    } catch (err) {
-      const { code, message } = err as { code?: string; message?: string };
-      setStatus("idle");
-      const fallback = (
-        <>Please try again, or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</>
-      );
-      if (code === "rate_limited") setFormError(<>You’ve sent a few requests in a short time. Please wait a few minutes, or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</>);
-      else if (code === "too_large") setFormError(<>Those photos are too big to send together. Remove one or two and try again.</>);
-      else if (code === "not_configured") setFormError(<>The form isn’t switched on yet, so your request hasn’t been sent. Please ring or <a href={business.whatsapp} target="_blank" rel="noopener">WhatsApp me</a> on {business.phoneDisplay}.</>);
-      else if (code === "invalid" && message) setFormError(<>{message}</>);
-      else if (!navigator.onLine) setFormError(<>You seem to be offline, so the request wasn’t sent. Check your connection and try again.</>);
-      else setFormError(<>Your request didn’t send. {fallback}</>);
-    }
+  function byEmail() {
+    const m = ready();
+    if (!m || !mail) return;
+    open(mailUrl(mail, m.subject, m.text), false);
+    setSent({ ...m, via: "email" });
   }
 
   useEffect(() => {
-    if (status === "sent") againRef.current?.focus({ preventScroll: true });
-  }, [status]);
+    if (sent) againRef.current?.focus({ preventScroll: true });
+  }, [sent]);
 
   const reset = () => {
     formRef.current?.reset();
-    setPics([]);
     setJob(defaultJob);
     setErrors({});
     setMore(false);
-    setStatus("idle");
+    setSent(null);
     setTimeout(() => (formRef.current?.elements.namedItem("name") as HTMLInputElement)?.focus(), 0);
   };
 
   const H = headingLevel === 1 ? "h1" : "h2";
 
-  if (status === "sent") {
+  if (sent) {
+    const wa = sent.via === "whatsapp";
     return (
       <div className="quote">
         <div className="done" role="status" aria-live="polite">
@@ -145,23 +126,40 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
             <path d="M20 33l8 8 16-17" fill="none" stroke="var(--ink)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
               style={{ strokeDasharray: 40, strokeDashoffset: 40, animation: "draw .6s .15s var(--ease) forwards" }} />
           </svg>
-          <H>Thanks, {thanks.first}.</H>
-          <p>I’ve got your request and I’ll ring you on {thanks.phone}.</p>
-          <button type="button" ref={againRef} onClick={reset}>Send another request</button>
+          <H>Nearly there{sent.first ? `, ${sent.first}` : ""}.</H>
+          <p>
+            {wa
+              ? <>WhatsApp should be open with your details written out. Add any photos with the paperclip, then tap send.</>
+              : <>Your email should be open with your details filled in. Add any photos, then send it.</>}
+          </p>
+          <ul className="done-links">
+            <li>
+              {wa
+                ? <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener">Didn’t open? Try WhatsApp again</a>
+                : <a href={mailUrl(mail, sent.subject, sent.text)}>Didn’t open? Try email again</a>}
+            </li>
+            <li>
+              {wa
+                ? <a href={mailUrl(mail, sent.subject, sent.text)}>Send it by email instead</a>
+                : <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener">Send it on WhatsApp instead</a>}
+            </li>
+            <li>Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a></li>
+          </ul>
+          <button type="button" ref={againRef} onClick={reset}>Start again</button>
           <style>{`@keyframes draw{to{stroke-dashoffset:0}}`}</style>
         </div>
       </div>
     );
   }
 
-  const field = (k: RuleKey) => ({
+  const field = (k: Key) => ({
     name: k,
     "aria-invalid": errors[k] ? true : undefined,
     "aria-describedby": errors[k] ? `e-${k}` : undefined,
     onBlur: (e: React.FocusEvent<HTMLInputElement>) => { if (e.target.value) check(k, e.target.value); },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => { if (errors[k]) check(k, e.target.value); },
   });
-  const err = (k: RuleKey) =>
+  const err = (k: Key) =>
     errors[k] ? <span className="err" id={`e-${k}`}><Alert />{errors[k]}</span> : null;
 
   return (
@@ -172,19 +170,12 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
       </div>
 
       <form ref={formRef} noValidate onSubmit={onSubmit} aria-describedby="q-note">
-        <div className={`field${errors.name ? " invalid" : ""}`}>
-          <label htmlFor="q-name">Name</label>
-          <input className="input" id="q-name" type="text" autoComplete="name" {...field("name")} />
-          <span className="bar" />
-          {err("name")}
-        </div>
-
         <div className="row2">
-          <div className={`field${errors.phone ? " invalid" : ""}`}>
-            <label htmlFor="q-phone">Phone</label>
-            <input className="input" id="q-phone" type="tel" autoComplete="tel" inputMode="tel" {...field("phone")} />
+          <div className={`field${errors.name ? " invalid" : ""}`}>
+            <label htmlFor="q-name">Name</label>
+            <input className="input" id="q-name" type="text" autoComplete="name" {...field("name")} />
             <span className="bar" />
-            {err("phone")}
+            {err("name")}
           </div>
           <div className={`field${errors.postcode ? " invalid" : ""}`}>
             <label htmlFor="q-post">Postcode</label>
@@ -207,66 +198,31 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
 
         <button type="button" className={`more${more ? " open" : ""}`} aria-expanded={more} aria-controls="q-more" onClick={() => setMore((m) => !m)}>
           <span className="more-ico" aria-hidden="true" />
-          {more ? "Hide details and photos" : "Add details or photos"}
-          <span className="opt">{pics.length ? `${pics.length} ${pics.length === 1 ? "photo" : "photos"} added` : "Optional"}</span>
+          {more ? "Hide details" : "Add a few details"}
+          <span className="opt">Optional</span>
         </button>
 
         <div className="more-panel" id="q-more" data-open={more} inert={!more}>
           <div>
             <div className="field">
               <label htmlFor="q-msg">About the job</label>
-              <textarea className="input" id="q-msg" name="message" rows={2} maxLength={2000}
+              <textarea className="input" id="q-msg" name="message" rows={2} maxLength={1500}
                 placeholder="A line or two is plenty, e.g. hang three internal doors" />
               <span className="bar" />
-            </div>
-
-            <div className="field" style={{ marginBottom: 4 }}>
-              <span className="label" id="q-photos-label">Photos <span className="opt">Up to {MAX_PHOTOS}</span></span>
-              {pics.length < MAX_PHOTOS && (
-                <label
-                  className={`drop${over ? " over" : ""}`}
-                  onDragOver={(e) => { e.preventDefault(); setOver(true); }}
-                  onDragLeave={() => setOver(false)}
-                  onDrop={(e) => { e.preventDefault(); setOver(false); addFiles(e.dataTransfer.files); }}
-                >
-                  <input type="file" name="photos" accept="image/*" multiple aria-labelledby="q-photos-label"
-                    onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }} />
-                  <span className="drop-ico"><Camera /></span>
-                  <span>
-                    <strong>{pics.length ? "Add more photos" : "Add photos of the job"}</strong>
-                    <small>Tap to choose, or drag them here</small>
-                  </span>
-                </label>
-              )}
-              {pics.length > 0 && (
-                <ul className="thumbs" aria-label={`${pics.length} ${pics.length === 1 ? "photo" : "photos"} added`}>
-                  {pics.map((p, i) => (
-                    <li key={p.url}>
-                      <img src={p.url} alt="" />
-                      <button type="button" onClick={() => removePic(i)} aria-label={`Remove photo ${i + 1}`}><Cross /></button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {picNote && <span className="err" role="status"><Alert />{picNote}</span>}
             </div>
           </div>
         </div>
 
-        {/* Honeypot for bots. People never see or fill this. */}
-        <div className="hp" aria-hidden="true">
-          <label htmlFor="q-company">Company</label>
-          <input id="q-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
-        </div>
-
-        <button className="send" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? <><span className="spin" aria-hidden="true" />Sending…</> : <>Send request<Arrow /></>}
+        <button className="send" type="submit">
+          <WhatsApp />Send on WhatsApp
         </button>
-
-        {formError && <p className="form-error" role="alert"><Alert />{<span>{formError}</span>}</p>}
+        <p className="or-email">
+          Or <button type="button" onClick={byEmail}>send it by email</button>
+          {mail && <> to <span className="addr">{mail}</span></>}
+        </p>
 
         <p className="note" id="q-note">
-          Your details are only used to reply about your job. <Link href="/privacy">Privacy</Link>
+          It opens with your details written out. Add photos there, then send. <Link href="/privacy">Privacy</Link>
         </p>
       </form>
     </div>

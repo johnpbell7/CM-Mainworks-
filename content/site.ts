@@ -10,6 +10,8 @@ export const business = {
   phoneDisplay: "07742 135592",
   phoneHref: "tel:+447742135592",
   whatsapp: "https://wa.me/447742135592",
+  /** Business email (John, 10 Nov 2026: shown as the other way to send a quote). Kept in two parts and joined in the browser, so bots reading the page don’t pick it up. */
+  emailParts: ["cmain237", "gmail.com"] as const,
   facebook: "https://www.facebook.com/61574301627028/",
   base: "Lichfield, Staffordshire",
   // From Connor's pinned Facebook post (1 Apr). Flagged for Connor to confirm on the site.

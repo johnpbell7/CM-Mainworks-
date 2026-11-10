@@ -119,6 +119,14 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
   - The four cards are one size, and "What's included" is a dropdown.
   - No "no surprises" or "no hidden costs" claims anywhere. The honest line: old houses can hide things, and any change is shown and agreed before work carries on.
 
+### The quote form goes to WhatsApp (John, 10 Nov 2026)
+
+Connor works from WhatsApp, not email, so the website sends nothing itself.
+
+- "Send on WhatsApp" opens WhatsApp with the person's name, postcode, type of work and job details written out. They add photos with the paperclip and tap send.
+- "Or send it by email" opens their own email app with Connor's business Gmail and the same details filled in. The address is kept in two parts in `content/site.ts` and joined in the browser, so bots reading the page don't pick it up.
+- No email service, key or domain is needed for the form. `app/api/quote` (the old Resend route) is no longer used by the form.
+
 ---
 
 ## 4. Site map
@@ -151,7 +159,7 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 | `app/concept.css`, `components/concept/` | The illustrated look: every drawing (`art/`), the van hero, the closing scene, the step drawings and the services scroll row |
 | `components/` | Header, Footer, MobileMenu, MobileBar, QuoteForm, Intro, Motion (GSAP scroll reveals, set up lazily for speed), Illustration (all drawings), Phases, PackageCard, BeforeAfter, BeforeAfterSplit, ProjectGrid, FaqList and others |
 | `lib/seo.tsx` | `pageMeta()`, breadcrumb and FAQ schema |
-| `app/api/quote/route.ts` | The quote form handler (Resend email, honeypot, rate limit) |
+| `app/api/quote/route.ts` | The old emailing route (Resend). Not used since 10 Nov 2026: the form opens WhatsApp or email instead |
 
 ---
 
@@ -168,7 +176,7 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
    - exactly what roofing he takes on,
    - whether he helps with plans and approvals for extensions,
    - "over 10 years" (taken from his Facebook).
-4. **A domain**, so the site can go live and the quote form can send from it. (The email quotes go to is confirmed: his business Gmail, John 29 Oct.)
+4. **A domain**, so the site can go live. (The quote form doesn't need one: it opens WhatsApp or the visitor's own email.)
 
 Confirmed so far: he's insured; he runs a team, with labourers he trusts; he covers the wider Midlands; renovations are his main focus; work is done in phases and invoiced phase by phase.
 
@@ -180,10 +188,7 @@ Confirmed so far: he's insured; he runs a team, with labourers he trusts; he cov
 2. Set the Vercel environment variables:
    - `NEXT_PUBLIC_SITE_URL` (the real domain)
    - `NEXT_PUBLIC_ALLOW_INDEXING=true`. Until this is set, the site tells Google not to index it, which is why Lighthouse SEO shows 69 on the preview
-   - `RESEND_API_KEY`
-   - `QUOTE_TO_EMAIL` (Connor's business Gmail, in the studio's client sheet; kept out of this public repo)
-   - `QUOTE_FROM_EMAIL`
-3. Send a test quote, then submit the sitemap (`/sitemap.xml`) in Google Search Console.
+3. Send a test quote on WhatsApp and by email, then submit the sitemap (`/sitemap.xml`) in Google Search Console.
 
 **Health at last check:** phone speed is in the 90s, desktop speed 100, accessibility 100 and best practices 100. SEO is 100 apart from the deliberate noindex.
 
