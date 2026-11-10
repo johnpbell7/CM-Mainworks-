@@ -29,6 +29,9 @@ const START = -260;
 const END = 1730;
 const PASS = 713; // van position when the change is at the middle of the house
 const FULL_RUN = 2 * (PASS - START); // the desktop run, for timing
+// How far off the left edge the van starts: its nose is already in view, so it's on the move as the page
+// appears (John, 10 Nov 2026). It's drawn there from the start, before the scripts load.
+const ENTER = 170;
 
 // Fast at the ends, slow in the middle, so the van lingers while it passes the house
 const lingering = (t: number) => t + (0.62 * Math.sin(2 * Math.PI * t)) / (2 * Math.PI);
@@ -231,7 +234,7 @@ export default function VanHero() {
         const wag = gsap.to(tail, { rotation: 24, duration: 0.3, yoyo: true, repeat: -1, ease: "sine.inOut" });
         const bounce = gsap.to(body, { y: -1.4, duration: 0.17, yoyo: true, repeat: -1, ease: "sine.inOut", paused: true });
 
-        const state = { x: START };
+        const state = { x: -ENTER };
         let popped = 0;
         let waved = false;
         const render = () => {
@@ -266,7 +269,7 @@ export default function VanHero() {
 
         const run = () => {
           const view = visible();
-          const from = view.left - 250;
+          const from = view.left - ENTER;
           const past = 2 * PASS - from; // as far past the house as it started before it
           const off = Math.max(past, view.right + 20);
           state.x = from;
@@ -276,15 +279,15 @@ export default function VanHero() {
           gsap.set(sparks, { scale: 0, opacity: 0 });
           render();
           bounce.play();
-          const run1 = 6.4 * Math.max(0.55, (past - from) / FULL_RUN);
+          const run1 = 5.6 * Math.max(0.55, (past - from) / FULL_RUN);
           const speed = (1.62 * (past - from)) / run1; // how fast it's going as it leaves
           gsap.timeline({ onComplete: () => { bounce.pause(); } })
             .to(state, { x: past, duration: run1, ease: lingering, onUpdate: render })
             .to(state, { x: off, duration: (off - past) / speed, ease: "none", onUpdate: render });
         };
-        // Start once the page has settled, so the first paint is never held up
-        const id = window.setTimeout(run, 700);
-        return () => window.clearTimeout(id);
+        // Start on the very next frame: the page has already painted, so nothing is held up
+        const id = requestAnimationFrame(run);
+        return () => cancelAnimationFrame(id);
       });
     },
     { scope: root },
@@ -472,7 +475,7 @@ export default function VanHero() {
           <People />
 
           {/* ---- the van ---- */}
-          <Van />
+          <Van x={-ENTER} />
         </svg>
       </div>
 
