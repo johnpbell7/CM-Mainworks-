@@ -581,3 +581,12 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
   .menu-links .menu-sub .svc-links a::before { content: none; }
   .menu-sub .mini { width: 46px; }
 }
+/* small drawings get finer lines, so they read as the big drawings made smaller, not heavier (John, 10 Nov) */
+.mini { --lw: .8; }
+.mini .kw { stroke-width: 1; }
+.mini .kwl { stroke-width: .7; }
+.mini .kerb, .mini .khatch { stroke-width: .5; }
+.nav-panel-top .mini { --lw: .9; }
+.svc-nav-art { --lw: 1.15; }
+.svc-nav-art .kw { stroke-width: 1.4; }
+.svc-nav-art .kwl { stroke-width: 1; }
