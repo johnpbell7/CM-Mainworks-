@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Illustration, { type IllustrationKind } from "@/components/Illustration";
-import { frame } from "@/components/PageHead";
+import { frame } from "@/components/concept/frames";
 import { publishedProjects } from "@/content/projects";
 import { areas } from "@/content/areas";
 import words from "@/content/share-cards.json";

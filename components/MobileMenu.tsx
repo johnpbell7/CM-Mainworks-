@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { business, isCurrent } from "@/content/site";
-import { Phone, WhatsApp } from "./Icons";
+import { ChevronDown, Phone, WhatsApp } from "./Icons";
+import ServiceLinks from "./ServiceLinks";
 
 const links = [
   { href: "/renovations", label: "Renovations", c: "var(--gold)" },
@@ -17,12 +18,14 @@ const links = [
 /** Menu button and full-screen panel for phones and tablets (hidden where the header nav shows). */
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [subs, setSubs] = useState(false); // the services under Renovations
+  const [seen, setSeen] = useState(false);
   const path = usePathname();
   const btn = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
 
   // Close on navigation
-  useEffect(() => setOpen(false), [path]);
+  useEffect(() => { setOpen(false); setSubs(false); }, [path]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("menu-open", open);
@@ -65,7 +68,22 @@ export default function MobileMenu() {
           <ul className="menu-links">
             {links.map((l, i) => (
               <li key={l.href} style={{ "--i": i, "--c": l.c } as React.CSSProperties}>
-                <Link href={l.href} aria-current={isCurrent(path, l.href) ? "page" : undefined}>{l.label}</Link>
+                {l.href !== "/renovations" ? (
+                  <Link href={l.href} aria-current={isCurrent(path, l.href) ? "page" : undefined}>{l.label}</Link>
+                ) : (
+                  <>
+                    <div className="menu-row">
+                      <Link href={l.href} aria-current={isCurrent(path, l.href) ? "page" : undefined}>{l.label}</Link>
+                      <button type="button" className={`menu-sub-btn${subs ? " open" : ""}`} aria-expanded={subs} aria-controls="menu-services"
+                        aria-label={subs ? "Hide the services" : "Show every service"} onClick={() => { setSeen(true); setSubs((v) => !v); }}>
+                        <ChevronDown />
+                      </button>
+                    </div>
+                    <div className="menu-sub" data-open={subs} inert={!subs}>
+                      <div><ServiceLinks art={seen} path={path} id="menu-services" /></div>
+                    </div>
+                  </>
+                )}
               </li>
             ))}
           </ul>

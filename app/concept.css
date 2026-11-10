@@ -531,3 +531,53 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
   .svc-nav-card.next .svc-nav-art { order: 0; }
   .svc-nav-text strong { font-size: 1rem; }
 }
+
+/* ---------- the services menu (John, 10 Nov): Renovations still goes to its page; its arrow (or a hover) shows every service ---------- */
+.head .wrap { position: relative; }
+.head .main-nav { align-items: center; }
+.nav-drop { display: flex; align-items: center; }
+.head .main-nav .nav-drop > a { padding-right: 4px; }
+.head .main-nav .nav-drop > a::after { right: 4px; }
+.nav-drop-btn { display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 6px; background: none; color: var(--ink-2); cursor: pointer; }
+.nav-drop-btn:hover, .nav-drop.open .nav-drop-btn { color: var(--ink); background: var(--grey); }
+.nav-drop-btn svg { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+.nav-drop.open .nav-drop-btn svg { transform: rotate(180deg); }
+.nav-panel {
+  position: absolute; top: calc(100% - 6px); right: 0; z-index: 60; width: min(720px, 100%); padding: 12px;
+  background: #fff; border-radius: 16px; box-shadow: inset 0 0 0 1px var(--line);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .18s var(--ease), transform .25s var(--ease), visibility 0s linear .25s;
+}
+.nav-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -26px; height: 26px; } /* so the pointer can cross the gap */
+.nav-drop.open .nav-panel { opacity: 1; visibility: visible; transform: none; transition: opacity .18s var(--ease), transform .25s var(--ease), visibility 0s; }
+.head .main-nav .nav-panel a { padding: 8px; color: var(--ink); border-radius: 10px; }
+.head .main-nav .nav-panel a::after { content: none; }
+.head .main-nav .nav-panel a:hover { background: color-mix(in srgb, var(--b1) 45%, #fff); }
+.head .main-nav .nav-panel a[aria-current="page"] { color: var(--gold-ink); }
+.nav-panel-top { display: flex; align-items: center; gap: 14px; background: color-mix(in srgb, var(--b1) 45%, #fff); }
+.nav-panel-top .mini { width: 84px; }
+.nav-panel-top strong { display: block; font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em; }
+.nav-panel-top small { display: block; margin-top: 2px; font-size: .85rem; color: var(--ink-2); font-weight: 500; }
+.nav-panel-top > svg { width: 18px; height: 18px; margin-left: auto; color: var(--gold-ink); }
+.nav-panel .svc-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 8px; }
+/* the service links, in both menus */
+.svc-links { list-style: none; margin: 0; padding: 0; }
+.svc-links a { display: flex; align-items: center; gap: 10px; font-size: .92rem; font-weight: 600; line-height: 1.25; text-decoration: none; }
+.mini { flex: none; display: block; width: 56px; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+.mini svg { display: block; width: 100%; height: 100%; }
+.mini .cloudf, .mini .far { display: none; }
+.mini .il * { animation: none !important; }
+@media (max-width: 1080px) {
+  .menu-row { display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+  .menu-row a { flex: 1; border-bottom: 0 !important; }
+  .menu-sub-btn { display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid var(--line-2); border-radius: 50%; background: #fff; color: var(--ink); cursor: pointer; }
+  .menu-sub-btn svg { width: 20px; height: 20px; transition: transform .25s var(--ease); }
+  .menu-sub-btn.open svg { transform: rotate(180deg); }
+  .menu-sub { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--ease); }
+  .menu-sub[data-open="true"] { grid-template-rows: 1fr; }
+  .menu-sub > div { overflow: hidden; }
+  .menu-sub .svc-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 12px; padding: 12px 0 14px; border-bottom: 1px solid var(--line); }
+  .menu-links .menu-sub .svc-links a { padding: 6px 0; border: 0; font-size: .95rem; font-weight: 600; letter-spacing: 0; }
+  .menu-links .menu-sub .svc-links a::before { content: none; }
+  .menu-sub .mini { width: 46px; }
+}
