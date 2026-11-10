@@ -1,95 +1,47 @@
 #!/usr/bin/env node
-// Share images (Open Graph and X, 1200 x 630 JPEG) for the main pages, each service page and each project.
-// Run:  node scripts/make-share-images.mjs            (all)
-//       node scripts/make-share-images.mjs home about  (just those)
-//       node scripts/make-share-images.mjs projects    (just the projects: their finished photo beside the job's name)
-// Needs macOS (sips) and Google Chrome. Writes public/images/share/<name>.jpg, each under 300 KB.
-// Wired in lib/seo.tsx (pageMeta's `image`). Look: brand only. Flat navy, chalk text, gold for the key words,
-// Bricolage Grotesque (brand/fonts), and the horizontal logo on navy exactly as supplied. No gradients or shadows.
-// Words come from each page's own heading and intro on the site; change them here when the page changes.
-import { mkdirSync, writeFileSync, readFileSync, statSync, existsSync, rmSync, mkdtempSync } from "node:fs";
+// Link pictures (Open Graph and X: what shows when a link is sent on WhatsApp, Facebook, iMessage…), 1200 x 630
+// JPEG, in the site's own look (John, 10 Nov 2026). Each one is the card page /share-card/<name> (the sky, the
+// heading with its gold underline, and the page's drawing on the street, as in the page heads), photographed
+// in Chrome with motion off.
+// Needs: the dev server running (npm run dev -- -p 3201, or SITE=http://localhost:<port>), Google Chrome and macOS (sips).
+// Writes public/images/share/<name>.jpg, and the default card to public/images/og-cm-mainworks.jpg, each under 300 KB.
+// Run:  node scripts/make-share-images.mjs              (all)
+//       node scripts/make-share-images.mjs home prices  (just those)
+//       node scripts/make-share-images.mjs projects     (every project)    areas (every town)
+// Words for the main pages: content/share-cards.json. Towns and projects come from content/areas.ts and content/projects.ts.
+// Wired in lib/seo.tsx (pageMeta's `image`, and the default card).
+import { mkdirSync, readFileSync, statSync, existsSync, rmSync, mkdtempSync } from "node:fs";
 import { spawnSync, spawn } from "node:child_process";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const U = (p) => pathToFileURL(p).href;
+const SITE = (process.env.SITE || "http://localhost:3201").replace(/\/$/, "");
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const MAX_KB = 280;
-const NAVY = "#16264A", GOLD = "#D9A441", CHALK = "#F5EFE4";
 
-// name -> eyebrow, title (<b> marks the gold words), sub line
-export const pages = {
-  home: { eyebrow: "Home renovations · the Midlands", title: "Your whole renovation, <b>one team.</b>", sub: "Kitchens, bathrooms, extensions and whole homes across the Midlands, managed start to finish." },
-  renovations: { eyebrow: "Full home renovations", title: "Full home renovations, <b>one team.</b>", sub: "Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me in clear phases." },
-  prices: { eyebrow: "Renovation prices", title: "Honest prices, <b>agreed with you.</b>", sub: "A rough guide before we talk. Every job is different, so I price it properly after a visit." },
-  services: { eyebrow: "Services", title: "Everything your home needs, <b>one team.</b>", sub: "Whole renovations are my main work, all managed by me. Smaller jobs are welcome too." },
-  about: { eyebrow: "About", title: "Hi, I’m <b>Connor.</b>", sub: "I run CM MainWorks, managing home renovations from start to finish." },
-  contact: { eyebrow: "Contact", title: "Get a <b>free quote.</b>", sub: "Send me a few details and photos and I’ll come back to you with a clear, written price." },
-  "service-extensions": { eyebrow: "Extensions", title: "Extensions, built and finished by <b>one team</b>", sub: "More room without moving house. Planned, built and finished inside by one team." },
-  "service-kitchens": { eyebrow: "Kitchens", title: "Kitchen renovations, <b>start to finish</b>", sub: "Old kitchen out, new one in, and the room finished around it. One team throughout." },
-  "service-bathrooms": { eyebrow: "Bathrooms", title: "Bathroom renovations, <b>done properly</b>", sub: "Lots of trades in one small room. I organise them all, so you get a finished bathroom." },
-  "service-staircases": { eyebrow: "Stairs, doors and skirting", title: "Stairs, doors and skirting that <b>finish a home</b>", sub: "A solid staircase, doors that close with a click, and skirting and architrave that sit tight." },
-  "service-roofing": { eyebrow: "Roofing", title: "Roofing, as part of the job or <b>on its own</b>", sub: "Repairs, new roofs on extensions, and the fascias and guttering that keep the weather out." },
-  "service-flooring-and-tiling": { eyebrow: "Flooring and tiling", title: "Floors and tiling, <b>laid flat and straight</b>", sub: "Floors laid flat and tiles set straight, on a properly prepared base." },
-  "service-carpentry": { eyebrow: "Carpentry", title: "Carpentry jobs, <b>big or small</b>", sub: "I started as a carpenter, and small jobs are still welcome. One sticking door included." },
-  "service-joinery": { eyebrow: "Joinery", title: "Joinery, <b>made to fit</b>", sub: "Media walls, alcove units and storage, made for the room they’re going in." },
-  "service-decorating": { eyebrow: "Decorating", title: "Decorating, <b>right to the last coat</b>", sub: "Clean lines, proper prep and paint that lasts, inside and out." },
-};
+const read = (f) => readFileSync(join(ROOT, f), "utf8");
+const words = JSON.parse(read("content/share-cards.json"));
+const towns = [...read("content/areas.ts").matchAll(/\n    slug: "([^"]+)"/g)].map((m) => `area-${m[1]}`);
+const jobs = read("content/projects.ts").split(/\n  \{\n    slug: /).slice(1)
+  .filter((b) => !/\n    placeholder: true/.test(b))
+  .map((b) => `project-${(b.match(/^"([^"]+)"/) || [])[1]}`);
+const all = [...Object.keys(words), ...towns, ...jobs];
 
-const css = `
-@font-face{font-family:'Bricolage Grotesque';font-weight:200 800;font-stretch:75% 100%;src:url(${U(join(ROOT, "brand/fonts/BricolageGrotesque.woff2"))}) format('woff2')}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1200px;height:630px;overflow:hidden}
-body{font-family:'Bricolage Grotesque',sans-serif;font-optical-sizing:auto;background:${NAVY};color:${CHALK};position:relative;-webkit-font-smoothing:antialiased}
-.copy{position:absolute;left:80px;top:72px;width:1040px;height:410px;display:flex;flex-direction:column;justify-content:center}
-.eyebrow{font-weight:600;font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:${GOLD};margin-bottom:28px}
-h1{font-weight:700;letter-spacing:-.035em;line-height:1.02;color:${CHALK};text-wrap:balance;max-width:980px}
-h1 b{font-weight:700;color:${GOLD}}
-.sub{font-weight:400;font-size:30px;line-height:1.4;color:rgba(245,239,228,.82);margin-top:30px;max-width:880px;text-wrap:balance}
-.logo{position:absolute;left:80px;bottom:60px;height:64px;display:block}
-`;
+const only = process.argv.slice(2);
+const wanted = all.filter((n) => !only.length || only.includes(n)
+  || (only.includes("projects") && n.startsWith("project-")) || (only.includes("areas") && n.startsWith("area-")));
 
-// Projects: read from content/projects.ts (and the photo list in content/photos.ts), so a new job gets its card
-// the next time this runs. Each card: the job's finished photo on the right, its name and town on navy on the left.
-const read = (f) => (existsSync(join(ROOT, f)) ? readFileSync(join(ROOT, f), "utf8") : "");
-const photoSrc = Object.fromEntries([...read("content/photos.ts").matchAll(/"([^"]+)": \{ src: "([^"]+)"/g)].map((m) => [m[1], m[2]]));
-export const projectCards = read("content/projects.ts").split(/\n  \{\n    slug: /).slice(1).map((b) => {
-  const get = (k) => (b.match(new RegExp(`\\n    ${k}: "([^"]*)"`)) || [])[1] || "";
-  const after = b.match(/\n    after: (?:photo\("([^"]+)"|\{ src: "([^"]+)")/) || [];
-  return { slug: (b.match(/^"([^"]+)"/) || [])[1], name: get("name"), place: get("place"), photo: after[1] ? photoSrc[after[1]] : after[2], placeholder: /\n    placeholder: true/.test(b) };
-}).filter((p) => p.slug && p.photo && !p.placeholder);
-
-const projectHtml = (p) => {
-  const title = p.place ? `${p.name} in <b>${p.place}</b>` : p.name;
-  const plain = title.replace(/<\/?b>/g, "");
-  const size = plain.length <= 20 ? 84 : plain.length <= 32 ? 72 : 62;
-  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>${p.slug}</title><style>${css}
-.copy{width:560px}.photo{position:absolute;right:0;top:0;width:520px;height:630px;object-fit:cover;display:block}</style></head><body>
-<div class="copy"><div class="eyebrow">Recent work</div><h1 style="font-size:${size}px">${title}</h1></div>
-<img class="photo" src="${U(join(ROOT, "public", p.photo))}" alt="">
-<img class="logo" src="${U(join(ROOT, "brand/logo/main/cm-mainworks-horizontal-on-navy.svg"))}" alt="">
-</body></html>`;
-};
-
-const html = (name, p) => {
-  const plain = p.title.replace(/<\/?b>/g, "");
-  const size = plain.length <= 28 ? 104 : plain.length <= 46 ? 84 : 72;
-  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>${name}</title><style>${css}</style></head><body>
-<div class="copy"><div class="eyebrow">${p.eyebrow}</div><h1 style="font-size:${size}px">${p.title}</h1><p class="sub">${p.sub}</p></div>
-<img class="logo" src="${U(join(ROOT, "brand/logo/main/cm-mainworks-horizontal-on-navy.svg"))}" alt="">
-</body></html>`;
-};
-
-async function render(htmlFile, png) {
+async function shoot(url, png) {
   rmSync(png, { force: true });
   const profile = mkdtempSync(join(tmpdir(), "cm-share-"));
   const args = ["--headless=new", "--disable-gpu", "--hide-scrollbars", "--mute-audio", "--no-first-run", "--no-default-browser-check",
-    "--disable-component-update", "--disable-background-networking", "--disable-sync", "--disable-default-apps", "--allow-file-access-from-files",
-    "--force-device-scale-factor=1", `--user-data-dir=${profile}`, "--window-size=1200,630", `--screenshot=${png}`, "--virtual-time-budget=6000", U(htmlFile)];
+    "--disable-component-update", "--disable-background-networking", "--disable-sync", "--disable-default-apps",
+    "--force-prefers-reduced-motion", "--force-device-scale-factor=1", `--user-data-dir=${profile}`, "--window-size=1200,630",
+    `--screenshot=${png}`, "--virtual-time-budget=8000", url];
   const child = spawn(CHROME, args, { stdio: "ignore" });
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 160; i++) {
     if (existsSync(png) && statSync(png).size > 0) { await new Promise((r) => setTimeout(r, 800)); break; }
     if (child.exitCode !== null) break;
     await new Promise((r) => setTimeout(r, 500));
@@ -100,23 +52,20 @@ async function render(htmlFile, png) {
 }
 
 const work = mkdtempSync(join(tmpdir(), "cm-share-work-"));
-const out = join(ROOT, "public/images/share");
-mkdirSync(out, { recursive: true });
-const only = process.argv.slice(2);
-const jobs = [
-  ...Object.entries(pages).map(([name, p]) => [name, () => html(name, p)]),
-  ...projectCards.map((p) => [`project-${p.slug}`, () => projectHtml(p)]),
-];
-for (const [name, make] of jobs) {
-  if (only.length && !only.includes(name) && !(only.includes("projects") && name.startsWith("project-"))) continue;
-  const h = join(work, `${name}.html`), png = join(work, `${name}.png`), jpg = join(out, `${name}.jpg`);
-  writeFileSync(h, make());
-  await render(h, png);
+mkdirSync(join(ROOT, "public/images/share"), { recursive: true });
+for (const name of wanted) {
+  const url = `${SITE}/share-card/${name}`;
+  const res = await fetch(url).catch(() => null); // also gets the dev server to compile the page first
+  if (!res) { console.error(`The dev server isn't answering at ${SITE}. Start it: npm run dev -- -p 3201`); process.exit(1); }
+  if (!res.ok) { console.log(name.padEnd(40), "skipped (no card)"); continue; }
+  const png = join(work, `${name}.png`);
+  const jpg = name === "default" ? join(ROOT, "public/images/og-cm-mainworks.jpg") : join(ROOT, "public/images/share", `${name}.jpg`);
+  await shoot(url, png);
   let q = 88;
   for (; q >= 50; q -= 6) {
     spawnSync("sips", ["-s", "format", "jpeg", "-s", "formatOptions", String(q), png, "--out", jpg], { stdio: "ignore" });
     if (statSync(jpg).size / 1024 <= MAX_KB) break;
   }
-  console.log(name.padEnd(30), Math.round(statSync(jpg).size / 1024) + " KB", "q" + q);
+  console.log(name.padEnd(40), Math.round(statSync(jpg).size / 1024) + " KB", "q" + q);
 }
 rmSync(work, { recursive: true, force: true });

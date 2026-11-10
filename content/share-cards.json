@@ -1,0 +1,87 @@
+{
+  "default": {
+    "title": "Home renovations across the Midlands, <b>one team.</b>",
+    "sub": "Kitchens, bathrooms, extensions and whole homes, managed start to finish.",
+    "art": "town"
+  },
+  "home": {
+    "title": "Your whole renovation, <b>one team.</b>",
+    "sub": "Kitchens, bathrooms, extensions and whole homes across the Midlands, managed start to finish.",
+    "art": "done"
+  },
+  "renovations": {
+    "title": "Your whole renovation, <b>one team.</b>",
+    "sub": "Every trade I do, in one job: kitchens, bathrooms, extensions, floors, stairs and decorating, managed in clear phases.",
+    "art": "renovation"
+  },
+  "prices": {
+    "title": "Honest prices, <b>agreed with you.</b>",
+    "sub": "A rough guide before we talk. Every job is different, so I price it properly after a visit.",
+    "art": "quote"
+  },
+  "about": {
+    "title": "Hi, I’m <b>Connor.</b>",
+    "sub": "I run CM MainWorks, managing home renovations from start to finish.",
+    "art": "done"
+  },
+  "contact": {
+    "title": "Get a <b>free quote.</b>",
+    "sub": "Send me a few details and photos and I’ll come back to you with a clear, written quote.",
+    "art": "photos"
+  },
+  "projects": {
+    "title": "Recent <b>work</b>",
+    "sub": "A few of my recent jobs, with before and after photos.",
+    "art": "gallery"
+  },
+  "faqs": {
+    "title": "Questions, <b>answered.</b>",
+    "sub": "Straight answers about quotes, small jobs, how I run a job and the areas I cover.",
+    "art": "faq"
+  },
+  "service-extensions": {
+    "title": "Extensions, built and finished by <b>one team</b>",
+    "sub": "More room without moving house. Planned, built and finished inside by one team.",
+    "art": "building"
+  },
+  "service-kitchens": {
+    "title": "Kitchen renovations, <b>start to finish</b>",
+    "sub": "Old kitchen out, new one in, and the room finished around it. One team throughout.",
+    "art": "kitchen"
+  },
+  "service-bathrooms": {
+    "title": "Bathroom renovations, <b>done properly</b>",
+    "sub": "Lots of trades in one small room. I organise them all, so you get a finished bathroom.",
+    "art": "bathroom"
+  },
+  "service-staircases": {
+    "title": "Stairs, doors and skirting that <b>finish a home</b>",
+    "sub": "A solid staircase, doors that close with a click, and skirting and architrave that sit tight.",
+    "art": "stairs"
+  },
+  "service-roofing": {
+    "title": "Roofing, as part of the job or <b>on its own</b>",
+    "sub": "Repairs, new roofs on extensions, and the fascias and guttering that keep the weather out.",
+    "art": "roof"
+  },
+  "service-flooring-and-tiling": {
+    "title": "Floors and tiling, <b>laid flat and straight</b>",
+    "sub": "Floors laid flat and tiles set straight, on a properly prepared base.",
+    "art": "flooring"
+  },
+  "service-carpentry": {
+    "title": "Carpentry jobs, <b>big or small</b>",
+    "sub": "I started as a carpenter, and small jobs are still welcome. One sticking door included.",
+    "art": "carpentry"
+  },
+  "service-joinery": {
+    "title": "Joinery, <b>made to fit</b>",
+    "sub": "Media walls, alcove units and storage, made for the room they’re going in.",
+    "art": "joinery"
+  },
+  "service-decorating": {
+    "title": "Decorating, <b>right to the last coat</b>",
+    "sub": "Clean lines, proper prep and paint that lasts, inside and out.",
+    "art": "decorating"
+  }
+}

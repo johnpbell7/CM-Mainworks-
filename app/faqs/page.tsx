@@ -3,12 +3,13 @@ import PageHead from "@/components/PageHead";
 import Closing from "@/components/Closing";
 import FaqList from "@/components/FaqList";
 import { allFaqs, faqGroups } from "@/content/faqs";
-import { faqLd, JsonLd, pageMeta } from "@/lib/seo";
+import { faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "FAQs: quotes, materials, small jobs and areas",
   description: "Straight answers about free quotes, materials, small jobs, insurance, how I run a job and the areas I cover across the Midlands.",
   path: "/faqs",
+  image: shareImage("faqs", "CM MainWorks: Questions, answered"),
 });
 
 export default function Faqs() {

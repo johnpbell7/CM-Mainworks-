@@ -4,12 +4,13 @@ import ProjectGrid from "@/components/ProjectGrid";
 import Closing from "@/components/Closing";
 import { publishedProjects } from "@/content/projects";
 import { business } from "@/content/site";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, shareImage } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Recent work",
   description: "Recent jobs with before and after photos: a garage conversion in Cannock, a 140-year-old bay window brought back to life, a kitchen fit and more.",
   path: "/projects",
+  image: shareImage("projects", "CM MainWorks: Recent work"),
 });
 
 export default function Projects() {

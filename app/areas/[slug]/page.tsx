@@ -13,7 +13,7 @@ import { business, getSection, renovation } from "@/content/site";
 import { media, renovationBento } from "@/content/media";
 import { hasPage, projectHref, projectsIn } from "@/content/projects";
 import FaqList from "@/components/FaqList";
-import { abs, businessId, faqLd, JsonLd, pageMeta } from "@/lib/seo";
+import { abs, businessId, faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -24,7 +24,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = getArea((await params).slug);
   if (!a) return {};
-  return pageMeta({ title: a.title, description: a.description, path: `/areas/${a.slug}` });
+  return pageMeta({ title: a.title, description: a.description, path: `/areas/${a.slug}`, image: shareImage(`area-${a.slug}`, `CM MainWorks: Home renovations in ${a.name}`) });
 }
 
 export default async function AreaPage({ params }: Props) {

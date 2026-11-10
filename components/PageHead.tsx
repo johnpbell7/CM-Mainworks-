@@ -20,7 +20,8 @@ const headFrame: Partial<Record<IllustrationKind, [z: number, cx: number]>> = {
   photos: [1.13, 171], quote: [1.11, 160], faq: [1.05, 154], privacy: [1.3, 161], gallery: [1.05, 163],
 };
 const r2 = (n: number) => Math.round(n * 100) / 100;
-function frame(kind: IllustrationKind) {
+/** Also used by the link pictures (app/share-card), so they're framed the same way. */
+export function frame(kind: IllustrationKind) {
   const [z, cx] = headFrame[kind] ?? [1, 160];
   return { z, view: `${r2(cx - 160 / z)} ${r2(210 - 210 / z)} ${r2(320 / z)} ${r2(240 / z)}` };
 }

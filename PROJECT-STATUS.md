@@ -194,4 +194,5 @@ Confirmed so far: he's insured; he runs a team, with labourers he trusts; he cov
 | Command | What it does |
 |---|---|
 | `node scripts/make-header-logo.mjs` | Rebuilds the header logo lockup |
+| `node scripts/make-share-images.mjs [names…]` | Remakes the link pictures (what shows when a link is sent) in the site's own look, from the card pages at `/share-card/<name>`. Needs the dev server running. Words in `content/share-cards.json`; towns and projects come from their own content |
 | `node scripts/render-logo-video.mjs http://localhost:3000` | Re-renders `brand/animation/cm-logo-animation-square.mp4` |

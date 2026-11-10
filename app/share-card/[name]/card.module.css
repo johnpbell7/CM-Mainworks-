@@ -1,0 +1,27 @@
+/* A link picture, 1200 x 630, in the site's own look: the page head's sky, the heading with its gold
+   underline, and the drawing on the street (same framing and street maths as .page-head .head-art). */
+.card {
+  --lw: 2.2; --artW: 600px; --artH: 450px;
+  --pave: calc(630px - var(--artH) * .125);              /* top of the pavement */
+  --paveH: calc(var(--artH) * .041667 * var(--z, 1));    /* its depth, which grows with the drawing's zoom */
+  position: fixed; left: 0; top: 0; z-index: 2147483000; width: 1200px; height: 630px; overflow: hidden;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--t-steel) 70%, #fff) 0, color-mix(in srgb, var(--t-steel) 38%, #fff) 140px, #fff 82%);
+  color: var(--ink);
+}
+.logo { position: absolute; left: 64px; top: 44px; height: 54px; width: auto; }
+.text { position: absolute; left: 64px; top: 110px; bottom: calc(630px - var(--pave) + 20px); width: 520px; display: flex; flex-direction: column; justify-content: center; }
+.title { margin: 0; font-weight: 700; font-size: 66px; line-height: 1.04; letter-spacing: -.045em; text-wrap: balance; }
+.title.long { font-size: 56px; }
+.title :global(.hl) { --hlw: 100% !important; background-size: 100% .26em; padding-bottom: .12em; }
+.sub { margin: 22px 0 0; font-size: 25px; line-height: 1.42; color: var(--ink-2); text-wrap: pretty; }
+.art { position: absolute; right: 36px; bottom: 0; z-index: 2; width: var(--artW); }
+.art svg { display: block; width: 100%; height: auto; }
+.art :global(.far), .art :global(.cloudf) { display: none; }
+.photo { position: absolute; right: 64px; top: 86px; bottom: calc(630px - var(--pave) + 26px); width: 470px; z-index: 2; border-radius: 16px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); background: var(--grey); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* the street, the full width of the card */
+.pavement { position: absolute; left: 0; right: 0; z-index: 1; box-sizing: border-box;
+  top: calc(var(--pave) - var(--lw) * .5px); height: calc(var(--paveH) + var(--lw) * 1px);
+  background: repeating-linear-gradient(90deg, transparent 0 39px, var(--b2) 39px 40px), var(--b1);
+  border-top: calc(var(--lw) * 1px) solid var(--ink); border-bottom: calc(var(--lw) * 1px) solid var(--ink); }
+.road { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; top: calc(var(--pave) + var(--paveH)); background: color-mix(in srgb, var(--b1) 40%, #fff); }
