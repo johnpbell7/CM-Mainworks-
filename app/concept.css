@@ -590,3 +590,9 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
 .svc-nav-art { --lw: 1.15; }
 .svc-nav-art .kw { stroke-width: 1.4; }
 .svc-nav-art .kwl { stroke-width: 1; }
+/* the phone menu's services: three across, drawing on top and the name under it, bigger and simpler (John, 10 Nov) */
+@media (max-width: 1080px) {
+  .menu-sub .svc-links { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 10px; padding: 14px 0 18px; }
+  .menu-links .menu-sub .svc-links a { flex-direction: column; align-items: stretch; gap: 7px; padding: 0; font-size: .86rem; line-height: 1.25; }
+  .menu-sub .mini { width: 100%; border-radius: 10px; --lw: .95; }
+}
