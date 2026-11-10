@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { business, jobColor, jobTypes, type JobType } from "@/content/site";
 import { formatPostcode, rules } from "@/lib/validation";
-import { Alert, Camera, ChevronDown, WhatsApp } from "./Icons";
+import { Alert, Arrow, Camera, ChevronDown, WhatsApp } from "./Icons";
 
 /*
   The quote form (John, 10 Nov 2026: Connor works from WhatsApp, not email). Nothing is sent from the
@@ -40,7 +40,12 @@ const whatsappUrl = (text: string) => `${business.whatsapp}?text=${encodeURIComp
 const mailUrl = (to: string, subject: string, text: string) =>
   `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
 
-function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { headingLevel?: 2 | 1; defaultJob?: JobType | ""; head?: boolean }) {
+/*
+  `starter` (the homepage hero): the type of work comes first, and on desktop the card starts folded to
+  just that and a "Start my quote" button, so it sits in the sky and the whole street stays in view.
+  Choosing a job, the button, "Ask about…" buttons or a #quote link open the rest (John, 10 Nov 2026).
+*/
+function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = false }: { headingLevel?: 2 | 1; defaultJob?: JobType | ""; head?: boolean; starter?: boolean }) {
   const formRef = useRef<HTMLFormElement>(null);
   const againRef = useRef<HTMLButtonElement>(null);
   const [errors, setErrors] = useState<Partial<Record<Key, string>>>({});
@@ -49,6 +54,8 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { heading
   const [sent, setSent] = useState<Sent | null>(null);
   const [mail, setMail] = useState(""); // joined after the page loads, so it isn't in the page for bots
   const [copied, setCopied] = useState(false);
+  const [started, setStarted] = useState(false);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => setMail(business.emailParts.join("@")), []);
 
@@ -57,9 +64,12 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { heading
     const fromUrl = new URLSearchParams(window.location.search).get("job");
     const match = jobTypes.find((j) => j.toLowerCase() === fromUrl?.toLowerCase());
     if (match) setJob(match);
-    const on = (e: Event) => setJob((e as CustomEvent<JobType>).detail);
+    if (match || location.hash === "#quote") setStarted(true);
+    const on = (e: Event) => { setJob((e as CustomEvent<JobType>).detail); setStarted(true); };
+    const start = () => setStarted(true);
     window.addEventListener("cm:job", on);
-    return () => window.removeEventListener("cm:job", on);
+    window.addEventListener("cm:open-quote", start);
+    return () => { window.removeEventListener("cm:job", on); window.removeEventListener("cm:open-quote", start); };
   }, []);
 
   const check = (k: Key, value: string) => {
@@ -171,8 +181,75 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { heading
   const err = (k: Key) =>
     errors[k] ? <span className="err" id={`e-${k}`}><Alert />{errors[k]}</span> : null;
 
+  const typeField = (
+    <div className="field">
+      <label htmlFor="q-job">Type of work</label>
+      <div className={`select${job ? " chosen" : ""}`} style={{ "--c": job ? jobColor(job) : "var(--line-2)" } as React.CSSProperties}>
+        <select className="input" id="q-job" name="job" value={job} onChange={(e) => { setJob(e.target.value as JobType | ""); if (e.target.value) setStarted(true); }}>
+          <option value="">Choose one</option>
+          {jobTypes.map((j) => <option key={j} value={j}>{j}</option>)}
+        </select>
+      </div>
+      <span className="bar" />
+    </div>
+  );
+  const nameRow = (
+    <div className="row2">
+      <div className={`field${errors.name ? " invalid" : ""}`}>
+        <label htmlFor="q-name">Name</label>
+        <input ref={nameRef} className="input" id="q-name" type="text" autoComplete="name" {...field("name")} />
+        <span className="bar" />
+        {err("name")}
+      </div>
+      <div className={`field${errors.postcode ? " invalid" : ""}`}>
+        <label htmlFor="q-post">Postcode</label>
+        <input className="input" id="q-post" type="text" autoComplete="postal-code" autoCapitalize="characters" {...field("postcode")} />
+        <span className="bar" />
+        {err("postcode")}
+      </div>
+    </div>
+  );
+  const rest = (
+    <>
+      <button type="button" className={`more${more ? " open" : ""}`} aria-expanded={more} aria-controls="q-more" onClick={() => setMore((m) => !m)}>
+        <span className="more-ico" aria-hidden="true" />
+        {more ? "Hide details" : "Add a few details"}
+        <span className="opt">Optional</span>
+      </button>
+
+      <div className="more-panel" id="q-more" data-open={more} inert={!more}>
+        <div>
+          <div className="field">
+            <label htmlFor="q-msg">About the job</label>
+            <textarea className="input" id="q-msg" name="message" rows={2} maxLength={1500}
+              placeholder="A line or two is plenty, e.g. hang three internal doors" />
+            <span className="bar" />
+          </div>
+        </div>
+      </div>
+
+      {/* photos can't travel through a link, so say plainly where they go */}
+      <p className="photo-tip">
+        <span className="photo-ico" aria-hidden="true"><Camera /></span>
+        <span><strong>Got photos of the job?</strong> Add them in WhatsApp with the paperclip, just before you tap send.</span>
+      </p>
+
+      <button className="send" type="submit">
+        <WhatsApp />Send on WhatsApp
+      </button>
+      <p className="or-email">
+        Or <button type="button" onClick={byEmail}>send it by email</button>
+        {mail && <> to <span className="addr">{mail}</span></>}
+      </p>
+
+      <p className="note" id="q-note">
+        WhatsApp opens with your details written out, ready to send. <Link href="/privacy">Privacy</Link>
+      </p>
+    </>
+  );
+
   return (
-    <div className="quote">
+    <div className={`quote${starter ? " starter" : ""}${starter && !started ? " is-folded" : ""}`}>
       {head && (
         <div className="quote-head">
           <H>Get a free quote</H>
@@ -181,66 +258,17 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { heading
       )}
 
       <form ref={formRef} noValidate onSubmit={onSubmit} aria-describedby="q-note" aria-label="Ask for a free quote">
-        <div className="row2">
-          <div className={`field${errors.name ? " invalid" : ""}`}>
-            <label htmlFor="q-name">Name</label>
-            <input className="input" id="q-name" type="text" autoComplete="name" {...field("name")} />
-            <span className="bar" />
-            {err("name")}
-          </div>
-          <div className={`field${errors.postcode ? " invalid" : ""}`}>
-            <label htmlFor="q-post">Postcode</label>
-            <input className="input" id="q-post" type="text" autoComplete="postal-code" autoCapitalize="characters" {...field("postcode")} />
-            <span className="bar" />
-            {err("postcode")}
-          </div>
-        </div>
-
-        <div className="field">
-          <label htmlFor="q-job">Type of work</label>
-          <div className={`select${job ? " chosen" : ""}`} style={{ "--c": job ? jobColor(job) : "var(--line-2)" } as React.CSSProperties}>
-            <select className="input" id="q-job" name="job" value={job} onChange={(e) => setJob(e.target.value as JobType | "")}>
-              <option value="">Choose one</option>
-              {jobTypes.map((j) => <option key={j} value={j}>{j}</option>)}
-            </select>
-          </div>
-          <span className="bar" />
-        </div>
-
-        <button type="button" className={`more${more ? " open" : ""}`} aria-expanded={more} aria-controls="q-more" onClick={() => setMore((m) => !m)}>
-          <span className="more-ico" aria-hidden="true" />
-          {more ? "Hide details" : "Add a few details"}
-          <span className="opt">Optional</span>
-        </button>
-
-        <div className="more-panel" id="q-more" data-open={more} inert={!more}>
-          <div>
-            <div className="field">
-              <label htmlFor="q-msg">About the job</label>
-              <textarea className="input" id="q-msg" name="message" rows={2} maxLength={1500}
-                placeholder="A line or two is plenty, e.g. hang three internal doors" />
-              <span className="bar" />
-            </div>
-          </div>
-        </div>
-
-        {/* photos can't travel through a link, so say plainly where they go */}
-        <p className="photo-tip">
-          <span className="photo-ico" aria-hidden="true"><Camera /></span>
-          <span><strong>Got photos of the job?</strong> Add them in WhatsApp with the paperclip, just before you tap send.</span>
-        </p>
-
-        <button className="send" type="submit">
-          <WhatsApp />Send on WhatsApp
-        </button>
-        <p className="or-email">
-          Or <button type="button" onClick={byEmail}>send it by email</button>
-          {mail && <> to <span className="addr">{mail}</span></>}
-        </p>
-
-        <p className="note" id="q-note">
-          WhatsApp opens with your details written out, ready to send. <Link href="/privacy">Privacy</Link>
-        </p>
+        {starter ? (
+          <>
+            {typeField}
+            <button type="button" className="send q-start" onClick={() => { setStarted(true); requestAnimationFrame(() => nameRef.current?.focus()); }}>
+              Start my quote<Arrow />
+            </button>
+            <div className="q-rest"><div>{nameRow}{rest}</div></div>
+          </>
+        ) : (
+          <>{nameRow}{typeField}{rest}</>
+        )}
       </form>
     </div>
   );
@@ -249,8 +277,8 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { heading
 /*
   The quote form. With `collapsible` (the homepage hero), phones see a single
   "Get a free quote" button above the fold that slides the form open underneath.
-  Tablets and desktop always show the form. "Ask about…" buttons, the mobile bar
-  and links to #quote open it too.
+  Tablets show the whole form; desktop shows it folded to its first step (see
+  `starter` above). "Ask about…" buttons, the mobile bar and links to #quote open it too.
 */
 export default function QuoteForm({ headingLevel = 2, collapsible = false, defaultJob = "", head = true }: { headingLevel?: 2 | 1; collapsible?: boolean; defaultJob?: JobType | ""; head?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -293,7 +321,7 @@ export default function QuoteForm({ headingLevel = 2, collapsible = false, defau
         <a className="quote-call" href={business.phoneHref}>Or ring me on {business.phoneDisplay}</a>
       </div>
       <div className="quote-panel" id="quote-panel" ref={panel} inert={mobile && !open}>
-        <div><QuoteCard headingLevel={headingLevel} /></div>
+        <div><QuoteCard headingLevel={headingLevel} starter /></div>
       </div>
     </div>
   );

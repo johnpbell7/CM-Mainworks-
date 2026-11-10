@@ -88,6 +88,17 @@
   .vh-text { max-width: calc(100% - 480px); }
   .vh-form { position: absolute; top: 0; right: var(--gutter); width: min(420px, 34vw); z-index: 3; }
 }
+/* desktop: the hero card starts folded to its first step, so it sits in the sky and the whole street
+   shows; choosing a job or "Start my quote" slides the rest open (QuoteCard `starter`) */
+.q-start { display: none; }
+@media (min-width: 1081px) {
+  .vh .quote.starter .q-rest { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .5s var(--ease); }
+  .vh .quote.starter .q-rest > div { overflow: hidden; min-height: 0; padding: 4px; margin: -4px; }
+  .vh .quote.is-folded .q-rest { grid-template-rows: 0fr; }
+  .vh .quote.is-folded .q-rest > div { visibility: hidden; }
+  .vh .quote.is-folded .q-start { display: flex; margin-top: 4px; }
+  .vh .quote .q-start:hover svg { transform: translateX(4px); }
+}
 .vh-stage { position: relative; width: 100%; height: clamp(260px, 46svh, 440px); margin-top: clamp(4px, 1.2vw, 14px); }
 .vh-stage > svg { display: block; width: 100%; max-width: none; height: 100%; overflow: visible; }
 .vh-meta {

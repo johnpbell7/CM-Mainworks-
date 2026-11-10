@@ -74,7 +74,7 @@ export default function Header() {
           <Phone />
           <span className="tel-num">{business.phoneDisplay}</span>
         </a>
-        <Link className="btn btn-gold head-quote" href={quoteHref}>Free quote</Link>
+        <Link className="btn btn-gold head-quote" href={quoteHref} onClick={() => window.dispatchEvent(new Event("cm:open-quote"))}>Free quote</Link>
         <MobileMenu />
       </div>
     </header>

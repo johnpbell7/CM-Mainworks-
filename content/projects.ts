@@ -44,7 +44,7 @@ const none = (label: string): Media => ({ src: null, alt: label, label });
 export const projects: Project[] = [
   {
     slug: "garage-conversion-cannock",
-    name: "Garage conversion",
+    name: "Decorated garage conversion",
     section: "decorating",
     place: "Cannock",
     date: "2026-10-01",
