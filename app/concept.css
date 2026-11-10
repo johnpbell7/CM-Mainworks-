@@ -244,7 +244,9 @@
    on a street that runs the full width of the screen. The street strip lines up with
    the pavement drawn inside the drawing (y 210 to 220 of its 240). */
 .page-head.has-street {
-  --A: clamp(360px, 46vw, 680px);
+  /* the drawing stops at 560px: the page is only 1096px wide inside, and any wider squeezed the
+     heading into one word a line on big screens (John, 10 Nov) */
+  --A: clamp(360px, 44vw, 560px);
   padding-bottom: 0; overflow: hidden;
   background: linear-gradient(180deg, color-mix(in srgb, var(--t-steel) 70%, #fff) 0, color-mix(in srgb, var(--t-steel) 38%, #fff) 140px, #fff 82%);
 }
@@ -481,12 +483,13 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
 /* page heads with a drawing: the heading a size smaller on computers, so it sits in two or
    three lines beside the drawing and the head doesn't grow tall (John, 10 Nov) */
 @media (min-width: 901px) {
-  .page-head .wrap.has-art h1 { font-size: clamp(2.4rem, 3.9vw, 4rem); max-width: 14ch; }
+  .page-head .wrap.has-art h1 { font-size: clamp(2.4rem, 3.9vw, 3.5rem); max-width: none; text-wrap: balance; }
+  .page-head .wrap.has-art h1 .hl { white-space: nowrap; } /* one underline, never split over two lines */
   .page-head .wrap.has-art .head-text > p { font-size: clamp(1.02rem, 1.15vw, 1.15rem); max-width: 40ch; }
 }
 /* the "Draft: Connor to confirm…" line: small and marked, not another paragraph */
-.page-head .head-text p.draft { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: .85rem; font-weight: 600; color: var(--ink-2); }
-.page-head .head-text p.draft::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--gold); }
+.page-head .head-text p.draft { display: flex; align-items: flex-start; gap: 8px; margin-top: 14px; font-size: .85rem; font-weight: 600; color: var(--ink-2); }
+.page-head .head-text p.draft::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: .42em; border-radius: 2px; background: var(--gold); }
 
 /* ---------- price cards: all one height, rows lined up across them, what's included as a dropdown ---------- */
 .pkgs:not(.three) > .pkg { padding: clamp(20px, 2vw, 28px) clamp(16px, 1.6vw, 24px); }
