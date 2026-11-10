@@ -23,6 +23,8 @@ export type Package = {
   sizes?: Size[];
   /** No figure at all: always quoted after a visit */
   quoteOnly?: boolean;
+  /** For the quoted-after-a-visit card: how it's priced, as three rows like the other cards' sizes */
+  steps?: { name: string; note: string; value: string }[];
   /** e.g. "per room" */
   unit?: string;
   summary: string;
@@ -37,6 +39,12 @@ export const packages: Package[] = [
     look: "renovation",
     from: null,
     quoteOnly: true,
+    // how a full renovation is priced, in the same three-row rhythm as the other cards (John, 10 Nov 2026)
+    steps: [
+      { name: "A visit", note: "I come and see the house", value: "Free" },
+      { name: "A written quote", note: "A clear plan and price", value: "Free" },
+      { name: "Paid in phases", note: "Invoiced as the work is done", value: "" },
+    ],
     summary: "My main work: every room you want doing, managed by one team.",
     includes: [
       "Planned with you, in clear phases",

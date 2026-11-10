@@ -66,6 +66,16 @@ export default function PackageCard({ p, compact = false, headingLevel = 3 }: { 
               </li>
             ))}
           </ul>
+        ) : p.steps ? (
+          <ul className="sizes steps-rows">
+            {p.steps.map((st, i) => (
+              <li key={st.name}>
+                <span className="step-dot" aria-hidden="true">{i + 1}</span>
+                <span><b>{st.name}</b>{st.note}</span>
+                {st.value && <strong className="step-val">{st.value}</strong>}
+              </li>
+            ))}
+          </ul>
         ) : p.quoteOnly ? (
           <div className="pkg-visit">
             <strong>Priced after a visit</strong>

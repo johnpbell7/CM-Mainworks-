@@ -667,3 +667,7 @@ input, textarea, select { caret-color: var(--gold-ink); }
 
 .contact-page .ticks { margin-bottom: 8px; }
 .crumbs { align-items: center; } .crumbs li > span { display: inline-block; padding: 4px 0; }
+/* the full renovation card: how it's priced, in three rows like the other cards (no big gold box) */
+.pkgs:not(.three) > .pkg.main::before { background: linear-gradient(180deg, color-mix(in srgb, var(--t-gold) 62%, #fff) 0, #fff 100%); }
+.pkg .sizes .step-dot { flex: none; display: grid; place-items: center; width: 22px; height: 22px; margin-right: 4px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--gold); color: var(--gold-ink); font-size: .74rem; font-weight: 700; line-height: 1; }
+.pkg .sizes .step-val { font-size: 1rem; letter-spacing: -.01em; color: var(--ink); }
