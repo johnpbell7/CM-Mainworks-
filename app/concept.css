@@ -503,3 +503,9 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
 .quote .or-email .addr { color: var(--ink); }
 .done .done-links { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 8px; font-size: .95rem; color: var(--ink-2); }
 .done .done-links a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+/* "Got photos?": photos can't travel through the link, so the form says plainly where they go */
+.quote .photo-tip { display: flex; align-items: center; gap: 12px; margin: 6px 0 14px; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--b1) 55%, #fff); font-size: .9rem; line-height: 1.4; color: var(--ink-2); }
+.quote .photo-tip strong { color: var(--ink); font-weight: 600; }
+.quote .photo-ico { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 1px var(--line); color: var(--gold-ink); }
+.quote .photo-ico svg { width: 18px; height: 18px; }
+.done p strong { color: var(--ink); }

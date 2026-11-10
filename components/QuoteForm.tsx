@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { business, jobColor, jobTypes, type JobType } from "@/content/site";
 import { formatPostcode, rules } from "@/lib/validation";
-import { Alert, ChevronDown, WhatsApp } from "./Icons";
+import { Alert, Camera, ChevronDown, WhatsApp } from "./Icons";
 
 /*
   The quote form (John, 10 Nov 2026: Connor works from WhatsApp, not email). Nothing is sent from the
@@ -129,8 +129,8 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
           <H>Nearly there{sent.first ? `, ${sent.first}` : ""}.</H>
           <p>
             {wa
-              ? <>WhatsApp should be open with your details written out. Add any photos with the paperclip, then tap send.</>
-              : <>Your email should be open with your details filled in. Add any photos, then send it.</>}
+              ? <>WhatsApp should be open with your details written out. <strong>Now add any photos with the paperclip</strong>, then tap send.</>
+              : <>Your email should be open with your details filled in. <strong>Now attach any photos</strong>, then send it.</>}
           </p>
           <ul className="done-links">
             <li>
@@ -213,6 +213,12 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
           </div>
         </div>
 
+        {/* photos can't travel through a link, so say plainly where they go */}
+        <p className="photo-tip">
+          <span className="photo-ico" aria-hidden="true"><Camera /></span>
+          <span><strong>Got photos of the job?</strong> Add them in WhatsApp with the paperclip, just before you tap send.</span>
+        </p>
+
         <button className="send" type="submit">
           <WhatsApp />Send on WhatsApp
         </button>
@@ -222,7 +228,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
         </p>
 
         <p className="note" id="q-note">
-          It opens with your details written out. Add photos there, then send. <Link href="/privacy">Privacy</Link>
+          WhatsApp opens with your details written out, ready to send. <Link href="/privacy">Privacy</Link>
         </p>
       </form>
     </div>
