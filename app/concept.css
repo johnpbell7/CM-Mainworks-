@@ -609,3 +609,23 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
   .menu-links .menu-sub .reno-link strong { font-size: 1.05rem; }
   .menu-sub .reno-link + .svc-links { padding-top: 12px; }
 }
+
+/* ---------- price cards with some life (John, 10 Nov): the site's sky at the top of each card, full renovations in
+   warm gold as the main work, a little size meter on small, medium and large, a gold edge on hover ---------- */
+.pkgs:not(.three) > .pkg { position: relative; padding-top: clamp(40px, 3.6vw, 48px); transition: box-shadow .25s var(--ease), border-color .25s var(--ease); }
+.pkgs:not(.three) > .pkg::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 150px; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--t-steel) 62%, #fff) 0, #fff 100%); }
+.pkgs:not(.three) > .pkg.main::before { background: linear-gradient(180deg, color-mix(in srgb, var(--t-gold) 90%, #fff) 0, #fff 100%); }
+.pkgs:not(.three) > .pkg > * { position: relative; z-index: 1; }
+.pkgs:not(.three) > .pkg:hover { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+.pkg-tag { position: absolute !important; top: 16px; left: clamp(16px, 1.6vw, 24px); font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
+.pkg.main .pkg-visit { background: color-mix(in srgb, var(--t-gold) 55%, #fff); }
+.pkg .sizes li { justify-content: flex-start; }
+.pkg .sizes li > strong { margin-left: auto; }
+.size-meter { flex: none; display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; margin-right: 4px; }
+.size-meter i { width: 4px; border-radius: 1.5px; background: var(--line-2); }
+.size-meter i:nth-child(1) { height: 7px; }
+.size-meter i:nth-child(2) { height: 11px; }
+.size-meter i:nth-child(3) { height: 16px; }
+.size-meter i.on { background: var(--gold); }
+.pkg .sizes .size-meter { display: inline-flex; flex-direction: row; align-items: flex-end; gap: 2px; }

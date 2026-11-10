@@ -51,14 +51,17 @@ export default function PackageCard({ p, compact = false, headingLevel = 3 }: { 
     );
   }
   return (
-    <article className="pkg" style={style}>
+    <article className={`pkg${p.quoteOnly ? " main" : ""}`} style={style}>
+      {p.quoteOnly && <span className="pkg-tag">My main work</span>}
       <H className="pkg-name">{p.name}</H>
       <p className="pkg-sum">{p.summary}</p>
       <div className="pkg-price">
         {p.sizes ? (
           <ul className="sizes">
-            {p.sizes.map((z) => (
+            {p.sizes.map((z, i) => (
               <li key={z.name}>
+                {/* a little size meter: one, two or three gold bars */}
+                <span className="size-meter" aria-hidden="true">{[0, 1, 2].map((b) => <i key={b} className={b <= i ? "on" : ""} />)}</span>
                 <span><b>{z.name}</b>{z.note}</span>
                 <strong>{z.from ?? "£TBC"}<sup aria-hidden="true">*</sup></strong>
               </li>
