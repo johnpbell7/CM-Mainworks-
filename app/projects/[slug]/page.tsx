@@ -10,7 +10,7 @@ import Closing from "@/components/Closing";
 import type { Media } from "@/content/media";
 import { getProject, monthOf, projectPages, projectPhotos } from "@/content/projects";
 import { getSection } from "@/content/site";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, shareImage } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,7 +25,8 @@ const ratio = (m: Media) => (m.w && m.h ? m.w / m.h : 3 / 4);
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = getProject((await params).slug);
   if (!p) return {};
-  const image = p.after.src ? { src: p.after.src, alt: p.after.alt } : undefined;
+  // its own 1200 x 630 card (scripts/make-share-images.mjs projects): the finished photo beside the job's name
+  const image = shareImage(`project-${p.slug}`, `CM MainWorks: ${titleOf(p)}`);
   return pageMeta({ title: titleOf(p), description: p.summary, path: `/projects/${p.slug}`, image });
 }
 

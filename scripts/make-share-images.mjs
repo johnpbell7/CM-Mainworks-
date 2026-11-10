@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// Share images (Open Graph and X, 1200 x 630 JPEG) for the main pages and each service page.
+// Share images (Open Graph and X, 1200 x 630 JPEG) for the main pages, each service page and each project.
 // Run:  node scripts/make-share-images.mjs            (all)
 //       node scripts/make-share-images.mjs home about  (just those)
+//       node scripts/make-share-images.mjs projects    (just the projects: their finished photo beside the job's name)
 // Needs macOS (sips) and Google Chrome. Writes public/images/share/<name>.jpg, each under 300 KB.
 // Wired in lib/seo.tsx (pageMeta's `image`). Look: brand only. Flat navy, chalk text, gold for the key words,
 // Bricolage Grotesque (brand/fonts), and the horizontal logo on navy exactly as supplied. No gradients or shadows.
 // Words come from each page's own heading and intro on the site; change them here when the page changes.
-import { mkdirSync, writeFileSync, statSync, existsSync, rmSync, mkdtempSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync, statSync, existsSync, rmSync, mkdtempSync } from "node:fs";
 import { spawnSync, spawn } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join, resolve } from "node:path";
@@ -22,7 +23,7 @@ const NAVY = "#16264A", GOLD = "#D9A441", CHALK = "#F5EFE4";
 export const pages = {
   home: { eyebrow: "Home renovations · the Midlands", title: "Your whole renovation, <b>one team.</b>", sub: "Kitchens, bathrooms, extensions and whole homes across the Midlands, managed start to finish." },
   renovations: { eyebrow: "Full home renovations", title: "Full home renovations, <b>one team.</b>", sub: "Kitchens, bathrooms, extensions, floors, stairs and decorating, planned with you and managed by me in clear phases." },
-  prices: { eyebrow: "Renovation prices", title: "Clear prices, <b>no surprises.</b>", sub: "A rough guide before we talk. You’ll always get a written quote for your home." },
+  prices: { eyebrow: "Renovation prices", title: "Honest prices, <b>agreed with you.</b>", sub: "A rough guide before we talk. Every job is different, so I price it properly after a visit." },
   services: { eyebrow: "Services", title: "Everything your home needs, <b>one team.</b>", sub: "Whole renovations are my main work, all managed by me. Smaller jobs are welcome too." },
   about: { eyebrow: "About", title: "Hi, I’m <b>Connor.</b>", sub: "I run CM MainWorks, managing home renovations from start to finish." },
   contact: { eyebrow: "Contact", title: "Get a <b>free quote.</b>", sub: "Send me a few details and photos and I’ll come back to you with a clear, written price." },
@@ -49,6 +50,28 @@ h1 b{font-weight:700;color:${GOLD}}
 .sub{font-weight:400;font-size:30px;line-height:1.4;color:rgba(245,239,228,.82);margin-top:30px;max-width:880px;text-wrap:balance}
 .logo{position:absolute;left:80px;bottom:60px;height:64px;display:block}
 `;
+
+// Projects: read from content/projects.ts (and the photo list in content/photos.ts), so a new job gets its card
+// the next time this runs. Each card: the job's finished photo on the right, its name and town on navy on the left.
+const read = (f) => (existsSync(join(ROOT, f)) ? readFileSync(join(ROOT, f), "utf8") : "");
+const photoSrc = Object.fromEntries([...read("content/photos.ts").matchAll(/"([^"]+)": \{ src: "([^"]+)"/g)].map((m) => [m[1], m[2]]));
+export const projectCards = read("content/projects.ts").split(/\n  \{\n    slug: /).slice(1).map((b) => {
+  const get = (k) => (b.match(new RegExp(`\\n    ${k}: "([^"]*)"`)) || [])[1] || "";
+  const after = b.match(/\n    after: (?:photo\("([^"]+)"|\{ src: "([^"]+)")/) || [];
+  return { slug: (b.match(/^"([^"]+)"/) || [])[1], name: get("name"), place: get("place"), photo: after[1] ? photoSrc[after[1]] : after[2], placeholder: /\n    placeholder: true/.test(b) };
+}).filter((p) => p.slug && p.photo && !p.placeholder);
+
+const projectHtml = (p) => {
+  const title = p.place ? `${p.name} in <b>${p.place}</b>` : p.name;
+  const plain = title.replace(/<\/?b>/g, "");
+  const size = plain.length <= 20 ? 84 : plain.length <= 32 ? 72 : 62;
+  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>${p.slug}</title><style>${css}
+.copy{width:560px}.photo{position:absolute;right:0;top:0;width:520px;height:630px;object-fit:cover;display:block}</style></head><body>
+<div class="copy"><div class="eyebrow">Recent work</div><h1 style="font-size:${size}px">${title}</h1></div>
+<img class="photo" src="${U(join(ROOT, "public", p.photo))}" alt="">
+<img class="logo" src="${U(join(ROOT, "brand/logo/main/cm-mainworks-horizontal-on-navy.svg"))}" alt="">
+</body></html>`;
+};
 
 const html = (name, p) => {
   const plain = p.title.replace(/<\/?b>/g, "");
@@ -80,10 +103,14 @@ const work = mkdtempSync(join(tmpdir(), "cm-share-work-"));
 const out = join(ROOT, "public/images/share");
 mkdirSync(out, { recursive: true });
 const only = process.argv.slice(2);
-for (const [name, p] of Object.entries(pages)) {
-  if (only.length && !only.includes(name)) continue;
+const jobs = [
+  ...Object.entries(pages).map(([name, p]) => [name, () => html(name, p)]),
+  ...projectCards.map((p) => [`project-${p.slug}`, () => projectHtml(p)]),
+];
+for (const [name, make] of jobs) {
+  if (only.length && !only.includes(name) && !(only.includes("projects") && name.startsWith("project-"))) continue;
   const h = join(work, `${name}.html`), png = join(work, `${name}.png`), jpg = join(out, `${name}.jpg`);
-  writeFileSync(h, html(name, p));
+  writeFileSync(h, make());
   await render(h, png);
   let q = 88;
   for (; q >= 50; q -= 6) {
