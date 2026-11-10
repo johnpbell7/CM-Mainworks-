@@ -52,7 +52,6 @@ export default function PackageCard({ p, compact = false, headingLevel = 3 }: { 
   }
   return (
     <article className={`pkg${p.quoteOnly ? " main" : ""}`} style={style}>
-      {p.quoteOnly && <span className="pkg-tag">My main work</span>}
       <H className="pkg-name">{p.name}</H>
       <p className="pkg-sum">{p.summary}</p>
       <div className="pkg-price">

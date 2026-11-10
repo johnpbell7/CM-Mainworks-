@@ -37,7 +37,7 @@ export const packages: Package[] = [
     look: "renovation",
     from: null,
     quoteOnly: true,
-    summary: "Every room you want doing, managed by one team.",
+    summary: "My main work: every room you want doing, managed by one team.",
     includes: [
       "Planned with you, in clear phases",
       "Invoiced phase by phase",

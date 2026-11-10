@@ -26,19 +26,31 @@ export function RenovationLink({ art, path }: { art: boolean; path: string }) {
   in the page (for Google); the drawings appear once the menu is opened.
 */
 export default function ServiceLinks({ art, path, id }: { art: boolean; path: string; id?: string }) {
+  // two small groups (renovation work, smaller jobs) rather than one block of nine (Impeccable critique, 10 Nov)
+  const groups = [
+    { label: "Renovation work", items: sections.filter((s) => s.group === "renovation") },
+    { label: "Smaller jobs", items: sections.filter((s) => s.group === "smaller") },
+  ];
   return (
-    <ul className="svc-links" id={id}>
-      {sections.map((s) => {
-        const href = `/services/${s.slug}`;
-        return (
-          <li key={s.slug}>
-            <Link href={href} aria-current={path === href ? "page" : undefined}>
-              <Mini kind={s.illo} show={art} />
-              <span>{s.name}</span>
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="svc-groups" id={id}>
+      {groups.map((g) => (
+        <div className="svc-group" key={g.label}>
+          <p className="svc-group-label">{g.label}</p>
+          <ul className="svc-links">
+            {g.items.map((s) => {
+              const href = `/services/${s.slug}`;
+              return (
+                <li key={s.slug}>
+                  <Link href={href} aria-current={path === href ? "page" : undefined}>
+                    <Mini kind={s.illo} show={art} />
+                    <span>{s.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }

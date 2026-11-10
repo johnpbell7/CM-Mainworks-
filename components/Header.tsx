@@ -20,6 +20,9 @@ export default function Header() {
   const show = (on: boolean) => { if (on) setSeen(true); setDrop(on); };
 
   useEffect(() => setDrop(false), [path]);
+  // "Free quote" goes to this page's own form when it has one, otherwise the contact page's
+  const [quoteHref, setQuoteHref] = useState("/contact#quote");
+  useEffect(() => setQuoteHref(document.getElementById("quote") ? "#quote" : "/contact#quote"), [path]);
   useEffect(() => {
     if (!drop) return;
     const away = (e: MouseEvent) => { if (!dropRef.current?.contains(e.target as Node)) setDrop(false); };
@@ -71,6 +74,7 @@ export default function Header() {
           <Phone />
           <span className="tel-num">{business.phoneDisplay}</span>
         </a>
+        <Link className="btn btn-gold head-quote" href={quoteHref}>Free quote</Link>
         <MobileMenu />
       </div>
     </header>

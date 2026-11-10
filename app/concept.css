@@ -629,3 +629,41 @@ h1 .hl, h2 .hl, .quote-big .hl { background-size: var(--hlw, 100%) .26em; paddin
 .size-meter i:nth-child(3) { height: 16px; }
 .size-meter i.on { background: var(--gold); }
 .pkg .sizes .size-meter { display: inline-flex; flex-direction: row; align-items: flex-end; gap: 2px; }
+
+/* ---------- Impeccable critique fixes (10 Nov) ---------- */
+/* a gold "Free quote" beside the phone number on computers (phones have the sticky bar) */
+.head-quote { padding: 10px 18px; font-size: .95rem; white-space: nowrap; }
+@media (max-width: 1080px) { .head-quote { display: none !important; } }
+@media (min-width: 1081px) { .head .wrap { gap: 28px; } }
+.pkgs:not(.three) > .pkg { padding-top: clamp(24px, 2.4vw, 32px); }
+/* the menus' services in two small groups */
+.svc-group-label { margin: 10px 8px 4px; font-size: .8rem; font-weight: 600; color: var(--ink-3); }
+.nav-panel .svc-group-label { margin: 12px 8px 2px; }
+@media (max-width: 1080px) { .menu-sub .svc-group-label { margin: 14px 0 0; font-size: .85rem; } .menu-sub .svc-group + .svc-group .svc-links { border-bottom: 1px solid var(--line); } .menu-sub .svc-group:first-child .svc-links { border-bottom: 0; } }
+/* the quote form: what happens next, and copy my message */
+.done .next { margin-top: 12px; font-size: .95rem; color: var(--ink); }
+.done .done-links .copy { padding: 0 0 1px; border: 0; border-bottom: 2px solid var(--gold); background: none; font: inherit; font-weight: 600; color: var(--ink); cursor: pointer; margin-top: 0; }
+/* contact page: the form first on phones; what to send and the other ways beside it on computers */
+.contact-page .contact-sub { margin: 8px 0 18px; color: var(--ink-2); }
+.contact-page .factors { margin-bottom: 8px; }
+.contact-page .contact-or { margin-top: clamp(32px, 4vw, 48px); }
+@media (max-width: 1080px) { .contact-page .contact-grid { display: flex; flex-direction: column; } .contact-page .quote-wrap { order: -1; margin-bottom: 40px; } }
+/* price cards stack on phones, so all four are seen (the gold one first) */
+@media (max-width: 720px) {
+  .pkgs:not(.three) { display: grid !important; grid-template-columns: minmax(0, 1fr); gap: 14px; overflow: visible; margin: 0; padding: 0; }
+  .pkgs:not(.three) > .pkg { flex: none; }
+}
+/* small technical fixes from the browser checks */
+.crumbs a { display: inline-block; padding: 4px 0; }
+.foot nav ul { gap: 3px; }
+.foot nav a { display: inline-block; min-height: 24px; padding: 3px 0; }
+.foot-areas li { margin-bottom: 3px; }
+.foot-brand > a { display: inline-block; }
+.ba .tag, .ba-split .tag { font-size: .84rem; }
+.price-note { max-width: 60ch; }
+/* browser surfaces in the palette: text selection and the typing caret */
+::selection { background: var(--t-gold); color: var(--ink); }
+input, textarea, select { caret-color: var(--gold-ink); }
+
+.contact-page .ticks { margin-bottom: 8px; }
+.crumbs { align-items: center; } .crumbs li > span { display: inline-block; padding: 4px 0; }

@@ -39,8 +39,8 @@ export type SectionSlug =
 
 /** What people pick in the quote form. Each service maps to one. */
 export const jobTypes = [
-  "Full renovation", "Extension", "Kitchen", "Bathroom", "Stairs", "Floors and tiling", "Roofing",
-  "Doors, skirting and carpentry", "Joinery", "Decorating", "Something else",
+  "Full renovation", "Extension", "Kitchen", "Bathroom", "Stairs, doors and skirting", "Floors and tiling", "Roofing",
+  "Carpentry", "Joinery", "Decorating", "Something else",
 ] as const;
 export type JobType = (typeof jobTypes)[number];
 
@@ -95,7 +95,7 @@ export const sections: Section[] = [
     work: "Bathroom work",
   },
   {
-    slug: "staircases", ...oak, group: "renovation", illo: "stairs", job: "Stairs",
+    slug: "staircases", ...oak, group: "renovation", illo: "stairs", job: "Stairs, doors and skirting",
     name: "Stairs, doors and skirting",
     blurb: "The joinery that finishes a home.",
     intro: "The joinery that makes a house feel finished: a solid staircase, doors that close properly and skirting and architrave that sit tight.",
@@ -119,7 +119,7 @@ export const sections: Section[] = [
     work: "Floor and tiling work",
   },
   {
-    slug: "carpentry", ...oak, group: "smaller", illo: "carpentry", job: "Doors, skirting and carpentry",
+    slug: "carpentry", ...oak, group: "smaller", illo: "carpentry", job: "Carpentry",
     name: "Carpentry",
     blurb: "Doors, trims and the odd jobs.",
     intro: "One door that sticks is as welcome as a whole house of new ones. Small carpentry jobs, done the same way as the big ones.",

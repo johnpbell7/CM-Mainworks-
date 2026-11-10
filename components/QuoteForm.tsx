@@ -40,7 +40,7 @@ const whatsappUrl = (text: string) => `${business.whatsapp}?text=${encodeURIComp
 const mailUrl = (to: string, subject: string, text: string) =>
   `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
 
-function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1; defaultJob?: JobType | "" }) {
+function QuoteCard({ headingLevel = 2, defaultJob = "", head = true }: { headingLevel?: 2 | 1; defaultJob?: JobType | ""; head?: boolean }) {
   const formRef = useRef<HTMLFormElement>(null);
   const againRef = useRef<HTMLButtonElement>(null);
   const [errors, setErrors] = useState<Partial<Record<Key, string>>>({});
@@ -48,6 +48,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
   const [more, setMore] = useState(false);
   const [sent, setSent] = useState<Sent | null>(null);
   const [mail, setMail] = useState(""); // joined after the page loads, so it isn't in the page for bots
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => setMail(business.emailParts.join("@")), []);
 
@@ -111,6 +112,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
     setErrors({});
     setMore(false);
     setSent(null);
+    setCopied(false);
     setTimeout(() => (formRef.current?.elements.namedItem("name") as HTMLInputElement)?.focus(), 0);
   };
 
@@ -132,6 +134,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
               ? <>WhatsApp should be open with your details written out. <strong>Now add any photos with the paperclip</strong>, then tap send.</>
               : <>Your email should be open with your details filled in. <strong>Now attach any photos</strong>, then send it.</>}
           </p>
+          <p className="next">What happens next: I’ll reply, come and see the job, then send you a written quote.</p>
           <ul className="done-links">
             <li>
               {wa
@@ -142,6 +145,12 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
               {wa
                 ? <a href={mailUrl(mail, sent.subject, sent.text)}>Send it by email instead</a>
                 : <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener">Send it on WhatsApp instead</a>}
+            </li>
+            <li>
+              {/* for anyone whose WhatsApp or email didn't open: the message, to paste anywhere */}
+              <button type="button" className="copy" onClick={() => navigator.clipboard?.writeText(sent.text).then(() => setCopied(true), () => {})}>
+                {copied ? "Copied. Paste it anywhere" : "Copy my message"}
+              </button>
             </li>
             <li>Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a></li>
           </ul>
@@ -164,12 +173,14 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
 
   return (
     <div className="quote">
-      <div className="quote-head">
-        <H>Get a free quote</H>
-        <p>A few details and I’ll come back to you with a price.</p>
-      </div>
+      {head && (
+        <div className="quote-head">
+          <H>Get a free quote</H>
+          <p>A few details and I’ll come back to you to arrange a visit.</p>
+        </div>
+      )}
 
-      <form ref={formRef} noValidate onSubmit={onSubmit} aria-describedby="q-note">
+      <form ref={formRef} noValidate onSubmit={onSubmit} aria-describedby="q-note" aria-label="Ask for a free quote">
         <div className="row2">
           <div className={`field${errors.name ? " invalid" : ""}`}>
             <label htmlFor="q-name">Name</label>
@@ -241,7 +252,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "" }: { headingLevel?: 2 | 1
   Tablets and desktop always show the form. "Ask about…" buttons, the mobile bar
   and links to #quote open it too.
 */
-export default function QuoteForm({ headingLevel = 2, collapsible = false, defaultJob = "" }: { headingLevel?: 2 | 1; collapsible?: boolean; defaultJob?: JobType | "" }) {
+export default function QuoteForm({ headingLevel = 2, collapsible = false, defaultJob = "", head = true }: { headingLevel?: 2 | 1; collapsible?: boolean; defaultJob?: JobType | ""; head?: boolean }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
@@ -264,7 +275,7 @@ export default function QuoteForm({ headingLevel = 2, collapsible = false, defau
   }, [collapsible]);
 
   if (!collapsible) {
-    return <div className="quote-wrap" id="quote"><QuoteCard headingLevel={headingLevel} defaultJob={defaultJob} /></div>;
+    return <div className="quote-wrap" id="quote"><QuoteCard headingLevel={headingLevel} defaultJob={defaultJob} head={head} /></div>;
   }
 
   const openForm = () => {
@@ -276,7 +287,7 @@ export default function QuoteForm({ headingLevel = 2, collapsible = false, defau
   return (
     <div className={`quote-wrap collapsible${open ? " is-open" : ""}`} id="quote">
       <div className="quote-cta-wrap">
-        <button type="button" className="quote-cta" aria-expanded={open} aria-controls="quote-panel" onClick={openForm}>
+        <button type="button" className="quote-cta" aria-expanded={open} aria-controls="quote-panel" onClick={() => (open ? setOpen(false) : openForm())}>
           Get a free quote <ChevronDown />
         </button>
         <a className="quote-call" href={business.phoneHref}>Or ring me on {business.phoneDisplay}</a>

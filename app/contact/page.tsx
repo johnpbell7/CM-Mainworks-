@@ -16,11 +16,21 @@ export const metadata: Metadata = pageMeta({
 export default function Contact() {
   return (
     <>
-      <PageHead art="photos" crumbs={[{ href: "/contact", label: "Contact" }]} title={<>Get a <span className="hl">free quote.</span></>} lede="Planning a renovation or just one job? Send me a few details and photos and I’ll come back to you with a clear, written price." />
-      <section className="sec" style={{ paddingTop: 0 }}>
+      <PageHead art="photos" crumbs={[{ href: "/contact", label: "Contact" }]} title={<>Get a <span className="hl">free quote.</span></>} lede="Planning a renovation or just one job? Send me a few details and photos and I’ll come back to you to arrange a visit, then a written quote." />
+      <section className="sec contact-page" style={{ paddingTop: 0 }}>
         <div className="wrap contact-grid">
           <div data-reveal="up">
-            <h2 className="mid-h">Ring, message or send photos</h2>
+            <h2 className="mid-h">What to send for a quick quote</h2>
+            <p className="contact-sub">Not all of it. The more I see, the quicker the price.</p>
+            <ul className="ticks">
+              <li>A photo of each room or area, plus a couple of close-ups of anything that’s damaged or awkward</li>
+              <li>Rough measurements, if you’ve got them. Not essential</li>
+              <li>Any pictures you’ve saved of the look you’re after</li>
+              <li>Your postcode, and roughly when you’d like the work done</li>
+              <li>For a renovation, a rough budget if you have one. I’ll be honest about what it can do</li>
+              <li>Whether you’re supplying anything yourself, like doors, paint or tiles</li>
+            </ul>
+            <h2 className="mid-h contact-or">Or ring or message me</h2>
             <ul className="contact-list">
               <li><span className="k">Call</span><a href={business.phoneHref}>{business.phoneDisplay}</a></li>
               <li><span className="k">WhatsApp</span><a href={business.whatsapp} target="_blank" rel="noopener">Message me</a></li>
@@ -36,23 +46,8 @@ export default function Contact() {
               </li>
             </ul>
           </div>
-          <QuoteForm />
-        </div>
-      </section>
-      <section className="sec grey" aria-labelledby="send-title">
-        <div className="wrap faq-wrap">
-          <div className="faq-side" data-reveal="up">
-            <h2 id="send-title">What to send for a quick quote</h2>
-            <p>Not all of it. The more I see, the quicker the price.</p>
-          </div>
-          <ol className="factors" data-reveal="stagger">
-            <li>A photo of each room or area, plus a couple of close-ups of anything that’s damaged or awkward</li>
-            <li>Rough measurements, if you’ve got them. Not essential</li>
-            <li>Any pictures you’ve saved of the look you’re after</li>
-            <li>Your postcode, and roughly when you’d like the work done</li>
-            <li>For a renovation, a rough budget if you have one. I’ll be honest about what it can do</li>
-            <li>Whether you’re supplying anything yourself, like doors, paint or tiles</li>
-          </ol>
+          {/* the page's heading already says "Get a free quote", so the form doesn't repeat it */}
+          <QuoteForm head={false} />
         </div>
       </section>
     </>

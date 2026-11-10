@@ -62,7 +62,7 @@ export default function Motion() {
           const drawings = pick<SVGSVGElement>("[data-illustration]");
           const badge = pick<HTMLElement>(".closing .big-badge")[0];
 
-          gsap.set(ups, { opacity: 0, y: 18 });
+          if (ups.length) gsap.set(ups, { opacity: 0, y: 18 });
           ScrollTrigger.batch(ups, {
             start: "top 98%", once: true,
             onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.05 }),
@@ -76,13 +76,13 @@ export default function Motion() {
           });
 
           // illustration tiles just fade in quickly; the drawing does the work
-          gsap.set(tiles, { opacity: 0 });
+          if (tiles.length) gsap.set(tiles, { opacity: 0 });
           ScrollTrigger.batch(tiles, {
             start: "top 98%", once: true,
             onEnter: (els) => gsap.to(els, { opacity: 1, duration: 0.35, ease: "power1.out" }),
           });
 
-          gsap.set(photos, { opacity: 0 });
+          if (photos.length) gsap.set(photos, { opacity: 0 });
           ScrollTrigger.batch(photos, {
             start: "top 96%", once: true,
             onEnter: (els) => els.forEach((el, i) => {
@@ -93,7 +93,7 @@ export default function Motion() {
           });
 
           // ---- marker highlights ----
-          gsap.set(marks, { "--hlw": "0%" });
+          if (marks.length) gsap.set(marks, { "--hlw": "0%" });
           ScrollTrigger.batch(marks, {
             start: "top 94%", once: true,
             onEnter: (els) => gsap.to(els, { "--hlw": "100%", duration: 0.5, ease: "power2.inOut", delay: 0.05 }),
@@ -103,7 +103,7 @@ export default function Motion() {
           // Moving anything inside a drawing (drawing each line in, sliding its colour
           // block) repaints the whole drawing on every frame, which was the slowest thing
           // on the site. Fading the drawing as one piece is handled by the graphics chip.
-          gsap.set(drawings, { autoAlpha: 0, y: 14 });
+          if (drawings.length) gsap.set(drawings, { autoAlpha: 0, y: 14 });
           ScrollTrigger.batch(drawings, {
             start: "top 98%", once: true,
             onEnter: (els) => gsap.to(els, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.05, force3D: true, clearProps: "transform" }),

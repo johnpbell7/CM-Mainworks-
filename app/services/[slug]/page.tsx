@@ -50,7 +50,16 @@ export default async function Service({ params }: Props) {
   const at = sections.findIndex((x) => x.slug === s.slug);
   const prev = sections[(at - 1 + sections.length) % sections.length];
   const next = sections[(at + 1) % sections.length];
-  const [first, ...rest] = c.h1.split(" ");
+  // the gold underline goes under the words that matter, at the end of the heading (Impeccable critique, 10 Nov):
+  // the words after the comma, or the last three when there are more ("Decorating, right to the last coat"),
+  // kept on one line so the underline never runs into the line below
+  const [lead, mark] = (() => {
+    const at = c.h1.indexOf(", ");
+    const tail = at > 0 ? c.h1.slice(at + 2) : c.h1;
+    const words = tail.split(" ");
+    const keep = words.length > 3 ? words.slice(-3).join(" ") : tail;
+    return [c.h1.slice(0, c.h1.length - keep.length), keep];
+  })();
   const faqs = c.faqs.map((f) => ({ ...f, color: s.slug }));
   // keep white and grey sections alternating whichever optional blocks show
   const showReno = s.slug !== "carpentry";
@@ -83,7 +92,7 @@ export default async function Service({ params }: Props) {
       <PageHead
         crumbs={[{ href: "/renovations", label: "Renovations" }, { href: `/services/${s.slug}`, label: s.name }]}
         art={s.illo}
-        title={<><span className="hl" data-pen={s.pen}>{first}</span> {rest.join(" ")}</>}
+        title={<>{lead}<span className="hl" data-pen={s.pen} style={{ whiteSpace: "nowrap" }}>{mark}</span></>}
         lede={c.lede}
       />
 
