@@ -14,7 +14,7 @@
 |---|---|
 | Code | GitHub `johnpbell7/CM-Mainworks-` |
 | Working branch | `ccr-6ec0a5e9-9pzhmk` (currently the only branch; there is no `main` yet) |
-| Preview site | https://cm-mainworks.vercel.app. Vercel auto-deploys every push to the working branch |
+| Live site | https://cmmainworks.com (from 15 Nov 2026). Vercel auto-deploys every push to the working branch, so every push goes live |
 | Pitch deck | `docs/website-pitch.pdf`: a 17-slide tour of the site for showing Connor |
 | Brand guide and proposal | `docs/brand-guide.pdf` and `docs/client-proposal.pdf` |
 | Stack | Next.js 16 (App Router) with TypeScript, GSAP 3 for motion, Resend for the quote email, hosted on Vercel |
@@ -122,8 +122,8 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 ### Visitor counts (John, 15 Nov 2026)
 
 - Vercel Web Analytics (`@vercel/analytics`, `components/Tracking.tsx`, `lib/analytics.ts`): page views, plus three events, each with the page and where on it:
-  - "Quote: WhatsApp" and "Quote: email": a filled-in quote form opened WhatsApp or the visitor's email (the site can't see whether they then pressed send). Place: Homepage hero, Contact page or Foot of the page.
-  - "Call tapped": any phone link. Place: Header, Menu, Phone bar, Footer, Quote form, Ring me block or In the page.
+  - "Contact: WhatsApp" and "Contact: email": a filled-in quote form opened WhatsApp or the visitor's email (the site can't see whether they then pressed send). Place: Homepage hero, Contact page or Foot of the page; the links shown after sending count as "Tried again" or "Switched from WhatsApp/email".
+  - "Contact: call": any phone link. Place: Header, Menu, Phone bar, Footer, Quote form, Ring me block or In the page.
 - No cookies and nothing typed into the form is sent. The privacy page says so ("Cookies and visitor counts").
 - Seen in Vercel: project cm-mainworks > Analytics. Web Analytics has to be switched on there for anything to be recorded.
 
@@ -191,6 +191,10 @@ Confirmed so far: he's insured; he runs a team, with labourers he trusts; he cov
 ---
 
 ## 7. Going live (only when John says "launch")
+
+**Launched 15 Nov 2026 (John: "let's get it live now").** Domain `cmmainworks.com` (GoDaddy, renews 15 Nov 2029) on the Vercel project, connected to Production; `www.cmmainworks.com` 308-redirects to it. DNS at GoDaddy: A `@` 216.150.1.1, CNAME `www` e2201d63da94241f.vercel-dns-016.com (Vercel's own values). Production variables set: `NEXT_PUBLIC_SITE_URL=https://cmmainworks.com`, `NEXT_PUBLIC_ALLOW_INDEXING=true` (Preview stays noindex). `vercel.json` sends `X-Robots-Tag: noindex` on cm-mainworks.vercel.app so only the real domain is indexed. The working branch is still the production branch. Left to do: test quotes on WhatsApp and email, Search Console (sitemap), Google Business Profile.
+
+The steps, for reference:
 
 1. Point the real domain at the Vercel project, and make the launch branch the production branch (or merge into `main` and use that).
 2. Set the Vercel environment variables:

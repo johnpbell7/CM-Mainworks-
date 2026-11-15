@@ -5,9 +5,11 @@ import { track } from "@vercel/analytics";
   cookies, nothing that identifies a visitor, and nothing about what they typed. Each event
   carries two things only: the page it happened on and where on that page.
   Seen in Vercel: project cm-mainworks > Analytics > Events.
-    "Quote: WhatsApp" / "Quote: email"  a filled-in quote form opened WhatsApp or their email app
-                                        (the site can't see whether they then pressed send)
-    "Call tapped"                       any phone link on the site
+    "Contact: WhatsApp" / "Contact: email"  a filled-in quote form opened WhatsApp or their email app
+                                            (the site can't see whether they then pressed send). Place is
+                                            the form, or "Tried again" / "Switched from …" for the links
+                                            shown after sending
+    "Contact: call"                         any phone link on the site
   Nothing is sent in development.
 */
 
@@ -31,10 +33,11 @@ function callPlace(link: Element) {
   return "In the page";
 }
 
-export function trackQuote(via: "whatsapp" | "email", form: Element | null) {
-  track(via === "whatsapp" ? "Quote: WhatsApp" : "Quote: email", { page: page(), place: formPlace(form) });
+/** `again`: the links shown after sending ("Didn’t open? Try again", "Send it by email instead"…), counted apart from first tries. */
+export function trackQuote(via: "whatsapp" | "email", form: Element | null, again?: string) {
+  track(via === "whatsapp" ? "Contact: WhatsApp" : "Contact: email", { page: page(), place: again ?? formPlace(form) });
 }
 
 export function trackCall(link: Element) {
-  track("Call tapped", { page: page(), place: callPlace(link) });
+  track("Contact: call", { page: page(), place: callPlace(link) });
 }

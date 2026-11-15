@@ -151,13 +151,13 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
           <ul className="done-links">
             <li>
               {wa
-                ? <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener">Didn’t open? Try WhatsApp again</a>
-                : <a href={mailUrl(mail, sent.subject, sent.text)}>Didn’t open? Try email again</a>}
+                ? <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Tried again")}>Didn’t open? Try WhatsApp again</a>
+                : <a href={mailUrl(mail, sent.subject, sent.text)} onClick={() => trackQuote("email", formRef.current, "Tried again")}>Didn’t open? Try email again</a>}
             </li>
             <li>
               {wa
-                ? <a href={mailUrl(mail, sent.subject, sent.text)}>Send it by email instead</a>
-                : <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener">Send it on WhatsApp instead</a>}
+                ? <a href={mailUrl(mail, sent.subject, sent.text)} onClick={() => trackQuote("email", formRef.current, "Switched from WhatsApp")}>Send it by email instead</a>
+                : <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Switched from email")}>Send it on WhatsApp instead</a>}
             </li>
             <li>
               {/* for anyone whose WhatsApp or email didn't open: the message, to paste anywhere */}
