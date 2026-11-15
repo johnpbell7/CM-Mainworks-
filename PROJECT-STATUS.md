@@ -119,6 +119,14 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 - **Prices:** see the Prices item above (15 Nov: no figures).
   - No "no surprises" or "no hidden costs" claims anywhere. The honest line: old houses can hide things, and any change is shown and agreed before work carries on.
 
+### Visitor counts (John, 15 Nov 2026)
+
+- Vercel Web Analytics (`@vercel/analytics`, `components/Tracking.tsx`, `lib/analytics.ts`): page views, plus three events, each with the page and where on it:
+  - "Quote: WhatsApp" and "Quote: email": a filled-in quote form opened WhatsApp or the visitor's email (the site can't see whether they then pressed send). Place: Homepage hero, Contact page or Foot of the page.
+  - "Call tapped": any phone link. Place: Header, Menu, Phone bar, Footer, Quote form, Ring me block or In the page.
+- No cookies and nothing typed into the form is sent. The privacy page says so ("Cookies and visitor counts").
+- Seen in Vercel: project cm-mainworks > Analytics. Web Analytics has to be switched on there for anything to be recorded.
+
 ### The quote form goes to WhatsApp (John, 10 Nov 2026)
 
 Connor works from WhatsApp, not email, so the website sends nothing itself.

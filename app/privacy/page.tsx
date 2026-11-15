@@ -34,8 +34,8 @@ export default function Privacy() {
           <h2>How it’s sent and stored</h2>
           <p>The quote form doesn’t send anything itself. It opens WhatsApp, or your own email, with your details written out, and you send them to me from there. Nothing is stored on this website. I keep your messages and photos in my WhatsApp or email for as long as I need them to quote for and do the job, then delete them.</p>
 
-          <h2>Cookies</h2>
-          <p>This site doesn’t use cookies, and nothing tracks you while you’re on it.</p>
+          <h2>Cookies and visitor counts</h2>
+          <p>This site doesn’t use cookies. It counts visits with Vercel Web Analytics, which tells me how many people look at each page, and how many times the quote form or a phone number is used and on which page. It doesn’t use cookies, doesn’t follow you to other sites, and can’t tell me who you are. It never sees what you type into the quote form.</p>
 
           <h2>Your rights</h2>
           <p>You can ask to see the details I hold about you, have them corrected or have them deleted. Ring me on {business.phoneDisplay} to ask. If you’re unhappy with how your details have been handled, you can complain to the Information Commissioner’s Office at ico.org.uk.</p>

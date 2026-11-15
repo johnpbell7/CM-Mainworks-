@@ -1,0 +1,40 @@
+import { track } from "@vercel/analytics";
+
+/*
+  Counting quote requests and calls (John, 15 Nov 2026), with Vercel Web Analytics: no
+  cookies, nothing that identifies a visitor, and nothing about what they typed. Each event
+  carries two things only: the page it happened on and where on that page.
+  Seen in Vercel: project cm-mainworks > Analytics > Events.
+    "Quote: WhatsApp" / "Quote: email"  a filled-in quote form opened WhatsApp or their email app
+                                        (the site can't see whether they then pressed send)
+    "Call tapped"                       any phone link on the site
+  Nothing is sent in development.
+*/
+
+const page = () => window.location.pathname;
+
+/** Which quote form: the homepage hero, the contact page, or the one at the foot of a page. */
+function formPlace(form: Element | null) {
+  if (form?.closest(".vh-form")) return "Homepage hero";
+  if (page() === "/contact") return "Contact page";
+  return "Foot of the page";
+}
+
+/** Where a phone link sits. */
+function callPlace(link: Element) {
+  if (link.closest("#site-menu")) return "Menu";
+  if (link.closest(".mbar")) return "Phone bar";
+  if (link.closest("header.head")) return "Header";
+  if (link.closest("footer.foot")) return "Footer";
+  if (link.closest(".quote, .quote-call, .vh-form")) return "Quote form";
+  if (link.closest(".closing")) return "Ring me block";
+  return "In the page";
+}
+
+export function trackQuote(via: "whatsapp" | "email", form: Element | null) {
+  track(via === "whatsapp" ? "Quote: WhatsApp" : "Quote: email", { page: page(), place: formPlace(form) });
+}
+
+export function trackCall(link: Element) {
+  track("Call tapped", { page: page(), place: callPlace(link) });
+}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { business, jobColor, jobTypes, type JobType } from "@/content/site";
 import { formatPostcode, rules } from "@/lib/validation";
 import { Alert, Arrow, Camera, ChevronDown, WhatsApp } from "./Icons";
+import { trackQuote } from "@/lib/analytics";
 
 /*
   The quote form (John, 10 Nov 2026: Connor works from WhatsApp, not email). Nothing is sent from the
@@ -101,6 +102,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
     e.preventDefault();
     const m = ready();
     if (!m) return;
+    trackQuote("whatsapp", e.currentTarget);
     open(whatsappUrl(m.text), !isPhone()); // phones go straight to the app; computers open WhatsApp in a new tab
     setSent({ ...m, via: "whatsapp" });
   }
@@ -108,6 +110,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
   function byEmail() {
     const m = ready();
     if (!m || !mail) return;
+    trackQuote("email", formRef.current);
     open(mailUrl(mail, m.subject, m.text), false);
     setSent({ ...m, via: "email" });
   }

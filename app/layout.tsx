@@ -8,6 +8,7 @@ import MobileBar from "@/components/MobileBar";
 import Motion from "@/components/Motion";
 import IlloPlay from "@/components/concept/IlloPlay";
 import JsonLd from "@/components/JsonLd";
+import Tracking from "@/components/Tracking";
 import { siteUrl } from "@/content/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MobileBar />
         <Motion />
         <IlloPlay />
+        <Tracking />
       </body>
     </html>
   );
