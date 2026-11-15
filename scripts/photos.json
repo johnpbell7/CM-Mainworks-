@@ -3,6 +3,52 @@
  "maxEdge": 1400,
  "quality": 78,
  "projects": {
+  "kitchen-diner-decoration": [
+   {
+    "name": "after-room",
+    "fbid": "122136647132810054"
+   },
+   {
+    "name": "before-room",
+    "fbid": "122136646670810054"
+   },
+   {
+    "name": "after-sink",
+    "fbid": "122136647054810054"
+   },
+   {
+    "name": "after-kitchen",
+    "fbid": "122136647306810054"
+   },
+   {
+    "name": "after-units",
+    "fbid": "122136646976810054"
+   },
+   {
+    "name": "after-dining",
+    "fbid": "122136647222810054"
+   },
+   {
+    "name": "after-doors",
+    "fbid": "122136647462810054"
+   },
+   {
+    "name": "after-sink-wide",
+    "fbid": "122136646904810054"
+   },
+   {
+    "name": "before-beam",
+    "fbid": "122136646508810054"
+   },
+   {
+    "name": "before-dining",
+    "fbid": "122136646592810054"
+   },
+   {
+    "name": "before-masked",
+    "fbid": "122136646826810054"
+   }
+  ],
   "garage-conversion-cannock": [
    {
     "name": "after-loft-room",

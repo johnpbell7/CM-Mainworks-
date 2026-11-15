@@ -2,7 +2,7 @@ import { photo, type Media } from "./media";
 import type { SectionSlug } from "./site";
 
 /*
-  Connor's jobs, from his Facebook posts (1 Apr to 1 Oct 2026). One entry per job feeds
+  Connor's jobs, from his Facebook posts (1 Apr to 11 Nov 2026). One entry per job feeds
   the projects page, its service page ("Recent … work"), its town page ("Recent work in …",
   matched by `place`) and, with `homepage`, the homepage before and afters. A job with at
   least four photos also gets its own page (/projects/<slug>) and a sitemap entry; smaller
@@ -42,6 +42,35 @@ export type Project = {
 const none = (label: string): Media => ({ src: null, alt: label, label });
 
 export const projects: Project[] = [
+  {
+    slug: "kitchen-diner-decoration",
+    name: "Kitchen-diner, fully decorated",
+    section: "decorating",
+    place: "",
+    date: "2026-11-11",
+    summary: "A full decoration of a kitchen and dining room, taken from bare plaster round the beam to a sharp, warm, luxurious finish.",
+    body: [
+      "Have a look at the difference on this one. A full decoration of this kitchen and dining room, finished with a sharp, warm, luxurious look.",
+      "Everything was dust-sheeted and masked off while I worked, and the bare plaster round the beam was taken right through to the final coat.",
+    ],
+    done: ["Kitchen and dining room fully decorated", "Walls and ceilings painted", "Bare plaster round the beam finished"],
+    before: photo("kitchen-diner-decoration/before-room", "Kitchen-diner mid-job: bare plaster round the beam, dust sheets over the table and tools on the worktop"),
+    after: photo("kitchen-diner-decoration/after-room", "The kitchen-diner finished: pale walls, white ceiling with downlights, and dark green units with gold handles"),
+    aligned: false,
+    gallery: [
+      photo("kitchen-diner-decoration/after-sink", "Finished kitchen: white quartz worktop, gold tap and dark green cabinets under the window"),
+      photo("kitchen-diner-decoration/after-kitchen", "Dark green shaker kitchen with glass-fronted wall cabinets in the newly decorated room"),
+      photo("kitchen-diner-decoration/after-units", "The finished kitchen run, with a tall oven housing and a wood-effect floor"),
+      photo("kitchen-diner-decoration/after-dining", "Looking through the decorated dining end to the French doors and shuttered window"),
+      photo("kitchen-diner-decoration/after-doors", "The finished kitchen-diner with French doors out to the garden"),
+      photo("kitchen-diner-decoration/after-sink-wide", "Sink wall finished, with a cream splashback and gold sockets"),
+      photo("kitchen-diner-decoration/before-beam", "Before: the beam and walls in bare plaster, with the room dust-sheeted"),
+      photo("kitchen-diner-decoration/before-dining", "Before: the dining end in bare plaster, with paint and dust sheets down"),
+      photo("kitchen-diner-decoration/before-masked", "Before: the kitchen units wrapped in plastic while the room was decorated"),
+    ],
+    placeholder: false,
+    homepage: 1,
+  },
   {
     slug: "garage-conversion-cannock",
     name: "Decorated garage conversion",
@@ -183,7 +212,6 @@ export const projects: Project[] = [
       photo("bay-window-restoration/before-cill-2", "The rotten cill and frame before the repair"),
     ],
     placeholder: false,
-    homepage: 3,
   },
   {
     slug: "garage-and-porch",
@@ -266,7 +294,7 @@ export const projects: Project[] = [
     aligned: true,
     gallery: [],
     placeholder: false,
-    homepage: 1,
+    homepage: 3,
   },
   {
     slug: "under-stairs-cupboard-door",

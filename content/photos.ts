@@ -2,6 +2,17 @@
 export type PhotoFile = { src: string; w: number; h: number };
 
 export const photoFiles: Record<string, PhotoFile> = {
+  "kitchen-diner-decoration/after-room": { src: "/images/projects/kitchen-diner-decoration/after-room.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/before-room": { src: "/images/projects/kitchen-diner-decoration/before-room.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/after-sink": { src: "/images/projects/kitchen-diner-decoration/after-sink.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/after-kitchen": { src: "/images/projects/kitchen-diner-decoration/after-kitchen.jpg", w: 1049, h: 1400 },
+  "kitchen-diner-decoration/after-units": { src: "/images/projects/kitchen-diner-decoration/after-units.jpg", w: 1049, h: 1400 },
+  "kitchen-diner-decoration/after-dining": { src: "/images/projects/kitchen-diner-decoration/after-dining.jpg", w: 1049, h: 1400 },
+  "kitchen-diner-decoration/after-doors": { src: "/images/projects/kitchen-diner-decoration/after-doors.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/after-sink-wide": { src: "/images/projects/kitchen-diner-decoration/after-sink-wide.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/before-beam": { src: "/images/projects/kitchen-diner-decoration/before-beam.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/before-dining": { src: "/images/projects/kitchen-diner-decoration/before-dining.jpg", w: 1400, h: 1050 },
+  "kitchen-diner-decoration/before-masked": { src: "/images/projects/kitchen-diner-decoration/before-masked.jpg", w: 1050, h: 1400 },
   "garage-conversion-cannock/after-loft-room": { src: "/images/projects/garage-conversion-cannock/after-loft-room.jpg", w: 1050, h: 1400 },
   "garage-conversion-cannock/after-room": { src: "/images/projects/garage-conversion-cannock/after-room.jpg", w: 1050, h: 1400 },
   "garage-conversion-cannock/after-skylight": { src: "/images/projects/garage-conversion-cannock/after-skylight.jpg", w: 1050, h: 1400 },

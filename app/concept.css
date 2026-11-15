@@ -726,3 +726,33 @@ input, textarea, select { caret-color: var(--gold-ink); }
 .quote .via-row .via-mail:hover { background: color-mix(in srgb, var(--t-gold) 45%, #fff); }
 .quote .note { overflow-wrap: anywhere; }
 .quote .via-row .send svg { flex: none; width: 20px; height: 20px; }
+
+/* ---------- JB Design Agency credit (John, 15 Nov): the same slim banner as on Birth Hood, edge to edge under the footer ---------- */
+.foot { padding-bottom: 0 !important; }
+.foot-base { padding-bottom: 28px; }
+.jb-credit { background: #18181a; color: #fafaf8; font-family: Helvetica, Arial, sans-serif; font-size: 13.5px; line-height: 1.375; border-top: 1px solid rgb(255 255 255 / .06); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.jb-credit-inner { max-width: var(--max, 1240px); margin: 0 auto; padding: .75rem var(--gutter, 24px); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.jb-credit-brand { display: inline-flex; align-items: center; gap: .625rem; color: #a3a3a0; text-decoration: none; border-radius: 4px; }
+.jb-credit-brand b { font-weight: 600; color: #fafaf8; text-underline-offset: 3px; }
+.jb-credit-brand:hover b { text-decoration: underline; }
+.jb-credit-mark { width: 24px; height: 24px; flex: none; }
+.jb-credit-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem .875rem; }
+.jb-credit-cta > span { font-weight: 500; }
+.jb-credit-btn { display: inline-flex; align-items: center; gap: .375rem; min-height: 2.25rem; padding: 0 1rem; border-radius: 999px; background: #fff04d; color: #18181a; font-weight: 600; white-space: nowrap; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+.jb-credit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgb(255 240 77 / .25); }
+.jb-credit-btn svg { width: 14px; height: 14px; }
+.jb-credit a:focus-visible { outline: 2px solid #fff04d; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .jb-credit-btn { transition: none; } }
+@media (max-width: 767px) {
+  .jb-credit-inner { flex-direction: column; gap: .625rem; text-align: center; padding-top: .875rem; padding-bottom: .875rem; }
+}
+@media (max-width: 720px) {
+  /* clear the fixed Call / Free quote bar */
+  .jb-credit { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ---------- no pale blue next to grey (John, 15 Nov): a "how it works" section that touches a grey one goes white ---------- */
+.sec.grey + .sec:has(.steps), .sec.grey + .sec:has(.timeline),
+.sec:has(.steps):has(+ .sec.grey), .sec:has(.timeline):has(+ .sec.grey) { background: #fff; }
+.sec:has(.steps):has(+ .sec.grey) + .sec.grey, .sec:has(.timeline):has(+ .sec.grey) + .sec.grey { border-top: 0; }
+.sec.grey + .sec:has(.steps) + .sec:not(.grey), .sec.grey + .sec:has(.timeline) + .sec:not(.grey) { border-top: 1px solid var(--line); }

@@ -119,6 +119,12 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 - **Prices:** see the Prices item above (15 Nov: no figures).
   - No "no surprises" or "no hidden costs" claims anywhere. The honest line: old houses can hide things, and any change is shown and agreed before work carries on.
 
+### 15 Nov 2026, after launch
+
+- **Designer credit:** the slim JB Design Agency banner along the very bottom of the footer, the same as Birth Hood and the cricket club (links to jbdesignagency.co.uk; "Start a project" emails John). On phones it clears the Call / Free quote bar.
+- **No pale blue next to grey:** a "how it works" section (steps or phases) that touches a grey section turns white (`app/concept.css`, end).
+- **New job from Facebook:** "Kitchen-diner, fully decorated" (post of 11 Nov, 11 of its 14 photos), homepage before and after 1. Homepage slots now: kitchen-diner 1, garage conversion 2, panelled wall 3; the bay window moved to the photo strip under them.
+
 ### Visitor counts (John, 15 Nov 2026)
 
 - Vercel Web Analytics (`@vercel/analytics`, `components/Tracking.tsx`, `lib/analytics.ts`): page views, plus three events, each with the page and where on it:
