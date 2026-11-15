@@ -153,8 +153,8 @@ export default function Home() {
             </p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="" width={96} height={42} loading="lazy" />
           </div>
-          {/* to the right of the words; his own work until there's a portrait of him: the oak-framed canopy he built */}
-          <Photo media={media.portrait.src ? media.portrait : media.hero} sizes="(max-width: 1080px) 100vw, 45vw" />
+          {/* to the right of the words: the oak-framed canopy he built (his cut-out portrait is on the about page only, John 15 Nov 2026) */}
+          <Photo media={media.hero} sizes="(max-width: 1080px) 100vw, 45vw" />
         </div>
       </section>
 

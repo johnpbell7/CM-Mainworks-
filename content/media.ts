@@ -52,7 +52,8 @@ export const media = {
     alt: "Restored bay window, freshly painted white, by CM MainWorks",
     label: "Reviews background",
   },
-  portrait: { src: null, alt: "Connor, who runs CM MainWorks", label: "Photo of Connor" },
+  // Cut out from a photo John supplied (15 Nov 2026): Connor only, waist up, his own pixels enlarged 2x (no AI redraw of his face).
+  portrait: { src: "/images/connor.webp", w: 842, h: 1509, alt: "Connor, who runs CM MainWorks, smiling in a light blue shirt", label: "Photo of Connor" },
 } satisfies Record<string, Media>;
 
 /*

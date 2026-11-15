@@ -762,3 +762,12 @@ input, textarea, select { caret-color: var(--gold-ink); }
 .crumbs li { display: flex; align-items: baseline; min-width: 0; }
 .crumbs li + li::before { flex: none; }
 .crumbs a, .crumbs li > span { display: inline; padding: 4px 0; line-height: 1.5; }
+
+/* About: Connor cut out on a warm gold tint (his shirt is blue, so not a blue panel). Zoomed in: he
+   fills the panel's width, standing on its bottom edge, with his head breaking out above the top, so
+   his shoulders and both arms always show whole (John, 15 Nov 2026). */
+.about .ph.cutout { aspect-ratio: 4 / 5; max-width: 480px; background: var(--t-gold); overflow: visible; margin-top: clamp(64px, 9vw, 120px); }
+.about .ph.cutout img { object-fit: contain !important; object-position: center bottom !important; inset: auto 3% 0 !important; width: 94% !important; height: auto !important; border-radius: 0 0 var(--radius) var(--radius); }
+@media (max-width: 1080px) {
+  .about .ph.cutout { max-width: 360px; margin-top: 72px; }
+}

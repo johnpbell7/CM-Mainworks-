@@ -37,7 +37,7 @@ export default function About() {
 
       <section className={`sec about${media.portrait.src ? "" : " no-photo"}`} style={{ paddingTop: 0, borderTop: 0 }} aria-labelledby="story-title">
         <div className="wrap">
-          {media.portrait.src && <Photo media={media.portrait} sizes="(max-width: 1080px) 100vw, 45vw" />}
+          {media.portrait.src && <Photo media={media.portrait} className="cutout" sizes="(max-width: 1080px) 90vw, 520px" priority />}
           <div data-reveal="up">
             {/* DRAFT copy for Connor to approve. Do not add insurance, qualifications or reviews until he confirms them. */}
             <h2 id="story-title" className="mid-h">How I work</h2>
