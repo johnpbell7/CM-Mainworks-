@@ -174,7 +174,10 @@ export default async function Service({ params }: Props) {
                   {asPair(p)
                     ? <BeforeAfterSplit before={p.before} after={p.after} sizes="(max-width: 720px) 50vw, 25vw" />
                     : <Photo media={cover(p)} sizes="(max-width: 720px) 100vw, 50vw" />}
-                  <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
+                  {/* a job borrowed from another trade (`also`) says which, so a decorated kitchen isn't read as a fitted one (John, 15 Nov 2026) */}
+                  {p.section === s.slug
+                    ? <span className="proj-tag" style={{ "--c": s.color } as React.CSSProperties}>{s.name}</span>
+                    : <span className="proj-tag" style={{ "--c": getSection(p.section)!.color } as React.CSSProperties}>{getSection(p.section)!.name} job</span>}
                   <h3>{p.name}</h3>
                   <p>{p.summary}</p>
                   <span className="proj-more">{hasPage(p) ? "See the job" : "See the photos"} <Arrow /></span>
