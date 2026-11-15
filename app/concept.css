@@ -756,3 +756,9 @@ input, textarea, select { caret-color: var(--gold-ink); }
 .sec:has(.steps):has(+ .sec.grey), .sec:has(.timeline):has(+ .sec.grey) { background: #fff; }
 .sec:has(.steps):has(+ .sec.grey) + .sec.grey, .sec:has(.timeline):has(+ .sec.grey) + .sec.grey { border-top: 0; }
 .sec.grey + .sec:has(.steps) + .sec:not(.grey), .sec.grey + .sec:has(.timeline) + .sec:not(.grey) { border-top: 1px solid var(--line); }
+
+/* ---------- breadcrumbs (John, 15 Nov): a long last item wraps onto its own line, each slash stays beside its item ---------- */
+.crumbs { flex-wrap: wrap; align-items: baseline; row-gap: 0; }
+.crumbs li { display: flex; align-items: baseline; min-width: 0; }
+.crumbs li + li::before { flex: none; }
+.crumbs a, .crumbs li > span { display: inline; padding: 4px 0; line-height: 1.5; }
