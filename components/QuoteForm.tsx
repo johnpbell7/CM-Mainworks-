@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { business, jobColor, jobTypes, type JobType } from "@/content/site";
 import { formatPostcode, rules } from "@/lib/validation";
-import { Alert, Arrow, Camera, ChevronDown, WhatsApp } from "./Icons";
+import { Alert, Arrow, Camera, ChevronDown, Mail, WhatsApp } from "./Icons";
 import { trackQuote } from "@/lib/analytics";
 
 /*
@@ -40,6 +40,13 @@ function compose(f: FormData) {
 const whatsappUrl = (text: string) => `${business.whatsapp}?text=${encodeURIComponent(text)}`;
 const mailUrl = (to: string, subject: string, text: string) =>
   `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+/* On a computer email opens in the browser, the way WhatsApp does (John, 15 Nov 2026): Gmail's compose
+   window in a new tab, with Outlook, the email app and Copy as the other ways after. Phones use their mail app. */
+const q = (o: Record<string, string>) => Object.entries(o).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
+const gmailUrl = (to: string, subject: string, text: string) =>
+  `https://mail.google.com/mail/?${q({ view: "cm", fs: "1", to, su: subject, body: text })}`;
+const outlookUrl = (to: string, subject: string, text: string) =>
+  `https://outlook.live.com/mail/0/deeplink/compose?${q({ to, subject, body: text })}`;
 
 /*
   `starter` (the homepage hero): the type of work comes first, and on desktop the card starts folded to
@@ -111,7 +118,8 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
     const m = ready();
     if (!m || !mail) return;
     trackQuote("email", formRef.current);
-    open(mailUrl(mail, m.subject, m.text), false);
+    if (isPhone()) open(mailUrl(mail, m.subject, m.text), false);
+    else open(gmailUrl(mail, m.subject, m.text), true);
     setSent({ ...m, via: "email" });
   }
 
@@ -133,6 +141,7 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
 
   if (sent) {
     const wa = sent.via === "whatsapp";
+    const phone = isPhone();
     return (
       <div className="quote">
         <div className="done" role="status" aria-live="polite">
@@ -145,20 +154,30 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
           <p>
             {wa
               ? <>WhatsApp should be open with your details written out. <strong>Now add any photos with the paperclip</strong>, then tap send.</>
-              : <>Your email should be open with your details filled in. <strong>Now attach any photos</strong>, then send it.</>}
+              : phone
+                ? <>Your email should be open with your details filled in. <strong>Now attach any photos</strong>, then send it.</>
+                : <>Gmail should be open in a new tab with your details filled in. <strong>Now attach any photos</strong>, then send it. Use a different email? Pick it below.</>}
           </p>
           <p className="next">What happens next: I’ll reply, come and see the job, then send you a written quote.</p>
           <ul className="done-links">
-            <li>
-              {wa
-                ? <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Tried again")}>Didn’t open? Try WhatsApp again</a>
-                : <a href={mailUrl(mail, sent.subject, sent.text)} onClick={() => trackQuote("email", formRef.current, "Tried again")}>Didn’t open? Try email again</a>}
-            </li>
-            <li>
-              {wa
-                ? <a href={mailUrl(mail, sent.subject, sent.text)} onClick={() => trackQuote("email", formRef.current, "Switched from WhatsApp")}>Send it by email instead</a>
-                : <a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Switched from email")}>Send it on WhatsApp instead</a>}
-            </li>
+            {wa ? (
+              <>
+                <li><a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Tried again")}>Didn’t open? Try WhatsApp again</a></li>
+                <li><a href={phone ? mailUrl(mail, sent.subject, sent.text) : gmailUrl(mail, sent.subject, sent.text)} target={phone ? undefined : "_blank"} rel="noopener" onClick={() => trackQuote("email", formRef.current, "Switched from WhatsApp")}>Send it by email instead</a></li>
+              </>
+            ) : phone ? (
+              <>
+                <li><a href={mailUrl(mail, sent.subject, sent.text)} onClick={() => trackQuote("email", formRef.current, "Tried again")}>Didn’t open? Try email again</a></li>
+                <li><a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Switched from email")}>Send it on WhatsApp instead</a></li>
+              </>
+            ) : (
+              <>
+                <li><a href={gmailUrl(mail, sent.subject, sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("email", formRef.current, "Tried again")}>Didn’t open? Try Gmail again</a></li>
+                <li><a href={outlookUrl(mail, sent.subject, sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("email", formRef.current, "Outlook instead")}>Use Outlook instead</a></li>
+                <li><a href={mailUrl(mail, sent.subject, sent.text)} onClick={() => trackQuote("email", formRef.current, "Email app instead")}>Open my email app</a></li>
+                <li><a href={whatsappUrl(sent.text)} target="_blank" rel="noopener" onClick={() => trackQuote("whatsapp", formRef.current, "Switched from email")}>Send it on WhatsApp instead</a></li>
+              </>
+            )}
             <li>
               {/* for anyone whose WhatsApp or email didn't open: the message, to paste anywhere */}
               <button type="button" className="copy" onClick={() => navigator.clipboard?.writeText(sent.text).then(() => setCopied(true), () => {})}>
@@ -234,19 +253,19 @@ function QuoteCard({ headingLevel = 2, defaultJob = "", head = true, starter = f
       {/* photos can't travel through a link, so say plainly where they go */}
       <p className="photo-tip">
         <span className="photo-ico" aria-hidden="true"><Camera /></span>
-        <span><strong>Got photos of the job?</strong> Add them in WhatsApp with the paperclip, just before you tap send.</span>
+        <span><strong>Got photos of the job?</strong> Add them in WhatsApp or your email, just before you send.</span>
       </p>
 
-      <button className="send" type="submit">
-        <WhatsApp />Send on WhatsApp
-      </button>
-      <p className="or-email">
-        Or <button type="button" onClick={byEmail}>send it by email</button>
-        {mail && <> to <span className="addr">{mail}</span></>}
-      </p>
+      <fieldset className="send-via">
+        <legend>How do you want to send it?</legend>
+        <div className="via-row">
+          <button className="send" type="submit"><WhatsApp />WhatsApp</button>
+          <button className="send via-mail" type="button" onClick={byEmail}><Mail />Email</button>
+        </div>
+      </fieldset>
 
       <p className="note" id="q-note">
-        WhatsApp opens with your details written out, ready to send. <Link href="/privacy">Privacy</Link>
+        Either way it opens with your details written out, ready to send{mail && <>, to {mail}</>}. <Link href="/privacy">Privacy</Link>
       </p>
     </>
   );

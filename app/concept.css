@@ -716,3 +716,13 @@ input, textarea, select { caret-color: var(--gold-ink); }
   .shapes h3 { font-size: 1.08rem; }
   .shapes p { font-size: .95rem; }
 }
+
+/* ---------- the quote form asks how to send it (John, 15 Nov): WhatsApp or email, side by side, both tracked ---------- */
+.quote .send-via { margin: 22px 0 0; padding: 0; border: 0; min-width: 0; }
+.quote .send-via legend { padding: 0; margin-bottom: 10px; font-size: .95rem; font-weight: 600; color: var(--ink); }
+.quote .via-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quote .via-row .send { margin-top: 0; padding: 14px 16px; }
+.quote .via-row .via-mail { background: #fff; box-shadow: inset 0 0 0 1.5px var(--gold); }
+.quote .via-row .via-mail:hover { background: color-mix(in srgb, var(--t-gold) 45%, #fff); }
+.quote .note { overflow-wrap: anywhere; }
+.quote .via-row .send svg { flex: none; width: 20px; height: 20px; }

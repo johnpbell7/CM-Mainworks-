@@ -133,6 +133,7 @@ Connor works from WhatsApp, not email, so the website sends nothing itself.
 
 - "Send on WhatsApp" opens WhatsApp with the person's name, postcode, type of work and job details written out. They add photos with the paperclip and tap send.
 - "Or send it by email" opens their own email app with Connor's business Gmail and the same details filled in. The address is kept in two parts in `content/site.ts` and joined in the browser, so bots reading the page don't pick it up.
+- **The form asks "How do you want to send it?" (John, 15 Nov 2026):** WhatsApp and Email side by side, both counted. On a computer Email opens Gmail's compose window in a new tab (like WhatsApp Web), and the page after offers Gmail again, Outlook, the email app, WhatsApp and Copy. Phones open their mail app. It is one component (`components/QuoteForm.tsx`), so every form on the site matches.
 - No email service, key or domain is needed for the form. `app/api/quote` (the old Resend route) is no longer used by the form.
 
 ---
