@@ -39,7 +39,7 @@ export default async function Service({ params }: Props) {
   const s = getSection((await params).slug);
   if (!s) notFound();
   const c = serviceContent[s.slug];
-  const work = publishedProjects.filter((p) => p.section === s.slug);
+  const work = publishedProjects.filter((p) => p.section === s.slug || p.also?.includes(s.slug));
   // A job's card shows another of its photos when its finished one already leads the page,
   // or its before and after side by side when it has no other
   const repeats = (p: (typeof work)[number]) => p.after.src === media[s.slug].src;

@@ -121,6 +121,7 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 
 ### 15 Nov 2026, after launch
 
+- **Jobs on more than one service page:** `also` in `content/projects.ts`. The kitchen-diner and the kitchen drop ceiling also show on Kitchens; the hall, stairs and landing and the under-stairs door also show on Stairs, doors and skirting.
 - **Designer credit:** the slim JB Design Agency banner along the very bottom of the footer, the same as Birth Hood and the cricket club (links to jbdesignagency.co.uk; "Start a project" emails John). On phones it clears the Call / Free quote bar.
 - **No pale blue next to grey:** a "how it works" section (steps or phases) that touches a grey section turns white (`app/concept.css`, end).
 - **New job from Facebook:** "Kitchen-diner, fully decorated" (post of 11 Nov, 11 of its 14 photos), not in the homepage before and afters (John: the kitchen was already fitted in the "before", so the pair showed little change); its sink-wall photo leads the strip under them. Homepage slots stay: panelled wall 1, garage conversion 2, bay window 3.

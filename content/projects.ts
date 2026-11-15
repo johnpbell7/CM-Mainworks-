@@ -19,6 +19,8 @@ export type Project = {
   slug: string;
   name: string;
   section: SectionSlug;
+  /** Other service pages it also shows on ("Recent … work"), e.g. a decorated kitchen on Kitchens (John, 15 Nov 2026) */
+  also?: SectionSlug[];
   /** Town, only where Connor named it */
   place: string;
   /** When he posted it, YYYY-MM-DD */
@@ -46,6 +48,7 @@ export const projects: Project[] = [
     slug: "kitchen-diner-decoration",
     name: "Kitchen-diner, fully decorated",
     section: "decorating",
+    also: ["kitchens"],
     place: "",
     date: "2026-11-11",
     summary: "A full decoration of a kitchen and dining room, taken from bare plaster round the beam to a sharp, warm, luxurious finish.",
@@ -146,6 +149,7 @@ export const projects: Project[] = [
     slug: "kitchen-drop-ceiling",
     name: "Drop ceiling in a kitchen",
     section: "carpentry",
+    also: ["kitchens"],
     place: "",
     date: "2026-09-08",
     summary: "A new drop ceiling to modernise a kitchen: a timber frame laser-levelled all round, boarded, taped, filled and painted.",
@@ -166,6 +170,7 @@ export const projects: Project[] = [
     slug: "hall-stairs-landing",
     name: "Hall, stairs and landing",
     section: "decorating",
+    also: ["staircases"],
     place: "",
     date: "2026-08-04",
     summary: "Hall, stairs and landing painted: a nice change from the basic white to a light grey.",
@@ -300,6 +305,7 @@ export const projects: Project[] = [
     slug: "under-stairs-cupboard-door",
     name: "Under-stairs cupboard door",
     section: "carpentry",
+    also: ["staircases"],
     place: "",
     date: "2026-04-01",
     summary: "A cupboard door for under the stairs, cut to follow the line of the staircase, hung and painted.",
