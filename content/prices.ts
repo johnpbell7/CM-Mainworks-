@@ -1,126 +1,46 @@
-import type { JobType, SectionSlug } from "./site";
+import type { SectionSlug } from "./site";
 
 /*
-  Prices page (John, 10 Nov 2026). Every price depends on seeing the job:
-  - a full renovation is always quoted after a visit (no figure at all)
-  - kitchens, bathrooms and single-storey extensions show small, medium and large,
-    each with a rough "from" figure
-  - smaller jobs are priced after a visit
-  The "from" figures are PLACEHOLDERS: null until Connor supplies real numbers, and the
-  page shows £TBC. Never fill these in without Connor's say-so (see CLAUDE.md: no
-  invented prices). The size descriptions are a draft for Connor to confirm too.
-  Write figures as plain strings, e.g. "£18,000" or "£450".
+  Prices page (John, 15 Nov 2026): no figures at all. Connor can't price a job before
+  he's seen it, so the page is about how a job gets priced: the process, what shapes a
+  price, and the work he quotes for. Every job is quoted after a free visit.
+  (Until 15 Nov the page had "from" figures for small, medium and large kitchens,
+  bathrooms and extensions; they were never filled in. See git history if he ever
+  wants them back.)
 */
 
-export type Size = { name: "Small" | "Medium" | "Large"; note: string; from: string | null };
+export type Step = { title: string; text: string; art: 0 | 1 | 2 | 3 | 4 | 5 };
 
-export type Package = {
-  name: string;
-  /** Colour family (a service slug), or "renovation" for brand gold */
-  look: SectionSlug | "renovation";
-  from: string | null;
-  /** Rough sizes, each with its own "from" figure */
-  sizes?: Size[];
-  /** No figure at all: always quoted after a visit */
-  quoteOnly?: boolean;
-  /** For the quoted-after-a-visit card: how it's priced, as three rows like the other cards' sizes */
-  steps?: { name: string; note: string; value: string }[];
-  /** e.g. "per room" */
-  unit?: string;
-  summary: string;
-  includes: string[];
-  job: JobType;
-  href: string;
-};
-
-export const packages: Package[] = [
-  {
-    name: "Full home renovation",
-    look: "renovation",
-    from: null,
-    quoteOnly: true,
-    // how a full renovation is priced, in the same three-row rhythm as the other cards (John, 10 Nov 2026)
-    steps: [
-      { name: "A visit", note: "I come and see the house", value: "Free" },
-      { name: "A written quote", note: "A clear plan and price", value: "Free" },
-      { name: "Paid in phases", note: "Invoiced as the work is done", value: "" },
-    ],
-    summary: "My main work: every room you want doing, managed by one team.",
-    includes: [
-      "Planned with you, in clear phases",
-      "Invoiced phase by phase",
-      "Kitchen, bathroom, floors, stairs and doors",
-      "Trades organised, decorated to finish",
-    ],
-    job: "Full renovation",
-    href: "/renovations",
-  },
-  {
-    name: "Kitchen renovation",
-    look: "kitchens",
-    from: null,
-    sizes: [
-      { name: "Small", note: "Compact or galley", from: null },
-      { name: "Medium", note: "Typical family kitchen", from: null },
-      { name: "Large", note: "Large or open-plan", from: null },
-    ],
-    summary: "Old kitchen out, new one in, room finished.",
-    includes: [
-      "Strip-out and rubbish taken away",
-      "New kitchen fitted level and square",
-      "Splashback tiling and flooring",
-      "Trades organised, decorated to finish",
-    ],
-    job: "Kitchen",
-    href: "/services/kitchens",
-  },
-  {
-    name: "Bathroom renovation",
-    look: "bathrooms",
-    from: null,
-    sizes: [
-      { name: "Small", note: "Cloakroom or en suite", from: null },
-      { name: "Medium", note: "Family bathroom", from: null },
-      { name: "Large", note: "Large main bathroom", from: null },
-    ],
-    summary: "A complete bathroom, strip-out to final seal.",
-    includes: [
-      "Old suite and tiles stripped out",
-      "New bath or shower, basin and toilet",
-      "Walls and floor tiled",
-      "Trades organised, decorated to finish",
-    ],
-    job: "Bathroom",
-    href: "/services/bathrooms",
-  },
-  {
-    name: "Single-storey extension",
-    look: "extensions",
-    from: null,
-    sizes: [
-      { name: "Small", note: "One room, like a utility", from: null },
-      { name: "Medium", note: "Kitchen-diner or family room", from: null },
-      { name: "Large", note: "Wide or L-shaped", from: null },
-    ],
-    summary: "More room, built and finished inside.",
-    includes: [
-      "Help with plans and approvals",
-      "Groundwork, walls and roof",
-      "Finished inside, ready to use",
-      "Invoiced phase by phase",
-    ],
-    job: "Extension",
-    href: "/services/extensions",
-  },
+/** From first message to final walk-round. Art: 0 photos, 1 quote, 2 finished house, 3 visit, 4 sit-down, 5 phases. */
+export const priceSteps: Step[] = [
+  { art: 0, title: "Tell me about the job", text: "A few photos and a line about what you’re after, on WhatsApp or by email." },
+  { art: 3, title: "I come and see it", text: "I measure up, look at what’s there and talk it through with you. The visit is free." },
+  { art: 1, title: "Your written quote", text: "Broken down so you can see what each part costs. Free, with no obligation." },
+  { art: 4, title: "We plan it together", text: "We agree the phases, the start date, the timescales and the targets." },
+  { art: 5, title: "Built and paid in phases", text: "An invoice as each phase is done, never the whole job at once, and regular sit-downs to check we’re on target." },
+  { art: 2, title: "A final walk-round", text: "We go round together, and I put right anything you’re not happy with." },
 ];
 
-/** Smaller jobs, kept broad. Each is priced after a visit (John: they all depend on seeing the job). */
-export const roomPrices: { name: string; note: string; from: string | null; look: SectionSlug; href: string }[] = [
-  { name: "Stairs, doors and skirting", note: "Staircase makeovers, internal doors, trims", from: null, look: "staircases", href: "/services/staircases" },
-  { name: "Floors and tiling", note: "Wood, laminate, LVT and tiles", from: null, look: "flooring-and-tiling", href: "/services/flooring-and-tiling" },
-  { name: "Roof repairs", note: "Tiles, leaks, fascias and guttering", from: null, look: "roofing", href: "/services/roofing" },
-  { name: "Joinery and decorating", note: "Media walls, alcoves and painting", from: null, look: "joinery", href: "/services/joinery" },
+/** What a price depends on. Kept general: nothing here is a figure or a promise. */
+export const priceFactors: { title: string; text: string }[] = [
+  { title: "How much is changing", text: "One room or the whole house, and whether walls come out or go up." },
+  { title: "The house itself", text: "Its age, the walls and floors, and what’s behind them." },
+  { title: "The finishes you choose", text: "Kitchens, tiles, floors and doors come at every price." },
+  { title: "Other trades it needs", text: "Electrics, plumbing and plastering, organised as part of the job." },
+  { title: "Getting in and clearing up", text: "Parking, skips and how materials get in and rubbish gets out." },
 ];
 
-/** Shown wherever a price appears, tied to the asterisk on every "from" figure. Honest: things can change. */
-export const priceNote = "Every price depends on seeing the job, so these are a rough guide. You’ll get a written quote after a visit, before any work starts. If something hidden turns up once work starts, like rot or old wiring, I’ll show you and agree any change with you before I carry on.";
+/** The work Connor quotes for, main work first. Each row is tapped as a whole, through to its page. */
+export const quoteJobs: { name: string; note: string; look: SectionSlug | "renovation"; href: string }[] = [
+  { name: "Full home renovations", note: "My main work: every room you want doing, one team", look: "renovation", href: "/renovations" },
+  { name: "Kitchens", note: "Old kitchen out, new one in, room finished", look: "kitchens", href: "/services/kitchens" },
+  { name: "Bathrooms", note: "Strip-out to final seal", look: "bathrooms", href: "/services/bathrooms" },
+  { name: "Extensions", note: "More room, built and finished inside", look: "extensions", href: "/services/extensions" },
+  { name: "Stairs, doors and skirting", note: "Staircase makeovers, internal doors, trims", look: "staircases", href: "/services/staircases" },
+  { name: "Floors and tiling", note: "Wood, laminate, LVT and tiles", look: "flooring-and-tiling", href: "/services/flooring-and-tiling" },
+  { name: "Roof repairs", note: "Tiles, leaks, fascias and guttering", look: "roofing", href: "/services/roofing" },
+  { name: "Joinery and decorating", note: "Media walls, alcoves and painting", look: "joinery", href: "/services/joinery" },
+];
+
+/** The honest line about change: old houses can hide things. */
+export const priceNote = "Old houses can hide things, like rot or old wiring. If something turns up once work starts, I’ll show you and we agree any change before I carry on.";

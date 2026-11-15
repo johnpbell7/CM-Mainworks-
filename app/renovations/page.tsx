@@ -173,7 +173,7 @@ export default function Renovations() {
       <section className="sec grey" aria-labelledby="how-title">
         <div className="wrap">
           <Phases titleId="how-title" />
-          <p className="more-note">Want a rough figure first? <Link href="/prices">See my renovation prices</Link>.</p>
+          <p className="more-note">Wondering what it costs? <Link href="/prices">See how I price a job</Link>.</p>
         </div>
       </section>
 

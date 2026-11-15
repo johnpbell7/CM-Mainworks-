@@ -136,7 +136,7 @@ export default function Home() {
             <p data-reveal="up">You get <span className="hl" data-pen="steel">a written quote before any work starts</span>.</p>
           </div>
           <Steps />
-          <p className="more-note">Want a rough figure first? <Link href="/prices">See my prices</Link>.</p>
+          <p className="more-note">Wondering what it costs? <Link href="/prices">See how I price a job</Link>.</p>
         </div>
       </section>
 

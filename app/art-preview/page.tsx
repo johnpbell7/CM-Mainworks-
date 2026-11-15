@@ -6,7 +6,7 @@ import Illustration, { type IllustrationKind } from "@/components/Illustration";
 // a live build shows "not found" (.concept-tools/frames.mjs measures the drawings here).
 export const metadata: Metadata = { title: "Drawings", robots: { index: false, follow: false } };
 
-const kinds: IllustrationKind[] = ["kitchen", "bathroom", "building", "roof", "flooring", "stairs", "carpentry", "joinery", "decorating", "renovation", "done", "town", "photos", "quote", "faq", "privacy", "gallery"];
+const kinds: IllustrationKind[] = ["kitchen", "bathroom", "building", "roof", "flooring", "stairs", "carpentry", "joinery", "decorating", "renovation", "done", "town", "photos", "quote", "faq", "privacy", "gallery", "survey"];
 
 export default function ArtPreview() {
   if (process.env.NODE_ENV === "production") notFound();

@@ -28,12 +28,13 @@ import Faq from "./concept/art/Faq";
 import Privacy from "./concept/art/Privacy";
 import Town from "./concept/art/Town";
 import Gallery from "./concept/art/Gallery";
+import Survey from "./concept/art/Survey";
 
 export type IllustrationKind =
   | "carpentry" | "building" | "joinery" | "decorating"
   | "renovation" | "kitchen" | "bathroom" | "flooring" | "stairs" | "roof"
   | "photos" | "quote" | "done"
-  | "faq" | "privacy" | "town" | "gallery";
+  | "faq" | "privacy" | "town" | "gallery" | "survey";
 
 const map: Record<IllustrationKind, { C: () => React.ReactNode; label: string }> = {
   kitchen: { C: Kitchen, label: "Drawing of a fitted kitchen" },
@@ -53,6 +54,7 @@ const map: Record<IllustrationKind, { C: () => React.ReactNode; label: string }>
   privacy: { C: Privacy, label: "Drawing of a padlock on a shield" },
   town: { C: Town, label: "Drawing of a street with a map pin" },
   gallery: { C: Gallery, label: "Drawing of before and after photos" },
+  survey: { C: Survey, label: "Drawing of a wall opened up to show the old brick, pipe and wiring behind it" },
 };
 
 // `view` frames a drawing more tightly (a page head uses it so the subject fills the space without anything cut off)

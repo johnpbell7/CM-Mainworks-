@@ -1,28 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/PageHead";
-import PackageCard, { PriceNote, VisitPrice } from "@/components/PackageCard";
 import QuoteForm from "@/components/QuoteForm";
 import FaqList from "@/components/FaqList";
+import Illustration from "@/components/Illustration";
+import StepArt from "@/components/concept/StepArt";
 import { business, getSection, renovation } from "@/content/site";
-import { Calendar, Eye, Layers, QuoteDoc } from "@/components/Icons";
-import { packages, roomPrices } from "@/content/prices";
+import { priceFactors, priceNote, priceSteps, quoteJobs } from "@/content/prices";
 import { priceFaqs } from "@/content/faqs";
 import { faqLd, JsonLd, pageMeta, shareImage } from "@/lib/seo";
 
-export const metadata: Metadata = pageMeta({
-  title: "Renovation prices and packages",
-  description: "A rough guide to my prices for kitchens, bathrooms and extensions across the Midlands. Every job is priced after a free visit, with a written quote.",
-  path: "/prices",
-  image: shareImage("prices", "CM MainWorks: Honest renovation prices"),
-});
+/*
+  Prices (John, 15 Nov 2026): no figures. Every job is quoted once Connor has seen it, so
+  the page shows how a job gets priced: the process as six drawings, what shapes a price,
+  the work he quotes for, the price questions and the quote form.
+*/
 
-const how = [
-  { Icon: QuoteDoc, title: "Priced after a visit", text: "I need to see the job. The written quote is free, with no obligation." },
-  { Icon: Layers, title: "Paid in phases", text: "Renovations are invoiced phase by phase." },
-  { Icon: Calendar, title: "Regular sit-downs", text: "We check timescales and targets together." },
-  { Icon: Eye, title: "Changes agreed first", text: "Old houses can hide things. If something turns up, I’ll show you and we agree it before I carry on." },
-];
+export const metadata: Metadata = pageMeta({
+  title: "How I price a job",
+  description: "Every renovation and smaller job across the Midlands is priced after a free visit, with a written quote broken down so you can see what each part costs.",
+  path: "/prices",
+  image: shareImage("prices", "CM MainWorks: Every job priced once I’ve seen it"),
+});
 
 export default function Prices() {
   return (
@@ -31,63 +30,76 @@ export default function Prices() {
       <PageHead
         crumbs={[{ href: "/prices", label: "Prices" }]}
         art="quote"
-        title={<>Honest prices, <span className="hl">agreed with you.</span></>}
-        lede="A rough guide before we talk. Every job is different, so I price it properly after a visit, with a written quote."
-      >
-        {packages.every((p) => (p.sizes ?? []).every((z) => !z.from)) && <p className="draft">Draft: Connor to confirm the sizes and prices.</p>}
-      </PageHead>
+        title={<>Every job priced <span className="hl">once I’ve seen it.</span></>}
+        lede="No two homes are the same, so there’s no price list here. I come and see the job, then send you a written quote, free."
+      />
 
-      <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="pkg-title">
-        <div className="wrap">
-          <h2 id="pkg-title" className="sr-only">Renovation packages</h2>
-          <div className="pkgs swipe" data-reveal="stagger">
-            {packages.map((p) => <PackageCard key={p.name} p={p} />)}
-          </div>
-          <PriceNote />
-        </div>
-      </section>
-
-      <section className="sec grey" aria-labelledby="how-title">
+      <section className="sec" aria-labelledby="how-title">
         <div className="wrap">
           <div className="sec-head">
-            <div data-reveal="up"><h2 id="how-title">How my pricing works</h2></div>
-            <p data-reveal="up">Fair, competitive and <span className="hl">out in the open</span>.</p>
+            <div data-reveal="up"><h2 id="how-title">How I price a job</h2></div>
+            <p data-reveal="up">From your first message to the <span className="hl" style={{ whiteSpace: "nowrap" }}>final walk-round</span>.</p>
           </div>
-          <ul className="benefits tight" data-reveal="stagger">
-            {how.map(({ Icon, title, text }) => (
-              <li key={title} style={{ "--c": "var(--gold)", "--pen": "#fff" } as React.CSSProperties}>
-                <span className="benefit-ico"><Icon /></span>
-                <h3>{title}</h3>
-                <p>{text}</p>
+          <ol className="steps six">
+            {priceSteps.map((st, i) => (
+              <li key={st.title} data-reveal="up">
+                <div className="step-mark"><StepArt step={st.art} /></div>
+                <div className="step-body">
+                  <p className="step-n">Step {i + 1}</p>
+                  <h3>{st.title}</h3>
+                  <p>{st.text}</p>
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
-      <section className="sec" aria-labelledby="room-title">
+      <section className="sec grey" aria-labelledby="shape-title">
         <div className="wrap faq-wrap">
           <div className="faq-side" data-reveal="up">
-            <h2 id="room-title">Smaller jobs</h2>
-            <p>On their own or as part of a bigger job.</p>
+            <h2 id="shape-title">What shapes your price</h2>
+            <p>Your quote is worked out from your home, not from a list.</p>
+            <div className="ph ph-illo shape-art">
+              <Illustration kind="survey" fit="bottom" />
+            </div>
           </div>
           <div>
+            <ol className="shapes" data-reveal="stagger">
+              {priceFactors.map((f, i) => (
+                <li key={f.title}>
+                  <span className="shape-n" aria-hidden="true">{i + 1}</span>
+                  <div>
+                    <h3>{f.title}</h3>
+                    <p>{f.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="price-note">{priceNote}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" aria-labelledby="jobs-title">
+        <div className="wrap faq-wrap">
+          <div className="faq-side" data-reveal="up">
+            <h2 id="jobs-title">What I quote for</h2>
+            <p>Whole homes first, and smaller jobs on their own or as part of a bigger one.</p>
+          </div>
           <ul className="price-rows" data-reveal="stagger">
-            {roomPrices.map((r) => {
-              const s = getSection(r.look)!;
+            {quoteJobs.map((r) => {
+              const c = r.look === "renovation" ? renovation.color : getSection(r.look)!.color;
               return (
-                <li key={r.name} style={{ "--c": s.color } as React.CSSProperties}>
+                <li key={r.name} className={r.look === "renovation" ? "main" : undefined} style={{ "--c": c } as React.CSSProperties}>
                   <Link href={r.href}>
                     <h3>{r.name}</h3>
-                    <VisitPrice />
                     <p>{r.note}</p>
                   </Link>
                 </li>
               );
             })}
           </ul>
-            <p className="price-note">Every job is different, so I price these once I’ve seen it. The written quote is free.</p>
-          </div>
         </div>
       </section>
 
@@ -104,7 +116,7 @@ export default function Prices() {
         <div className="wrap contact-grid">
           <div data-reveal="up">
             <h2 id="ask-title" className="big-h">Get your price</h2>
-            <p className="big-p">Send a few photos and a line about the job, and I’ll send a written quote.</p>
+            <p className="big-p">Send a few photos and a line about the job, and I’ll come and see it.</p>
             <p className="big-p">Or ring me on <a href={business.phoneHref}>{business.phoneDisplay}</a>.</p>
           </div>
           <QuoteForm />

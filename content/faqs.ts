@@ -37,7 +37,7 @@ export const renovationFaqs: Faq[] = [
 
 export const priceFaqs: Faq[] = [
   pay,
-  { q: "Why don’t you give a fixed price online?", a: "Because every home is different, and a lot depends on what I see when I visit. The sizes give you a rough idea before you get in touch; your written quote is based on your job, not a price list.", color: "renovation" },
+  { q: "Why don’t you give a fixed price online?", a: "Because every home is different, and a lot depends on what I see when I visit. A figure on a website would only be a guess. Your written quote is worked out for your job, after a free visit.", color: "renovation" },
   surprises,
   budget,
   { q: "Why can one team cost less?", a: "Fewer people each adding their own margin, no days lost waiting between trades, and nobody paid twice to fix what someone else left.", color: "extensions" },

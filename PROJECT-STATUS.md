@@ -4,7 +4,7 @@
 
 - **Client:** Connor, CM MainWorks.
 - **Built by:** John Bell, JB Design Agency.
-- **Last updated:** 10 November 2026 (the illustrated look and the new prices layout).
+- **Last updated:** 15 November 2026 (the prices page is now about how a job is priced, with no figures).
 
 ---
 
@@ -58,10 +58,13 @@ He still takes on smaller jobs (carpentry, joinery and decorating), but they are
   - on its own town page (`/areas/lichfield`),
   - in town lists (the footer, the contact page's areas, the areas FAQ answer),
   - in the footer address line and the invisible business schema.
-- **Prices (`/prices`):**
-  - Four renovation packages, plus four broad smaller-job rows. No per-door or per-room rates.
-  - Every "from" price has an asterisk, explained by: "Prices are a guide and subject to seeing the job…".
-  - **All figures are placeholders (`£TBC`) until Connor supplies them.** Never invent prices.
+- **Prices (`/prices`, John, 15 Nov 2026): no figures at all.** Connor can't price a job before he's seen it, so the page is about how a job gets priced:
+  - Page head: "Every job priced once I’ve seen it." with the quote drawing (John likes it; keep it).
+  - "How I price a job": six drawn steps (message, visit, written quote, plan together, built and paid in phases, final walk-round). Drawings are in `components/concept/StepArt.tsx` (steps 3 to 5 are new), shown full column width on computers.
+  - "What shapes your price": five things a price depends on, beside the `survey` drawing (`components/concept/art/Survey.tsx`), and the honest line about old houses.
+  - "What I quote for": every kind of job, renovations first, each row through to its page. Then the price FAQs and the quote form.
+  - Words in `content/prices.ts`. The old packages, sizes and `PackageCard` were removed (in git history if ever wanted).
+  - Never add prices or invent figures.
 - **Homepage before and afters:** at most three sliders, taken from jobs marked `homepage: true` in `content/projects.ts` (both photos needed); placeholder slots fill the gaps until there are three. Jobs with only one photo go on the projects page as single-photo posts.
 - **Photos alongside the drawings (John, 27 Oct: keep every icon and drawing, work photography in; 29 Oct: never both in one frame):**
   - Cards (service cards, the renovation trades, smaller jobs, steps) always keep the drawing (`drawingOnly`).
@@ -113,10 +116,7 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 - **Page-head framing:** each drawing is framed to its own edges (`headFrame` in PageHead), so nothing is ever cut off and its pavement lines up with the street. After changing a drawing, re-measure with `node .concept-tools/frames.mjs`. That only works on John's Mac: it needs the dev server, and it reads `/art-preview`, a working page that exists only in dev.
 - **The one gradient allowed** is the pale blue sky that fades to white at the top of the hero and the page heads.
 - **Not in the drawings:** people (John: they looked weird), birds or cats. The price cards carry no drawings.
-- **Prices (10 Nov):**
-  - A full renovation, and every smaller job, is "priced after a visit".
-  - Kitchens, bathrooms and single-storey extensions show small, medium and large, each with a rough "from" figure (£TBC until Connor gives them).
-  - The four cards are one size, and "What's included" is a dropdown.
+- **Prices:** see the Prices item above (15 Nov: no figures).
   - No "no surprises" or "no hidden costs" claims anywhere. The honest line: old houses can hide things, and any change is shown and agreed before work carries on.
 
 ### The quote form goes to WhatsApp (John, 10 Nov 2026)
@@ -165,7 +165,7 @@ Connor works from WhatsApp, not email, so the website sends nothing itself.
 
 ## 6. Waiting on Connor
 
-1. **"From" prices** for small, medium and large kitchens, bathrooms and single-storey extensions, and a check of the size descriptions (`content/prices.ts`). Full renovations and smaller jobs are priced after a visit, so they need no figure.
+1. **A read of the prices page** (`/prices`): the six steps and "What shapes your price" describe how he works; he should confirm them. No figures are needed.
 2. **Photos.** 14 jobs are in from his Facebook (27 Oct). Still wanted:
    - a portrait of Connor (none of the Facebook photos show him clearly, and his face stays off until he says),
    - before and after pairs taken from the same spot, so more of them can be sliders,
