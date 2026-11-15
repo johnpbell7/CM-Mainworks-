@@ -706,7 +706,11 @@ input, textarea, select { caret-color: var(--gold-ink); }
   .shape-art { max-width: 360px; margin-bottom: 8px; }
 }
 @media (max-width: 720px) {
-  .steps.six { row-gap: var(--gap); }
+  .steps.six { --gap: 36px; row-gap: var(--gap); }
+  /* phones: drawings top-aligned, a dashed gold arrow from each one down to the next (John, 15 Nov) */
+  .steps.six li { align-items: start; }
+  .steps.six li:not(:last-child)::after { content: ""; display: block; position: absolute; left: 55px; right: auto; top: 96px; bottom: calc(-1 * var(--gap) + 14px); border-top: 0; border-left: 2px dashed var(--gold); }
+  .steps.six li:not(:last-child)::before { content: ""; position: absolute; left: 51px; bottom: calc(-1 * var(--gap) + 13px); width: 8px; height: 8px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(45deg); }
   .shapes li { grid-template-columns: 30px minmax(0, 1fr); gap: 14px; padding: 16px 0; }
   .shape-n { width: 28px; height: 28px; font-size: .82rem; }
   .shapes h3 { font-size: 1.08rem; }
