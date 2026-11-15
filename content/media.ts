@@ -53,7 +53,7 @@ export const media = {
     label: "Reviews background",
   },
   // Cut out from a photo John supplied (15 Nov 2026, the suit photo): Connor only, waist up, his own pixels enlarged 3x (no AI redraw of his face).
-  portrait: { src: "/images/connor.webp", w: 754, h: 1525, alt: "Connor, who runs CM MainWorks, smiling in a checked waistcoat and tie", label: "Photo of Connor" },
+  portrait: { src: "/images/connor-suit.webp", w: 754, h: 1525, alt: "Connor, who runs CM MainWorks, smiling in a checked waistcoat and tie", label: "Photo of Connor" },
 } satisfies Record<string, Media>;
 
 /*
