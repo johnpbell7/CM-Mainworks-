@@ -30,7 +30,6 @@ export default function Faqs() {
           </div>
         </section>
       ))}
-      <div className="wrap"><p className="draft" style={{ marginBottom: 32 }}>Draft answers, waiting on Connor’s approval.</p></div>
       <Closing />
     </>
   );

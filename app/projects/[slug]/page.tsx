@@ -71,6 +71,12 @@ export default async function ProjectPage({ params }: Props) {
                   <ul className="ticks">{p.done.map((d) => <li key={d}>{d}</li>)}</ul>
                 </>
               )}
+              {p.more && (
+                <>
+                  <h3 className="sub-h" style={{ marginTop: 32 }}>{p.more.title}</h3>
+                  {p.more.text.map((t) => <p key={t}>{t}</p>)}
+                </>
+              )}
             </div>
             {beside && <Photo media={beside} sizes="(max-width: 1080px) 100vw, 40vw" style={{ aspectRatio: String(ratio(beside)) }} priority={!pair} />}
           </div>

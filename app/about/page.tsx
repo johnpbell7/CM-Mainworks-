@@ -45,7 +45,6 @@ export default function About() {
             <p>So I run the whole job with one team: my labourers, trusted trades for electrics and plumbing, and me on site. One person to ring, one written quote, paid phase by phase.</p>
             <p>I’m straight about cost, and I’ll <span className="hl" data-pen="sage">work with you to get the home you want</span>.</p>
             <img className="badge" src="/brand/logo/badge/cm-badge.svg" alt="CM MainWorks badge" width={96} height={42} loading="lazy" />
-            <p className="draft">Draft copy, waiting on Connor’s approval.</p>
           </div>
         </div>
       </section>

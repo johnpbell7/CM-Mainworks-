@@ -29,6 +29,9 @@ export type Project = {
   /** Longer write-up for the project page */
   body?: string[];
   done?: string[];
+  /** A short section on planning a job of this kind, in Connor's voice: the type of work and how he runs a job,
+      from what the site already says (visit, written quote, phases, sit-downs). No new facts about him (John, 16 Nov 2026). */
+  more?: { title: string; text: string[] };
   review?: { quote: string; name: string };
   before: Media;
   after: Media;
@@ -179,6 +182,14 @@ export const projects: Project[] = [
       "A nice change from the basic white to a light grey, with the handrail, newel and skirting in crisp white.",
     ],
     done: ["Hall, stairs and landing painted", "Walls taken from white to light grey"],
+    more: {
+      title: "Painting a hall, stairs and landing",
+      text: [
+        "The hall, stairs and landing are the first thing anyone sees, and one of the trickiest areas to paint well: tall walls over the stairs, lots of edges, and woodwork that takes more knocks than anywhere else in the house.",
+        "Going from white to a light grey on the walls, with the handrail, newel and skirting in crisp white, gives a clean line where they meet, and grey walls hide everyday scuffs better than plain white.",
+        "Want yours done? Send me a photo or two and I’ll arrange a visit and a written quote.",
+      ],
+    },
     before: photo("hall-stairs-landing/during-stairs", "Stairs mid-job, with the grey going on over the old white"),
     after: photo("hall-stairs-landing/after-stairs", "Stairs and hall finished in light grey with a white handrail"),
     gallery: [
@@ -230,6 +241,14 @@ export const projects: Project[] = [
       "These photos are from during the job: the garage walls studded, boarded and skimmed, and the porch skimmed with a new boarded ceiling.",
     ],
     done: ["Garage walls studded and boarded", "Walls skimmed", "Porch ceiling boarded"],
+    more: {
+      title: "Studwork, boards and plaster",
+      text: [
+        "Garages and porches are often the roughest parts of a house. Timber studwork gives a straight, level frame to fix plasterboard to, and a skim coat over the boards leaves a smooth finish that’s ready to paint.",
+        "Doing the garage and the porch as one job means one written quote and one team for both, rather than two separate jobs.",
+        "Got a garage or porch you’d like to make more of? Send me a few photos and I’ll come and have a look.",
+      ],
+    },
     before: none("Before photo"),
     after: photo("garage-and-porch/porch-door", "Front porch mid-job: fresh plaster and a new boarded ceiling around a black front door"),
     gallery: [
@@ -253,6 +272,14 @@ export const projects: Project[] = [
       "Kitchen fitted and splashbacks tiled, ready for grouting. In the bathroom, the new bath is in and the wall tiles are going up.",
     ],
     done: ["Kitchen units and worktops fitted", "Metro tile splashback", "New bath fitted", "Bathroom wall tiles"],
+    more: {
+      title: "Renovating a shared house",
+      text: [
+        "A house shared by several tenants works harder than most homes. Everyone uses the kitchen and bathroom, so they need to be well fitted and easy to keep clean.",
+        "On this one the kitchen units and worktops went in first, then the metro tile splashback, ready for grouting. In the bathroom the bath was fitted before the wall tiles went up around it.",
+        "Getting a house ready for tenants usually comes with a deadline. On a job like this we agree the phases and timescales before we start, then check them together at regular sit-downs as it goes.",
+      ],
+    },
     before: photo("hmo-renovation/during-worktop", "Kitchen mid-fit: the worktop in, the walls still bare"),
     after: photo("hmo-renovation/after-kitchen", "Kitchen fitted: white units, a dark worktop and a white metro tile splashback"),
     gallery: [
@@ -275,6 +302,14 @@ export const projects: Project[] = [
       "The walls were filled and made good first, then painted in a pale two-tone scheme through the living room, hall and bedrooms.",
     ],
     done: ["Walls filled and made good", "Two-tone scheme through the living room and hall", "Bedrooms painted"],
+    more: {
+      title: "Decorating a whole house",
+      text: [
+        "Most of the work in a good paint finish happens before the paint goes on. Filling, making good and sanding is what makes walls look smooth when the light catches them, so it gets as much care as the painting.",
+        "A two-tone scheme like this one keeps a house feeling joined up from room to room, and pale colours make halls and smaller rooms feel lighter.",
+        "Planning a full repaint? I’ll come and look, then send a written quote. On a bigger job we agree the order of the rooms first, so you know which rooms are being done and when.",
+      ],
+    },
     before: photo("full-house-repaint-lichfield/before-bedroom", "Bedroom before, with filler patches on the walls"),
     after: photo("full-house-repaint-lichfield/after-bedroom", "The same bedroom finished in a pale two-tone scheme"),
     gallery: [
@@ -342,6 +377,14 @@ export const projects: Project[] = [
     summary: "An extension going up: block walls, roof timbers and the frame for a roof light.",
     body: ["Photos from an extension as it went up: the block walls, the roof timbers and the frame for a roof light."],
     done: ["Block walls built", "Roof timbers on", "Roof light framed in"],
+    more: {
+      title: "Planning an extension",
+      text: [
+        "An extension goes up in stages: groundwork and footings, the walls, the roof, then windows, plastering and the finish inside. These photos are from the middle of that, with the block walls up and the roof timbers going on.",
+        "A roof light like this one is worth deciding on early. It’s framed in with the roof timbers, so it’s far easier to plan at the start than to add later.",
+        "If you’re thinking about an extension, it starts with a visit. We’ll talk about how you want to use the room, then you get a written quote split into phases, and we sit down to agree the timescales before any work starts.",
+      ],
+    },
     before: none("Before photo"),
     after: photo("extension-build/roof-timbers", "New extension with block walls up and the roof timbers on"),
     gallery: [
@@ -361,6 +404,14 @@ export const projects: Project[] = [
     summary: "Outdoor timber work: an oak-framed canopy over a patio, a slatted fence screen and a pair of timber gates.",
     body: ["A few outdoor timber jobs: an oak-framed canopy over a patio, a slatted fence screen, a pair of timber gates and an oak gazebo going up."],
     done: ["Oak-framed canopy", "Slatted timber fence screen", "Timber gates", "Oak gazebo"],
+    more: {
+      title: "Timber for outside",
+      text: [
+        "Timber outside has to cope with rain, sun and frost, so the frame and fixings matter. Oak, like the canopy and gazebo here, weathers to a silver grey over the years.",
+        "A canopy over a patio gives you somewhere to sit when the weather turns, and slatted screens and gates add privacy without closing a garden in.",
+        "Got an idea for your garden, whether it’s a canopy, a gazebo, gates or a screen? Send me a photo of the space and I’ll come and have a look.",
+      ],
+    },
     before: none("Before photo"),
     after: { src: "/images/hero-oak-canopy.jpg", w: 1080, h: 1434, alt: "Oak-framed garden canopy with slatted timber screens over a patio", label: "Oak canopy" },
     gallery: [
