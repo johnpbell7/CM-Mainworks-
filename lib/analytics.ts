@@ -10,6 +10,10 @@ import { track } from "@vercel/analytics";
                                             the form, or "Tried again" / "Switched from …" for the links
                                             shown after sending
     "Contact: call"                         any phone link on the site
+    "Contact: WhatsApp link"                the plain "WhatsApp me" links (footer, menu, contact page), not the form
+    "Quote button"                          a "Free quote" / "Get a free quote" / "Start my quote" button that opens
+                                            or leads to the quote form. Compare with the WhatsApp and email counts to
+                                            see how many who start a quote send it
   Nothing is sent in development.
 */
 
@@ -40,4 +44,18 @@ export function trackQuote(via: "whatsapp" | "email", form: Element | null, agai
 
 export function trackCall(link: Element) {
   track("Contact: call", { page: page(), place: callPlace(link) });
+}
+
+export function trackWhatsAppLink(link: Element) {
+  track("Contact: WhatsApp link", { page: page(), place: callPlace(link) });
+}
+
+/** Where a quote button sits. */
+function quotePlace(el: Element) {
+  if (el.closest(".q-start, .quote-cta")) return "Homepage hero";
+  return callPlace(el);
+}
+
+export function trackQuoteButton(el: Element) {
+  track("Quote button", { page: page(), place: quotePlace(el) });
 }

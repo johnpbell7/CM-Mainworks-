@@ -131,6 +131,8 @@ The whole site was restyled from a Lemonade-style concept John liked. Keep to it
 - Vercel Web Analytics (`@vercel/analytics`, `components/Tracking.tsx`, `lib/analytics.ts`): page views, plus three events, each with the page and where on it:
   - "Contact: WhatsApp" and "Contact: email": a filled-in quote form opened WhatsApp or the visitor's email (the site can't see whether they then pressed send). Place: Homepage hero, Contact page or Foot of the page; the links shown after sending count as "Tried again" or "Switched from WhatsApp/email".
   - "Contact: call": any phone link. Place: Header, Menu, Phone bar, Footer, Quote form, Ring me block or In the page.
+  - "Contact: WhatsApp link" (17 Nov): the plain "WhatsApp me" links outside the form (footer, menu, contact page). Same places as calls.
+  - "Quote button" (17 Nov): a button or link that opens or leads to the quote form (Header and Phone bar "Free quote", Menu and Ring me block "Get a free quote", the hero's "Start my quote" and phone "Get a free quote" as Homepage hero). Set against the WhatsApp and email counts, it shows how many who start a quote send it.
 - No cookies and nothing typed into the form is sent. The privacy page says so ("Cookies and visitor counts").
 - Seen in Vercel: project cm-mainworks > Analytics. Web Analytics has to be switched on there for anything to be recorded.
 
