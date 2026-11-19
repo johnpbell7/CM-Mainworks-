@@ -6,6 +6,7 @@ import type { SectionSlug } from "./site";
   Leicester and Redditch. Each has its own copy so
   they aren’t duplicates. Town descriptions are general, publicly known geography.
   Nothing here states prices, travel charges, past jobs or reviews in a town.
+  Connor does homes only, no commercial work (John, 19 Nov 2026).
   Every town leads with renovation work (kitchens, bathrooms, extensions); smaller
   jobs are mentioned on the page but not featured.
   The villages around Lichfield (Fradley, Shenstone, Whittington and others) are
@@ -72,6 +73,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Burntwood, Chase Terrace and Chasetown. I’m Connor, based in nearby Lichfield. Free written quotes.",
     intro:
       "Burntwood is about four miles west of Lichfield, a straight run along the A5190, so it’s well within my patch. I cover the whole town, including Chase Terrace, Chasetown, Boney Hay and the roads out towards Chasewater.",
+    alsoCovers: ["Chase Terrace", "Chasetown", "Boney Hay"],
     local: [
       "A lot of Burntwood went up between the 1960s and the 80s. Those houses are solid, but many are tired inside: a small kitchen cut off from the dining room, a dated bathroom, and the original doors and skirting all the way through.",
       "They’re ideal for renovating in phases. Knock through for a kitchen-diner, add a single-storey extension at the back if you need the room, refit the bathroom, then new doors, floors and decorating to finish. One team does the lot, and you know the cost of each phase before it starts.",
@@ -83,6 +85,7 @@ export const areas: Area[] = [
       { service: "staircases", text: "New doors, skirting and architrave right through the house." },
     ],
     faqs: [
+      { q: "Are you a local builder?", a: "Yes. I’m based in Lichfield, about four miles away, so Burntwood is on my doorstep. I’m the builder you deal with from the first visit to the finished job." },
       { q: "Do you cover Chase Terrace and Chasetown?", a: "Yes, along with the rest of Burntwood and Boney Hay." },
       { q: "Is Burntwood too far for a small job?", a: "No. It’s a few miles from Lichfield, so small jobs are fine." },
       { q: "Can you do the work in stages?", a: "Yes. Every full renovation I take on is done in phases. Each one is agreed and priced before it starts and invoiced when it’s done, so you always know where you are." },
@@ -98,6 +101,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Tamworth, Wilnecote, Amington and Fazeley. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Tamworth is about seven miles south-east of Lichfield along the A51, and I cover the whole town. That takes in Wilnecote, Amington, Glascote, Belgrave, Fazeley and the estates in between.",
+    alsoCovers: ["Wilnecote", "Amington", "Glascote", "Belgrave", "Fazeley"],
     local: [
       "There’s a bit of everything in Tamworth: older terraces near the castle and the town centre, and big estates built from the 60s onwards as the town grew, in places like Glascote, Belgrave and Amington.",
       "Plenty of those estate houses are now ready for a proper update: a new kitchen, a new bathroom, floors throughout, and more room downstairs. Doing it as one renovation, in phases, means no gaps waiting for the next trade and one person to deal with from start to finish.",
@@ -124,6 +128,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Sutton Coldfield, Four Oaks and Mere Green. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Sutton Coldfield is about eight miles south of Lichfield, straight down the A5127. I cover the town, including Four Oaks, Mere Green and Little Aston.",
+    alsoCovers: ["Four Oaks", "Mere Green", "Little Aston"],
     local: [
       "Sutton has plenty of Victorian, Edwardian and 1930s houses, and the original features are often the best thing about them. Panelled doors, turned spindles, bay windows and deep alcoves are worth keeping and working around.",
       "The kitchens and bathrooms are often a different story: small, tucked at the back and cut off from the garden. A rear extension or a knock-through gives you a proper kitchen-diner, while the period features in the rest of the house are repaired rather than ripped out, all as one job.",
@@ -150,9 +155,11 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Walsall, Aldridge and Pelsall. I’m Connor, based in Lichfield. Insured, free written quotes.",
     intro:
       "Walsall is about nine miles south-west of Lichfield, and I cover the town and the areas around it, including Aldridge, Pelsall, Bloxwich, Rushall and Walsall Wood.",
+    alsoCovers: ["Aldridge", "Pelsall", "Bloxwich", "Rushall", "Walsall Wood"],
     local: [
       "Walsall has a real mix: Victorian terraces close to the town centre, interwar semis, and big post-war estates further out towards Bloxwich and Pelsall.",
       "Whatever the age, the wish list is often the same: opening up the back of the house, a new kitchen and bathroom, and new doors and floors throughout. I plan it all as one renovation, run it with one team and invoice it phase by phase, so you always know where you are.",
+      "That includes Pelsall: I take on renovations in Pelsall and the villages either side, from a new kitchen or bathroom to a whole house brought up to date.",
     ],
     focus: [
       { service: "kitchens", text: "Kitchen refits, and knocking through to open up the back." },
@@ -161,6 +168,7 @@ export const areas: Area[] = [
       { service: "flooring-and-tiling", text: "Floors and tiling throughout, laid flat and straight." },
     ],
     faqs: [
+      { q: "Do you do renovations in Pelsall?", a: "Yes. Pelsall is well within my patch, between Walsall and Brownhills, and I take on full renovations there as well as kitchens, bathrooms and extensions." },
       { q: "Do you cover Aldridge and Pelsall?", a: "Yes, along with Bloxwich, Rushall, Walsall Wood and the rest of Walsall." },
       { q: "Can you price a Walsall job from photos?", a: "Smaller jobs, usually. For building work I’ll come and see it first." },
       { q: "Do you work on Victorian terraces near the town centre?", a: "Yes. Narrow rooms, uneven walls and old floors are normal in a terrace. I fit everything to the house you’ve actually got, and repair the original features where they’re worth saving." },
@@ -173,12 +181,14 @@ export const areas: Area[] = [
     where: "About eight miles west of Lichfield",
     title: "Builder and home renovations in Cannock",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Cannock, Hednesford and Heath Hayes. I’m Connor, based in Lichfield. Insured, free written quotes.",
+      "Renovations, refurbishments, extensions, kitchens and bathrooms in Cannock, Hednesford and Heath Hayes. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Cannock is about eight miles west of Lichfield, on the edge of Cannock Chase. I cover the town along with Hednesford, Heath Hayes, Norton Canes and Huntington.",
+    alsoCovers: ["Hednesford", "Heath Hayes", "Norton Canes", "Huntington", "Chadsmoor"],
     local: [
       "A lot of Cannock’s housing is post-war and newer estate homes, alongside older terraces in Hednesford and Chadsmoor from the mining days. Plenty of them are now ready for a new kitchen, a new bathroom or more room downstairs.",
       "Many homes here have room at the back for a single-storey extension, which is often the simplest way to get a big kitchen-diner. I build it, roof it and finish it inside with one team, so you’re handed a room, not a shell.",
+      "Whether you call it a renovation or a refurbishment, it’s the same job to me: the house taken back and brought up to date, room by room or all at once, in phases you agree before we start.",
     ],
     focus: [
       { service: "extensions", text: "Single-storey extensions, built and finished inside." },
@@ -187,6 +197,7 @@ export const areas: Area[] = [
       { service: "staircases", text: "Internal doors, skirting and staircases throughout." },
     ],
     faqs: [
+      { q: "Do you do full house refurbishments in Cannock?", a: "Yes. A full refurbishment is my main work: new kitchen, bathroom, doors, floors and decorating, planned as one job in phases and run by one team, across Cannock, Hednesford and Heath Hayes." },
       { q: "Do you cover Hednesford and Heath Hayes?", a: "Yes, along with Norton Canes, Huntington and the rest of Cannock." },
       { q: "Can you do the extension and the kitchen together?", a: "Yes. That’s the best reason to use one team: the extension and the kitchen inside it are planned together, so nothing’s left waiting on anyone else." },
       { q: "Do you build garden canopies?", a: "Yes, including oak-framed canopies and pergolas." },
@@ -202,6 +213,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Burton upon Trent, Stapenhill and Winshill. I’m Connor, based in Lichfield. Free written quotes.",
     intro:
       "Burton upon Trent is about eleven miles north-east of Lichfield, straight up the A38. I cover the town, including Stapenhill, Winshill, Horninglow and Branston.",
+    alsoCovers: ["Stapenhill", "Winshill", "Horninglow", "Branston"],
     local: [
       "Burton’s older streets are full of Victorian terraces from its brewing days. Newer areas like Branston are mostly modern estates.",
       "A terrace usually has the same wish list: a kitchen that opens onto the dining room, a bathroom that isn’t squeezed in at the back, and the original doors and stairs looked after. On the newer estates it’s more often a kitchen you actually chose, an en-suite, and doors that don’t feel hollow.",
@@ -228,6 +240,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms across Birmingham, from Erdington to Moseley and Harborne. I’m Connor. Insured, free written quotes.",
     intro:
       "Birmingham is about fifteen miles south-west of Lichfield, down the A38. I work across the city, from Erdington, Kingstanding and Great Barr in the north to Moseley, Kings Heath and Harborne.",
+    alsoCovers: ["Erdington", "Kingstanding", "Great Barr", "Moseley", "Kings Heath", "Harborne"],
     local: [
       "Birmingham has every kind of house going: Victorian and Edwardian terraces in places like Moseley and Kings Heath, 1930s semis right across the north of the city, and newer town houses and flats.",
       "The 1930s semis in Erdington, Kingstanding and Great Barr are ideal for a renovation. Most have room at the back for an extension and a layout that opens up well into a kitchen-diner. Add a new bathroom, bring the rest of the house up to date in phases, and it’s a different home.",
@@ -254,6 +267,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Solihull, Shirley, Knowle, Dorridge and Olton. I’m Connor. Insured, free written quotes.",
     intro:
       "Solihull is about nineteen miles south of Lichfield, and I cover the town and the villages around it, including Shirley, Olton, Knowle, Dorridge and Hockley Heath.",
+    alsoCovers: ["Shirley", "Olton", "Knowle", "Dorridge", "Hockley Heath"],
     local: [
       "Solihull is mostly interwar semis and bigger detached houses, with Knowle and Dorridge leaning towards the larger end.",
       "Houses like these suit a kitchen extension across the back, a new bathroom or en-suite, and floors that run through without a step. I plan it as one renovation, so the extension, the kitchen and the finishing all come together rather than one trade at a time.",
@@ -277,12 +291,14 @@ export const areas: Area[] = [
     where: "About twenty-five miles south of Lichfield",
     title: "Builder and home renovations in Redditch",
     description:
-      "Full renovations, extensions, kitchens and bathrooms in Redditch, Headless Cross, Webheath and Matchborough. I’m Connor. Insured, free written quotes.",
+      "Residential builder in Redditch: renovations, extensions, kitchens and bathrooms in Headless Cross, Webheath and Matchborough. Free written quotes.",
     intro:
       "Redditch is about twenty-five miles south of Lichfield, on the Worcestershire side of Birmingham. I cover the whole town, including Headless Cross, Webheath, Matchborough, Winyates and Church Hill.",
+    alsoCovers: ["Headless Cross", "Webheath", "Matchborough", "Winyates", "Church Hill"],
     local: [
       "Much of Redditch was built as a new town in the 60s, 70s and 80s, so a lot of houses in places like Matchborough, Winyates and Church Hill share the same layouts.",
       "Those layouts tend to want the same things: knocking through downstairs, a new kitchen and bathroom, and the original doors and skirting replaced. Because the houses are so alike, it’s easy to see what’s possible and to plan the whole job in phases from the first visit.",
+      "So if you’re looking for a residential builder in Redditch, that’s the work I do: building work on houses, from extensions and knock-throughs to full renovations, run as one job by one team. I don’t do commercial building; it’s homes only.",
     ],
     focus: [
       { service: "kitchens", text: "Knock-throughs and new kitchens for new-town layouts." },
@@ -291,6 +307,7 @@ export const areas: Area[] = [
       { service: "staircases", text: "Replacing original doors, skirting and architrave." },
     ],
     faqs: [
+      { q: "Are you a building contractor, or a renovation company?", a: "Both, for homes. I take on residential building work in Redditch, extensions, knock-throughs and full renovations, and run the whole job with one team, from the building work to the decorating." },
       { q: "Is Redditch too far for you?", a: "No. I cover Redditch and the areas around it, and bigger jobs are well worth the drive." },
       { q: "Our house still has its original 70s layout. Can it be opened up?", a: "Often, yes. The wall between the kitchen and dining room is the usual one. Whether it holds anything up changes the job, so I’ll look at it on the first visit and tell you what’s involved." },
       { q: "Can you do a whole house of doors in one go?", a: "Yes. Doing every internal door and the skirting together is quicker, and neater, than doing them bit by bit." },
@@ -306,6 +323,7 @@ export const areas: Area[] = [
       "Full renovations, extensions, kitchens and bathrooms in Leicester, Oadby, Wigston and Birstall. I’m Connor. Insured, managed by one team. Free quotes.",
     intro:
       "Leicester is about thirty miles east of Lichfield, along the A5 and M69. I cover the city and the areas around it, including Oadby, Wigston, Birstall, Glenfield and Braunstone.",
+    alsoCovers: ["Oadby", "Wigston", "Birstall", "Glenfield", "Braunstone"],
     local: [
       "Leicester has streets of Victorian terraces in places like Clarendon Park and Westcotes, and plenty of interwar and post-war semis in the suburbs.",
       "The terraces tend to want their kitchens opened up and their original features looked after. The semis are more often ready for an extension and a full update. Either way, it’s one renovation, run by one team, in phases you agree up front.",

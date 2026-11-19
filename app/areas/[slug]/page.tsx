@@ -51,7 +51,7 @@ export default async function AreaPage({ params }: Props) {
       <PageHead
         crumbs={[{ href: `/areas/${a.slug}`, label: a.name }]}
         art="town"
-        title={<>Home renovations in <span className="hl">{a.name}</span></>}
+        title={<>Builder &amp; home renovations in <span className="hl">{a.name}</span></>}
         lede={a.intro}
       />
 
